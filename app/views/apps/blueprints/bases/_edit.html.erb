@@ -1,0 +1,17 @@
+<%= custom_form_for @app.blueprint.base,
+      url: app_blueprint_base_path(app_id: @app.name) do |f| %>
+<%= f.input :name, required: true, pattern: "^[a-z0-9_]*$", maxlength: 16, hint: "Valid characters are lowercase alpha-numeric and underscore. Maximum length 16 characters." %>
+<%= f.input :framework, as: :select, required: true, collection: f.object.frameworks_collection %>
+<div class="form-section-heading">Memory (MB)</div>
+<%= f.input :memory_required, as: :integer, label: 'Required' %>
+<%= f.input :memory_recommended, as: :integer, label: 'Recommended' %>
+<div class="form-section-heading">Deployment</div>
+<%= f.input :http_protocol, as: :select, collection: f.object.http_protocol_collection, required: true, label: 'HTTP protocol' %>
+<%= f.input :framework_port_override, as: :integer, input_html: { min: 0, max: 65535 }  %>
+<%= f.input :deployment_type, as: :select, required: true, collection: f.object.types_collection %>
+<%= f.input :web_root_directory %>
+<%= f.input :continuous_deployment, as: :boolean, wrapper: :horizontal_boolean %>
+<div class="form-section-heading">Setup</div>
+<%= f.input :first_run_url, as: :url, label: 'First run URL' %>
+<%= f.input :installation_report, as: :markdown %>
+<% end %>

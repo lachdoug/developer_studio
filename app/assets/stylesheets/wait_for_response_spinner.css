@@ -1,0 +1,7 @@
+#saving-alert {
+  position: fixed;
+  font-size: 18px;
+  margin-right: 75px;
+  top: 12px;
+  right: 0;
+  z-index: 1060; }

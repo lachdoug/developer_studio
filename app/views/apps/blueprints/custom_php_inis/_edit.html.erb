@@ -1,0 +1,14 @@
+<%= custom_form_for @app.blueprint.custom_php_inis,
+      url: app_blueprint_custom_php_inis_path(app_id: @app.name) do |f| %>
+  <%= f.simple_fields_for :custom_php_inis do |ff| %>
+    <legend>Custom PHP ini <%= ff.index + 1 %></legend>
+    <%= ff.input :content, as: :code, required: true, input_html: { data: { mode: :php } }  %>
+    <div class='clearfix'>
+      <%= link_to icon_text('fa-trash-o', "Delete custom PHP ini #{ff.index + 1}" ), app_blueprint_custom_php_inis_custom_php_ini_path(app_id: @app.name, id: ff.index), method: :delete, remote: true, class: 'btn btn-default pull-right', data: {confirm: "Are you sure that you want to delete this custom PHP ini?"} %>
+    </div>
+    <hr>
+  <% end %>
+<% end %>
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New custom PHP ini'), new_app_blueprint_custom_php_inis_path(app_id: @app.name), remote: true, class: 'btn btn-default pull-right' %>
+</div>

@@ -1,0 +1,28 @@
+<%= link_to icon('fa-arrow-up'), service_definition_groups_path(), class: 'btn pull-right' %>
+<h4>Service definitions for <%= @service_definition_group.name %></h4>
+<div class='col-sm-12'>
+  <%= link_to icon_text('fa-download', 'Pull'), edit_service_definition_group_path(id: @service_definition_group.name), class: 'btn btn-default' %>
+  <%= link_to icon_text('fa-trash', 'Delete'), service_definition_group_path(id: @service_definition_group.name), method: :delete, class: 'btn btn-default', data: {confirm: "Are you sure that you want to delete these service definitions?"} %>
+</div>
+
+<div class='col-sm-3 page-main-col'>
+  <ul class='nav nav-pills nav-stacked'>
+    <% @service_definition_group.service_definitions.each do |service_definition| %>
+      <li id='service_definition_<%= service_definition.type_path_for_html_id %>_pill' class='page_section_pill'>
+        <%= content_tag :a, onclick: "display_service_definition('#{service_definition.type_path_for_html_id}')" do %>
+          <%= service_definition.type_path %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+  <hr>
+</div>
+
+
+<div class='col-sm-9 page-main-col'>
+  <% @service_definition_group.service_definitions.each do |service_definition| %>
+    <div id='service_definition_<%= service_definition.type_path_for_html_id %>' class='service-definition-display' style='<%= 'display: none;' %>'>
+      <%= pretty_print service_definition.content %>
+    </div>
+  <% end %>
+</div>

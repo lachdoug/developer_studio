@@ -1,0 +1,15 @@
+<%= custom_form_for @app.blueprint.apache_htaccess_files,
+      url: app_blueprint_apache_htaccess_files_path(app_id: @app.name) do |f| %>
+  <%= f.simple_fields_for :apache_htaccess_files do |ff| %>
+    <legend>Apache htaccess file <%= ff.index + 1 %></legend>
+    <%= ff.input :path, required: true %>
+    <%= ff.input :content, as: :code, required: true, input_html: { data: { mode: :text } }  %>
+    <div class='clearfix'>
+      <%= link_to icon_text('fa-trash-o', "Delete Apache htaccess file #{ff.index + 1}" ), app_blueprint_apache_htaccess_files_apache_htaccess_file_path(app_id: @app.name, id: ff.index), method: :delete, remote: true, class: 'btn btn-default pull-right', data: {confirm: "Are you sure that you want to delete this Apache htaccess file?"} %>
+    </div>
+    <hr>
+  <% end %>
+<% end %>
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New Apache htaccess file'), new_app_blueprint_apache_htaccess_files_path(app_id: @app.name), remote: true, class: 'btn btn-default pull-right' %>
+</div>

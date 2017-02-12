@@ -1,0 +1,17 @@
+<%= custom_form_for @app.blueprint.template_files,
+      url: app_blueprint_template_files_path(app_id: @app.name) do |f| %>
+  <%= f.simple_fields_for :template_files do |ff| %>
+    <legend>Template file <%= ff.index + 1 %></legend>
+    <%= ff.input :name, required: true %>
+    <%= ff.input :path, required: true, hint: 'Relative to /home/ (except when path prefixed with /usr/local/ or /home/ ).' %>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: false, required: false %>
+    <%= ff.input :content, as: :code, required: true, input_html: { data: { mode: ff.object.send(:language) } }  %>
+    <div class='clearfix'>
+      <%= link_to icon_text('fa-trash-o', "Delete template file #{ff.index + 1}" ), app_blueprint_template_files_template_file_path(app_id: @app.name, id: ff.index), method: :delete, remote: true, class: 'btn btn-default pull-right', data: {confirm: "Are you sure that you want to delete this template file?"} %>
+    </div>
+    <hr>
+  <% end %>
+<% end %>
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New template file'), new_app_blueprint_template_files_path(app_id: @app.name), remote: true, class: 'btn btn-default pull-right' %>
+</div>

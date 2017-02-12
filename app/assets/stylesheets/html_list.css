@@ -1,0 +1,15 @@
+ul.html-list {
+  list-style-type: none;
+  margin-bottom: 5px;
+  margin-top: -5px;
+  min-height: 24px;
+}
+
+ul.html-list .html-list-label{
+  margin-right: 5px;
+  color: #666;
+  font-size: 0.8em;
+  min-width: 75px;
+  display: inline-block;
+  text-align: right;
+}

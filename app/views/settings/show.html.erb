@@ -1,0 +1,5 @@
+<h4>Settings</h4>
+<legend>Public key</legend>
+<pre><%= Rails.application.config.public_key %></pre><br>
+<legend class='error'>Danger zone</legend>
+<%= link_to icon_text('fa-wrench', 'Config'), config_path, class: 'btn btn-danger' %>

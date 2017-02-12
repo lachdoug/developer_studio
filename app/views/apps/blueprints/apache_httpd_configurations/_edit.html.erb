@@ -1,0 +1,14 @@
+<%= custom_form_for @app.blueprint.apache_httpd_configurations,
+      url: app_blueprint_apache_httpd_configurations_path(app_id: @app.name) do |f| %>
+  <%= f.simple_fields_for :apache_httpd_configurations do |ff| %>
+    <legend>Apache httpd configuration <%= ff.index + 1 %></legend>
+    <%= ff.input :content, as: :code, required: true, input_html: { data: { mode: :text } }  %>
+    <div class='clearfix'>
+      <%= link_to icon_text('fa-trash-o', "Delete Apache httpd configuration #{ff.index + 1}" ), app_blueprint_apache_httpd_configurations_apache_httpd_configuration_path(app_id: @app.name, id: ff.index), method: :delete, remote: true, class: 'btn btn-default pull-right', data: {confirm: "Are you sure that you want to delete this Apache httpd configuration?"} %>
+    </div>
+    <hr>
+  <% end %>
+<% end %>
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New Apache httpd configuration'), new_app_blueprint_apache_httpd_configurations_path(app_id: @app.name), remote: true, class: 'btn btn-default pull-right' %>
+</div>

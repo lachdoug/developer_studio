@@ -1,0 +1,61 @@
+<%= custom_form_for @app.blueprint.environment_variables,
+      url: app_blueprint_environment_variables_path(app_id: @app.name) do |f| %>
+  <%= f.simple_fields_for :environment_variables do |ff| %>
+    <legend>Environment variable <%= ff.index + 1 %></legend>
+    <%= ff.input :name, required: true %>
+    <%= ff.input :value %>
+    <%= ff.input :ask_at_build_time, as: :boolean, wrapper: :horizontal_boolean %>
+    <%= ff.input :build_time_only, as: :boolean, wrapper: :horizontal_boolean %>
+    <%= ff.input :immutable, as: :boolean, wrapper: :horizontal_boolean %>
+    <div class="form-section-heading">Input</div>
+    <%= ff.simple_fields_for :input do |fff| %>
+      <%= fff.input :type, as: :select, collection: fff.object.type_collection, include_blank: false %>
+      <%= fff.input :label %>
+      <%= fff.input :title %>
+      <%= fff.input :hint %>
+      <%= fff.input :placeholder %>
+      <div class="form-section-heading">Collection</div>
+      <%= fff.simple_fields_for :collection do |ffff| %>
+        <%= ffff.input :include_blank, required: false, as: :boolean, wrapper: :horizontal_boolean %>
+        <table class="table">
+          <tr><th>Value</th><th>Label</th><th width="1"></th></tr>
+          <%= ffff.simple_fields_for :items do |fffff| %>
+          <tr>
+            <%= fffff.input :value, required: true, wrapper: :table_cell_input %>
+            <%= fffff.input :label, required: true, wrapper: :table_cell_input %>
+            <td>
+              <div class='clearfix'>
+              <%= link_to icon('fa-trash-o'),
+                app_blueprint_environment_variables_environment_variable_input_collection_items_item_path(app_id: @app.name, environment_variable_id: ff.index, id: fffff.index),
+                method: :delete, remote: true,
+                class: 'btn btn-default pull-right',
+                data: {confirm: "Are you sure that you want to delete this environment variable collection item?"} %>
+              </div>
+            </td>
+          </tr>
+          <% end %>
+        </table>
+        <div class='clearfix'>
+          <%= link_to icon_text('fa-plus', 'New environment variable collection item'),
+            new_app_blueprint_environment_variables_environment_variable_input_collection_items_path(app_id: @app.name, environment_variable_id: ff.index), remote: true, class: 'btn btn-default pull-right' %>
+        </div>
+      <% end %>
+      <div class="form-section-heading">Validation</div>
+      <%= fff.simple_fields_for :validation do |ffff| %>
+        <%= ffff.input :required, as: :boolean, wrapper: :horizontal_boolean %>
+        <%= ffff.input :pattern, required: false %>
+        <%= ffff.input :message, required: false %>
+      <% end %>
+    <% end %>
+    <br>
+    <div class='clearfix'>
+      <%= link_to icon_text('fa-trash-o', "Delete environment variable #{ff.index + 1}" ), app_blueprint_environment_variables_environment_variable_path(app_id: @app.name, id: ff.index), method: :delete, remote: true, class: 'btn btn-default pull-right', data: {confirm: "Are you sure that you want to delete this environment variable?"} %>
+    </div>
+    <hr>
+  <% end %>
+<% end %>
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New environment variable'),
+      new_app_blueprint_environment_variables_path(app_id: @app.name),
+      remote: true, class: 'btn btn-default pull-right' %>
+</div>

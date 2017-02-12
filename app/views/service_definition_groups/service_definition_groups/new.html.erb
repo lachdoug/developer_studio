@@ -1,0 +1,14 @@
+<h4>New service definition publisher</h4>
+<%= simple_form_for @service_definition_group_builder,
+      url: service_definition_groups_path,
+      # method: :post,
+      html: { class: 'form-horizontal' },
+      wrapper: :horizontal_form do |f| %>
+      <%= f.input :url, as: :url, label: "Remote repo URL", required: true %>
+
+<%= link_to icon_text('fa-times', :Cancel), service_definition_groups_path, class: 'btn btn-warning' %>
+
+<%= f.button :button, class: "btn btn-primary pull-right", data: { disable_with: 'Cloning...' } do %>
+  <%= icon_text 'fa-check', :Clone  %>
+<% end %>
+<% end %>

@@ -1,0 +1,232 @@
+<div class='col-sm-3 page-main-col'>
+  <ul class='nav nav-pills nav-stacked'>
+    <li id='app_blueprint_section_json_pill' class='page_section_pill active'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("json")' do %>
+        {}
+      <% end %>
+    </li>
+    <li id='app_blueprint_section_metadata_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("metadata")' do %>
+        Metadata <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_metadata_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_base_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("base")' do %>
+        Base <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_base_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_scripts_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("scripts")' do %>
+        Scripts <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_scripts_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_database_seed_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("database_seed")' do %>
+        Database seed <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_database_seed_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_components_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("components")' do %>
+        Components <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_components_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_persistent_directories_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("persistent_directories")' do %>
+        Persistent directories <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_persistent_directories_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_service_configurations_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("service_configurations")' do %>
+        Service configurations <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_service_configurations_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+
+    <li id='app_blueprint_section_replacement_strings_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("replacement_strings")' do %>
+        Replacement strings <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_replacement_strings_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_persistent_files_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("persistent_files")' do %>
+        Persistent files <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_persistent_files_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_installed_packages_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("installed_packages")' do %>
+        Installed packages <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_installed_packages_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_system_packages_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("system_packages")' do %>
+        System packages <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_system_packages_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_workers_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("workers")' do %>
+        Workers <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_workers_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_rake_tasks_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("rake_tasks")' do %>
+        Rake tasks <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_rake_tasks_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_template_files_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("template_files")' do %>
+        Template files <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_template_files_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_file_write_permissions_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("file_write_permissions")' do %>
+        File write permissions <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_file_write_permissions_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_custom_php_inis_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("custom_php_inis")' do %>
+        Custom PHP inis <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_custom_php_inis_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_apache_htaccess_files_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("apache_htaccess_files")' do %>
+        Apache htaccess files <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_apache_htaccess_files_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_apache_httpd_configurations_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("apache_httpd_configurations")' do %>
+        Apache httpd configurations <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_apache_httpd_configurations_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_required_modules_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("required_modules")' do %>
+        Required modules <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_required_modules_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_ports_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("ports")' do %>
+        Ports <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_ports_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_actionators_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("actionators")' do %>
+        Actionators <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_actionators_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_external_repositories_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("external_repositories")' do %>
+        External repositories <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_external_repositories_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+    <li id='app_blueprint_section_environment_variables_pill' class='page_section_pill'>
+      <%= content_tag :a, onclick: 'display_blueprint_section("environment_variables")' do %>
+        Environment variables <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_environment_variables_pill_error" %>
+      <% end %>
+      <%= %>
+    </li>
+  </ul>
+  <hr>
+</div>
+<div class='col-sm-9 page-main-col'>
+
+  <div id='app_blueprint_section_json' class='main-page-col-section'>
+    <%= render 'apps/blueprints/jsons/show' %>
+  </div>
+  <div id='app_blueprint_section_metadata' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/metadata/edit' %>
+  </div>
+  <div id='app_blueprint_section_base' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/bases/edit' %>
+  </div>
+  <div id='app_blueprint_section_scripts' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/scripts/edit' %>
+  </div>
+  <div id='app_blueprint_section_database_seed' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/database_seed/edit' %>
+  </div>
+  <div id='app_blueprint_section_components' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/components/edit' %>
+  </div>
+  <div id='app_blueprint_section_persistent_directories' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/persistent_directories/edit' %>
+  </div>
+  <div id='app_blueprint_section_service_configurations' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/service_configurations/edit' %>
+  </div>
+  <div id='app_blueprint_section_replacement_strings' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/replacement_strings/edit' %>
+  </div>
+  <div id='app_blueprint_section_persistent_files' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/persistent_files/edit' %>
+  </div>
+  <div id='app_blueprint_section_installed_packages' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/installed_packages/edit' %>
+  </div>
+  <div id='app_blueprint_section_system_packages' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/system_packages/edit' %>
+  </div>
+  <div id='app_blueprint_section_workers' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/workers/edit' %>
+  </div>
+  <div id='app_blueprint_section_rake_tasks' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/rake_tasks/edit' %>
+  </div>
+  <div id='app_blueprint_section_template_files' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/template_files/edit' %>
+  </div>
+  <div id='app_blueprint_section_file_write_permissions' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/file_write_permissions/edit' %>
+  </div>
+  <div id='app_blueprint_section_custom_php_inis' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/custom_php_inis/edit' %>
+  </div>
+  <div id='app_blueprint_section_apache_htaccess_files' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/apache_htaccess_files/edit' %>
+  </div>
+  <div id='app_blueprint_section_apache_httpd_configurations' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/apache_httpd_configurations/edit' %>
+  </div>
+  <div id='app_blueprint_section_required_modules' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/required_modules/edit' %>
+  </div>
+  <div id='app_blueprint_section_ports' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/ports/edit' %>
+  </div>
+  <div id='app_blueprint_section_actionators' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/actionators/edit' %>
+  </div>
+  <div id='app_blueprint_section_external_repositories' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/external_repositories/edit' %>
+  </div>
+  <div id='app_blueprint_section_environment_variables' class='main-page-col-section' style='display: none;'>
+    <%= render 'apps/blueprints/environment_variables/edit' %>
+  </div>
+
+
+
+<% if false %>
+
+
+<% end %>
+
+</div>

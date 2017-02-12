@@ -1,0 +1,27 @@
+#ace-editor {
+    position: fixed;
+    top: 40px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2000;
+}
+#ace-editor-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 40px;
+    z-index: 2001;
+    background-color: #fff;
+}
+
+.ace-editor-header-buttons {
+  margin: 3px;
+}
+
+#ace-editor-language-mode-display {
+  padding: 6px 12px;
+  min-height: 34px;
+  font-weight: bold;
+}
