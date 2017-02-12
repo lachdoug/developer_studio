@@ -23,7 +23,11 @@
 
 # Ignore SSH keys
 /.ssh/*
+!/.ssh/.gitignore
+
 
 # Ignore repos
 /repos/apps/*
+!/repos/apps/.gitignore
 /repos/service_definitions/*
+!/repos/service_definitions/.gitignore

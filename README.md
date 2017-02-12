@@ -1,24 +1,12 @@
-# README
+Engines Developer Studio
+===
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Developer Studio is used to create app blueprints, service blueprints and service templates/packages/some-other-term????
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Deploy
+---
+- Rails 5 app.
+- Requires an SSH key in the .ssh directory. The public key must have filename 'identity.pub'.
+- Persistent directories:
+  - .ssh
+  - repos
