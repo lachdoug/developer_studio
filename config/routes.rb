@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :users, :skip => [:registrations]
+  as :user do
+    get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
+    put 'users' => 'devise/registrations#update', :as => 'user_registration'
+  end
+
+
 
   devise_scope :user do
     root to: "devise/sessions#new"
   end
 
   resource :settings
-  resource :config
+  resource :dropdowns_config
 
   resources :apps, module: :apps do
     resource :repository, only: [:show] do

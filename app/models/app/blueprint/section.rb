@@ -67,12 +67,12 @@ class App
         blueprint.update updated_blueprint
       end
 
-      def application_config
-        @application_config ||= ApplicationConfig.config
+      def dropdowns_config
+        @dropdowns_config ||= DropdownsConfig.config
       end
 
       def script_language_collection
-        application_config[:script_languages]
+        dropdowns_config[:script_languages]
       end
 
 

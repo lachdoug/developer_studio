@@ -36,7 +36,7 @@ class App
       end
 
       def type_collection
-        application_config[:required_module_types]
+        dropdowns_config[:required_module_types]
       end
 
     end

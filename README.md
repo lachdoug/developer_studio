@@ -10,3 +10,5 @@ Deploy
 - Persistent directories:
   - .ssh
   - repos
+- Persistent files:
+  - config/custom_dropdowns.yml

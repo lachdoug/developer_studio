@@ -1,5 +1,0 @@
-<%= link_to icon('fa-arrow-up'), settings_path(), class: 'btn pull-right' %>
-<h4>config.yml</h4>
-<%= simple_form_for @application_config, url: config_path, html: { class: 'autosubmit' }, remote: true, method: :patch do |f| %>
-<%= f.input :config_yaml, as: :code, input_html: { data: { mode: :yaml } }, label: false %>
-<% end %>

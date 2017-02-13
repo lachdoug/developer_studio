@@ -51,7 +51,7 @@ class App
       end
 
       def frameworks_collection
-        application_config[:frameworks]
+        dropdowns_config[:frameworks]
       end
 
       def types_collection

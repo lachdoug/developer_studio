@@ -23,7 +23,7 @@ class App
       end
 
       def database_seed_language_collection
-        application_config[:database_seed_languages]
+        dropdowns_config[:database_seed_languages]
       end
 
     end

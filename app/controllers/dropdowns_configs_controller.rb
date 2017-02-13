@@ -1,6 +1,6 @@
-class ConfigsController < ApplicationController
+class DropdownsConfigsController < ApplicationController
 
-  before_action :set_application_config
+  before_action :set_dropdowns_config
 
   # def index
   #   @apps = App.all
@@ -11,7 +11,7 @@ class ConfigsController < ApplicationController
   end
 
   def update
-    @application_config.update(strong_params)
+    @dropdowns_config.update(strong_params)
   end
 
   # def new
@@ -28,11 +28,11 @@ class ConfigsController < ApplicationController
   private
   #
   def strong_params
-    params.require(:application_config).permit(:config_yaml)
+    params.require(:dropdowns_config).permit(:config_yaml)
   end
 
-  def set_application_config
-    @application_config = ApplicationConfig.load
+  def set_dropdowns_config
+    @dropdowns_config = DropdownsConfig.load
   end
 
 end
