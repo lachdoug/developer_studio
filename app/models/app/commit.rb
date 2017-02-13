@@ -11,10 +11,13 @@ class App
     attr_reader :name, :error_message
 
     def commit(params)
-      Repo::App.new(name).commit params[:message]
-    rescue Rugged::NetworkError => e
-      @error_message = e.message
-      false
+      commit_result = Repo::App.new(name).commit params[:message]
+      if commit_result[:success]
+        true
+      else
+        @error_message = push_result[:message]
+        false
+      end
     end
 
   end

@@ -71,7 +71,12 @@ module Repo
     end
 
     def commit(message)
-      `git -C repos/apps/#{name} commit -a -m '#{message}'`
+      stdout, stderr, status = Open3.capture3("git -C repos/apps/#{name} commit -a -m '#{message}'")
+      if status.exitstatus == 0
+        { success: true }
+      else
+        { success: false, message: stderr.split('fatal: ')[1] }
+      end
     end
 
     def status
@@ -82,10 +87,12 @@ module Repo
     end
 
     def push
-      push_result = `git -C repos/apps/#{name} push --porcelain`
-      push_error = push_result.split("\t")[2][/\[(.*?)\]/] # split by tab, take second element, find [a string surrounded by square brackets]
-      return 'done' unless push_error
-      push_error[1..-2]
+      stdout, stderr, status = Open3.capture3("git -C repos/apps/#{name} push")
+      if status.exitstatus == 0
+        { success: true }
+      else
+        { success: false, message: stderr.split('fatal: ')[1] }
+      end
     end
 
     def update_license(message, author)

@@ -2,22 +2,25 @@ module ServiceDefinitions
   class Group
     class Builder
 
-      require 'rugged'
-      require 'fileutils'
-      include ActiveModel::Model
+      require 'open3'
 
-      def self.create(params)
-        new(params[:url]).tap(&:clone_remote)
-      end
+      include ActiveModel::Model
 
       def initialize(url=nil)
         @url = url
       end
 
       attr_accessor :url
+      attr_reader :error_message
 
       def clone_remote
-        Rugged::Repository.clone_at url, "repos/service_definitions/#{name}"
+        stdout, stderr, status = Open3.capture3("git -C repos/service_definitions clone '#{url}'")
+        if status.exitstatus == 0
+          true
+        else
+          @error_message = stderr.split('fatal: ')[1]
+          false
+        end
       end
 
       def name

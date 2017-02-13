@@ -16,10 +16,12 @@ module ServiceDefinitionGroups
     end
 
     def create
-      @service_definition_group_builder = ServiceDefinitions::Group::Builder.create(strong_params)
-      redirect_to service_definition_groups_path, notice: "Service definitions from #{@service_definition_group_builder.name} have been cloned."
-    rescue Rugged::InvalidError => e
-      redirect_to service_definition_groups_path, alert: "Failed to create service definitions because #{e.message}."
+      @service_definition_group_builder = ServiceDefinitions::Group::Builder.new(strong_params[:url])
+      if @service_definition_group_builder.clone_remote
+        redirect_to service_definition_groups_path, notice: "Service definitions for #{@service_definition_group_builder.name} have been cloned."
+      else
+        redirect_to service_definition_groups_path, alert: "Failed to create service definitions for #{@service_definition_group_builder.name}. (#{@service_definition_group_builder.error_message})"
+      end
     end
 
     def edit

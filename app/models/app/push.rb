@@ -12,19 +12,11 @@ class App
 
     def push #(params)
       push_result = Repo::App.new(name).push # params[:username], params[:password]
-      # byebug
-      case push_result
-      when 'rejected'
-        @error_message = "Remote repo rejected push."
-        return false
-      when 'up to date'
-        @error_message = "Already up-to-date."
-        return false
-      when 'done'
-        return true
+      if push_result[:success]
+        true
       else
-        @error_message = "Unhandled error."
-        return false
+        @error_message = push_result[:message]
+        false
       end
     end
 
