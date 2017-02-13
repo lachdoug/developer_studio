@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'mysql2'
+
 # # Git library
 # gem 'rugged'
 # Simple form + country select
