@@ -5,7 +5,7 @@
   <%= f.simple_fields_for :required_modules do |ff| %>
   <tr>
     <%= ff.input :type, as: :select, collection: f.object.type_collection, include_blank: false, required: false, wrapper: :table_cell_input %>
-    <%= ff.input :os_package, required: true, wrapper: :table_cell_input %>
+    <%= ff.input :os_package, wrapper: :table_cell_input %>
     <%= ff.input :name, required: true, wrapper: :table_cell_input %>
     <td>
       <div class='clearfix'>

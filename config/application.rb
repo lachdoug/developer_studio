@@ -22,7 +22,7 @@ module DeveloperStudio
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    config.public_key = File.read('.ssh/identity.pub')
+    config.public_key = File.read("#{Dir.home}/.ssh/identity.pub")
 
   end
 end

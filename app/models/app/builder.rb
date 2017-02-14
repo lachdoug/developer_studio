@@ -17,8 +17,8 @@ class App
     # attr_accessor :url
     attr_reader :url, :error_message
 
-    def url=(input_value)
-      @url = input_value.sub('https://', 'ssh://')
+    def url=(url)
+      @url = url
     end
 
     def clone_remote

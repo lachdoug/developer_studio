@@ -21,18 +21,6 @@ html body {margin-bottom: 200px;}
   color: #c33;
 }
 
-pre.custom-form-code-input-show-ace-editor {
-  min-height: 34px;
-  margin: 0px;
-  cursor: pointer;
-}
-
-.custom-form-markdown-input-show-simplemde-editor.form-control {
-  height: inherit;
-  min-height: 34px;
-  cursor: pointer;
-}
-
 .form-control.input-not-viewable {
   height: 0px;
   padding: 0px;
@@ -41,6 +29,10 @@ pre.custom-form-code-input-show-ace-editor {
 
 #page .form-group {
   margin-bottom: 5px;
+}
+
+#page .form-group-wide-bottom-margin {
+  margin-bottom: 15px;
 }
 
 .form-section-heading {

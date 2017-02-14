@@ -1,0 +1,17 @@
+<div class="dropdown pull-right">
+  <button class="btn btn-custom dropdown-toggle" type="button" data-toggle="dropdown">
+    <%= icon 'fa-bars' %>
+  </button>
+  <ul class="dropdown-menu">
+    <li><%= link_to icon_text('fa-download', 'Pull'),
+      edit_service_definition_group_path(id: @service_definition_group.name) %>
+    </li>
+    <li role="separator" class="divider"></li>
+    <li><%= link_to icon_text('fa-trash', 'Delete'),
+      service_definition_group_path(id: @service_definition_group.name),
+      method: :delete, data: {
+        confirm: "Are you sure that you want to delete service definitions for #{@service_definition_group.name}?"
+      } %>
+    </li>
+  </ul>
+</div>

@@ -26,6 +26,7 @@ module ServiceDefinitions
     end
 
     attr_accessor :name
+    attr_reader :error_message
 
     def service_definition_for(type_path)
       ServiceDefinition.new(self, type_path)
@@ -40,7 +41,13 @@ module ServiceDefinitions
     end
 
     def pull
-      system "git -C repos/service_definitions/#{name} pull"
+      stdout, stderr, status = Open3.capture3("git -C repos/service_definitions/#{name} pull")
+      if status.exitstatus == 0
+        true
+      else
+        @error_message = stderr.split('fatal: ')[1]
+        false
+      end
     end
 
     def delete

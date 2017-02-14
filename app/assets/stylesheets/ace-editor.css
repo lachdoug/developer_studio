@@ -25,3 +25,9 @@
   min-height: 34px;
   font-weight: bold;
 }
+
+pre.custom-form-code-input-show-ace-editor {
+  min-height: 34px;
+  margin: 0px;
+  cursor: pointer;
+}

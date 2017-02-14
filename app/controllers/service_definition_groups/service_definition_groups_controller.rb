@@ -29,7 +29,7 @@ module ServiceDefinitionGroups
       if @service_definition_group.pull
         redirect_to service_definition_group_path(id: @service_definition_group.name), notice: "Service definitions from #{@service_definition_group.name} have been pulled."
       else
-        redirect_to service_definition_groups_path, alert: "Failed to pull service definitions because #{e.message}."
+        redirect_to service_definition_group_path(id: @service_definition_group.name), alert: "Failed to pull service definitions for #{@service_definition_group.name}. (#{@service_definition_group.error_message})"
       end
     end
 

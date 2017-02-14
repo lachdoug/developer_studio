@@ -10,6 +10,8 @@ module Repo
     def self.clone(url)
       stdout, stderr, status = Open3.capture3("git -C repos/apps clone '#{url}'")
       if status.exitstatus == 0
+        ssh_url = url.sub('https://', 'ssh://')
+        `git -C repos/apps remote origin set-url '#{ssh_url}'`
         { success: true }
       else
         { success: false, message: stderr.split('fatal: ')[1] }
@@ -87,6 +89,7 @@ module Repo
     end
 
     def push
+      # byebug
       stdout, stderr, status = Open3.capture3("git -C repos/apps/#{name} push")
       if status.exitstatus == 0
         { success: true }

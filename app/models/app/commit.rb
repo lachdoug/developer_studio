@@ -15,7 +15,7 @@ class App
       if commit_result[:success]
         true
       else
-        @error_message = push_result[:message]
+        @error_message = commit_result[:message]
         false
       end
     end

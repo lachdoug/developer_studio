@@ -1,9 +1,6 @@
 <%= link_to icon('fa-arrow-up'), service_definition_groups_path(), class: 'btn pull-right' %>
+<%= render 'show_menu' %>
 <h4>Service definitions for <%= @service_definition_group.name %></h4>
-<div class='col-sm-12'>
-  <%= link_to icon_text('fa-download', 'Pull'), edit_service_definition_group_path(id: @service_definition_group.name), class: 'btn btn-default' %>
-  <%= link_to icon_text('fa-trash', 'Delete'), service_definition_group_path(id: @service_definition_group.name), method: :delete, class: 'btn btn-default', data: {confirm: "Are you sure that you want to delete these service definitions?"} %>
-</div>
 
 <div class='col-sm-3 page-main-col'>
   <ul class='nav nav-pills nav-stacked'>

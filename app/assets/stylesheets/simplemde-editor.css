@@ -21,3 +21,9 @@
 .simplemde-editor-header-buttons {
   margin: 3px;
 }
+
+.custom-form-markdown-input-show-simplemde-editor.form-control {
+  height: inherit;
+  min-height: 34px;
+  cursor: pointer;
+}

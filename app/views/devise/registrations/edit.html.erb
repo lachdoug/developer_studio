@@ -1,4 +1,4 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h4>Edit <%= resource_name.to_s.humanize %></h4>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 
@@ -9,38 +9,44 @@
 
   <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+  <div class="devise-form col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+    <legend>Recovery email</legend>
+    <p>If you forget your password, reset instruction will be sent to this email address.</p>
+    <div class="form-group form-group-wide-bottom-margin">
+      <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+    </div>
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
     <% end %>
+
+    <legend>Change password</legend>
+    <p>Leave blank if you don't want to change it.</p>
+    <div class="form-group form-group-wide-bottom-margin">
+      <%= f.label :password %>
+      <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+      <% if @minimum_password_length %>
+        <br />
+        <em><%= @minimum_password_length %> characters minimum</em>
+      <% end %>
+    </div>
+    <div class="form-group form-group-wide-bottom-margin">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+    </div>
+
+    <hr>
+
+    <legend>Current password</legend>
+    <div class="form-group form-group-wide-bottom-margin">
+      <p>Enter your current password to allow your changes to be saved.</p>
+      <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
+    </div>
+
+    <div class="actions">
+      <%= link_to icon_text('fa-times', "Cancel"), settings_path(), class: 'btn btn-warning' %>
+      <%= button_tag type: :submit, class: 'btn btn-primary pull-right' do %><%= icon_text('fa-check', "Update") %><% end %>
+    </div>
+
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
 <% end %>
-
-<br>
-<%= link_to "Back", :back %>

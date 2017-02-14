@@ -21,11 +21,6 @@
 .byebug_history
 
 
-# Ignore SSH keys
-/.ssh/*
-!/.ssh/.gitignore
-
-
 # Ignore repos
 /repos/apps/*
 !/repos/apps/.gitignore

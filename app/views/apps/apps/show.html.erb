@@ -1,5 +1,6 @@
 <%= link_to icon('fa-arrow-up'), apps_path(), class: 'btn pull-right' %>
-<%= render 'menu' %>
+<%= link_to icon('fa-git-square'), app_repository_path(app_id: @app.name), class: 'btn pull-right' %>
+<%= render 'show_menu' %>
 <div class='app-show-page'>
   <h4>
     <%= @app.name %>
