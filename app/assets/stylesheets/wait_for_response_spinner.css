@@ -1,7 +1,13 @@
 #saving-alert {
   position: fixed;
   font-size: 18px;
-  margin-right: 75px;
+  margin-right: 100px;
   top: 12px;
   right: 0;
   z-index: 1060; }
+
+@media (max-width: 767px) {
+  #saving-alert {
+    margin-right: 75px;
+  }
+}

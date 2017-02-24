@@ -19,6 +19,6 @@
 //= require bootstrap-sprockets
 //= require list
 //= require simplemde.min
-//  require ace-rails-ap
+//=  require ace-rails-ap
 
 //= require_tree .

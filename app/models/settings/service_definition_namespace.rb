@@ -1,5 +1,5 @@
-module ServiceDefinitions
-  class Group
+module Settings
+  class ServiceDefinitionNamespace
 
     require 'fileutils'
     include ActiveModel::Model

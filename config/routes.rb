@@ -11,8 +11,10 @@ Rails.application.routes.draw do
     root to: "devise/sessions#new"
   end
 
-  resource :settings
-  resource :dropdowns_config
+  resource :settings, module: :settings do
+    resource :dropdowns_config
+    resources :service_definition_namespaces
+  end
 
   resources :apps, module: :apps do
     resource :repository, only: [:show] do
@@ -101,8 +103,5 @@ Rails.application.routes.draw do
   resources :services, module: :services do
     # resource :author
   end
-
-  resources :service_definition_groups, module: :service_definition_groups
-
 
 end

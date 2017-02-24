@@ -5,12 +5,12 @@
     <legend>Service configuration <%= service_configuration_id + 1 %></legend>
     <% if f.object.namespace.blank? %>
       <%= f.input :namespace, as: :select, required: true,
-          collection: ServiceDefinitions::Group.publishers_collection %>
+          collection: Settings::ServiceDefinitionNamespace.publishers_collection %>
     <% elsif f.object.type_path.blank? %>
       <%= f.input :namespace, disabled: true %>
       <%= f.input :namespace, as: :hidden %>
       <%= f.input :type_path, as: :select, required: true,
-          collection: ServiceDefinitions::Group.
+          collection: Settings::ServiceDefinitionNamespace.
                         type_paths_collection_for(f.object.namespace) %>
     <% else %>
       <% if f.object.service_definition_file.present? %>

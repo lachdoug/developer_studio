@@ -1,3 +1,13 @@
 <%= render 'index_menu' %>
 <h4>Apps</h4>
-<%= render @apps %>
+<div id="apps_list_search">
+  <input class="search form-control" placeholder="Search" />
+  <ul class="list">
+    <% @apps.each do |app| %>
+      <li>
+        <div class="list_search" hidden="true"><%= app.name %></div>
+        <%= render 'app', app: app %>
+      </li>
+    <% end %>
+  </ul>
+</div>

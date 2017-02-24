@@ -15,7 +15,6 @@ class App
           end
 
           def value=(value)
-            # byebug
             if value.present? && test_for_resolve_regex.match(value)
               @resolve = '1'
               @resolve_string = value

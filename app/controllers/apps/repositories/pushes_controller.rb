@@ -11,12 +11,6 @@ module Apps
         end
       end
 
-      # private
-      #
-      # def strong_params
-      #   params.require(:app_push).permit(:username, :password)
-      # end
-
     end
   end
 end

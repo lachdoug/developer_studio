@@ -8,6 +8,9 @@ html body {margin-bottom: 200px;}
   pointer-events: none;
 }
 
+#apps_list_search input.search.form-control { width: 200px; display: inline-block; }
+#apps_list_search ul { list-style: none; padding: 10px; }
+
 #saving-alert {
   color: #337ab766;
 }

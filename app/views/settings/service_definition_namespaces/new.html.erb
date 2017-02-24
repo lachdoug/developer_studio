@@ -1,0 +1,15 @@
+<h4>Add service definition namespace</h4>
+<%= simple_form_for @service_definition_namespace_builder,
+      url: settings_service_definition_namespaces_path,
+      # method: :post,
+      html: { class: 'form-horizontal' },
+      wrapper: :horizontal_form do |f| %>
+      <p>Remote repo URL for service definition namespace.</p>
+      <%= f.input :url, as: :string, label: "URL", required: true %>
+
+<%= link_to icon_text('fa-times', :Cancel), settings_path, class: 'btn btn-warning' %>
+
+<%= f.button :button, class: "btn btn-primary pull-right", data: { disable_with: 'Cloning...' } do %>
+  <%= icon_text 'fa-check', :Submit  %>
+<% end %>
+<% end %>

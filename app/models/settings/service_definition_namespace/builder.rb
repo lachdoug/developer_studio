@@ -1,5 +1,5 @@
-module ServiceDefinitions
-  class Group
+module Settings
+  class ServiceDefinitionNamespace
     class Builder
 
       require 'open3'

@@ -41,14 +41,6 @@ class App
         blueprint.content.dig(*data_location)
       end
 
-      # def build(params)
-      #   if params.present?
-      #     assign_attributes params
-      #   else
-      #     load_data
-      #   end
-      # end
-
       def update(params)
         assign_attributes(params)
         save
@@ -74,7 +66,6 @@ class App
       def script_language_collection
         dropdowns_config[:script_languages]
       end
-
 
     end
   end

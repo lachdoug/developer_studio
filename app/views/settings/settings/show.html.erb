@@ -1,0 +1,26 @@
+<h4>Settings</h4>
+<legend>SSH public key</legend>
+<div class='col-sm-12 clearfix'>
+  <p>Add this key to your remote repo so that this app can push changes.</p>
+  <pre><%= Rails.application.config.public_key %></pre><br>
+</div>
+<legend>Admin user</legend>
+<div class='col-sm-12 clearfix'>
+  <%= link_to icon_text('fa-user-secret', 'Credentials'), edit_user_registration_path(current_user), class: 'btn btn-default pull-right' %>
+  <p>Edit password and password recovery email address.</p>
+  <br>
+</div>
+<legend >Customize</legend>
+<div class='col-sm-12 clearfix'>
+  <%= link_to icon_text('fa-caret-down', 'Dropdowns'), settings_dropdowns_config_path, class: 'btn btn-default pull-right' %>
+  <p>Add options to dropdown menus.</p>
+  <br>
+</div>
+<legend >Service definitions</legend>
+<div class='col-sm-12 clearfix'>
+  <%= link_to icon_text('fa-plus', 'Add'),  new_settings_service_definition_namespace_path(), class: 'btn btn-default pull-right' %>
+  <p>Service definitions used for blueprint service configurations.</p>
+  <% @service_definition_namespaces.each do |sdg| %>
+    <p><%= link_to sdg.name,  settings_service_definition_namespace_path(sdg.name) %></p>
+  <% end %>
+</div>

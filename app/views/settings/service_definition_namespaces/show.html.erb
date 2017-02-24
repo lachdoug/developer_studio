@@ -1,10 +1,10 @@
-<%= link_to icon('fa-arrow-up'), service_definition_groups_path(), class: 'btn pull-right' %>
+<%= link_to icon('fa-arrow-up'), settings_path(), class: 'btn pull-right' %>
 <%= render 'show_menu' %>
-<h4>Service definitions for <%= @service_definition_group.name %></h4>
+<h4>Service definitions for <%= @service_definition_namespace.name %></h4>
 
 <div class='col-sm-3 page-main-col'>
   <ul class='nav nav-pills nav-stacked'>
-    <% @service_definition_group.service_definitions.each do |service_definition| %>
+    <% @service_definition_namespace.service_definitions.each do |service_definition| %>
       <li id='service_definition_<%= service_definition.type_path_for_html_id %>_pill' class='page_section_pill'>
         <%= content_tag :a, onclick: "display_service_definition('#{service_definition.type_path_for_html_id}')" do %>
           <%= service_definition.type_path %>
@@ -17,7 +17,7 @@
 
 
 <div class='col-sm-9 page-main-col'>
-  <% @service_definition_group.service_definitions.each do |service_definition| %>
+  <% @service_definition_namespace.service_definitions.each do |service_definition| %>
     <div id='service_definition_<%= service_definition.type_path_for_html_id %>' class='service-definition-display' style='<%= 'display: none;' %>'>
       <%= pretty_print service_definition.content %>
     </div>

@@ -2,8 +2,6 @@ class App
   class Blueprint
     class ServiceConfigurations < Section
 
-      # attr_reader :service_configurations
-
       def all
         @service_configurations
       end

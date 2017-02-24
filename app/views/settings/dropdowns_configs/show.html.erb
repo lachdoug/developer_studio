@@ -1,6 +1,6 @@
 <%= link_to icon('fa-arrow-up'), settings_path(), class: 'btn pull-right' %>
 <h4>Dropdowns config</h4>
 <p>Use YAML. Add new dropdown options by adding a key/value, where the key is the display text and the value is the stored value.</p>
-<%= simple_form_for @dropdowns_config, url: dropdowns_config_path, html: { class: 'autosubmit' }, remote: true, method: :patch do |f| %>
+<%= simple_form_for @dropdowns_config, url: settings_dropdowns_config_path, html: { class: 'autosubmit' }, remote: true, method: :patch do |f| %>
 <%= f.input :config_yaml, as: :code, input_html: { data: { mode: :yaml } }, label: false %>
 <% end %>
