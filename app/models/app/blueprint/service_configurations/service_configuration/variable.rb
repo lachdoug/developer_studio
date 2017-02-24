@@ -35,7 +35,7 @@ class App
           end
 
           def form_data_value
-            return resolve_string if resolve = '1'
+            return resolve_string if resolve == '1'
             return ActiveRecord::Type::Boolean.new.cast(value) if type.to_sym == :boolean
             value
           end

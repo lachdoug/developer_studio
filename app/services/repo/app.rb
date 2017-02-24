@@ -8,10 +8,9 @@ module Repo
     end
 
     def self.clone(url)
-      stdout, stderr, status = Open3.capture3("git -C repos/apps clone '#{url}'")
+      ssh_url = url.sub('https://', 'ssh://')
+      stdout, stderr, status = Open3.capture3("git -C repos/apps clone '#{ssh_url}'")
       if status.exitstatus == 0
-        ssh_url = url.sub('https://', 'ssh://')
-        `git -C repos/apps remote origin set-url '#{ssh_url}'`
         { success: true }
       else
         { success: false, message: stderr.split('fatal: ')[1] }
@@ -33,8 +32,16 @@ module Repo
       readme.precheck
       release_notes.precheck
       license.precheck
-      `git -C repos/apps/#{name} add -A`
+      # remote_repo_url_precheck
     end
+
+    # def remote_repo_url_precheck
+    #   url = `git -C repos/apps/#{name} remote get-url origin`
+    #   ssh_url = url.sub('https://', 'ssh://')
+    #   `git -C repos/apps/#{name} remote set-url origin '#{ssh_url}'`
+    #   # byebug
+    #   # `git -C repos/apps/#{name} add -A`
+    # end
 
     def remote_web_url
       @remote_web_url ||= remote_url.sub('ssh://', 'https://')
@@ -94,7 +101,7 @@ module Repo
       if status.exitstatus == 0
         { success: true }
       else
-        { success: false, message: stderr.split('fatal: ')[1] }
+        { success: false, message: stderr.split('fatal: ')[1].sub(' Email support@github.com for help', '') }
       end
     end
 
