@@ -6,7 +6,7 @@
       wrapper: :horizontal_form do |f| %>
       <p>URL to remote Git repository. The repository must be accessible via SSH. Ensure the SSH pubic key for this application
          (see <%= link_to icon_text('fa-cog', :Settings), settings_path %>) has been loaded into the repository.</p>
-      <%= f.input :url, as: :url, label: "Remote URL", required: true, hint: "should start with https:// " %>
+      <%= f.input :url, as: :string, label: "Remote URL", required: true %>
 
 <%= link_to icon_text('fa-times', :Cancel), apps_path, class: 'btn btn-warning' %>
 
