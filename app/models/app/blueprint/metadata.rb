@@ -40,7 +40,8 @@ class App
               minor: blueprint_version_minor.to_i,
               level: blueprint_version_level,
               patch: blueprint_version_patch.to_i
-            }
+            },
+            timestamp: Time.now.utc
           },
           software: {
               display: {

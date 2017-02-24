@@ -50,7 +50,7 @@ module Repo
           end
 
           def timestamp
-            DateTime.parse(r :timestamp)
+            DateTime.parse(r :metadata, :blueprint, :timestamp)
           rescue
             nil
           end

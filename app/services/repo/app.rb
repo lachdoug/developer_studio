@@ -9,7 +9,7 @@ module Repo
 
     def self.clone(url)
       ssh_url = url.sub('https://', 'ssh://')
-      stdout, stderr, status = Open3.capture3("git -C repos/apps clone '#{ssh_url}'")
+      stdout, stderr, status = Open3.capture3("env GIT_SSH_COMMAND=\"ssh -i /home/home_dir/.ssh/identity\" git -C repos/apps clone '#{ssh_url}'")
       if status.exitstatus == 0
         { success: true }
       else
