@@ -13,11 +13,11 @@ module Settings
     private
 
     def strong_params
-      params.require(:dropdowns_config).permit(:config_yaml)
+      params.require(:settings_dropdowns_config).permit(:config_yaml)
     end
 
     def set_dropdowns_config
-      @dropdowns_config = DropdownsConfig.load
+      @dropdowns_config = Settings::DropdownsConfig.load
     end
 
   end

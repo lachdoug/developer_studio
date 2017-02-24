@@ -60,7 +60,7 @@ class App
       end
 
       def dropdowns_config
-        @dropdowns_config ||= DropdownsConfig.config
+        @dropdowns_config ||= Settings::DropdownsConfig.config
       end
 
       def script_language_collection
