@@ -1,7 +1,6 @@
 ---
 frameworks:
   # e.g. 'New One': new_one
-  'New One': new_one
 
 script_languages:
 

@@ -457,10 +457,13 @@ module Repo
             return {} if vsc.empty?
             # case vsc
             # when String
-            #
-            #    || {}
+            #   vsc.split ' '
+            # else
+            #   vsc
+            # #
+            # #    || {}
 
-            # byebug
+            byebug
 
             vsc
 

@@ -15,9 +15,10 @@ class App
           end
 
           def value=(value)
+            # byebug
             if value.present? && test_for_resolve_regex.match(value)
               @resolve = '1'
-              @resolve_string =  value
+              @resolve_string = value
             else
               @value = value
             end
@@ -34,7 +35,7 @@ class App
           end
 
           def form_data_value
-            return resolve_string if test_for_resolve_regex.match(value)
+            return resolve_string if resolve = '1'
             return ActiveRecord::Type::Boolean.new.cast(value) if type.to_sym == :boolean
             value
           end

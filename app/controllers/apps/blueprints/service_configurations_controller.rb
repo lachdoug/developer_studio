@@ -3,7 +3,6 @@ module Apps
     class ServiceConfigurationsController < BaseController
 
       def update
-        # byebug
         blueprint_section_view_requires_refresh = ( service_configurations_incomplete || service_configuration_creation )
         @app.blueprint.service_configurations.find(params[:id]).update(strong_params)
         if blueprint_section_view_requires_refresh

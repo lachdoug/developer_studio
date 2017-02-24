@@ -8,13 +8,31 @@ class App
         attr_accessor :service_configurations, :namespace, :type_path
         attr_reader :variables
 
-        # def initialize(service_configurations)
-        #   @service_configurations = service_configurations
+        # def apply_changes params
+        #   byebug
+        #   update params
         # end
 
+
         def variables_attributes=(params={})
-          @variables = params.map { |i, variable_params| Variable.new(service_configuration: self).tap{ |variable| variable.assign_attributes variable_params } }
+          @variables =
+            params.map do |i, variable_params|
+              Variable.new(service_configuration: self).tap do |variable|
+                # byebug if variable_params[:name] == 'cron_job'
+                # variable.assign_attributes variable_params_with_resolve_string_in_value_if_resolve(variable_params)
+                variable.assign_attributes variable_params
+              end
+            end
         end
+
+        # def variable_params_with_resolve_string_in_value_if_resolve(variable_params)
+        #   if variable_params[:resolve] == '1'
+        #     { name: variable_params[:name], value: variable_params[:resolve_string] }
+        #   else
+        #     { name: variable_params[:name], value: variable_params[:value] }
+        #   end
+        # end
+
 
         def form_data
           {
