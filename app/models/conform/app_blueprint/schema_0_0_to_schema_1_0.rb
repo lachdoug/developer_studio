@@ -394,7 +394,7 @@ module Conform
             type: variable_field_type_for(av),
             label: av.dig(:label).to_s,
             title: av.dig(:tooltip).to_s,
-            comment: ev.dig(:input, :comment).to_s,
+            comment: av.dig(:input, :comment).to_s,
             hint: av.dig(:hint).to_s,
             placeholder: av.dig(:placeholder).to_s,
             validation: {

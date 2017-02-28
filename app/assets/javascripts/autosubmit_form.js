@@ -35,7 +35,6 @@ var bind_autosubmit_forms_input_change_events = function() {
   });
   $('form.autosubmit textarea').off('change');
   $('form.autosubmit textarea:not(.do_not_autosubmit_form_on_change)').on('change', function(){
-    console.log('hi');
     submit_autosubmit_form(this);
   });
 };
