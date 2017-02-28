@@ -94,6 +94,9 @@ Rails.application.routes.draw do
           end
         end
       end
+      resource :schedules, only: [:new, :update] do
+        resource :schedule, only: [:destroy]
+      end
     end
     resource :readme, only: [:update], module: :readmes
     resource :release_notes, only: [:update], module: :release_notes

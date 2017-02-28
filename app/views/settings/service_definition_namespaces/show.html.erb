@@ -2,24 +2,39 @@
 <%= render 'show_menu' %>
 <h4>Service definitions for <%= @service_definition_namespace.name %></h4>
 
-<div class='col-sm-3 page-main-col'>
-  <ul class='nav nav-pills nav-stacked'>
+<div id="service_definitions">
+  <div class="col-sm-3 page-main-col">
+      <nav id="sidebar_nav" class="navbar navbar-default" role="navigation">
+
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle btn btn-default" data-toggle="collapse" data-target="#sidebar_nav .navbar-collapse">
+                <span class="nav_menu_text">Select</span>
+                <%= icon('fa-caret-down') %>
+              </button>
+          </div>
+
+          <div class="collapse navbar-collapse">
+              <ul class='nav nav-pills nav-stacked'>
+                <% @service_definition_namespace.service_definitions.each do |service_definition| %>
+                  <li id='service_definition_<%= service_definition.type_path_for_html_id %>_pill' class='page_section_pill'>
+                    <%= content_tag :a, onclick: "display_service_definition('#{service_definition.type_path_for_html_id}')", data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
+                      <%= service_definition.type_path %>
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
+          </div>
+
+      </nav>
+
+  </div>
+
+  <div class='col-sm-9 page-main-col'>
     <% @service_definition_namespace.service_definitions.each do |service_definition| %>
-      <li id='service_definition_<%= service_definition.type_path_for_html_id %>_pill' class='page_section_pill'>
-        <%= content_tag :a, onclick: "display_service_definition('#{service_definition.type_path_for_html_id}')" do %>
-          <%= service_definition.type_path %>
-        <% end %>
-      </li>
+    <% # = service_definition.type_path if service_definition.content[:actionators].present? %>
+      <div id='service_definition_<%= service_definition.type_path_for_html_id %>' class='service-definition-display' style='<%= 'display: none;' %>'>
+        <%= pretty_print service_definition.content %>
+      </div>
     <% end %>
-  </ul>
-  <hr>
-</div>
-
-
-<div class='col-sm-9 page-main-col'>
-  <% @service_definition_namespace.service_definitions.each do |service_definition| %>
-    <div id='service_definition_<%= service_definition.type_path_for_html_id %>' class='service-definition-display' style='<%= 'display: none;' %>'>
-      <%= pretty_print service_definition.content %>
-    </div>
-  <% end %>
+  </div>
 </div>

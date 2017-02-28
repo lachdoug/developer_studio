@@ -31,6 +31,7 @@ module Apps
                       :type,
                       :label,
                       :title,
+                      :comment,
                       :hint,
                       :placeholder,
                       collection_attributes: [

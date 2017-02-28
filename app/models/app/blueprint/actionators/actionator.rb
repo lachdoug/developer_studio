@@ -17,6 +17,7 @@ class App
         end
 
         def build_variable
+          @variables = [] if @variables.nil?
           Variable.new.tap(&:build_input).tap do |v|
             @variables << v
           end

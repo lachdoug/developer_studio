@@ -47,11 +47,11 @@ class App
       end
 
       def environment_variables_attributes=(params)
-        @environment_variables = params.map { |i, p| App::Blueprint::EnvironmentVariables::EnvironmentVariable.new p }
+        @environment_variables = params.map { |i, p| EnvironmentVariable.new p }
       end
 
-      def build_environment_variable
-        App::Blueprint::EnvironmentVariables::EnvironmentVariable.new.tap(&:build_input).tap do |v|
+      def build
+        EnvironmentVariable.new.tap(&:build_input).tap do |v|
           @environment_variables << v
         end
       end
@@ -71,7 +71,7 @@ class App
       end
 
       def find(i)
-        environment_variables[i.to_i] || build_environment_variable
+        environment_variables[i.to_i] || build
       end
 
     end

@@ -1,7 +1,7 @@
 class App
   class Blueprint
-    class ServiceConfigurations
-      class ServiceConfiguration
+    class Schedules
+      class Schedule
         class Variable
 
           include ActiveModel::Model

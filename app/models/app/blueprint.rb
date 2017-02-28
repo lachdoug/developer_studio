@@ -53,7 +53,8 @@ class App
       :ports,
       :actionators,
       :external_repositories,
-      :environment_variables
+      :environment_variables,
+      :schedules
     ].each do |method_name|
       define_method method_name do
         instance_variable_set "@#{method_name}",

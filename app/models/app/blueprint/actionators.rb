@@ -66,7 +66,11 @@ class App
       end
 
       def build_actionator
-        @actionators << Actionator.new.tap { |actionator| actionator.script_attributes = {} }
+        @actionators ||= []
+        Actionator.new.tap do|a|
+          a.script_attributes = {}
+          @actionators << a
+        end
       end
 
       def form_data

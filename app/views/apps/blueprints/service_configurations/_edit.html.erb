@@ -5,7 +5,7 @@
     <legend>Service configuration <%= service_configuration_id + 1 %></legend>
     <% if f.object.namespace.blank? %>
       <%= f.input :namespace, as: :select, required: true,
-          collection: Settings::ServiceDefinitionNamespace.publishers_collection %>
+          collection: Settings::ServiceDefinitionNamespace.namespaces_collection %>
     <% elsif f.object.type_path.blank? %>
       <%= f.input :namespace, disabled: true %>
       <%= f.input :namespace, as: :hidden %>
@@ -13,7 +13,7 @@
           collection: Settings::ServiceDefinitionNamespace.
                         type_paths_collection_for(f.object.namespace) %>
     <% else %>
-      <% if f.object.service_definition_file.present? %>
+      <% if f.object.service_definition.present? %>
         <%= f.input :namespace, disabled: true %>
         <%= f.input :namespace, as: :hidden %>
         <%= f.input :type_path, disabled: true %>
@@ -31,7 +31,8 @@
                 <%= ff.object.send :name %>
               </div>
               <% if ff.object.variable_definition.present? %>
-                <%= ( content_tag :p, ff.object.send(:label), class: 'col-sm-9 col-sm-offset-3' ) if ff.object.send(:label).present? %>
+                <%= ( content_tag :label, ff.object.send(:label), class: 'col-sm-9 col-sm-offset-3' ) %>
+                <%= ( content_tag :p, ff.object.send(:comment), class: 'col-sm-9 col-sm-offset-3' ) if ff.object.send(:comment).present? %>
                 <%= ff.input :name, as: :hidden %>
                 <%= ff.input :value,
                         hint: ( ff.object.send(:hint) if ff.object.send(:hint).present? ),

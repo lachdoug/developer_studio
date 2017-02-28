@@ -8,7 +8,7 @@ module Apps
       end
 
       def new
-        @app.blueprint.environment_variables.build_environment_variable
+        @app.blueprint.environment_variables.build
         render 'apps/blueprints/environment_variables/update'
       end
 
@@ -32,6 +32,7 @@ module Apps
             :type,
             :label,
             :title,
+            :comment,
             :hint,
             :placeholder,
             collection_attributes: [

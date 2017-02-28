@@ -10,6 +10,7 @@ class App
                         :type,
                         :title,
                         :collection,
+                        :comment,
                         :hint,
                         :placeholder
           attr_reader :validation, :collection
@@ -61,6 +62,7 @@ class App
               label: label,
               type: type,
               title: title,
+              comment: comment,
               hint: hint,
               placeholder: placeholder,
               collection: collection.form_data,

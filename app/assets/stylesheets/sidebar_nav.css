@@ -1,0 +1,17 @@
+#sidebar_nav.navbar-default {
+  background-color: transparent;
+  border: none;
+  margin-bottom: 0px;
+}
+
+#sidebar_nav.navbar-default .navbar-toggle {
+  margin: 0px 0px 10px 0px;
+  width: 100%;
+  text-align: left;
+  color: #337ab7;
+}
+
+#sidebar_nav.navbar-default .navbar-collapse {
+  border: none;
+  padding: 0px;
+}

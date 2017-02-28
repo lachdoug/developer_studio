@@ -12,7 +12,7 @@ module Settings
       list.map{ |name| new(name) }
     end
 
-    def self.publishers_collection
+    def self.namespaces_collection
       list
     end
 
