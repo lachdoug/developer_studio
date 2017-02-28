@@ -40,6 +40,7 @@ class App
           end
 
           def type
+            return '' unless variable_definition
             variable_definition.dig(:input, :type) || field_type_for( variable_definition[:field_type] )
           end
 
