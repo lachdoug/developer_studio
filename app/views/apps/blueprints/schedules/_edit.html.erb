@@ -10,24 +10,24 @@
     </div>
     <div class="clearfix schedule_timespec_cols">
       <div class="col-sm-2 col-sm-offset-2">
-        <%= f.input :timespec_minute, label: 'Minute', pattern: "[*\/0-9]", wrapper: :vertical_form,
-            input_html: { pattern_validation_error_message: "* / 0-9" } %>
+        <%= f.input :timespec_minute, label: 'Minute', pattern: "[*\/0-9]/g", wrapper: :vertical_form,
+            input_html: { pattern_validation_error_message: "* / 0-9 only" } %>
       </div>
       <div class="col-sm-2">
-        <%= f.input :timespec_hour, label: 'Hour', pattern: "[*\/0-9]", wrapper: :vertical_form,
-            input_html: { pattern_validation_error_message: "* / 0-9" } %>
+        <%= f.input :timespec_hour, label: 'Hour', pattern: "[*\/0-9]/g", wrapper: :vertical_form,
+            input_html: { pattern_validation_error_message: "* / 0-9 only" } %>
       </div>
       <div class="col-sm-2">
-        <%= f.input :timespec_day_of_month, label: 'Day of month', pattern: "[*\/0-9]", wrapper: :vertical_form,
-            input_html: { pattern_validation_error_message: "* / 0-9" } %>
+        <%= f.input :timespec_day_of_month, label: 'Day of month', pattern: "[*\/0-9]/g", wrapper: :vertical_form,
+            input_html: { pattern_validation_error_message: "* / 0-9 only" } %>
       </div>
       <div class="col-sm-2">
-        <%= f.input :timespec_month, label: 'Month', pattern: "[*\/0-9]", wrapper: :vertical_form,
-            input_html: { pattern_validation_error_message: "* / 0-9" } %>
+        <%= f.input :timespec_month, label: 'Month', pattern: "[*\/0-9]/g", wrapper: :vertical_form,
+            input_html: { pattern_validation_error_message: "* / 0-9 only" } %>
       </div>
       <div class="col-sm-2">
-        <%= f.input :timespec_day_of_week, label: 'Day of week', pattern: "[*\/0-9]", wrapper: :vertical_form,
-            input_html: { pattern_validation_error_message: "* / 0-9" } %>
+        <%= f.input :timespec_day_of_week, label: 'Day of week', pattern: "[*\/0-9]/g", wrapper: :vertical_form,
+            input_html: { pattern_validation_error_message: "* / 0-9 only" } %>
       </div>
     </div>
     <div class="form-section-heading">
