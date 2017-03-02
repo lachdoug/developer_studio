@@ -229,7 +229,8 @@ module Conform
 
       def system_package_for(sp)
         {
-          package: sp.dig(:package).to_s
+          package: sp.dig(:package).to_s,
+          version: ''
         }
       end
 

@@ -5,10 +5,11 @@ class App
 
         include ActiveModel::Model
 
-        attr_accessor :package
+        attr_accessor :package, :version
 
         def form_data
-          { package: package }
+          { package: package,
+            version: version }
         end
 
       end
