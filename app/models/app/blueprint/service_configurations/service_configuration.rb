@@ -84,10 +84,10 @@ class App
 
         def service_definition
           # byebug
-          YAML.load(xservice_definition_file).deep_symbolize_keys || {}
+          ( YAML.load(service_definition_file) || {} ).deep_symbolize_keys
         end
 
-        def xservice_definition_file
+        def service_definition_file
           Settings::ServiceDefinitionNamespace.new( namespace ).service_definition_for(type_path).content
         end
 

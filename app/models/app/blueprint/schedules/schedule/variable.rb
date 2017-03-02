@@ -6,7 +6,7 @@ class App
 
           include ActiveModel::Model
 
-          attr_accessor :service_configuration, :resolve_string, :resolve
+          attr_accessor :schedule, :resolve_string, :resolve
           attr_reader :name, :value
 
           def name=(name)
@@ -15,7 +15,7 @@ class App
           end
 
           def value=(value)
-            if value.present? && test_for_resolve_regex.match(value)
+            if value.present? && value.is_a?(String) && test_for_resolve_regex.match(value)
               @resolve = '1'
               @resolve_string = value
             else
@@ -35,65 +35,58 @@ class App
 
           def form_data_value
             return resolve_string if resolve == '1'
-            return ActiveRecord::Type::Boolean.new.cast(value) if type.to_sym == :boolean
+            return ActiveRecord::Type::Boolean.new.cast(value) if variable_definition.present? && type.to_sym == :boolean
             value
           end
 
           def type
-            variable_definition.dig(:input, :type) || field_type_for( variable_definition[:field_type] )
+            variable_definition.dig(:input, :type)
           end
 
           def collection
-            variable_definition.dig(:input, :collection) || collection_for( variable_definition[:select_collection] )
+            variable_definition.dig(:input, :collection)
           end
 
           def label
-            variable_definition.dig(:input, :label) || variable_definition[:label]
+            variable_definition.dig(:input, :label)
           end
 
           def title
-            variable_definition.dig(:input, :title) || variable_definition[:title]
+            variable_definition.dig(:input, :title)
           end
 
           def hint
-            variable_definition.dig(:input, :hint) || variable_definition[:hint]
+            variable_definition.dig(:input, :hint)
           end
 
           def comment
-            variable_definition.dig(:input, :comment) || variable_definition[:comment]
+            variable_definition.dig(:input, :comment)
           end
 
           def placeholder
-            variable_definition.dig(:input, :placeholder) || variable_definition[:placeholder]
+            variable_definition.dig(:input, :placeholder)
+          end
+
+          def pattern
+            variable_definition.dig(:input, :validation, :pattern)
+          end
+
+          def validation_message
+            variable_definition.dig(:input, :validation, :message)
+          end
+
+          def required
+            variable_definition.dig(:input, :validation, :required)
           end
 
           def variable_definition
             @variable_definition ||=
-            service_configuration.service_definition_consumer_params[name.to_sym]
-          end
+            schedule.blueprint_actionator_variables.find { |v| v[:name] == name.to_s }
+            # 
+            # byebug unless @variable_definition
+            # @variable_definition
 
-          # Convert schema v0 service definition field types to v1 fields types
-          def field_type_for(field_type)
-            case field_type.to_sym
-            when :boolean
-              :boolean
-            when :collection, :select, :select_single
-              :select
-            when :int
-              :integer
-            when :hidden
-              :string
-            when :password
-              :string
-            when :password_with_confirmation
-              :string
-            when :text, :text_area
-              :text
-            when :text_field
-              :string
-            else
-              :string
-            end
+
           end
 
           def collection_for(select_collection)
@@ -102,7 +95,6 @@ class App
           rescue
             [variable_definition[:select_collection]]
           end
-
 
         end
       end

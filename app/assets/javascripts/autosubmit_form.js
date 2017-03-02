@@ -26,9 +26,6 @@ var bind_autosubmit_forms_input_change_events = function() {
   $('form.autosubmit input:not(.do_not_autosubmit_form_on_change)').on('change', function(){
     submit_autosubmit_form(this);
   });
-  $('input.service_configuration_variable_resolve_checkbox').on('change', function() {
-    show_app_blueprint_service_configurations_service_configuration_variable_input_for(this);
-  });
   $('form.autosubmit select').off('change');
   $('form.autosubmit select:not(.do_not_autosubmit_form_on_change)').on('change', function(){
     submit_autosubmit_form(this);

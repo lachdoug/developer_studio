@@ -3,8 +3,14 @@ module Apps
     class SchedulesController < BaseController
 
       def update
-        @app.blueprint.schedules.find(params[:id]).update(strong_params)
-        render 'apps/blueprints/jsons/update'
+        @schedule = @app.blueprint.schedules.find(params[:id])
+        blueprint_section_view_requires_refresh = schedule_actionator_name_set || schedule_instruction_changed
+        @schedule.update(strong_params)
+        if blueprint_section_view_requires_refresh
+          render 'apps/blueprints/schedules/update'
+        else
+          render 'apps/blueprints/jsons/update'
+        end
       end
 
       def new
@@ -21,17 +27,25 @@ module Apps
 
       def strong_params
         params.require(:app_blueprint_schedules_schedule).
-          permit( :namespace,
-                :type_path,
+          permit( :label,
+                :timespec_minute,
+                :timespec_hour,
+                :timespec_day_of_month,
+                :timespec_month,
+                :timespec_day_of_week,
+                :instruction,
+                :actionator_name,
                 { variables_attributes: [:name, :value, :resolve_string, :resolve] } )
       end
 
-      def schedules_incomplete
-        @app.blueprint.schedules.all.map{ |schedule| schedule.type_path.blank? }.any?
+      # def
+
+      def schedule_actionator_name_set
+        @schedule.actionator_name != strong_params[:actionator_name]
       end
 
-      def schedule_creation
-        @app.blueprint.schedules.all.count == params[:id].to_i
+      def schedule_instruction_changed
+        @schedule.instruction != strong_params[:instruction]
       end
 
     end

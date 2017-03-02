@@ -15,7 +15,9 @@
 //= require turbolinks
 
 //= require jquery.validate
-//= require jquery.validate.additional-methods
+//~= require jquery.validate.additional-methods
+
+
 //= require bootstrap-sprockets
 //= require list
 //= require simplemde.min

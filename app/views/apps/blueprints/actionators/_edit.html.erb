@@ -12,7 +12,7 @@
     <%= ff.simple_fields_for :variables do |fff| %>
       <div class="panel panel-default">
         <div class="panel-body">
-          <legend>Actionator <%= ff.index + 1 %> variable <%= ff.index + 1 %></legend>
+          <legend>Actionator <%= ff.index + 1 %> variable <%= fff.index + 1 %></legend>
           <%= fff.input :name, required: true %>
           <%= fff.input :value %>
           <div class="form-section-heading">Input</div>

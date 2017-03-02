@@ -4,7 +4,7 @@ module Apps
 
       def update
         @app.blueprint.actionators.update strong_params
-        render 'apps/blueprints/jsons/update'
+        render 'apps/blueprints/schedules/update'
       end
 
       def new

@@ -21,13 +21,17 @@ class App
       def schedules_persisted_data
         persisted_data.map.with_index do |schedule, i|
           { i.to_s =>
-            schedule.map do |k,v|
-              if k.to_sym == :variables
-                { variables_attributes: variables_attributes_for(v) }
-              else
-                { k => v }
-              end
-            end.inject(:merge) }
+            { label: schedule[:label],
+              timespec_minute: schedule.dig(:timespec, :minute),
+              timespec_hour: schedule.dig(:timespec, :hour),
+              timespec_day_of_month: schedule.dig(:timespec, :day_of_month),
+              timespec_month: schedule.dig(:timespec, :month),
+              timespec_day_of_week: schedule.dig(:timespec, :day_of_week),
+              instruction: schedule[:instruction],
+              actionator_name: schedule.dig(:actionator, :name),
+              variables_attributes: variables_attributes_for( schedule.dig(:actionator, :params) )
+            }
+          }
         end.inject(:merge) || {}
       end
 
@@ -39,11 +43,11 @@ class App
       end
 
       def schedules_attributes=(params)
-        @schedules = params.map { |i, attributes| ServiceConfiguration.new(schedules: self).tap { |item| item.assign_attributes(attributes) } }
+        @schedules = params.map { |i, attributes| Schedule.new(schedules: self).tap { |item| item.assign_attributes(attributes) } }
       end
 
       def build
-        ServiceConfiguration.new(schedules: self).tap do |new_item|
+        Schedule.new(schedules: self).tap do |new_item|
           @schedules << new_item
         end
       end
@@ -59,6 +63,21 @@ class App
       def delete(i)
         @schedules.delete_at i.to_i
         save
+      end
+
+      def instruction_collection
+        {
+          Start: :start,
+          Stop: :stop,
+          Pause: :pause,
+          Unpause: :unpause,
+          Restart: :restart,
+          Action: :action
+        }
+      end
+
+      def actionator_names_collection
+        blueprint.content[:software][:actionators].map { |actionator| actionator[:name] }
       end
 
     end

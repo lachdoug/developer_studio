@@ -4,6 +4,10 @@ class App
 
       attr_reader :actionators
 
+      def all
+        @actionators
+      end
+
       def data_location
         [ :software, :actionators ]
       end

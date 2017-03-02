@@ -97,7 +97,7 @@ module Repo
 
     def push
       # byebug
-      stdout, stderr, status = Open3.capture3("env GIT_SSH_COMMAND=\"ssh -i /home/home_dir/.ssh/identity\" git -C repos/apps/#{name} push")
+      stdout, stderr, status = Open3.capture3("env GIT_SSH_COMMAND=\"ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i /home/home_dir/.ssh/identity\" git -C repos/apps/#{name} push")
       if status.exitstatus == 0
         { success: true }
       else

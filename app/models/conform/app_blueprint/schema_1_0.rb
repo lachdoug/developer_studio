@@ -465,18 +465,27 @@ module Conform
 
       def schedule_for(s)
         {
-          title: s.dig(:title).to_s,
-          timespec: s.dig(:timespec).to_s,
+          label: s.dig(:label).to_s,
+          timespec: {
+            minute: s.dig(:timespec, :minute),
+            hour: s.dig(:timespec, :hour),
+            day_of_month: s.dig(:timespec, :day_of_month),
+            month: s.dig(:timespec, :month),
+            day_of_week: s.dig(:timespec, :day_of_week)
+          },
           instruction: s.dig(:instruction).to_s,
-        }.tap do |result|
-          result.merge( { actionator: schedule_actionator_for(s) } ) if s.dig(:action).to_s == 'action'
-        end
+        }.merge(
+          if s.dig(:instruction).to_s == 'action'
+            { actionator: schedule_actionator_for(s) }
+          else
+            {}
+          end )
       end
 
       def schedule_actionator_for(s)
         {
-          name: s.dig(:name).to_s,
-          params: ( s.dig(:params) || {} )
+          name: s.dig(:actionator, :name).to_s,
+          params: ( s.dig(:actionator, :params) || {} )
         }
       end
 

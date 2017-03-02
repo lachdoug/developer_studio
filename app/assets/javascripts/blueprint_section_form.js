@@ -9,7 +9,7 @@ $(document).on('turbolinks:load', function(){
 var do_blueprint_section_forms = function() {
   check_validity_of_all_blueprint_section_forms();
   bind_blueprint_section_forms_input_change_events();
-  do_blueprint_section_form_service_configuration_variable_resolve_checkboxes();
+  do_variable_resolve_checkbox_inputs();
 };
 
 var auto_submit_blueprint_section_form = function(form_element){
@@ -71,7 +71,7 @@ var check_blueprint_section_form_is_valid = function(section_form) {
 };
 
 var blueprint_section_form_has_no_custom_errors = function(section_form) {
-  return ( section_form.find(".app_blueprint_service_configuration_error").length == 0 );
+  return ( section_form.find(".app_blueprint_section_custom_error").length == 0 );
 };
 
 var hide_pill_error_warning_for = function(section_pill) {
@@ -87,8 +87,8 @@ var bind_blueprint_section_forms_input_change_events = function() {
   $('#app_blueprint input:not(.do_not_autosubmit_form_on_change)').on('change', function(){
     auto_submit_blueprint_section_form(this);
   });
-  $('input.service_configuration_variable_resolve_checkbox').on('change', function() {
-    show_app_blueprint_service_configurations_service_configuration_variable_input_for(this);
+  $('input.variable_resolve_checkbox_input').on('change', function() {
+    show_variable_input_for(this);
   });
   $('#app_blueprint select').off('change');
   $('#app_blueprint select:not(.do_not_autosubmit_form_on_change)').on('change', function(){
@@ -100,18 +100,18 @@ var bind_blueprint_section_forms_input_change_events = function() {
   });
 };
 
-var do_blueprint_section_form_service_configuration_variable_resolve_checkboxes = function() {
-  $('input.service_configuration_variable_resolve_checkbox').each(function() {
-    show_app_blueprint_service_configurations_service_configuration_variable_input_for(this);
+var do_variable_resolve_checkbox_inputs = function() {
+  $('input.variable_resolve_checkbox_input').each(function() {
+    show_variable_input_for(this);
   });
 };
 
-var show_app_blueprint_service_configurations_service_configuration_variable_input_for = function(resolve_checkbox) {
+var show_variable_input_for = function(resolve_checkbox) {
   if (resolve_checkbox.checked) {
-    $(resolve_checkbox).parents('.form-group').prevAll('.app_blueprint_service_configurations_service_configuration_variables_resolve_string').show();
-    $(resolve_checkbox).parents('.form-group').prevAll('.app_blueprint_service_configurations_service_configuration_variables_value').hide();
+    $(resolve_checkbox).parents('.form-group').prevAll('.variable_resolve_string_input_wrapper').show();
+    $(resolve_checkbox).parents('.form-group').prevAll('.variable_value_input_wrapper').hide();
   } else {
-    $(resolve_checkbox).parents('.form-group').prevAll('.app_blueprint_service_configurations_service_configuration_variables_resolve_string').hide();
-    $(resolve_checkbox).parents('.form-group').prevAll('.app_blueprint_service_configurations_service_configuration_variables_value').show();
+    $(resolve_checkbox).parents('.form-group').prevAll('.variable_resolve_string_input_wrapper').hide();
+    $(resolve_checkbox).parents('.form-group').prevAll('.variable_value_input_wrapper').show();
   };
 };

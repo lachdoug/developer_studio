@@ -15,7 +15,7 @@ class App
           end
 
           def value=(value)
-            if value.present? && test_for_resolve_regex.match(value)
+            if value.present? && value.is_a?(String) && test_for_resolve_regex.match(value)
               @resolve = '1'
               @resolve_string = value
             else

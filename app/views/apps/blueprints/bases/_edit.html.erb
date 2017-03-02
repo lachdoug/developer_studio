@@ -12,6 +12,6 @@
 <%= f.input :web_root_directory %>
 <%= f.input :continuous_deployment, as: :boolean, wrapper: :horizontal_boolean %>
 <div class="form-section-heading">Setup</div>
-<%= f.input :first_run_url, as: :url, label: 'First run URL' %>
+<%= f.input :first_run_url, as: :string, label: 'First run URL' %>
 <%= f.input :installation_report, as: :markdown %>
 <% end %>

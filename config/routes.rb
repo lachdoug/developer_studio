@@ -33,7 +33,8 @@ Rails.application.routes.draw do
       resource :persistent_directories, only: [:new, :update] do
         resource :persistent_directory, only: [:destroy]
       end
-      resource :service_configurations, only: [:new, :update, :destroy] do
+      resource :service_configurations, only: [:new, :update] do
+        resource :service_configuration, only: [:new, :update]
         resource :variables_builder, only: [:new], module: :service_configurations
       end
       resource :replacement_strings, only: [:new, :update] do
@@ -96,6 +97,7 @@ Rails.application.routes.draw do
       end
       resource :schedules, only: [:new, :update] do
         resource :schedule, only: [:destroy]
+        resource :variables_builder, only: [:new], module: :schedules
       end
     end
     resource :readme, only: [:update], module: :readmes

@@ -7,6 +7,7 @@ module CustomForms
             html: { class: 'form-horizontal', autocomplete: :off },
             wrapper: :horizontal_form,
             url: opts[:url],
+            namespace: opts[:namespace],
             method: opts[:method] || :patch,
             remote: true ) do |f|
               content_tag(:div, style: 'height: 0px; overflow: hidden;') do
