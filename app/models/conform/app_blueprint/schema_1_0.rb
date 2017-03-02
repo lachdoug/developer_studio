@@ -162,7 +162,7 @@ module Conform
 
       def service_configuration_for(sc)
         {
-          namespace: sc.dig(:namespace).to_s,
+          publisher_namespace: sc.dig(:publisher_namespace).to_s,
           type_path: sc.dig(:type_path).to_s,
           variables: sc.dig(:variables)
         }
@@ -392,6 +392,7 @@ module Conform
         {
           name: av.dig(:name).to_s,
           value: av.dig(:value).to_s,
+          mandatory: cast_boolean_for(av.dig(:mandatory)),
           input: {
             type: av.dig(:input, :type).to_s,
             label: av.dig(:input, :label).to_s,
@@ -400,7 +401,6 @@ module Conform
             hint: av.dig(:input, :hint).to_s,
             placeholder: av.dig(:input, :placeholder).to_s,
             validation: {
-              required: cast_boolean_for( av.dig(:input, :validation, :required) ),
               pattern: av.dig(:input, :validation, :pattern).to_s,
               message: av.dig(:input, :validation, :message).to_s
             },
@@ -435,9 +435,10 @@ module Conform
         {
           name: ev.dig(:name).to_s,
           value: ev.dig(:value).to_s,
-          ask_at_build_time: cast_boolean_for( ev.dig(:ask_at_build_time) ),
-          build_time_only: cast_boolean_for( ev.dig(:build_time_only) ),
-          immutable: cast_boolean_for( ev.dig(:immutable) ),
+          mandatory: cast_boolean_for(ev.dig(:mandatory)),
+          immutable: cast_boolean_for(ev.dig(:immutable)),
+          ask_at_build_time: cast_boolean_for(ev.dig(:ask_at_build_time)),
+          build_time_only: cast_boolean_for(ev.dig(:build_time_only)),
           input: {
             type: ev.dig(:input, :type).to_s,
             label: ev.dig(:input, :label).to_s,
@@ -446,7 +447,6 @@ module Conform
             hint: ev.dig(:input, :hint).to_s,
             placeholder: ev.dig(:input, :placeholder).to_s,
             validation: {
-              required: cast_boolean_for( ev.dig(:input, :validation, :required) ),
               pattern: ev.dig(:input, :validation, :pattern).to_s,
               message: ev.dig(:input, :validation, :message).to_s
             },
@@ -491,6 +491,7 @@ module Conform
       end
 
       def cast_boolean_for(boolean)
+        return false if boolean.nil?
         ActiveRecord::Type::Boolean.new.cast(boolean)
       end
 

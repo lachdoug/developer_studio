@@ -18,9 +18,9 @@
 </div>
 <legend >Service definitions</legend>
 <div class='col-sm-12 clearfix'>
-  <%= link_to icon_text('fa-plus', 'Add'),  new_settings_service_definition_namespace_path(), class: 'btn btn-default pull-right' %>
+  <%= link_to icon_text('fa-plus', 'Add'),  new_settings_service_definition_publisher_namespace_path(), class: 'btn btn-default pull-right' %>
   <p>Service definitions used for blueprint service configurations.</p>
-  <% @service_definition_namespaces.each do |sdg| %>
-    <p><%= link_to sdg.name,  settings_service_definition_namespace_path(sdg.name) %></p>
+  <% @service_definition_publisher_namespaces.each do |sdg| %>
+    <p><%= link_to sdg.name,  settings_service_definition_publisher_namespace_path(sdg.name) %></p>
   <% end %>
 </div>

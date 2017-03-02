@@ -37,6 +37,7 @@ class App
       end
 
       def form_data
+        byebug
         {
           path: path,
           extract: extract == "1",

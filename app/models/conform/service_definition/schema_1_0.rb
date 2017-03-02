@@ -160,7 +160,7 @@ module Conform
 
       def service_configuration_for(sc)
         {
-          namespace: sc.dig(:namespace).to_s,
+          publisher_namespace: sc.dig(:publisher_namespace).to_s,
           type_path: sc.dig(:type_path).to_s,
           variables: sc.dig(:variables)
         }

@@ -26,7 +26,7 @@ module Apps
 
       def strong_params
         params.require(:app_blueprint_service_configurations_service_configuration).
-          permit( :namespace,
+          permit( :publisher_namespace,
                 :type_path,
                 { variables_attributes: [:name, :value, :resolve_string, :resolve] } )
       end

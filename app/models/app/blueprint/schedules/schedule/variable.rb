@@ -76,13 +76,13 @@ class App
           end
 
           def required
-            variable_definition.dig(:input, :validation, :required)
+            variable_definition.dig(:input, :mandatory)
           end
 
           def variable_definition
             @variable_definition ||=
             schedule.blueprint_actionator_variables.find { |v| v[:name] == name.to_s }
-            # 
+            #
             # byebug unless @variable_definition
             # @variable_definition
 

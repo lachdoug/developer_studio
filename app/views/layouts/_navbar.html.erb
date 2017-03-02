@@ -17,7 +17,7 @@
         <li class="<%= :active if active_nav == "services" %>"><a href="<%= services_path %>">Services</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="<%= :active if ( active_nav == "settings" || active_nav == "dropdowns_configs" || active_nav == "service_definition_namespaces" ) %>"><a href="<%= settings_path %>"><i class="fa fa-cog"></i></a></li>
+        <li class="<%= :active if ( active_nav == "settings" || active_nav == "dropdowns_configs" || active_nav == "service_definition_publisher_namespaces" ) %>"><a href="<%= settings_path %>"><i class="fa fa-cog"></i></a></li>
         <% if user_signed_in? %>
         <li><%= link_to destroy_user_session_path, method: :delete do %><i class="fa fa-sign-out"></i><% end %></li>
         <% else %>

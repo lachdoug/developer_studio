@@ -4,19 +4,19 @@
         url: app_blueprint_service_configurations_path(app_id: @app.name,
           id: service_configuration_id) do |f| %>
     <legend>Service configuration <%= service_configuration_id + 1 %></legend>
-    <% if f.object.namespace.blank? %>
-      <%= f.input :namespace, as: :select, required: true,
-          collection: Settings::ServiceDefinitionNamespace.namespaces_collection %>
+    <% if f.object.publisher_namespace.blank? %>
+      <%= f.input :publisher_namespace, label: 'Namespace', as: :select, required: true,
+          collection: Settings::ServiceDefinitionNamespace.publisher_namespaces_collection %>
     <% elsif f.object.type_path.blank? %>
-      <%= f.input :namespace, disabled: true %>
-      <%= f.input :namespace, as: :hidden %>
+      <%= f.input :publisher_namespace, label: 'Namespace', disabled: true %>
+      <%= f.input :publisher_namespace, as: :hidden %>
       <%= f.input :type_path, as: :select, required: true,
           collection: Settings::ServiceDefinitionNamespace.
-                        type_paths_collection_for(f.object.namespace) %>
+                        type_paths_collection_for(f.object.publisher_namespace) %>
     <% else %>
       <% if f.object.service_definition.present? %>
-        <%= f.input :namespace, disabled: true %>
-        <%= f.input :namespace, as: :hidden %>
+        <%= f.input :publisher_namespace, label: 'Namespace', disabled: true %>
+        <%= f.input :publisher_namespace, as: :hidden %>
         <%= f.input :type_path, disabled: true %>
         <%= f.input :type_path, as: :hidden %>
         <% if f.object.service_definition_consumer_params_mismatch %>
@@ -78,12 +78,12 @@
         <% end %>
       <% else %>
         <div class='error app_blueprint_section_custom_error'>
-          <%= f.input :namespace, disabled: true %>
-          <%= f.input :namespace, as: :hidden %>
+          <%= f.input :publisher_namespace, label: 'Namespace', disabled: true %>
+          <%= f.input :publisher_namespace, as: :hidden %>
           <%= f.input :type_path, disabled: true %>
           <%= f.input :type_path, as: :hidden %>
           <div class="col-sm-12 alert alert-danger">
-            A service definition for <%= "#{f.object.namespace}/#{f.object.type_path}" %> is not available.<br>
+            A service definition for <%= "#{f.object.publisher_namespace}/#{f.object.type_path}" %> is not available.<br>
             Please add the service definition in <%= link_to icon_text('fa-cog', :Settings), settings_path %>, or delete this service configuration.
           </div>
         </div>

@@ -15,6 +15,7 @@
           <legend>Actionator <%= ff.index + 1 %> variable <%= fff.index + 1 %></legend>
           <%= fff.input :name, required: true %>
           <%= fff.input :value %>
+          <%= fff.input :mandatory, as: :boolean, wrapper: :horizontal_boolean %>
           <div class="form-section-heading">Input</div>
           <%= fff.simple_fields_for :input do |ffff| %>
             <%= ffff.input :type, as: :select, collection: ffff.object.type_collection, include_blank: false %>
@@ -51,7 +52,6 @@
             <% end %>
             <div class="form-section-heading">Validation</div>
             <%= ffff.simple_fields_for :validation do |fffff| %>
-              <%= fffff.input :required, as: :boolean, wrapper: :horizontal_boolean %>
               <%= fffff.input :pattern, required: false %>
               <%= fffff.input :message, required: false %>
             <% end %>

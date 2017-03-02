@@ -62,7 +62,7 @@ module Conform
       def base
         {
           type_path: r(:type_path).to_s,
-          namespace: r(:publisher_namespace).to_s,
+          publisher_namespace: r(:publisher_namespace).to_s,
           accepts: r(:accepts),
           service_container: r(:service_container).to_s,
           service_handle_field: r(:service_handle_field).to_s,

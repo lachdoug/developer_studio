@@ -27,6 +27,7 @@ module Apps
                   variables_attributes: [
                     :name,
                     :value,
+                    :mandatory,
                     input_attributes: [
                       :type,
                       :label,
@@ -43,8 +44,7 @@ module Apps
                       ],
                       validation_attributes: [
                         :pattern,
-                        :message,
-                        :required
+                        :message
                       ] ] ] ] )
       end
 

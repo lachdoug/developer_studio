@@ -7,7 +7,8 @@ class App
           include ActiveModel::Model
 
           attr_accessor :name,
-                        :value
+                        :value,
+                        :mandatory
           attr_reader :input
 
           def input_attributes=(params={})
@@ -22,6 +23,7 @@ class App
             {
               name: name,
               value: value,
+              mandatory: ActiveRecord::Type::Boolean.new.cast(mandatory),
               input: input.form_data
             }
           end

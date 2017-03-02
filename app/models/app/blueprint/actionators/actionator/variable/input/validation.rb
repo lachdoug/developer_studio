@@ -8,11 +8,10 @@ class App
 
               include ActiveModel::Model
 
-              attr_accessor :required, :pattern, :message
+              attr_accessor :pattern, :message
 
               def form_data
-                { required: ActiveRecord::Type::Boolean.new.cast(required),
-                  pattern: pattern,
+                { pattern: pattern,
                   message: message }
               end
 

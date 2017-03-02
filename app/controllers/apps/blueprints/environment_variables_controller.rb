@@ -25,9 +25,10 @@ module Apps
         params.require(:app_blueprint_environment_variables).permit(environment_variables_attributes: [
           :name,
           :value,
+          :mandatory,
+          :immutable,
           :ask_at_build_time,
           :build_time_only,
-          :immutable,
           input_attributes: [
             :type,
             :label,
@@ -44,8 +45,7 @@ module Apps
             ],
             validation_attributes: [
               :pattern,
-              :message,
-              :required
+              :message
             ]
           ]
         ] )

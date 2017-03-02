@@ -85,7 +85,7 @@ module Conform
           framework_port_override: ( r(:software, :framework_port_override).present? ? r(:software, :framework_port_override).to_i : '' ) ,
           deployment_type: r(:software, :deployment_type).to_s,
           web_root_directory: r(:software, :web_root_directory).to_s,
-          continuous_deployment: cast_boolean_for(r(:software, :continuous_deployment)),
+          continuous_deployment: cast_boolean_for( r(:software, :continuous_deployment) ),
           first_run_url: r(:software, :first_run_url).to_s,
           installation_report: r(:software, :installation_report_template).to_s
         }
@@ -133,7 +133,7 @@ module Conform
         {
           sources: component_sources,
           path: r(:software, :component_path).to_s,
-          extract: cast_boolean_for(r(:software, :extract_components)),
+          extract: cast_boolean_for( r(:software, :extract_components) ),
         }
       end
 
@@ -161,7 +161,7 @@ module Conform
 
       def service_configuration_for(sc)
         {
-          namespace: sc.dig(:publisher_namespace).to_s,
+          publisher_namespace: sc.dig(:publisher_namespace).to_s,
           type_path: sc.dig(:type_path).to_s,
           variables: sc.dig(:variables)
         }
@@ -391,6 +391,7 @@ module Conform
         {
           name: av.dig(:name).to_s,
           value: av.dig(:value).to_s,
+          mandatory: cast_boolean_for(av.dig(:mandatory)),
           input: {
             type: variable_field_type_for(av),
             label: av.dig(:label).to_s,
@@ -399,7 +400,6 @@ module Conform
             hint: av.dig(:hint).to_s,
             placeholder: av.dig(:placeholder).to_s,
             validation: {
-              required: cast_boolean_for(av.dig(:mandatory)),
               pattern: av.dig(:regex_validator).to_s,
               message: av.dig(:regex_invalid_message).to_s
             },
@@ -434,9 +434,10 @@ module Conform
         {
           name: ev.dig(:name).to_s,
           value: ev.dig(:value).to_s,
+          mandatory: cast_boolean_for(ev.dig(:mandatory)),
+          immutable: cast_boolean_for(ev.dig(:immutable)),
           ask_at_build_time: cast_boolean_for(ev.dig(:ask_at_build_time)),
           build_time_only: cast_boolean_for(ev.dig(:build_time_only)),
-          immutable: cast_boolean_for(ev.dig(:immutable)),
           input: {
             type: variable_field_type_for(ev),
             label: ev.dig(:label).to_s,
@@ -445,7 +446,6 @@ module Conform
             hint: ev.dig(:hint).to_s,
             placeholder: ev.dig(:placeholder).to_s,
             validation: {
-              required: cast_boolean_for(ev.dig(:mandatory)),
               pattern: ev.dig(:regex_validator).to_s,
               message: ev.dig(:regex_invalid_message).to_s
             },
@@ -498,6 +498,7 @@ module Conform
       end
 
       def cast_boolean_for(boolean)
+        return false if boolean.nil?
         ActiveRecord::Type::Boolean.new.cast(boolean)
       end
 

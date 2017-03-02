@@ -5,7 +5,7 @@ class App
 
         include ActiveModel::Model
 
-        attr_accessor :service_configurations, :namespace, :type_path
+        attr_accessor :service_configurations, :publisher_namespace, :type_path
         attr_reader :variables
 
         def variables_attributes=(params={})
@@ -19,7 +19,7 @@ class App
 
         def form_data
           {
-            namespace: namespace,
+            publisher_namespace: publisher_namespace,
             type_path: type_path,
             variables: ( ( variables || [] ).map(&:form_data).inject(:merge) || {} )
           }
@@ -28,7 +28,7 @@ class App
         def update(params)
           assign_attributes(params)
           service_configurations.save
-          if namespace.present? && type_path.present? && variables.empty? && service_definition_has_consumer_params
+          if publisher_namespace.present? && type_path.present? && variables.empty? && service_definition_has_consumer_params
             load_variables_from_service_definition
           end
         end
@@ -88,7 +88,7 @@ class App
         end
 
         def service_definition_file
-          Settings::ServiceDefinitionNamespace.new( namespace ).service_definition_for(type_path).content
+          Settings::ServiceDefinitionNamespace.new( publisher_namespace ).service_definition_for(type_path).content
         end
 
       end

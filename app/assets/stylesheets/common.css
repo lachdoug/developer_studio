@@ -46,7 +46,7 @@ html body {margin-bottom: 200px;}
 
 @media (min-width: 768px) {
   #page .schedule_timespec_cols .form-group {
-    padding: 2px;
+    padding-left: 2px;
   }
 
   #page .schedule_timespec_cols .form-group label {

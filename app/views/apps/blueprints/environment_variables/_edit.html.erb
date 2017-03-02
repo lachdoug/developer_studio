@@ -4,9 +4,10 @@
     <legend>Environment variable <%= ff.index + 1 %></legend>
     <%= ff.input :name, required: true %>
     <%= ff.input :value %>
+    <%= ff.input :mandatory, as: :boolean, wrapper: :horizontal_boolean %>
+    <%= ff.input :immutable, as: :boolean, wrapper: :horizontal_boolean %>
     <%= ff.input :ask_at_build_time, as: :boolean, wrapper: :horizontal_boolean %>
     <%= ff.input :build_time_only, as: :boolean, wrapper: :horizontal_boolean %>
-    <%= ff.input :immutable, as: :boolean, wrapper: :horizontal_boolean %>
     <div class="form-section-heading">Input</div>
     <%= ff.simple_fields_for :input do |fff| %>
       <%= fff.input :type, as: :select, collection: fff.object.type_collection, include_blank: false %>
@@ -43,7 +44,6 @@
       <% end %>
       <div class="form-section-heading">Validation</div>
       <%= fff.simple_fields_for :validation do |ffff| %>
-        <%= ffff.input :required, as: :boolean, wrapper: :horizontal_boolean %>
         <%= ffff.input :pattern, required: false %>
         <%= ffff.input :message, required: false %>
       <% end %>
