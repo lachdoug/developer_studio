@@ -315,7 +315,7 @@ module Conform
 
       def apache_htaccess_file_for(ahf)
         {
-          path: ahf.dig(:directory).to_s,
+          directory: ahf.dig(:directory).to_s,
           content: ahf.dig(:htaccess_content).to_s
         }
       end

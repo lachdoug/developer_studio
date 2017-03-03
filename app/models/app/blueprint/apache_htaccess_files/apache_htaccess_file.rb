@@ -5,11 +5,11 @@ class App
 
         include ActiveModel::Model
 
-        attr_accessor :path, :content
+        attr_accessor :directory, :content
 
         def form_data
           {
-            path: path,
+            directory: directory,
             content: content
           }
         end

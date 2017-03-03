@@ -21,7 +21,7 @@ module Apps
 
       def strong_params
         params.require(:app_blueprint_template_files).
-          permit( template_files_attributes: [ :name, :path, :language, :content ] )
+          permit( template_files_attributes: [ :path, :language, :content ] )
       end
 
     end

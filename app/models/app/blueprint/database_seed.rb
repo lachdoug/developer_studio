@@ -2,7 +2,12 @@ class App
   class Blueprint
     class DatabaseSeed < Section
 
-      attr_accessor :language, :content, :script
+      attr_accessor :content, :script
+      attr_writer :language
+
+      def language
+        @language || :text
+      end
 
       def data_location
         [ :software, :database_seed ]

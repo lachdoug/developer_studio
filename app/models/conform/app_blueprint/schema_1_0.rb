@@ -276,7 +276,6 @@ module Conform
 
       def template_file_for(tf)
         {
-          name: tf.dig(:name).to_s,
           path: tf.dig(:path).to_s,
           language: tf.dig(:language).to_s,
           content: tf.dig(:content).to_s
@@ -316,7 +315,7 @@ module Conform
 
       def apache_htaccess_file_for(ahf)
         {
-          path: ahf.dig(:path).to_s,
+          directory: ahf.dig(:directory).to_s,
           content: ahf.dig(:content).to_s
         }
       end

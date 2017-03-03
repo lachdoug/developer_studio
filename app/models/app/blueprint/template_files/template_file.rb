@@ -5,11 +5,15 @@ class App
 
         include ActiveModel::Model
 
-        attr_accessor :name, :path, :language, :content
+        attr_accessor :path, :content
+        attr_writer :language
+
+        def language
+          @language || :text
+        end
 
         def form_data
           {
-            name: name,
             path: path,
             language: language,
             content: content

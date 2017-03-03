@@ -21,7 +21,7 @@ module Apps
 
       def strong_params
         params.require(:app_blueprint_apache_htaccess_files).
-          permit( apache_htaccess_files_attributes: [ :path, :content ] )
+          permit( apache_htaccess_files_attributes: [ :directory, :content ] )
       end
 
     end

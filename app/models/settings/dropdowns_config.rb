@@ -55,22 +55,24 @@ module Settings
           "Base C": "base_c"
         },
         "script_languages": {
+          "Javascript": "javascript",
           "Lua": "lua",
           "Shell": "sh",
+          "PHP": "php",
           "Python": "python",
           "R": "r",
-          "Javascript": "javascript",
-          "PHP": "php"
+          "Text": "text"
         },
         "database_seed_languages": {
-          "Shell": "sh",
-          "NoSQL": "nosql",
-          "Python": "python",
           "Javascript": "javascript",
           "Lua": "lua",
+          "NoSQL": "nosql",
+          "PHP": "php",
+          "Python": "python",
           "R": "r",
+          "Shell": "sh",
           "SQL": "sql",
-          "PHP": "php"
+          "Text": "text"
         },
         "required_module_types": {
           "npm": "npm",
