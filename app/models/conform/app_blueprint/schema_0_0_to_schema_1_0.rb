@@ -275,7 +275,6 @@ module Conform
 
       def template_file_for(tf)
         {
-          name: tf.dig(:title).to_s,
           path: tf.dig(:path).to_s,
           language: :text,
           content: tf.dig(:content).to_s
