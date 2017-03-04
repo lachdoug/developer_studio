@@ -4,13 +4,13 @@
   </button>
   <ul class="dropdown-menu">
     <li><%= link_to icon_text('fa-download', 'Pull'),
-      edit_settings_service_definition_publisher_namespace_path(id: @service_definition_publisher_namespace.name) %>
+      edit_settings_service_definition_namespace_path(id: @service_definition_namespace.name) %>
     </li>
     <li role="separator" class="divider"></li>
     <li><%= link_to icon_text('fa-trash', 'Delete'),
-       settings_service_definition_publisher_namespace_path(id: @service_definition_publisher_namespace.name),
+       settings_service_definition_namespace_path(id: @service_definition_namespace.name),
       method: :delete, data: {
-        confirm: "Are you sure that you want to delete service definitions for #{@service_definition_publisher_namespace.name}?"
+        confirm: "Are you sure that you want to delete service definitions for #{@service_definition_namespace.name}?"
       } %>
     </li>
   </ul>
