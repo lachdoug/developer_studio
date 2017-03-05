@@ -86,6 +86,7 @@ module Conform
           deployment_type: r(:software, :deployment_type).to_s,
           web_root_directory: r(:software, :web_root_directory).to_s,
           continuous_deployment: cast_boolean_for( r(:software, :continuous_deployment) ),
+          install_form_comment: '',
           first_run_url: r(:software, :first_run_url).to_s,
           installation_report: r(:software, :installation_report_template).to_s
         }
@@ -97,8 +98,6 @@ module Conform
           recommended: r(:software, :recommended_memory).to_i
         }
       end
-
-
 
       def scripts
         {

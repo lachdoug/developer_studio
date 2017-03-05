@@ -92,6 +92,7 @@ module Conform
           deployment_type: r(:software, :base, :deployment_type).to_s,
           web_root_directory: r(:software, :base, :web_root_directory).to_s,
           continuous_deployment: cast_boolean_for( r(:software, :base, :continuous_deployment) ),
+          install_form_comment: r(:software, :base, :install_form_comment).to_s,
           first_run_url: r(:software, :base, :first_run_url).to_s,
           installation_report: r(:software, :base, :installation_report).to_s
         }

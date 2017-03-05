@@ -20,6 +20,7 @@ module Apps
                   :deployment_type,
                   :web_root_directory,
                   :continuous_deployment,
+                  :install_form_comment,
                   :first_run_url,
                   :installation_report )
       end

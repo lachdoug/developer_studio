@@ -11,6 +11,7 @@ class App
                     :deployment_type,
                     :web_root_directory,
                     :continuous_deployment,
+                    :install_form_comment,
                     :first_run_url,
                     :installation_report
 
@@ -28,6 +29,7 @@ class App
         @deployment_type = persisted_data.dig :deployment_type
         @web_root_directory = persisted_data.dig :web_root_directory
         @continuous_deployment = persisted_data.dig :continuous_deployment
+        @install_form_comment = persisted_data.dig :install_form_comment
         @first_run_url = persisted_data.dig :first_run_url
         @installation_report = persisted_data.dig :installation_report
       end
@@ -45,6 +47,7 @@ class App
           deployment_type: deployment_type,
           web_root_directory: web_root_directory,
           continuous_deployment: ActiveRecord::Type::Boolean.new.cast(continuous_deployment),
+          install_form_comment: install_form_comment,
           first_run_url: first_run_url,
           installation_report: installation_report
         }
