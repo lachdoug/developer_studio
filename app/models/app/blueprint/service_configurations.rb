@@ -3,11 +3,11 @@ class App
     class ServiceConfigurations < Section
 
       def all
-        @service_configurations
+        @collection
       end
 
       def each_with_id
-        @service_configurations.each.with_index { |item, i| yield item, i }
+        @collection.each.with_index { |item, i| yield item, i }
       end
 
       def data_location
@@ -39,25 +39,25 @@ class App
       end
 
       def service_configurations_attributes=(params)
-        @service_configurations = params.map { |i, attributes| ServiceConfiguration.new(service_configurations: self).tap { |item| item.assign_attributes(attributes) } }
+        @collection = params.map { |i, attributes| ServiceConfiguration.new(service_configurations: self).tap { |item| item.assign_attributes(attributes) } }
       end
 
-      def build
-        ServiceConfiguration.new(service_configurations: self).tap do |new_item|
-          @service_configurations << new_item
+      def build(attributes={})
+        ServiceConfiguration.new(attributes.merge({service_configurations: self})).tap do |new_item|
+          @collection << new_item
         end
       end
 
       def form_data
-        @service_configurations.map &:form_data
+        @collection.map &:form_data
       end
 
       def find(i)
-        @service_configurations[i.to_i] || build
+        @collection[i.to_i]
       end
 
       def delete(i)
-        @service_configurations.delete_at i.to_i
+        @collection.delete_at i.to_i
         save
       end
 

@@ -8,6 +8,10 @@ class App
         attr_accessor :path, :content
         attr_writer :language
 
+        def new_record?
+          path.blank?
+        end
+
         def language
           @language || :text
         end

@@ -1,0 +1,8 @@
+<% if @service_configuration.type_path.blank? %>
+  $("#new_service_configuration_form_area").html("<%= j render 'apps/blueprints/service_configurations/new_form' %>");
+  $("#new_service_configuration_form_area .collapse").collapse('show');
+<% else %>
+  <%= render 'apps/blueprints/service_configurations/update_all' %>
+  $("#app_blueprint_section_service_configurations .section_item_collapse").last().next().collapse('show');
+  <%= render 'apps/blueprints/jsons/update' %>
+<% end %>

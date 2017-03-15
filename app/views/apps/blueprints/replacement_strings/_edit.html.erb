@@ -1,17 +1,21 @@
 <%= custom_form_for @app.blueprint.replacement_strings,
       url: app_blueprint_replacement_strings_path(app_id: @app.name) do |f| %>
-<%= f.simple_fields_for :replacement_strings do |ff| %>
-<legend>Replacement string <%= ff.index + 1 %></legend>
-<%= ff.input :string, required: true %>
-<%= ff.input :source_file, required: true %>
-<%= ff.input :destination_file, required: true %>
-<div class='clearfix'>
-<%= link_to icon_text('fa-trash-o', "Delete replacement string #{ff.index + 1}"), app_blueprint_replacement_strings_replacement_string_path(app_id: @app.name, id: ff.index), method: :delete, remote: true, class: 'btn btn-default pull-right', data: {confirm: "Are you sure that you want to delete this replacement string?"} %>
-</div>
-<hr>
+  <%= f.simple_fields_for :replacement_strings do |ff| %>
+    <a class="section_item_collapse" data-toggle="collapse" href="#replacement_string_collapse_<%= ff.index %>">
+      <legend>Replacement string <%= ff.index + 1 %></legend>
+    </a>
+    <div class="collapse" id="replacement_string_collapse_<%= ff.index %>">
+      <%= ff.input :string, required: true %>
+      <%= ff.input :source_file, required: true %>
+      <%= ff.input :destination_file, required: true %>
+      <div class='clearfix'>
+      <%= link_to icon_text('fa-trash-o', "Delete replacement string #{ff.index + 1}"), app_blueprint_replacement_strings_replacement_string_path(app_id: @app.name, id: ff.index), method: :delete, remote: true, class: 'btn btn-default pull-right', data: {confirm: "Are you sure that you want to delete this replacement string?"} %>
+      </div>
+      <hr>
+    </div>
+  <% end %>
 <% end %>
-<% end %>
 <div class='clearfix'>
-<%= link_to icon_text('fa-plus', 'New replacement string'),
-new_app_blueprint_replacement_strings_path(app_id: @app.name), remote: true, class: 'btn btn-default pull-right' %>
+  <%= link_to icon_text('fa-plus', 'New replacement string'),
+  new_app_blueprint_replacement_strings_path(app_id: @app.name), remote: true, class: 'btn btn-default pull-right' %>
 </div>

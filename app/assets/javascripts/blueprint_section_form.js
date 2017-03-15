@@ -17,6 +17,8 @@ var auto_submit_blueprint_section_form = function(form_element){
   if (check_blueprint_section_form_is_valid( section_form )){
     $('#saving-alert').show();
     section_form.submit();
+  } else {
+    check_validity_of_all_blueprint_section_forms();
   };
 };
 

@@ -1,2 +1,3 @@
-$("#app_blueprint_section_service_configurations").html('<%= j render("apps/blueprints/service_configurations/edit") %>');
+$("#app_blueprint_service_configuration_<%= @service_configuration_id %>").html(
+  '<%= j render("apps/blueprints/service_configurations/edit", service_configuration_id: @service_configuration_id, service_configuration: @service_configuration ) %>');
 <%= render 'apps/blueprints/jsons/update' %>

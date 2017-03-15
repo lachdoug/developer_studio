@@ -9,14 +9,13 @@ module Apps
 
       def new
         @app.blueprint.replacement_strings.build_replacement_string
-        render 'apps/blueprints/replacement_strings/update'
+        render 'apps/blueprints/replacement_strings/new'
       end
 
       def destroy
         @app.blueprint.replacement_strings.delete(params[:id].to_i)
         render 'apps/blueprints/replacement_strings/update'
       end
-
 
       private
 

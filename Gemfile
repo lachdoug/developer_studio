@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+group :development do
+  gem 'rubocop', require: false
+  gem 'rails_real_favicon'
+end
+
 gem 'mysql2'
 
 # # Git library

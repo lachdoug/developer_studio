@@ -13,6 +13,10 @@ class App
                       :build_time_only
         attr_reader :input
 
+        def new_record?
+          name.blank?
+        end
+
         def input_attributes=(params={})
           @input = Input.new params
         end

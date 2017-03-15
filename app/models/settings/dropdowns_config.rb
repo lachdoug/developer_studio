@@ -33,26 +33,26 @@ module Settings
     def self.default_dropdown_config
       {
         "frameworks": {
+          "Apache PHP": "apache_php",
+          "Apache PHP 5/6": "apache_php56",
+          "Base C": "base_c",
+          "Jetty": "jetty",
+          "Lua": "lua",
+          "Meteor": "meteor",
+          "NGINX": "nginx",
+          "Node 4.7": "node4.7",
+          "Node 6.9": "node6.9",
           "OpenJDK 8": "openjdk8",
           "OpenJDK 9": "openjdk9",
-          "Apache PHP 5/6": "apache_php56",
           "OpenJDK 7": "openjdk7",
-          "Jetty": "jetty",
-          "Tomcat 8": "tomcat8",
-          "Sinatra": "sinatra",
-          "Meteor": "meteor",
-          "Lua": "lua",
-          "Tomcat 7": "tomcat7",
-          "Node 4.7": "node4.7",
-          "NGINX": "nginx",
           "Python": "python",
-          "Apache PHP": "apache_php",
           "Rails 4": "rails4",
           "Rails 5": "rails5",
-          "Node 6.9": "node6.9",
           "RStudio": "rstudio",
-          "Tomcat 9": "tomcat9",
-          "Base C": "base_c"
+          "Sinatra": "sinatra",
+          "Tomcat 7": "tomcat7",
+          "Tomcat 8": "tomcat8",
+          "Tomcat 9": "tomcat9"
         },
         "script_languages": {
           "Javascript": "javascript",
@@ -75,12 +75,12 @@ module Settings
           "Text": "text"
         },
         "required_module_types": {
-          "npm": "npm",
-          "Lua": "lua",
           "Apache": "apache",
+          "Lua": "lua",
+          "npm": "npm",
+          "PEAR": "pear",
           "PECL": "pecl",
-          "PHP": "php",
-          "PEAR": "pear"
+          "PHP": "php"
         }
       }
     end

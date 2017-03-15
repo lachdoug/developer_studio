@@ -26,9 +26,14 @@
           html: { class: 'form-horizontal' },
           wrapper: :horizontal_form do |f| %>
       <%= f.input :message, as: :text, required: true %>
-      <%= f.button :button, class: "btn btn-primary pull-right", data: { disable_with: 'Committing...' } do %>
-        <%= icon_text 'fa-check', :Commit  %>
-      <% end %>
+      <div class='btn-group pull-right'>
+        <%= f.button :button, class: "btn btn-primary", name: :commit_type, value: :commit, data: { disable_with: 'Committing...' } do %>
+          <%= icon_text 'fa-check', :Commit  %>
+        <% end %>
+        <%= f.button :button, class: "btn btn-info", name: :commit_type, value: :commit_and_push, data: { disable_with: '...' } do %>
+          <%= icon_text 'fa-hand-paper-o', 'Commit and push'  %>
+        <% end %>
+      </div>
     <% end %>
   </div>
   <div class='col-sm-12'>

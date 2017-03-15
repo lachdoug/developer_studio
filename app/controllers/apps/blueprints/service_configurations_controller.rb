@@ -3,23 +3,26 @@ module Apps
     class ServiceConfigurationsController < BaseController
 
       def update
-        blueprint_section_view_requires_refresh = ( service_configurations_incomplete || service_configuration_creation )
-        @app.blueprint.service_configurations.find(params[:id]).update(strong_params)
-        if blueprint_section_view_requires_refresh
-          render 'apps/blueprints/service_configurations/update'
-        else
-          render 'apps/blueprints/jsons/update'
-        end
+        @service_configuration = @app.blueprint.service_configurations.find(params[:id])
+        @service_configuration.update strong_params
+        @service_configuration_id = params[:id]
+        render 'apps/blueprints/jsons/update'
       end
 
       def new
-        @app.blueprint.service_configurations.build
-        render 'apps/blueprints/service_configurations/update'
+        @service_configuration = @app.blueprint.service_configurations.build
+        render 'apps/blueprints/service_configurations/new'
+      end
+
+      def create
+        @service_configuration = @app.blueprint.service_configurations.build strong_params
+        @service_configuration.load_variables_from_service_definition if strong_params[:type_path].present?
+        render 'apps/blueprints/service_configurations/create'
       end
 
       def destroy
         @app.blueprint.service_configurations.delete(params[:id])
-        render 'apps/blueprints/service_configurations/update'
+        render 'apps/blueprints/service_configurations/destroy'
       end
 
       private
@@ -29,14 +32,6 @@ module Apps
           permit( :publisher_namespace,
                 :type_path,
                 { variables_attributes: [:name, :value, :resolve_string, :resolve] } )
-      end
-
-      def service_configurations_incomplete
-        @app.blueprint.service_configurations.all.map{ |service_configuration| service_configuration.type_path.blank? }.any?
-      end
-
-      def service_configuration_creation
-        @app.blueprint.service_configurations.all.count == params[:id].to_i
       end
 
     end

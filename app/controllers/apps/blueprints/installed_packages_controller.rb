@@ -9,7 +9,7 @@ module Apps
 
       def new
         @app.blueprint.installed_packages.build_installed_package
-        render 'apps/blueprints/installed_packages/update'
+        render 'apps/blueprints/installed_packages/new'
       end
 
       def destroy

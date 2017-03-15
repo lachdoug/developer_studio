@@ -3,13 +3,18 @@ module Apps
     class EnvironmentVariablesController < BaseController
 
       def update
-        @app.blueprint.environment_variables.update strong_params
-        render 'apps/blueprints/jsons/update'
+        # new_blueprint_environment_variable = @app.blueprint.environment_variables.environment_variables.last.new_record?
+        @app.blueprint.environment_variables.update(strong_params)
+        # if new_blueprint_environment_variable
+          # render 'apps/blueprints/environment_variables/new'
+        # else
+          render 'apps/blueprints/jsons/update'
+        # end
       end
 
       def new
         @app.blueprint.environment_variables.build
-        render 'apps/blueprints/environment_variables/update'
+        render 'apps/blueprints/environment_variables/new'
       end
 
       def destroy

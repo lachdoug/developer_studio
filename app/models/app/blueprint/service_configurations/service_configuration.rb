@@ -6,7 +6,14 @@ class App
         include ActiveModel::Model
 
         attr_accessor :service_configurations, :publisher_namespace, :type_path
-        attr_reader :variables
+
+        def variables
+          @variables ||= []
+        end
+
+        # def new_record?
+        #   @new_record
+        # end
 
         def variables_attributes=(params={})
           @variables =
@@ -28,7 +35,7 @@ class App
         def update(params)
           assign_attributes(params)
           service_configurations.save
-          if publisher_namespace.present? && type_path.present? && variables.empty? && service_definition_has_consumer_params
+          if publisher_namespace.present? && type_path.present? && service_definition_has_consumer_params && variables.nil?
             load_variables_from_service_definition
           end
         end
@@ -49,7 +56,7 @@ class App
         end
 
         def existing_variable_names
-          variables.map(&:name).map &:to_sym
+          ( variables || []).map(&:name).map &:to_sym
         end
 
         def defined_variable_names

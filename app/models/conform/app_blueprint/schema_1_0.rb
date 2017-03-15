@@ -14,7 +14,7 @@ module Conform
         { schema: {
             type: "app_blueprint",
             version: { major: 1, minor: 0 },
-            origin: "Engines Developer Studio 1.0"
+            origin: "Engines Developer Studio 0.2"
           },
           metadata: metadata,
           software: software
