@@ -19,17 +19,17 @@ class App
       end
 
       def load_data
-        @blueprint_version_major = persisted_data.dig :blueprint, :version, :major
-        @blueprint_version_minor = persisted_data.dig :blueprint, :version, :minor
-        @blueprint_version_level = persisted_data.dig :blueprint, :version, :level
-        @blueprint_version_patch = persisted_data.dig :blueprint, :version, :patch
-        @software_display_title = persisted_data.dig :software, :display, :title
-        @software_display_label = persisted_data.dig :software, :display, :label
-        @software_display_version = persisted_data.dig :software, :display, :version
-        @software_display_description = persisted_data.dig :software, :display, :description
-        @software_display_url = persisted_data.dig :software, :display, :url
-        @software_license_label = persisted_data.dig :software, :license, :label
-        @software_license_url = persisted_data.dig :software, :license, :url
+        @blueprint_version_major = data.dig :blueprint, :version, :major
+        @blueprint_version_minor = data.dig :blueprint, :version, :minor
+        @blueprint_version_level = data.dig :blueprint, :version, :level
+        @blueprint_version_patch = data.dig :blueprint, :version, :patch
+        @software_display_title = data.dig :software, :display, :title
+        @software_display_label = data.dig :software, :display, :label
+        @software_display_version = data.dig :software, :display, :version
+        @software_display_description = data.dig :software, :display, :description
+        @software_display_url = data.dig :software, :display, :url
+        @software_license_label = data.dig :software, :license, :label
+        @software_license_url = data.dig :software, :license, :url
       end
 
       def form_data

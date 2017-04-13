@@ -1,0 +1,36 @@
+<% @app.blueprint.service_configurations.each_with_index do |service_configuration, service_configuration_id| %>
+
+  <a class="section_item_collapse" data-toggle="collapse" href="#app_blueprint_service_configuration_<%= service_configuration_id %>_form">
+    <legend>
+      Service configuration <%= service_configuration_id + 1 %> -
+      <span id="app_blueprint_service_configuration_<%= service_configuration_id %>_section_heading">
+        <%= service_configuration.to_label %>
+      </span>
+    </legend>
+  </a>
+
+  <div class="collapse" id="app_blueprint_service_configuration_<%= service_configuration_id %>_form">
+    <% if service_configuration.type_path.blank? %>
+      <%= render 'apps/blueprints/service_configurations/new_form', service_configuration: service_configuration, service_configuration_id: service_configuration_id %>
+    <% else %>
+      <%= render 'apps/blueprints/service_configurations/edit_form', service_configuration: service_configuration, service_configuration_id: service_configuration_id %>
+    <% end %>
+
+    <div class='clearfix'>
+      <%= link_to icon_text('fa-trash-o',
+        "Delete service configuration #{service_configuration_id + 1}"),
+        app_blueprint_service_configuration_path(app_id: @app.name,
+                                            id: service_configuration_id),
+        method: :delete, remote: true, class: 'btn btn-default pull-right',
+        data: { confirm:
+          "Are you sure that you want to delete this service configuration?"} %>
+    </div>
+    <hr>
+
+  </div>
+
+<% end %>
+
+<%= link_to icon_text('fa-plus', 'New service configuration'),
+    new_app_blueprint_service_configuration_path(app_id: @app.name),
+    remote: true, class: 'btn btn-default pull-right' %>

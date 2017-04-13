@@ -1,0 +1,58 @@
+<% @app.blueprint.rake_tasks.each do |rake_task| %>
+
+  <%= custom_form_for rake_task,
+    namespace: "app_blueprint_rake_task_#{rake_task.index}",
+    url: app_blueprint_rake_task_path(app_id: @app.name, id: rake_task.index) do |f| %>
+
+    <table class="table form_table">
+      <tr class="<%= 'hidden_table_header' if rake_task.index > 0 %>">
+        <th>Action</th>
+        <th class="text-center" width="1">Always&nbsp;run</th>
+        <th width="1"></th>
+      </tr>
+
+      <tr>
+        <%= f.input :action, required: true, wrapper: :form_table_cell_input %>
+        <%= f.input :always_run, as: :boolean, wrapper: :form_table_cell_input, wrapper_html: { class: 'text-center' } %>
+        <td>
+          <div class="dropdown">
+            <a class="btn btn-custom" data-toggle="dropdown">
+              <i class="fa fa-bars"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li>
+                <%= link_to icon_text('fa-caret-up', 'Move up'),
+                  "#",
+                  title: 'Move up',
+                  id: "app_blueprint_rake_task_#{rake_task.index}_moveup_button_disabled", remote: true,
+                  class: "disabled_link",
+                  style: ( 'display:none;' unless rake_task.disable_moveup ) %>
+                <%= link_to icon_text('fa-caret-up', 'Move up'),
+                  app_blueprint_rake_task_moveup_path(app_id: @app.name, rake_task_id: rake_task.index),
+                  title: 'Move up',
+                  id: "app_blueprint_rake_task_#{rake_task.index}_moveup_button", remote: true,
+                  class: "show_saving_spinner_on_click",
+                  style: ( 'display:none;' if rake_task.disable_moveup ) %>
+              </li>
+              <li>
+                <%= link_to icon_text('fa-trash-o', 'Delete'),
+                  app_blueprint_rake_task_path(app_id: @app.name, id: rake_task.index),
+                  method: :delete, remote: true,
+                  title: 'Delete',
+                  class: 'show_saving_spinner_on_confirmed',
+                  data: {confirm: "Are you sure that you want to delete this rake task?"} %>
+                </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+
+<% end %>
+<br>
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New rake task'),
+      new_app_blueprint_rake_task_path(app_id: @app.name),
+      remote: true, class: 'btn btn-custom pull-right' %>
+</div>

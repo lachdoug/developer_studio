@@ -1,7 +1,12 @@
 class App
 
   include ActiveModel::Model
-  # include ViewSpec
+
+  attr_accessor :name
+
+  def initialize(params)
+    @name = params[:name]
+  end
 
   def self.list
     Repo::App.list
@@ -10,12 +15,6 @@ class App
   def self.all
     list.map{ |name| new(name: name) }
   end
-
-  def initialize(params)
-    @name = params[:name]
-  end
-
-  attr_accessor :name
 
   def blueprint
     @blueprint ||= App::Blueprint.new(self)

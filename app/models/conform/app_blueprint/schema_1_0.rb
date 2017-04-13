@@ -132,9 +132,9 @@ module Conform
 
       def components
         {
-          sources: component_sources,
           path: r(:software, :components, :path).to_s,
           extract: cast_boolean_for( r(:software, :components, :extract) ),
+          sources: component_sources,
         }
       end
 

@@ -3,25 +3,26 @@ module Apps
     class PersistentFilesController < BaseController
 
       def update
-        @app.blueprint.persistent_files.update strong_params
-        render 'apps/blueprints/jsons/update'
+        @persistent_file = @app.blueprint.persistent_files.find params[:id]
+        @persistent_file.update strong_params
+        render
       end
 
       def new
-        @app.blueprint.persistent_files.build_persistent_file
-        render 'apps/blueprints/persistent_files/update'
+        @app.blueprint.persistent_files.build
+        render
       end
 
       def destroy
-        @app.blueprint.persistent_files.delete(params[:id].to_i)
-        render 'apps/blueprints/persistent_files/update'
+        @app.blueprint.persistent_files.delete params[:id]
+        render
       end
 
       private
 
       def strong_params
-        params.require(:app_blueprint_persistent_files).
-          permit( persistent_files_attributes: [ :path ] )
+        params.require(:app_blueprint_persistent_file).
+          permit( :path )
       end
 
     end

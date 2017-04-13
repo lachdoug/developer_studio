@@ -3,25 +3,26 @@ module Apps
     class ReplacementStringsController < BaseController
 
       def update
-        @app.blueprint.replacement_strings.update strong_params
-        render 'apps/blueprints/jsons/update'
+        @replacement_string = @app.blueprint.replacement_strings.find params[:id]
+        @replacement_string.update strong_params
+        render
       end
 
       def new
-        @app.blueprint.replacement_strings.build_replacement_string
-        render 'apps/blueprints/replacement_strings/new'
+        @app.blueprint.replacement_strings.build
+        render
       end
 
       def destroy
-        @app.blueprint.replacement_strings.delete(params[:id].to_i)
-        render 'apps/blueprints/replacement_strings/update'
+        @app.blueprint.replacement_strings.delete params[:id]
+        render
       end
 
       private
 
       def strong_params
-        params.require(:app_blueprint_replacement_strings).
-          permit( replacement_strings_attributes: [ :string, :source_file, :destination_file ] )
+        params.require(:app_blueprint_replacement_string).
+          permit( :string, :source_file, :destination_file )
       end
 
     end

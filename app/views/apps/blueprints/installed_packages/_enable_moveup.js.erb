@@ -1,0 +1,4 @@
+<% if installed_package.index > 0 %>
+  $("#<%= "app_blueprint_installed_package_#{installed_package.index}_moveup_button_disabled" %>").hide();
+  $("#<%= "app_blueprint_installed_package_#{installed_package.index}_moveup_button" %>").show();
+<% end %>

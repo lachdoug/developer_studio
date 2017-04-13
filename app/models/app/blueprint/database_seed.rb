@@ -2,21 +2,11 @@ class App
   class Blueprint
     class DatabaseSeed < Section
 
-      attr_accessor :content, :script
-      attr_writer :language
+
+      form_attributes :language, :content, :script
 
       def language
         @language || :text
-      end
-
-      def data_location
-        [ :software, :database_seed ]
-      end
-
-      def load_data
-        @language = persisted_data.dig :language
-        @content = persisted_data.dig :content
-        @script = persisted_data.dig :script
       end
 
       def form_data

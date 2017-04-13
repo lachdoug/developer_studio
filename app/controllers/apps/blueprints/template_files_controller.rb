@@ -3,30 +3,26 @@ module Apps
     class TemplateFilesController < BaseController
 
       def update
-        # new_blueprint_template_file = @app.blueprint.template_files.template_files.last.new_record?
-        @app.blueprint.template_files.update(strong_params)
-        # if new_blueprint_template_file
-          # render 'apps/blueprints/template_files/new'
-        # else
-          render 'apps/blueprints/jsons/update'
-        # end
+        @template_file = @app.blueprint.template_files.find params[:id]
+        @template_file.update strong_params
+        render
       end
 
       def new
-        @app.blueprint.template_files.build_template_file
-        render 'apps/blueprints/template_files/new'
+        @app.blueprint.template_files.build
+        render
       end
 
       def destroy
-        @app.blueprint.template_files.delete(params[:id].to_i)
-        render 'apps/blueprints/template_files/update'
+        @app.blueprint.template_files.delete params[:id]
+        render
       end
 
       private
 
       def strong_params
-        params.require(:app_blueprint_template_files).
-          permit( template_files_attributes: [ :path, :language, :content ] )
+        params.require(:app_blueprint_template_file).
+          permit( :path, :content, :language )
       end
 
     end

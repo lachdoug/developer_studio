@@ -20,7 +20,7 @@ html body {margin-bottom: 200px;}
  font-weight: bold;
 }
 
-.error {
+.error, .error a.blueprint_item_collapse {
   color: #c33;
 }
 
@@ -30,12 +30,12 @@ html body {margin-bottom: 200px;}
   border: none;
 }
 
-.section_item_collapse:hover {
+.blueprint_item_collapse:hover {
   text-decoration: none;
 }
 
-.section_item_collapse legend {
-  color: inherit;
+.blueprint_item_collapse {
+  line-height: 34px;
 }
 
 #page .form-group {
@@ -47,9 +47,24 @@ html body {margin-bottom: 200px;}
 }
 
 #page .form-section-heading {
-  margin: 10px 0px 10px 20px;
+  margin: 10px 0px 10px 0px;
   border-bottom: 1px solid #e5e5e5;
 }
+
+#page .form-section-table {
+  margin-left: 20px;
+}
+
+#page a.disabled_link {
+  opacity: 0.1;
+  cursor: not-allowed;
+  pointer-events: inherit;
+}
+
+#page .collapse .panel .panel-body {
+  padding: 5px;
+}
+
 
 
 @media (min-width: 768px) {
@@ -80,10 +95,11 @@ html body {margin-bottom: 200px;}
 }
 
 .page-main-col { margin-top: 10px; }
-.main-page-col-section { margin-top: 10px; }
-.main-page-col-section .main-page-col-json { margin-top: -10px; }
+.app_blueprint_section { margin-top: 10px; }
+.app_blueprint_section .main-page-col-json { margin-top: -10px; }
 .nav li.page_section_pill a { padding: 2px 15px; }
 
+.btn.btn-default { border-color: transparent; }
 
 .btn.btn-custom { text-align: left; color: #337ab7; background-color: transparent }
 .btn.btn-custom:hover { text-decoration: none; color: #333; }

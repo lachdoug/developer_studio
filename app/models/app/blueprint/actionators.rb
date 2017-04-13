@@ -1,24 +1,14 @@
 class App
   class Blueprint
-    class Actionators < Section
+    class Actionators < SectionCollection
 
-      attr_reader :actionators
-
-      def all
-        @actionators
+      def build
+        super.tap &:build_script
       end
 
-      def data_location
-        [ :software, :actionators ]
-      end
-
-      def load_data
-        self.actionators_attributes = actionators_persisted_data
-      end
-
-      def actionators_persisted_data
-        persisted_data.map.with_index do |actionator, i|
-          { i.to_s =>
+      def collection_data
+        data.map.with_index do |actionator, i|
+          { i =>
             actionator.map do |k,v|
               if k.to_sym == :script
                 { script_attributes: v }
@@ -33,7 +23,7 @@ class App
 
       def variables_attributes_for(variables_params)
         variables_params.map.with_index do |variable_params, i|
-          { i.to_s => variable_attributes_for(variable_params) }
+          { i => variable_attributes_for(variable_params) }
         end.inject(:merge) || {}
       end
 
@@ -54,7 +44,9 @@ class App
           elsif k.to_sym == :collection
             { collection_attributes: v.map do |k,v|
               if k.to_sym == :items
-                { items_attributes: v.map.with_index { |item_attributes, i| { i.to_s => { value: item_attributes.first, label: item_attributes.last } } }.inject(:merge) || {} }
+                { items_attributes: v.map.with_index do |item_attributes, i|
+                  { i => { value: item_attributes.first, label: item_attributes.last } }
+                end.inject(:merge) || {} }
               else
                 { k => v }
               end
@@ -63,40 +55,6 @@ class App
             { k => v }
           end
         end.inject(:merge) }
-      end
-
-      def actionators_attributes=(params)
-        @actionators = params.map { |i, actionator_params| Actionator.new actionator_params }
-      end
-
-      def build_actionator
-        @actionators ||= []
-        Actionator.new.tap do|a|
-          a.script_attributes = {}
-          @actionators << a
-        end
-      end
-
-      def form_data
-        actionators.map &:form_data
-      end
-
-      def delete(i)
-        actionators.delete_at i
-        save
-      end
-
-      def find(i)
-        actionators[i.to_i] || build_actionator
-      end
-
-      def find_actionator_variable(actionator_i, variable_i)
-        find(actionator_i.to_i).variables[variable_i.to_i]
-      end
-
-      def delete_variable_input_collection_item(actionator_i, variable_i, i)
-        find_actionator_variable(actionator_i, variable_i).input.collection.items.delete_at(i.to_i)
-        save
       end
 
     end

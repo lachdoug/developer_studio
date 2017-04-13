@@ -144,80 +144,87 @@
 
 <div class='col-sm-9 page-main-col'>
 
-  <div id='app_blueprint_section_json' class='main-page-col-section'>
+  <div id='app_blueprint_section_json' class='app_blueprint_section'>
     <%= render 'apps/blueprints/jsons/show' %>
   </div>
-  <div id='app_blueprint_section_metadata' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/metadata/edit' %>
+
+  <div id='app_blueprint_section_schedules' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/schedules/section' %>
   </div>
-  <div id='app_blueprint_section_base' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/bases/edit' %>
+
+  <% if !false %>
+
+  <div id='app_blueprint_section_metadata' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/metadata/section' %>
   </div>
-  <div id='app_blueprint_section_scripts' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/scripts/edit' %>
+  <div id='app_blueprint_section_base' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/bases/section' %>
   </div>
-  <div id='app_blueprint_section_database_seed' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/database_seed/edit' %>
+  <div id='app_blueprint_section_ports' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/ports/section' %>
   </div>
-  <div id='app_blueprint_section_components' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/components/edit' %>
+  <div id='app_blueprint_section_scripts' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/scripts/section' %>
   </div>
-  <div id='app_blueprint_section_persistent_directories' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/persistent_directories/edit' %>
+  <div id='app_blueprint_section_external_repositories' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/external_repositories/section' %>
   </div>
-  <div id='app_blueprint_section_service_configurations' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/service_configurations/edit' %>
+  <div id='app_blueprint_section_system_packages' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/system_packages/section' %>
   </div>
-  <div id='app_blueprint_section_replacement_strings' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/replacement_strings/edit' %>
+  <div id='app_blueprint_section_installed_packages' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/installed_packages/section' %>
   </div>
-  <div id='app_blueprint_section_persistent_files' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/persistent_files/edit' %>
+  <div id='app_blueprint_section_required_modules' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/required_modules/section' %>
   </div>
-  <div id='app_blueprint_section_installed_packages' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/installed_packages/edit' %>
+  <div id='app_blueprint_section_service_configurations' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/service_configurations/section' %>
   </div>
-  <div id='app_blueprint_section_system_packages' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/system_packages/edit' %>
+  <div id='app_blueprint_section_environment_variables' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/environment_variables/section' %>
   </div>
-  <div id='app_blueprint_section_workers' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/workers/edit' %>
+  <div id='app_blueprint_section_template_files' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/template_files/section' %>
   </div>
-  <div id='app_blueprint_section_rake_tasks' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/rake_tasks/edit' %>
+  <div id='app_blueprint_section_replacement_strings' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/replacement_strings/section' %>
   </div>
-  <div id='app_blueprint_section_template_files' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/template_files/edit' %>
+  <div id='app_blueprint_section_database_seed' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/database_seed/section' %>
   </div>
-  <div id='app_blueprint_section_file_write_permissions' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/file_write_permissions/edit' %>
+  <div id='app_blueprint_section_file_write_permissions' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/file_write_permissions/section' %>
   </div>
-  <div id='app_blueprint_section_custom_php_inis' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/custom_php_inis/edit' %>
+  <div id='app_blueprint_section_persistent_directories' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/persistent_directories/section' %>
   </div>
-  <div id='app_blueprint_section_apache_htaccess_files' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/apache_htaccess_files/edit' %>
+  <div id='app_blueprint_section_persistent_files' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/persistent_files/section' %>
   </div>
-  <div id='app_blueprint_section_apache_httpd_configurations' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/apache_httpd_configurations/edit' %>
+  <div id='app_blueprint_section_components' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/components/section' %>
   </div>
-  <div id='app_blueprint_section_required_modules' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/required_modules/edit' %>
+  <div id='app_blueprint_section_workers' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/workers/section' %>
   </div>
-  <div id='app_blueprint_section_ports' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/ports/edit' %>
+  <div id='app_blueprint_section_rake_tasks' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/rake_tasks/section' %>
   </div>
-  <div id='app_blueprint_section_actionators' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/actionators/edit' %>
+  <div id='app_blueprint_section_custom_php_inis' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/custom_php_inis/section' %>
   </div>
-  <div id='app_blueprint_section_external_repositories' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/external_repositories/edit' %>
+  <div id='app_blueprint_section_apache_htaccess_files' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/apache_htaccess_files/section' %>
   </div>
-  <div id='app_blueprint_section_environment_variables' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/environment_variables/edit' %>
+  <div id='app_blueprint_section_apache_httpd_configurations' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/apache_httpd_configurations/section' %>
   </div>
-  <div id='app_blueprint_section_schedules' class='main-page-col-section' style='display: none;'>
-    <%= render 'apps/blueprints/schedules/edit' %>
+
+  <div id='app_blueprint_section_actionators' class='app_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/actionators/section' %>
   </div>
+
+<% end %>
 
 </div>

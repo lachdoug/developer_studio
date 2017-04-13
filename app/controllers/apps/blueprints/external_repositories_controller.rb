@@ -3,25 +3,26 @@ module Apps
     class ExternalRepositoriesController < BaseController
 
       def update
-        @app.blueprint.external_repositories.update strong_params
-        render 'apps/blueprints/jsons/update'
+        @external_repository = @app.blueprint.external_repositories.find params[:id]
+        @external_repository.update strong_params
+        render
       end
 
       def new
-        @app.blueprint.external_repositories.build_external_repository
-        render 'apps/blueprints/external_repositories/update'
+        @app.blueprint.external_repositories.build
+        render
       end
 
       def destroy
-        @app.blueprint.external_repositories.delete(params[:id].to_i)
-        render 'apps/blueprints/external_repositories/update'
+        @app.blueprint.external_repositories.delete params[:id]
+        render
       end
 
       private
 
       def strong_params
-        params.require(:app_blueprint_external_repositories).
-          permit( external_repositories_attributes: [ :url, :key ] )
+        params.require(:app_blueprint_external_repository).
+          permit( :url, :key )
       end
 
     end

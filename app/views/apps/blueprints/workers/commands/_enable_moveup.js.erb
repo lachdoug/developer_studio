@@ -1,0 +1,4 @@
+<% if command.index > 0 %>
+  $("#<%= "app_blueprint_workers_command_#{command.index}_moveup_button_disabled" %>").hide();
+  $("#<%= "app_blueprint_workers_command_#{command.index}_moveup_button" %>").show();
+<% end %>

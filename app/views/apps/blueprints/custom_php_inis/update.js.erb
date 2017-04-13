@@ -1,2 +1,3 @@
-$("#app_blueprint_section_custom_php_inis").html('<%= j render("apps/blueprints/custom_php_inis/edit") %>');
-<%= render 'apps/blueprints/jsons/update' %>
+<%= render 'apps/blueprints/custom_php_inis/refresh_item_heading', custom_php_ini: @custom_php_ini %>
+<%= render 'apps/blueprints/custom_php_inis/enable_moveup', custom_php_ini: @custom_php_ini %>
+<%= render 'apps/blueprints/jsons/refresh' %>

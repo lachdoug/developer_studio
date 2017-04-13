@@ -3,14 +3,28 @@ module Apps
     module Workers
       class CommandsController < BaseController
 
+        def update
+          @command = @app.blueprint.workers.commands.find params[:id]
+          @command.update strong_params
+          render
+        end
+
         def new
-          @app.blueprint.workers.build_command
-          render 'apps/blueprints/workers/update'
+          @app.blueprint.workers.commands.build
+          # byebug
+          render
         end
 
         def destroy
-          @app.blueprint.workers.delete_command(params[:id].to_i)
-          render 'apps/blueprints/workers/update'
+          @app.blueprint.workers.commands.delete params[:id]
+          render
+        end
+
+        private
+
+        def strong_params
+          params.require(:app_blueprint_workers_command).
+            permit( :name, :command )
         end
 
       end

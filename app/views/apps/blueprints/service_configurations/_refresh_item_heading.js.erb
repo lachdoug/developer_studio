@@ -1,0 +1,4 @@
+<% @app.blueprint.service_configurations.each do |service_configuration| %>
+  $("#app_blueprint_service_configuration_<%= service_configuration.index %>_section_heading").
+    text('<%= service_configuration.to_s %>');
+<% end %>

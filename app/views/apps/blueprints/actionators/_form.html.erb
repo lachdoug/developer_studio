@@ -1,0 +1,79 @@
+<%= custom_form_for actionator,
+  namespace: "app_blueprint_actionator_#{actionator.index}",
+  url: app_blueprint_actionator_path(app_id: @app.name, id: actionator.index) do |f| %>
+  <%= f.input :name, required: true %>
+  <%= f.input :label %>
+  <%= f.input :description, as: :markdown %>
+  <%= f.input :return_type, as: :select, collection: actionator.return_type_collection, include_blank: false %>
+  <%= f.input :return_file_name %>
+  <%= f.input :enable_logging, as: :boolean, wrapper: :horizontal_boolean %>
+  <div class="form-section-heading">Script</div>
+  <%= f.simple_fields_for :script do |ff| %>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'},
+    collection: actionator.script_language_collection, include_blank: false, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: actionator.script.send(:language) } }  %>
+  <% end %>
+  <% actionator.variables.each do |variable| %>
+    <div id="app_blueprint_actionator_<%= actionator.index %>_variable_<%= variable.index %>_nested_error"></div>
+  <% end %>
+<% end %>
+
+<div class="form-section-heading">Variables</div>
+<%= 'none' if actionator.variables.empty? %>
+<% actionator.variables.each do |variable| %>
+  <div class="panel panel-default blueprint_item_collapse_area blueprint_section_collapse_area_nested" data-target="app_blueprint_actionator_<%= actionator.index %>_variable_<%= variable.index %>_nested_error">
+    <div class="panel-body">
+      <div class="dropdown pull-right">
+        <a class="btn btn-custom" data-toggle="dropdown">
+          <i class="fa fa-bars"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li>
+            <%= link_to icon_text('fa-caret-up', 'Move up'),
+             "#",
+             title: 'Move up',
+             id: "app_blueprint_actionator_#{actionator.index}_variable_#{variable.index}_moveup_button_disabled", remote: true,
+             class: "disabled_link",
+             style: ( 'display:none;' unless variable.disable_moveup ) %>
+            <%= link_to icon_text('fa-caret-up', 'Move up'),
+             app_blueprint_actionator_variable_moveup_path(app_id: @app.name, actionator_id: actionator.index, variable_id: variable.index),
+             title: 'Move up',
+             id: "app_blueprint_actionator_#{actionator.index}_variable_#{variable.index}_moveup_button", remote: true,
+             class: "show_saving_spinner_on_click",
+             style: ( 'display:none;' if variable.disable_moveup ) %>
+          </li>
+          <li>
+            <%= link_to icon_text('fa-trash-o', 'Delete'),
+             app_blueprint_actionator_variable_path(app_id: @app.name, actionator_id: actionator.index, id: variable.index),
+             method: :delete, remote: true,
+             title: 'Delete',
+             class: 'show_saving_spinner_on_confirmed',
+             data: {confirm: "Are you sure that you want to delete this actionator variable?"} %>
+          </li>
+        </ul>
+      </div>
+      <a class="blueprint_item_collapse" data-toggle="collapse" href="#app_blueprint_actionator_<%= actionator.index %>_variable_<%= variable.index %>_form">
+         Actionator <%= actionator.index + 1 %> variable <%= variable.index + 1 %> -
+         <span id="app_blueprint_actionator_<%= actionator.index %>_variable_<%= variable.index %>_section_heading">
+           <%= variable.to_s %>
+         </span>
+      </a>
+    </div>
+    <div class="collapse <%= 'in' if variable.new_record %>" id="app_blueprint_actionator_<%= actionator.index %>_variable_<%= variable.index %>_form">
+        <%= render 'apps/blueprints/actionators/variables/form', actionator: actionator, variable: variable %>
+    </div>
+  </div>
+<% end %>
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New variable'),
+      '#',
+      id: "app_blueprint_actionator_#{actionator.index}_variables_button_disabled",
+      remote: true, class: 'btn btn-custom pull-right disabled_link',
+      style: ('display:none;' unless actionator.new_record) %>
+  <%= link_to icon_text('fa-plus', 'New variable'),
+      new_app_blueprint_actionator_variable_path(app_id: @app.name, actionator_id: actionator.index),
+      id: "app_blueprint_actionator_#{actionator.index}_variables_button",
+      remote: true, class: 'btn btn-custom pull-right',
+      style: ('display:none;' if actionator.new_record) %>
+</div>
+<hr>

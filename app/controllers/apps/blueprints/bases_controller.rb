@@ -4,7 +4,7 @@ module Apps
 
       def update
         @app.blueprint.base.update strong_params
-        render 'apps/blueprints/jsons/update'
+        render
       end
 
       private

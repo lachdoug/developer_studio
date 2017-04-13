@@ -6,14 +6,17 @@ module Apps
           class ItemsController < BaseController
 
             def new
-              @app.blueprint.environment_variables.
-                    find(params[:environment_variable_id].to_i).input.collection.build_item
-              render 'apps/blueprints/environment_variables/update'
+              @environment_variable = @app.blueprint.environment_variables.
+                    find( params[:environment_variable_id].to_i )
+              @environment_variable.input.collection.build_item
+              render
             end
 
             def destroy
-              @app.blueprint.environment_variables.delete_input_collection_item(params[:environment_variable_id], params[:id])
-              render 'apps/blueprints/environment_variables/update'
+              @environment_variable = @app.blueprint.environment_variables.
+                    find params[:environment_variable_id].to_i
+              @environment_variable.input.collection.delete params[:id]
+              render
             end
 
           end

@@ -3,26 +3,26 @@ module Apps
     class FileWritePermissionsController < BaseController
 
       def update
-        @app.blueprint.file_write_permissions.update strong_params
-        render 'apps/blueprints/jsons/update'
+        @file_write_permission = @app.blueprint.file_write_permissions.find params[:id]
+        @file_write_permission.update strong_params
+        render
       end
 
       def new
-        @app.blueprint.file_write_permissions.build_file_write_permission
-        render 'apps/blueprints/file_write_permissions/update'
+        @app.blueprint.file_write_permissions.build
+        render
       end
 
       def destroy
-        @app.blueprint.file_write_permissions.delete(params[:id].to_i)
-        render 'apps/blueprints/file_write_permissions/update'
+        @app.blueprint.file_write_permissions.delete params[:id]
+        render
       end
-
 
       private
 
       def strong_params
-        params.require(:app_blueprint_file_write_permissions).
-          permit( file_write_permissions_attributes: [ :path, :recursive ] )
+        params.require(:app_blueprint_file_write_permission).
+          permit( :path, :recursive )
       end
 
     end

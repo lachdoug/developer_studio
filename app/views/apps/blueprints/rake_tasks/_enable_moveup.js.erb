@@ -1,0 +1,4 @@
+<% if rake_task.index > 0 %>
+  $("#<%= "app_blueprint_rake_task_#{rake_task.index}_moveup_button_disabled" %>").hide();
+  $("#<%= "app_blueprint_rake_task_#{rake_task.index}_moveup_button" %>").show();
+<% end %>

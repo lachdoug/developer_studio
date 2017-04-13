@@ -8,7 +8,7 @@ module CustomForms
             wrapper: :horizontal_form,
             url: opts[:url],
             namespace: opts[:namespace],
-            method: opts[:method] || :patch,
+            method: opts[:method] || :put,
             remote: true ) do |f|
               content_tag(:div, style: 'height: 0px; overflow: hidden;') do
                 text_field_tag(:fake_input, nil, class: "do_not_autosubmit_form_on_change") +

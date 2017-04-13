@@ -1,0 +1,4 @@
+<% if environment_variable.index > 0 %>
+  $("#<%= "app_blueprint_environment_variable_#{environment_variable.index}_moveup_button_disabled" %>").hide();
+  $("#<%= "app_blueprint_environment_variable_#{environment_variable.index}_moveup_button" %>").show();
+<% end %>

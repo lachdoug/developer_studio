@@ -4,22 +4,45 @@ class App
 
       # child class should redefine these methods
 
-            def data_location
-              []
-            end
+            # def data_location
+            #   []
+            # end
+            #
+            # def form_data
+            #   {}
+            # end
+            #
+            # def load_data
+            #   # assign attribtes from persisted data
+            # end
 
-            def form_data
-              {}
-            end
+      # ------------
 
-            def load_data
-              # assign attribtes from persisted data
-            end
+      def self.form_attributes(*attributes)
+        attr_accessor *attributes
+        define_form_data attributes
+        define_load_data attributes
+      end
 
-       # ------------
+      def self.define_form_data(attributes)
+        send(:define_method, :form_data) do
+          attributes.map do |attribute|
+            { attribute => send(attribute) }
+          end.inject(:merge)
+        end
+      end
 
+      def self.define_load_data(attributes)
+        send(:define_method, :load_data) do
+          attributes.each do |attribute|
+            instance_variable_set( "@#{attribute}", data.dig(attribute) )
+          end
+        end
+      end
 
       include ActiveModel::Model
+
+      attr_reader :blueprint
 
       def initialize(blueprint)
         @blueprint = blueprint
@@ -27,7 +50,9 @@ class App
         self
       end
 
-      attr_reader :blueprint
+      def data_location
+        [ :software, self.class.name.split('::').last.underscore.to_sym ]
+      end
 
       def save
         valid? && save_updated_blueprint
@@ -37,7 +62,7 @@ class App
         "#{app.name} #{data_location.map(&:to_s).join ' '}"
       end
 
-      def persisted_data
+      def data
         blueprint.content.dig(*data_location)
       end
 
@@ -65,6 +90,10 @@ class App
 
       def script_language_collection
         dropdowns_config[:script_languages]
+      end
+
+      def new_record?
+        false
       end
 
     end

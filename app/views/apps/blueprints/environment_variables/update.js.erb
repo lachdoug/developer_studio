@@ -1,2 +1,5 @@
-<%= render 'apps/blueprints/environment_variables/update' %>
-<%= render 'apps/blueprints/jsons/update' %>
+<%= render 'apps/blueprints/environment_variables/refresh_item_heading', environment_variable: @environment_variable %>
+<%= render 'apps/blueprints/environment_variables/enable_moveup', environment_variable: @environment_variable %>
+<%= render 'apps/blueprints/environment_variables/enable_collection_items', environment_variable: @environment_variable %>
+<%= render 'apps/blueprints/environment_variables/inputs/collections/items/enable_moveup', environment_variable: @environment_variable %>
+<%= render 'apps/blueprints/jsons/refresh' %>

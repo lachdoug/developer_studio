@@ -3,25 +3,26 @@ module Apps
     class PortsController < BaseController
 
       def update
-        @app.blueprint.ports.update strong_params
-        render 'apps/blueprints/jsons/update'
+        @port = @app.blueprint.ports.find params[:id]
+        @port.update strong_params
+        render
       end
 
       def new
-        @app.blueprint.ports.build_port
-        render 'apps/blueprints/ports/update'
+        @app.blueprint.ports.build
+        render
       end
 
       def destroy
-        @app.blueprint.ports.delete(params[:id].to_i)
-        render 'apps/blueprints/ports/update'
+        @app.blueprint.ports.delete params[:id]
+        render
       end
 
       private
 
       def strong_params
-        params.require(:app_blueprint_ports).
-          permit(ports_attributes: [ :port, :external, :protocol ] )
+        params.require(:app_blueprint_port).
+          permit( :port, :external, :protocol )
       end
 
     end

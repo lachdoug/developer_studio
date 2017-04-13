@@ -1,0 +1,4 @@
+<% if apache_httpd_configuration.index > 0 %>
+  $("#<%= "app_blueprint_apache_httpd_configuration_#{apache_httpd_configuration.index}_moveup_button_disabled" %>").hide();
+  $("#<%= "app_blueprint_apache_httpd_configuration_#{apache_httpd_configuration.index}_moveup_button" %>").show();
+<% end %>

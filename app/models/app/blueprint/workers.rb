@@ -5,40 +5,68 @@ class App
       attr_accessor :blocking
       attr_reader :commands
 
-      def data_location
-        [ :software, :workers ]
+      def update(params)
+        assign_attributes(params)
+        save
       end
 
       def load_data
-        @blocking = persisted_data.dig :blocking
-        self.commands_attributes = commands_persisted_data
+        @blocking = data.dig :blocking
+        self.commands_attributes = commands_collection_data
       end
 
-      def commands_persisted_data
-        persisted_data[:commands].map.with_index do |worker, i|
-          { i.to_s => worker }
+      def commands_collection_data
+        data[:commands].map.with_index do |command, i|
+          { i => command }
         end.inject(:merge) || {}
       end
 
       def commands_attributes=(params)
-        @commands = params.map { |i, worker_params| Command.new worker_params }
-      end
-
-      def build_command
-        @commands << Command.new
+        @commands = Commands.new self, params
       end
 
       def form_data
         {
           blocking: blocking,
-          commands: commands.map(&:form_data)
+          commands: commands.form_data
         }
       end
 
-      def delete_command(i)
-        commands.delete_at i
-        save
-      end
+
+
+
+      # def item_class
+      #   App::Blueprint::Workers::Command
+      # end
+      #
+      # def commands
+      #   @collection
+      # end
+      #
+      # def update(params)
+      #   assign_attributes(params)
+      #   save
+      # end
+      #
+      # def load_data
+      #   @blocking = data.dig :blocking
+      #   self.collection_attributes = commands_collection_data
+      # end
+      #
+      # def commands_collection_data
+      #   data[:commands].map.with_index do |command, i|
+      #     { i => command }
+      #   end.inject(:merge) || {}
+      # end
+      #
+      # # def commands_attributes=(params)
+      # #   @commands = params.map { |i, command_params| Command.new command_params.merge({index: i}) }
+      # # end
+      # #
+      # # def build_command
+      # #   @commands << Command.new({index: i})
+      # # end
+      #
 
     end
   end

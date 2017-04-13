@@ -1,3 +1,4 @@
-$("#app_blueprint_section_actionators").html('<%= j render("apps/blueprints/actionators/edit") %>');
-<%= render 'apps/blueprints/schedules/update' %>
-<%= render 'apps/blueprints/jsons/update' %>
+<%= render 'apps/blueprints/actionators/refresh_item_heading', actionator: @actionator %>
+<%= render 'apps/blueprints/actionators/enable_moveup', actionator: @actionator %>
+<%= render 'apps/blueprints/actionators/enable_variables', actionator: @actionator %>
+<%= render 'apps/blueprints/jsons/refresh' %>

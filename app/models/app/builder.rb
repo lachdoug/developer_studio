@@ -14,7 +14,6 @@ class App
       end
     end
 
-    # attr_accessor :url
     attr_reader :url, :error_message
 
     def url=(url)

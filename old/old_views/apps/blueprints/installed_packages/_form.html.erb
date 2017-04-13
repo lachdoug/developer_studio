@@ -1,0 +1,12 @@
+<%= custom_form_for installed_package,
+      url: app_blueprint_installed_packages_path(app_id: @app.name, id: installed_package_id) do |f| %>
+  <%= f.input :name, required: true %>
+  <%= f.input :source_url, as: :url %>
+  <%= f.input :destination, hint: 'Relative to /home/app (defaults /home/app).' %>
+  <%= f.input :extraction_command %>
+  <%= f.input :path_to_extracted %>
+  <div class='clearfix'>
+  <%= link_to icon_text('fa-trash-o', "Delete installed package #{f.index + 1}"), app_blueprint_installed_packages_installed_package_path(app_id: @app.name, id: f.index), method: :delete, remote: true, class: 'btn btn-default pull-right', data: {confirm: "Are you sure that you want to delete this installed package?"} %>
+  </div>
+  <hr>
+<% end %>

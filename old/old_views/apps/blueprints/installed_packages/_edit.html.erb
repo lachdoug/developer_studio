@@ -1,0 +1,21 @@
+<% @app.blueprint.installed_packages.each_with_index do |installed_package, installed_package_id| %>
+
+  <a class="section_item_collapse" data-toggle="collapse" href="#app_blueprint_installed_package_form_<%= installed_package_id %>">
+    <legend>
+      Installed package <%= installed_package_id + 1 %> -
+      <span id="app_blueprint_installed_package_<%= installed_package_id %>_section_heading">
+        <%= installed_package.to_label %>
+      </span>
+    </legend>
+  </a>
+
+  <div class="collapse" id="app_blueprint_installed_package_form_<%= installed_package_id %>">
+    <%= render 'apps/blueprints/installed_packages/form', installed_package: installed_package, installed_package_id: installed_package_id %>
+    <hr>
+  </div>
+
+<% end %>
+
+<%= link_to icon_text('fa-plus', 'New installed package'),
+    new_app_blueprint_installed_package_path(app_id: @app.name),
+    remote: true, class: 'btn btn-default pull-right' %>

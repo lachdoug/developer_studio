@@ -1,0 +1,4 @@
+<% if replacement_string.index > 0 %>
+  $("#<%= "app_blueprint_replacement_string_#{replacement_string.index}_moveup_button_disabled" %>").hide();
+  $("#<%= "app_blueprint_replacement_string_#{replacement_string.index}_moveup_button" %>").show();
+<% end %>

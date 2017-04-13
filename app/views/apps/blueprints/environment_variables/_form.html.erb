@@ -1,0 +1,80 @@
+<%= custom_form_for environment_variable,
+  namespace: "app_blueprint_environment_variable_#{environment_variable.index}",
+  url: app_blueprint_environment_variable_path(app_id: @app.name, id: environment_variable.index) do |f| %>
+  <%= f.input :name, required: true %>
+  <%= f.input :value %>
+  <%= f.input :mandatory, as: :boolean, wrapper: :horizontal_boolean %>
+  <%= f.input :immutable, as: :boolean, wrapper: :horizontal_boolean %>
+  <%= f.input :ask_at_build_time, as: :boolean, wrapper: :horizontal_boolean %>
+  <%= f.input :build_time_only, as: :boolean, wrapper: :horizontal_boolean %>
+  <div class="form-section-heading">Input</div>
+  <%= f.simple_fields_for :input do |ff| %>
+    <%= ff.input :type, as: :select, collection: ff.object.type_collection, include_blank: false %>
+    <%= ff.input :label %>
+    <%= ff.input :title %>
+    <%= ff.input :comment %>
+    <%= ff.input :hint %>
+    <%= ff.input :placeholder %>
+    <div class="form-section-heading">Collection</div>
+    <%= ff.simple_fields_for :collection do |fff| %>
+      <%= fff.input :include_blank, required: false, as: :boolean, wrapper: :horizontal_boolean %>
+      <table class="table">
+        <tr><th>Value</th><th>Label</th><th width="1"></th></tr>
+        <%= fff.simple_fields_for :items do |ffff| %>
+        <tr>
+          <%= ffff.input :value, required: true, wrapper: :form_table_cell_input %>
+          <%= ffff.input :label, required: true, wrapper: :form_table_cell_input %>
+          <td>
+            <div class="dropdown">
+              <a class="btn btn-custom" data-toggle="dropdown">
+                <i class="fa fa-bars"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                  <%= link_to icon_text('fa-caret-up', 'Move up'),
+                    "#",
+                    title: 'Move up',
+                    id: "app_blueprint_environment_variable_#{environment_variable.index}_input_collection_item_#{ffff.index}_moveup_button_disabled", remote: true,
+                    class: "disabled_link",
+                    style: ( 'display:none;' unless ffff.object.disable_moveup ) %>
+                  <%= link_to icon_text('fa-caret-up', 'Move up'),
+                    app_blueprint_environment_variable_input_collection_item_moveup_path(app_id: @app.name, environment_variable_id: environment_variable.index, item_id: ffff.index),
+                    title: 'Move up',
+                    id: "app_blueprint_environment_variable_#{environment_variable.index}_input_collection_item_#{ffff.index}_moveup_button", remote: true,
+                    class: "show_saving_spinner_on_click",
+                    style: ( 'display:none;' if ffff.object.disable_moveup ) %>
+                </li>
+                <li>
+                  <%= link_to icon_text('fa-trash-o', 'Delete'),
+                    app_blueprint_environment_variable_input_collection_item_path(app_id: @app.name, environment_variable_id: environment_variable.index, id: ffff.index),
+                    method: :delete, remote: true,
+                    title: 'Delete',
+                    class: 'show_saving_spinner_on_confirmed',
+                    data: {confirm: "Are you sure that you want to delete this input collection item?"} %>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+      <div class='clearfix'>
+        <%= link_to icon_text('fa-plus', 'New environment variable collection item'),
+          '#',
+          id: "app_blueprint_environment_variable_#{environment_variable.index}_collection_items_button_disabled",
+          remote: true, class: 'btn btn-custom pull-right disabled_link',
+          style: ('display:none;' unless environment_variable.new_record) %>
+        <%= link_to icon_text('fa-plus', 'New environment variable collection item'),
+          new_app_blueprint_environment_variable_input_collection_item_path(app_id: @app.name, environment_variable_id: environment_variable.index),
+          id: "app_blueprint_environment_variable_#{environment_variable.index}_collection_items_button",
+          remote: true, class: 'btn btn-custom pull-right',
+          style: ('display:none;' if environment_variable.new_record) %>
+      </div>
+    <% end %>
+    <div class="form-section-heading">Validation</div>
+    <%= ff.simple_fields_for :validation do |fff| %>
+      <%= fff.input :pattern, required: false %>
+      <%= fff.input :message, required: false %>
+    <% end %>
+  <% end %>
+<% end %>

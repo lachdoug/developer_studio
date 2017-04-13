@@ -1,2 +1,3 @@
-$("#app_blueprint_section_apache_htaccess_files").html('<%= j render("apps/blueprints/apache_htaccess_files/edit") %>');
-<%= render 'apps/blueprints/jsons/update' %>
+<%= render 'apps/blueprints/apache_htaccess_files/refresh_item_heading', apache_htaccess_file: @apache_htaccess_file %>
+<%= render 'apps/blueprints/apache_htaccess_files/enable_moveup', apache_htaccess_file: @apache_htaccess_file %>
+<%= render 'apps/blueprints/jsons/refresh' %>

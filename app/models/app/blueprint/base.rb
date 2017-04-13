@@ -15,23 +15,19 @@ class App
                     :first_run_url,
                     :installation_report
 
-      def data_location
-        [ :software, :base ]
-      end
-
       def load_data
-        @name = persisted_data.dig :name
-        @framework = persisted_data.dig :framework
-        @memory_required = persisted_data.dig :memory, :required
-        @memory_recommended = persisted_data.dig :memory, :recommended
-        @http_protocol = persisted_data.dig :http_protocol
-        @framework_port_override = persisted_data.dig :framework_port_override
-        @deployment_type = persisted_data.dig :deployment_type
-        @web_root_directory = persisted_data.dig :web_root_directory
-        @continuous_deployment = persisted_data.dig :continuous_deployment
-        @install_form_comment = persisted_data.dig :install_form_comment
-        @first_run_url = persisted_data.dig :first_run_url
-        @installation_report = persisted_data.dig :installation_report
+        @name = data.dig :name
+        @framework = data.dig :framework
+        @memory_required = data.dig :memory, :required
+        @memory_recommended = data.dig :memory, :recommended
+        @http_protocol = data.dig :http_protocol
+        @framework_port_override = data.dig :framework_port_override
+        @deployment_type = data.dig :deployment_type
+        @web_root_directory = data.dig :web_root_directory
+        @continuous_deployment = data.dig :continuous_deployment
+        @install_form_comment = data.dig :install_form_comment
+        @first_run_url = data.dig :first_run_url
+        @installation_report = data.dig :installation_report
       end
 
       def form_data
@@ -62,7 +58,10 @@ class App
       end
 
       def http_protocol_collection
-        [:https_and_http, :http_and_https, :https_only, :http_only]
+        { "HTTPS and HTTP": :https_and_http,
+          "HTTP and HTTPS": :http_and_https,
+          "HTTPS only": :https_only,
+          "HTTP only": :http_only }
       end
 
     end

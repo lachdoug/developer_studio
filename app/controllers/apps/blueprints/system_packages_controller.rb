@@ -3,25 +3,26 @@ module Apps
     class SystemPackagesController < BaseController
 
       def update
-        @app.blueprint.system_packages.update strong_params
-        render 'apps/blueprints/jsons/update'
+        @system_package = @app.blueprint.system_packages.find params[:id]
+        @system_package.update strong_params
+        render
       end
 
       def new
-        @app.blueprint.system_packages.build_system_package
-        render 'apps/blueprints/system_packages/update'
+        @app.blueprint.system_packages.build
+        render
       end
 
       def destroy
-        @app.blueprint.system_packages.delete(params[:id].to_i)
-        render 'apps/blueprints/system_packages/update'
+        @app.blueprint.system_packages.delete params[:id]
+        render
       end
 
       private
 
       def strong_params
-        params.require(:app_blueprint_system_packages).
-          permit( system_packages_attributes: [ :package, :version ] )
+        params.require(:app_blueprint_system_package).
+          permit( :package, :version )
       end
 
     end

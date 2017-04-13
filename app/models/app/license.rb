@@ -3,11 +3,11 @@ class App
 
     include ActiveModel::Model
 
+    attr_reader :app
+
     def initialize(app)
       @app = app
     end
-
-    attr_reader :app
 
     def file
       @file ||= app.repository.license
@@ -25,7 +25,6 @@ class App
       @content = params[:content]
       save
     end
-
 
   end
 end

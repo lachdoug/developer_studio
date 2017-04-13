@@ -7,11 +7,11 @@ $(document).ajaxError(function(event, request, settings, error) {
       alert(response);
       location.reload();
     } else {
-      alert(error + ". " + response);
+      alert(response);
       location.reload();
     }
   } else if (request.status === 0) {
-    if (settings.data.constructor.name === 'Array') {
+    if (settings.data && settings.data.constructor.name === 'Array') {
       remotipart_submitted = settings.data.find(function(datum) {
         return datum.name === 'remotipart_submitted';
       });
@@ -19,11 +19,11 @@ $(document).ajaxError(function(event, request, settings, error) {
         if (remotipart_submitted.value === true) {
           // Do nothing
         } else {
-          console.log('Communication error. Ajax status 0 error type 2.');
+          console.log('Communication error. Ajax status 0. Settings data constructor Array.');
         }
       }
     } else {
-      console.log('Communication error. Ajax status 0 error type 1. Data constructor: ' + settings.data.constructor.name);
+      console.log('Communication error. Ajax status 0.');
       location.reload();
     }
   } else {

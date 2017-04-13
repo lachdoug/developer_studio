@@ -1,0 +1,4 @@
+<% if persistent_file.index > 0 %>
+  $("#<%= "app_blueprint_persistent_file_#{persistent_file.index}_moveup_button_disabled" %>").hide();
+  $("#<%= "app_blueprint_persistent_file_#{persistent_file.index}_moveup_button" %>").show();
+<% end %>

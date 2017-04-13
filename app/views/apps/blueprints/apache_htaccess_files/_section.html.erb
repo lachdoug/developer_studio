@@ -1,0 +1,59 @@
+<% @app.blueprint.apache_htaccess_files.each do |apache_htaccess_file| %>
+
+  <div class="blueprint_item_collapse_area">
+    <legend>
+      <div class="dropdown pull-right">
+        <a class="btn btn-custom" data-toggle="dropdown">
+          <i class="fa fa-bars"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li>
+            <%= link_to icon_text('fa-caret-up', 'Move up'),
+              "#",
+              title: 'Move up',
+              id: "app_blueprint_apache_htaccess_file_#{apache_htaccess_file.index}_moveup_button_disabled", remote: true,
+              class: "disabled_link",
+              style: ( 'display:none;' unless apache_htaccess_file.disable_moveup ) %>
+            <%= link_to icon_text('fa-caret-up', 'Move up'),
+              app_blueprint_apache_htaccess_file_moveup_path(app_id: @app.name, apache_htaccess_file_id: apache_htaccess_file.index),
+              title: 'Move up',
+              id: "app_blueprint_apache_htaccess_file_#{apache_htaccess_file.index}_moveup_button", remote: true,
+              class: "show_saving_spinner_on_click",
+              style: ( 'display:none;' if apache_htaccess_file.disable_moveup ) %>
+          </li>
+          <li>
+            <%= link_to icon_text('fa-trash-o', 'Delete'),
+              app_blueprint_apache_htaccess_file_path(app_id: @app.name, id: apache_htaccess_file.index),
+              method: :delete, remote: true,
+              title: 'Delete',
+              class: 'show_saving_spinner_on_confirmed',
+              data: {confirm: "Are you sure that you want to delete this apache htaccess file?"} %>
+          </li>
+        </ul>
+      </div>
+      <a class="blueprint_item_collapse" data-toggle="collapse" href="#app_blueprint_apache_htaccess_file_<%= apache_htaccess_file.index %>_form">
+          Apache htaccess file <%= apache_htaccess_file.index + 1 %> -
+          <span id="app_blueprint_apache_htaccess_file_<%= apache_htaccess_file.index %>_section_heading">
+            <%= apache_htaccess_file.to_s %>
+          </span>
+      </a>
+    </legend>
+
+    <div class="collapse <%= 'in' if apache_htaccess_file.new_record %>" id="app_blueprint_apache_htaccess_file_<%= apache_htaccess_file.index %>_form">
+      <%= custom_form_for apache_htaccess_file,
+        namespace: "app_blueprint_apache_htaccess_file_#{apache_htaccess_file.index}",
+        url: app_blueprint_apache_htaccess_file_path(app_id: @app.name, id: apache_htaccess_file.index) do |f| %>
+        <%= f.input :directory, required: true %>
+        <%= f.input :content, as: :code, required: true,
+              input_html: { data: { mode: :text } }  %>
+      <% end %>
+      <hr>
+    </div>
+  </div>
+
+<% end %>
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New apache htaccess file'),
+      new_app_blueprint_apache_htaccess_file_path(app_id: @app.name),
+      remote: true, class: 'btn btn-custom pull-right' %>
+</div>

@@ -1,0 +1,52 @@
+<% @app.blueprint.service_configurations.each do |service_configuration| %>
+
+  <div class="blueprint_item_collapse_area">
+    <legend>
+      <div class="dropdown pull-right">
+        <a class="btn btn-custom" data-toggle="dropdown">
+          <i class="fa fa-bars"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li>
+            <%= link_to icon_text('fa-caret-up', 'Move up'),
+              "#",
+              title: 'Move up',
+              id: "app_blueprint_service_configuration_#{service_configuration.index}_moveup_button_disabled", remote: true,
+              class: "disabled_link",
+              style: ( 'display:none;' unless service_configuration.disable_moveup ) %>
+            <%= link_to icon_text('fa-caret-up', 'Move up'),
+              app_blueprint_service_configuration_moveup_path(app_id: @app.name, service_configuration_id: service_configuration.index),
+              title: 'Move up',
+              id: "app_blueprint_service_configuration_#{service_configuration.index}_moveup_button", remote: true,
+              class: "show_saving_spinner_on_click",
+              style: ( 'display:none;' if service_configuration.disable_moveup ) %>
+          </li>
+          <li>
+            <%= link_to icon_text('fa-trash-o', 'Delete'),
+              app_blueprint_service_configuration_path(app_id: @app.name, id: service_configuration.index),
+              method: :delete, remote: true,
+              title: 'Delete',
+              class: 'show_saving_spinner_on_confirmed',
+              data: {confirm: "Are you sure that you want to delete this service configuration?"} %>
+          </li>
+        </ul>
+      </div>
+      <a class="blueprint_item_collapse" data-toggle="collapse" href="#app_blueprint_service_configuration_<%= service_configuration.index %>_form">
+          Service configuration <%= service_configuration.index + 1 %> -
+          <span id="app_blueprint_service_configuration_<%= service_configuration.index %>_section_heading">
+            <%= service_configuration.to_s %>
+          </span>
+      </a>
+    </legend>
+
+    <div class="collapse <%= 'in' if service_configuration.new_record %>" id="app_blueprint_service_configuration_<%= service_configuration.index %>_form">
+      <%= render 'apps/blueprints/service_configurations/form', service_configuration: service_configuration %>
+    </div>
+  </div>
+
+<% end %>
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New service configuration'),
+      new_app_blueprint_service_configuration_path(app_id: @app.name),
+      remote: true, class: 'btn btn-custom pull-right' %>
+</div>

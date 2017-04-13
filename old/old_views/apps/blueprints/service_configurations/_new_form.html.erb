@@ -1,0 +1,14 @@
+<%= custom_form_for service_configuration,
+      namespace: "service_configuration[new]",
+      url: app_blueprint_service_configurations_path(app_id: @app.name), method: :post do |f| %>
+  <% if f.object.publisher_namespace.blank? %>
+    <%= f.input :publisher_namespace, label: 'Namespace', as: :select, required: true,
+        collection: Settings::ServiceDefinitionNamespace.publisher_namespaces_collection %>
+  <% elsif f.object.type_path.blank? %>
+    <%= f.input :publisher_namespace, label: 'Namespace', disabled: true %>
+    <%= f.input :publisher_namespace, as: :hidden %>
+    <%= f.input :type_path, as: :select, required: true,
+        collection: Settings::ServiceDefinitionNamespace.
+                      type_paths_collection_for(f.object.publisher_namespace) %>
+  <% end %>
+<% end %>

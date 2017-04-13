@@ -1,0 +1,28 @@
+<%= custom_form_for @app.blueprint.workers,
+      url: app_blueprint_workers_path(app_id: @app.name) do |f| %>
+  <%= f.input :blocking %>
+  <br>
+  <legend>Commands</legend>
+  <% if @app.blueprint.workers.commands.any? %>
+    <table class="table">
+      <tr><th>Name</th><th>Command</th><th width="1"></th></tr>
+      <%= f.simple_fields_for :commands do |ff| %>
+      <tr>
+        <%= ff.input :name, required: true, wrapper: :form_table_cell_input %>
+        <%= ff.input :command, required: true, wrapper: :form_table_cell_input %>
+        <td>
+          <div class='clearfix'>
+          <%= link_to icon('fa-trash-o'),
+          app_blueprint_workers_command_path(app_id: @app.name, id: ff.index), method: :delete, remote: true, class: 'btn btn-default pull-right', data: {confirm: "Are you sure that you want to delete this command?"} %>
+          </div>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  <% end %>
+<% end %>
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New worker command'),
+      new_app_blueprint_workers_command_path(app_id: @app.name),
+      remote: true, class: 'btn btn-default pull-right' %>
+</div>

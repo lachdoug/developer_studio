@@ -1,2 +1,3 @@
-$("#app_blueprint_section_apache_httpd_configurations").html('<%= j render("apps/blueprints/apache_httpd_configurations/edit") %>');
-<%= render 'apps/blueprints/jsons/update' %>
+<%= render 'apps/blueprints/apache_httpd_configurations/refresh_item_heading', apache_httpd_configuration: @apache_httpd_configuration %>
+<%= render 'apps/blueprints/apache_httpd_configurations/enable_moveup', apache_httpd_configuration: @apache_httpd_configuration %>
+<%= render 'apps/blueprints/jsons/refresh' %>

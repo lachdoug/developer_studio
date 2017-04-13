@@ -1,0 +1,22 @@
+<% @app.blueprint.schedules.each_with_index do |schedule, schedule_id| %>
+
+  <a class="section_item_collapse" data-toggle="collapse" href="#app_blueprint_schedule_form_<%= schedule_id %>">
+    <legend>
+      Schedule <%= schedule_id + 1 %> -
+      <span id="app_blueprint_schedule_section_heading_<%= schedule_id %>">
+        <%= schedule.to_label %>
+      </span>
+    </legend>
+  </a>
+
+  <div class="collapse" id="app_blueprint_schedule_form_<%= schedule_id %>">
+    <%= render 'apps/blueprints/schedules/edit_form', schedule: schedule, schedule_id: schedule_id %>
+    <hr>
+  </div>
+
+<% end %>
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New schedule'),
+      new_app_blueprint_schedules_path(app_id: @app.name),
+      remote: true, class: 'btn btn-default pull-right' %>
+</div>

@@ -1,7 +1,7 @@
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
 
-  config.wrappers :table_cell_input, tag: 'td', error_class: 'has-error' do |b|
+  config.wrappers :form_table_cell_input, tag: 'td', error_class: 'has-error' do |b|
     b.use :html5
     b.optional :readonly
     b.use :input, class: 'form-control'

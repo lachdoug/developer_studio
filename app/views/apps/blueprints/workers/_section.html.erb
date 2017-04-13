@@ -1,0 +1,16 @@
+<%= custom_form_for @app.blueprint.workers,
+      url: app_blueprint_workers_path(app_id: @app.name) do |f| %>
+  <%= f.input :blocking %>
+<% end %>
+
+<div class="form-section-heading">Commands</div>
+<div id='app_blueprint_section_workers_commands'>
+  <%= render 'apps/blueprints/workers/commands' %>
+</div>
+
+<br>
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New worker command'),
+    new_app_blueprint_workers_command_path(app_id: @app.name),
+    remote: true, class: 'btn btn-custom pull-right' %>
+</div>
