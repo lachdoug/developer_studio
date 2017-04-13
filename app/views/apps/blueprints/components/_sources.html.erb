@@ -44,7 +44,7 @@
         namespace: "app_blueprint_components_source_#{source.index}",
         url: app_blueprint_components_source_path(app_id: @app.name, id: source.index) do |f| %>
         <%= f.input :label, required: true %>
-        <%= f.input :url, label: :URL, as: :url, required: true %>
+        <%= f.input :url, label: :URL, required: true %>
         <div class="form-section-heading">Install script</div>
         <%= f.simple_fields_for :install_script do |ff| %>
           <%= ff.input :language, as: :select,

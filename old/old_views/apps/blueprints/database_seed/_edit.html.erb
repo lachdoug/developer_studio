@@ -1,6 +1,0 @@
-<%= custom_form_for @app.blueprint.database_seed,
-      url: app_blueprint_database_seed_path(app_id: @app.name) do |f| %>
-<%= f.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.database_seed_language_collection, include_blank: false, required: false %>
-<%= f.input :content, as: :code, required: false, input_html: { data: { mode: f.object.send(:language) } } %>
-<%= f.input :script, as: :boolean, wrapper: :horizontal_boolean %>
-<% end %>
