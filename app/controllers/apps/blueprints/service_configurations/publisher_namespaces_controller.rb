@@ -4,7 +4,7 @@ module Apps
       class PublisherNamespacesController < BaseController
 
         def create
-          @app.blueprint.service_configurations.build strong_params
+          @service_configuration = @app.blueprint.service_configurations.build strong_params
           render
         end
 

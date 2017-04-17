@@ -15,6 +15,8 @@ module Apps
       end
 
       def destroy
+        @actionator = @app.blueprint.actionators.find params[:id]
+        @schedules_require_refresh = @app.blueprint.schedules.map(&:actionator_name).include?(@actionator.name)
         @app.blueprint.actionators.delete params[:id]
         render
       end

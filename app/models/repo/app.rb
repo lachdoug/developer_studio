@@ -28,6 +28,7 @@ module Repo
       readme.precheck
       release_notes.precheck
       license.precheck
+      git_precheck
     end
 
     def remote_web_url
@@ -56,6 +57,22 @@ module Repo
 
     def license
       @license ||= License.new(self)
+    end
+
+    def git_precheck
+      # byebug
+      make_initial_commit if git_is_bare
+    end
+
+    def git_is_bare
+      stdout, stderr, status = Open3.capture3("git -C repos/apps/#{name} cat-file -t HEAD")
+      status.exitstatus == 128
+    end
+
+    def make_initial_commit
+      `git -C repos/apps/#{name} add -A`
+      `git -C repos/apps/#{name} commit -a -m 'Initial commit'`
+      `git -C repos/apps/#{name} branch --unset-upstream`
     end
 
     def uncommitted_diffs

@@ -23,10 +23,10 @@ class App
         end.inject(:merge) || {}
       end
 
-      def load_variables_for(i)
-        i = i.to_i
-        find(i).load_variables && save
-      end
+      # def load_variables_for(i)
+      #   i = i.to_i
+      #   find(i).load_variables && save
+      # end
 
     end
   end

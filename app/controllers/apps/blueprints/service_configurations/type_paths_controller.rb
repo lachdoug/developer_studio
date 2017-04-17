@@ -4,8 +4,8 @@ module Apps
       class TypePathsController < BaseController
 
         def create
-          @app.blueprint.service_configurations.build strong_params
-          @app.blueprint.service_configurations.load_variables_for(params[:service_configuration_id])
+          @service_configuration = @app.blueprint.service_configurations.build strong_params
+          @service_configuration.load_variables
           render
         end
 

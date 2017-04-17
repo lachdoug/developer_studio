@@ -19,6 +19,10 @@ class App
         @collection.each &block
       end
 
+      def map(&block)
+        @collection.map &block
+      end
+
       def count
         @collection.count
       end

@@ -80,9 +80,19 @@ class App
 
       def load_variables
         return false unless service_definition.present?
+        remove_redundant_variables
+        build_new_variables
+        sort_variables_to_match_service_definition
+        blueprint_section.save
+      end
+
+      def remove_redundant_variables
         redundant_variable_names.each do |redundant_variable_name|
           @variables.delete_if { |variable| variable.name == redundant_variable_name }
         end
+      end
+
+      def build_new_variables
         new_variable_names.each do |new_variable_name|
           @variables <<
             Variable.new(service_configuration: self).tap do |variable|
@@ -90,13 +100,12 @@ class App
                 service_definition_consumer_params_settings[new_variable_name])
             end
         end
-        sort_variables_to_match_service_definition
       end
 
       def sort_variables_to_match_service_definition
         @variables =
           defined_variable_names.map do |defined_variable_name|
-            @variables.find { |variable| variable.name == defined_variable_name }
+            @variables.find { |variable| variable.name.to_s == defined_variable_name.to_s }
           end
       end
 
