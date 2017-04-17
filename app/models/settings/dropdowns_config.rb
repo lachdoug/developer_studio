@@ -52,7 +52,8 @@ module Settings
           "Sinatra": "sinatra",
           "Tomcat 7": "tomcat7",
           "Tomcat 8": "tomcat8",
-          "Tomcat 9": "tomcat9"
+          "Tomcat 9": "tomcat9",
+          "X11": "x11"
         },
         "script_languages": {
           "Javascript": "javascript",
