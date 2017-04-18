@@ -1,5 +1,3 @@
 <%= render 'apps/blueprints/actionators/refresh_all' %>
 <%= render 'apps/blueprints/jsons/refresh' %>
-<% if @schedules_require_refresh %>
-  <%= render 'apps/blueprints/schedules/refresh_all' %>
-<% end %>
+<%= render 'apps/blueprints/actionators/refresh_schedules', schedules: @actionator_schedules %>

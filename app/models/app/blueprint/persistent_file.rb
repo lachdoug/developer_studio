@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class PersistentFile < SectionCollectionItem
+    class PersistentFile < ::Blueprint::SectionCollectionItem
 
       form_attributes :path
 

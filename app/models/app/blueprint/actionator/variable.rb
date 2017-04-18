@@ -1,31 +1,10 @@
 class App
   class Blueprint
     class Actionator
-      class Variable
+      class Variable < ::Blueprint::SectionNestedCollectionItem
 
-        include ActiveModel::Model
-
-        attr_accessor :index, :new_record,
-                      :name, :value, :mandatory
-        attr_reader :blueprint_section, :input
-
-        def initialize(blueprint_section, params)
-          @blueprint_section = blueprint_section
-          super params
-        end
-
-        def to_s
-          name || 'New'
-        end
-
-        def disable_moveup
-          index == 0 || new_record
-        end
-
-        def update(params)
-          assign_attributes params
-          blueprint_section.save
-        end
+        attr_accessor :name, :value, :mandatory
+        attr_reader :input
 
         def input_attributes=(params={})
           @input = Input.new blueprint_section, params

@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class TemplateFile < SectionCollectionItem
+    class TemplateFile < ::Blueprint::SectionCollectionItem
 
       form_attributes :path, :content, :language
 

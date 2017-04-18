@@ -1,24 +1,24 @@
 <%= custom_form_for @app.blueprint.scripts,
       namespace: "app_blueprint_scripts",
       url: app_blueprint_scripts_path(app_id: @app.name) do |f| %>
-<%= f.simple_fields_for :start do |ff| %>
-<legend>Start</legend>
-<%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: false, required: false %>
-<%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
-<% end %>
-<%= f.simple_fields_for :install do |ff| %>
-<legend>Install</legend>
-<%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: false, required: false %>
-<%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
-<% end %>
-<%= f.simple_fields_for :post_install do |ff| %>
-<legend>Post install</legend>
-<%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: false, required: false %>
-<%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
-<% end %>
-<%= f.simple_fields_for :shutdown do |ff| %>
-<legend>Shutdown</legend>
-<%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: false, required: false %>
-<%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
-<% end %>
+  <%= f.simple_fields_for :start do |ff| %>
+    <div class="form-section-heading">Start</div>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: false, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
+  <% end %>
+  <%= f.simple_fields_for :install do |ff| %>
+    <div class="form-section-heading">Install</div>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: false, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
+  <% end %>
+  <%= f.simple_fields_for :post_install do |ff| %>
+    <div class="form-section-heading">Post install</div>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: false, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
+  <% end %>
+  <%= f.simple_fields_for :shutdown do |ff| %>
+    <div class="form-section-heading">Shutdown</div>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: false, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
+  <% end %>
 <% end %>

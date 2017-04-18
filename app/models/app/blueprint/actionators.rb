@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class Actionators < SectionCollection
+    class Actionators < ::Blueprint::SectionCollection
 
       def build
         super.tap &:build_script

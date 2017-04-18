@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class ApacheHtaccessFile < SectionCollectionItem
+    class ApacheHtaccessFile < ::Blueprint::SectionCollectionItem
 
       form_attributes :directory, :content
 

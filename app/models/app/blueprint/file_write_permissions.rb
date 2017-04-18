@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class FileWritePermissions < SectionCollection
+    class FileWritePermissions < ::Blueprint::SectionCollection
 
     end
   end

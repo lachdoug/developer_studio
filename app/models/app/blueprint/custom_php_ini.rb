@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class CustomPhpIni < SectionCollectionItem
+    class CustomPhpIni < ::Blueprint::SectionCollectionItem
 
       form_attributes :content
 

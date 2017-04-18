@@ -1,7 +1,7 @@
 #sidebar_nav.navbar-default {
   background-color: transparent;
   border: none;
-  margin-bottom: 0px;
+  margin: 0px 0px 20px 0px;
 }
 
 #sidebar_nav.navbar-default .navbar-toggle {

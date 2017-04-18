@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class Actionator < SectionCollectionItem
+    class Actionator < ::Blueprint::SectionCollectionItem
 
       attr_accessor :name, :label, :description, :return_type, :return_file_name, :enable_logging
       attr_reader :script
@@ -15,7 +15,7 @@ class App
       end
 
       def variables
-        @variables ||= Variables.new(blueprint_section, {})
+        @variables ||= Variables.new(blueprint_section)
       end
 
       def variables_attributes=(collection_params)

@@ -1,0 +1,4 @@
+<% if schedule.index > 0 %>
+  $("#<%= "app_blueprint_schedule_#{schedule.index}_moveup_button_disabled" %>").hide();
+  $("#<%= "app_blueprint_schedule_#{schedule.index}_moveup_button" %>").show();
+<% end %>

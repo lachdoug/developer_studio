@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class SystemPackages < SectionCollection
+    class SystemPackages < ::Blueprint::SectionCollection
 
     end
   end

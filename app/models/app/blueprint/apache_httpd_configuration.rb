@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class ApacheHttpdConfiguration < SectionCollectionItem
+    class ApacheHttpdConfiguration < ::Blueprint::SectionCollectionItem
 
       form_attributes :content
 

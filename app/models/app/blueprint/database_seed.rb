@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class DatabaseSeed < Section
+    class DatabaseSeed < ::Blueprint::Section
 
 
       form_attributes :language, :content, :script

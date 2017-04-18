@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class Metadata < Section
+    class Metadata < ::Blueprint::Section
 
       attr_accessor :blueprint_version_major,
                     :blueprint_version_minor,
@@ -18,7 +18,7 @@ class App
         [ :metadata ]
       end
 
-      def load_data
+      def build_section
         @blueprint_version_major = data.dig :blueprint, :version, :major
         @blueprint_version_minor = data.dig :blueprint, :version, :minor
         @blueprint_version_level = data.dig :blueprint, :version, :level

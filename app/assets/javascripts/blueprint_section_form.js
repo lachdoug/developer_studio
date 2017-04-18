@@ -68,12 +68,14 @@ var check_validity_of_blueprint_section = function(section_id, section_pill) {
 var do_unnested_blueprint_section_forms = function(section_forms, section_pill) {
   var section_valid = true;
   section_forms.forEach(function(section_form){
+    collapsed_form_visible_for_valitation( section_form );
     if (check_blueprint_section_form_is_valid( section_form )) {
       section_form.closest('.blueprint_item_collapse_area').find('.blueprint_item_collapse').first().removeClass('error');
     } else {
       section_form.closest('.blueprint_item_collapse_area').find('.blueprint_item_collapse').first().addClass('error');
       section_valid = false;
     };
+    remove_collapsed_form_visible_for_valitation( section_form );
   });
   if (section_valid) {
     hide_pill_error_warning_for(section_pill);
@@ -84,6 +86,7 @@ var do_unnested_blueprint_section_forms = function(section_forms, section_pill) 
 
 var do_nested_blueprint_section_forms = function(section_forms) {
   section_forms.forEach(function(section_form){
+    collapsed_form_visible_for_valitation( section_form );
     if ( check_blueprint_section_form_is_valid( section_form ) ) {
       section_form.closest('.blueprint_item_collapse_area').find('.blueprint_item_collapse').first().removeClass('error');
       do_nested_blueprint_item_collapse_area_errors(section_form, true);
@@ -91,8 +94,18 @@ var do_nested_blueprint_section_forms = function(section_forms) {
       section_form.closest('.blueprint_item_collapse_area').find('.blueprint_item_collapse').first().addClass('error');
       do_nested_blueprint_item_collapse_area_errors(section_form, false);
     };
+    remove_collapsed_form_visible_for_valitation( section_form );
   });
 };
+
+var collapsed_form_visible_for_valitation = function(section_form){
+  section_form.parents('.collapse').addClass('visible_for_validation');
+};
+
+var remove_collapsed_form_visible_for_valitation = function(section_form){
+  section_form.parents('.collapse').removeClass('visible_for_validation');
+};
+
 
 var check_blueprint_section_form_is_valid = function(section_form) {
   section_form.validate();

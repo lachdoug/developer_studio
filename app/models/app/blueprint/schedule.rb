@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class Schedule < SectionCollectionItem
+    class Schedule < ::Blueprint::SectionCollectionItem
 
       form_attributes :label,
                       :instruction,

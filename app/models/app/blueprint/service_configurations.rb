@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class ServiceConfigurations < SectionCollection
+    class ServiceConfigurations < ::Blueprint::SectionCollection
 
 
       def collection_data

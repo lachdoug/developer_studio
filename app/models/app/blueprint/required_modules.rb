@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class RequiredModules < SectionCollection
+    class RequiredModules < ::Blueprint::SectionCollection
 
     end
   end

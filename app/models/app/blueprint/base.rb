@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class Base < Section
+    class Base < ::Blueprint::Section
 
       attr_accessor :name,
                     :framework,
@@ -15,7 +15,7 @@ class App
                     :first_run_url,
                     :installation_report
 
-      def load_data
+      def build_section
         @name = data.dig :name
         @framework = data.dig :framework
         @memory_required = data.dig :memory, :required

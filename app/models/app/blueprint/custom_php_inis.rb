@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class CustomPhpInis < SectionCollection
+    class CustomPhpInis < ::Blueprint::SectionCollection
 
     end
   end

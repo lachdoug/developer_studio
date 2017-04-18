@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class ExternalRepositories < SectionCollection
+    class ExternalRepositories < ::Blueprint::SectionCollection
 
     end
   end

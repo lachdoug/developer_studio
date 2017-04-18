@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class RakeTasks < SectionCollection
+    class RakeTasks < ::Blueprint::SectionCollection
 
     end
   end

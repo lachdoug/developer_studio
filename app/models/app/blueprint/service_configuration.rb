@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class ServiceConfiguration < SectionCollectionItem
+    class ServiceConfiguration < ::Blueprint::SectionCollectionItem
 
       form_attributes :publisher_namespace, :type_path
 

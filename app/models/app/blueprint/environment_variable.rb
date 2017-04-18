@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class EnvironmentVariable < SectionCollectionItem
+    class EnvironmentVariable < ::Blueprint::SectionCollectionItem
 
       form_attributes :name,
                       :value,

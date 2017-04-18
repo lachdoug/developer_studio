@@ -65,6 +65,10 @@ html body {margin-bottom: 200px;}
   padding: 5px;
 }
 
+#page .collapse.visible_for_validation {
+  display: block;
+}
+
 
 
 @media (min-width: 768px) {

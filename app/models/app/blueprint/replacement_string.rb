@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class ReplacementString < SectionCollectionItem
+    class ReplacementString < ::Blueprint::SectionCollectionItem
 
       form_attributes :string, :source_file, :destination_file
 

@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class PersistentDirectory < SectionCollectionItem
+    class PersistentDirectory < ::Blueprint::SectionCollectionItem
 
       form_attributes :path
 

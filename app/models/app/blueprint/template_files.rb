@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class TemplateFiles < SectionCollection
+    class TemplateFiles < ::Blueprint::SectionCollection
 
     end
   end

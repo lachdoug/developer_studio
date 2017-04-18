@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class ReplacementStrings < SectionCollection
+    class ReplacementStrings < ::Blueprint::SectionCollection
 
     end
   end

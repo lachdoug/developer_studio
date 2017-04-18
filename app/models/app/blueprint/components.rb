@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class Components < Section
+    class Components < ::Blueprint::Section
 
       attr_accessor :path, :extract
       attr_reader :sources
@@ -10,7 +10,7 @@ class App
         save
       end
 
-      def load_data
+      def build_section
         @path = data.dig :path
         @extract = data.dig :extract
         self.sources_attributes = sources_collection_data

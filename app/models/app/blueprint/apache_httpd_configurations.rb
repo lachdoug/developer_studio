@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class ApacheHttpdConfigurations < SectionCollection
+    class ApacheHttpdConfigurations < ::Blueprint::SectionCollection
 
     end
   end

@@ -1,10 +1,10 @@
 class App
   class Blueprint
-    class Scripts < Section
+    class Scripts < ::Blueprint::Section
 
       attr_reader :start, :install, :post_install, :shutdown
 
-      def load_data
+      def build_section
         @start = Script.new(data.dig :start )
         @install = Script.new(data.dig :install )
         @post_install = Script.new(data.dig :post_install )

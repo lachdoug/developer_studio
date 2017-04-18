@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class Ports < SectionCollection
+    class Ports < ::Blueprint::SectionCollection
 
     end
   end

@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class PersistentFiles < SectionCollection
+    class PersistentFiles < ::Blueprint::SectionCollection
 
     end
   end

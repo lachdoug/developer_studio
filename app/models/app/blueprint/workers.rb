@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class Workers < Section
+    class Workers < ::Blueprint::Section
 
       attr_accessor :blocking
       attr_reader :commands
@@ -10,7 +10,7 @@ class App
         save
       end
 
-      def load_data
+      def build_section
         @blocking = data.dig :blocking
         self.commands_attributes = commands_collection_data
       end
@@ -48,7 +48,7 @@ class App
       #   save
       # end
       #
-      # def load_data
+      # def build_section
       #   @blocking = data.dig :blocking
       #   self.collection_attributes = commands_collection_data
       # end

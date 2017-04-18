@@ -4,8 +4,9 @@ module Apps
 
       def update
         @actionator = @app.blueprint.actionators.find params[:id]
+        # get associated schedules to refresh
+        @actionator_schedules = associated_schedules
         @actionator.update strong_params
-        # byebug
         render
       end
 
@@ -16,7 +17,7 @@ module Apps
 
       def destroy
         @actionator = @app.blueprint.actionators.find params[:id]
-        @schedules_require_refresh = @app.blueprint.schedules.map(&:actionator_name).include?(@actionator.name)
+        @actionator_schedules = associated_schedules
         @app.blueprint.actionators.delete params[:id]
         render
       end
@@ -33,6 +34,10 @@ module Apps
                   :enable_logging,
                   script_attributes: [:language, :content],
                 )
+      end
+
+      def associated_schedules
+        @app.blueprint.schedules.select{ |schedule| schedule.actionator_name == @actionator.name }
       end
 
     end

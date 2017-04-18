@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class EnvironmentVariables < SectionCollection
+    class EnvironmentVariables < ::Blueprint::SectionCollection
 
       def build
         super.tap &:build_input

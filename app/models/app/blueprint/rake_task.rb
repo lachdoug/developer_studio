@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class RakeTask < SectionCollectionItem
+    class RakeTask < ::Blueprint::SectionCollectionItem
 
       form_attributes :action, :always_run
 

@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class Port < SectionCollectionItem
+    class Port < ::Blueprint::SectionCollectionItem
 
       form_attributes :port, :external, :protocol
 

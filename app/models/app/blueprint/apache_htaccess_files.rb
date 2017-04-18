@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class ApacheHtaccessFiles < SectionCollection
+    class ApacheHtaccessFiles < ::Blueprint::SectionCollection
 
     end
   end

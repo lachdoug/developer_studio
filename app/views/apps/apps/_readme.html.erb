@@ -1,6 +1,6 @@
 <%= simple_form_for @app.readme,
       url: app_readme_path(app_id: @app.name), html: { class: 'autosubmit' }, method: :patch, remote: true do |f| %>
 <br>
-<%= button_tag icon_text('fa-edit', :edit), class: 'btn btn-default pull-right click-through-button-text' %>
+<%= button_tag icon_text('fa-edit', :edit), class: 'btn btn-custom pull-right click-through-button-text' %>
 <%= f.input :content, as: :markdown, label: false %>
 <% end %>

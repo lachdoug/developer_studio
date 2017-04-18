@@ -5,6 +5,8 @@ module Apps
 
         def update
           @actionator = @app.blueprint.actionators.find params[:actionator_id]
+          # get associated schedules to refresh
+          @actionator_schedules = associated_schedules
           @variable = @actionator.variables.find params[:id]
           @variable.update strong_params
           render
@@ -18,6 +20,7 @@ module Apps
 
         def destroy
           @actionator = @app.blueprint.actionators.find params[:actionator_id]
+          @actionator_schedules = associated_schedules
           @actionator.variables.delete params[:id]
           render
         end
@@ -48,6 +51,10 @@ module Apps
                         :message
                       ] ]
                   )
+        end
+
+        def associated_schedules
+          @app.blueprint.schedules.select{ |schedule| schedule.actionator_name == @actionator.name }
         end
 
       end

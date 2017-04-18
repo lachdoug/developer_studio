@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class PersistentDirectories < SectionCollection
+    class PersistentDirectories < ::Blueprint::SectionCollection
 
     end
   end

@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class Schedules < SectionCollection
+    class Schedules < ::Blueprint::SectionCollection
 
 
       def collection_data

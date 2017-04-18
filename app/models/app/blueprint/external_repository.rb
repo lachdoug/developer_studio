@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class ExternalRepository < SectionCollectionItem
+    class ExternalRepository < ::Blueprint::SectionCollectionItem
 
       form_attributes :url, :key
 

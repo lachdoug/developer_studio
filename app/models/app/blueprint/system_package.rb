@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class SystemPackage < SectionCollectionItem
+    class SystemPackage < ::Blueprint::SectionCollectionItem
 
       form_attributes :package, :version
 

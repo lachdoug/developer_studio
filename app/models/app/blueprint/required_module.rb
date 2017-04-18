@@ -1,6 +1,6 @@
 class App
   class Blueprint
-    class RequiredModule < SectionCollectionItem
+    class RequiredModule < ::Blueprint::SectionCollectionItem
 
       form_attributes :type, :os_package, :name
 
