@@ -30,11 +30,6 @@ var check_validity_of_all_blueprint_sections = function() {
   });
 };
 
-// var check_validity_of_active_blueprint_section_forms = function() {
-//   var section_pill = $(".page_section_pill.active");
-//   check_validity_of_blueprint_section_pill(section_pill);
-// };
-
 var check_validity_of_blueprint_section_pill = function(section_pill) {
   var section_id = section_pill.attr('id').replace('_pill', '');
   if (section_pill.hasClass('active')) {
@@ -117,15 +112,15 @@ var check_blueprint_section_form_is_valid = function(section_form) {
 };
 
 var blueprint_section_form_has_no_custom_errors = function(section_form) {
-  return ( $(section_form).find(".app_blueprint_section_custom_error").length == 0 );
+  return ( $(section_form).find(".engine_blueprint_section_custom_error").length == 0 );
 };
 
 var do_nested_blueprint_item_collapse_area_errors = function(section_form, is_valid) {
   var nested_section = section_form.closest('.blueprint_section_collapse_area_nested');
   if ( is_valid ) {
-    $('#' + nested_section.data('target')).removeClass('app_blueprint_section_custom_error');
+    $('#' + nested_section.data('target')).removeClass('engine_blueprint_section_custom_error');
   } else {
-    $('#' + nested_section.data('target')).addClass('app_blueprint_section_custom_error');
+    $('#' + nested_section.data('target')).addClass('engine_blueprint_section_custom_error');
   };
 };
 
@@ -138,19 +133,19 @@ var show_pill_error_warning_for = function(section_pill) {
 };
 
 var bind_blueprint_section_forms_input_change_events = function() {
-  $('#app_blueprint input').off('change');
-  $('#app_blueprint input:not(.do_not_autosubmit_form_on_change)').on('change', function(){
+  $('#engine_blueprint input').off('change');
+  $('#engine_blueprint input:not(.do_not_autosubmit_form_on_change)').on('change', function(){
     auto_submit_blueprint_section_form(this);
   });
   $('input.variable_resolve_checkbox_input').on('change', function() {
     show_variable_input_for(this);
   });
-  $('#app_blueprint select').off('change');
-  $('#app_blueprint select:not(.do_not_autosubmit_form_on_change)').on('change', function(){
+  $('#engine_blueprint select').off('change');
+  $('#engine_blueprint select:not(.do_not_autosubmit_form_on_change)').on('change', function(){
     auto_submit_blueprint_section_form(this);
   });
-  $('#app_blueprint textarea').off('change');
-  $('#app_blueprint textarea:not(.do_not_autosubmit_form_on_change)').on('change', function(){
+  $('#engine_blueprint textarea').off('change');
+  $('#engine_blueprint textarea:not(.do_not_autosubmit_form_on_change)').on('change', function(){
     auto_submit_blueprint_section_form(this);
   });
 };

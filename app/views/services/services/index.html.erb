@@ -1,3 +1,13 @@
-<%= link_to icon_text('fa-plus', 'New'), new_service_path(), class: 'btn btn-default pull-right' %>
+<%= render 'index_menu' %>
 <h4>Services</h4>
-<%= render @services %>
+<div id="engines_list_search">
+  <input class="search form-control" placeholder="Search" />
+  <ul class="list">
+    <% @services.each do |service| %>
+      <li>
+        <div class="list_search" hidden="true"><%= service.name %></div>
+        <%= render 'service', service: service %>
+      </li>
+    <% end %>
+  </ul>
+</div>

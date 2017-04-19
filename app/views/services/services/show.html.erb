@@ -1,0 +1,38 @@
+<%= link_to icon('fa-arrow-up'), services_path(), class: 'btn pull-right' %>
+<%= link_to icon('fa-git-square'), service_repository_path(service_id: @service.name), class: 'btn pull-right' %>
+<%= render 'show_menu' %>
+<div class='service-show-page'>
+  <h4>
+    <%= @service.name %>
+  </h4>
+  <div>
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#service-blueprint-tab" data-toggle="tab">Blueprint</a></li>
+      <li><a href="#service-readme-tab" data-toggle="tab">Readme</a></li>
+      <li><a href="#service-release_notes-tab" data-toggle="tab">Release notes</a></li>
+      <li><a href="#service-license-tab" data-toggle="tab">License</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="service-blueprint-tab">
+        <div id="engine_blueprint">
+          <%= render 'blueprint' %>
+        </div>
+      </div>
+      <div class="tab-pane" id="service-readme-tab">
+        <div id="service_readme">
+          <%= render 'readme' %>
+        </div>
+      </div>
+      <div class="tab-pane" id="service-release_notes-tab">
+        <div id="service_release_notes">
+          <%= render 'release_notes' %>
+        </div>
+      </div>
+      <div class="tab-pane" id="service-license-tab">
+        <div id="service_license">
+          <%= render 'license' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

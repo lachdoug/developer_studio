@@ -3,7 +3,7 @@ var simplemdeEditor;
 var enableSimplemdeEditor = function(targetInput) {
   $('body').append($('#simplemde-editor-template').html());
   $("#simplemde-editor-container").data("target", targetInput.attr('id'));
-  simplemdeEditor = new SimpleMDE({ element: $("#simplemde-editor")[0] });
+  simplemdeEditor = new SimpleMDE({ element: $("#simplemde-editor")[0], spellChecker: false });
   simplemdeEditor.value(targetInput.val());
   $('.cm-s-paper textarea').focus();
   $("body").addClass('modal-open');

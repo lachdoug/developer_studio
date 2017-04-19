@@ -1,0 +1,6 @@
+<% variable.input.collection.items.each do |item| %>
+  <% unless item.disable_moveup %>
+    $("#<%= "service_blueprint_actionator_#{actionator.index}_variable_#{variable.index}_input_collection_item_#{item.index}_moveup_button_disabled" %>").hide();
+    $("#<%= "service_blueprint_actionator_#{actionator.index}_variable_#{variable.index}_input_collection_item_#{item.index}_moveup_button" %>").show();
+  <% end %>
+<% end %>

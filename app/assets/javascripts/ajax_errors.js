@@ -1,9 +1,9 @@
 $(document).ajaxError(function(event, request, settings, error) {
   var remotipart_submitted, response;
   response = request.responseText;
-  if (request.status === 401 || request.status === 500 || request.status === 404) {
+  if (request.status === 400 || request.status === 401 || request.status === 500 || request.status === 404) {
     $('.modal').modal('hide');
-    if (request.status === 401) {
+    if (request.status === 400 && request.status === 401) {
       alert(response);
       location.reload();
     } else {
@@ -24,10 +24,10 @@ $(document).ajaxError(function(event, request, settings, error) {
       }
     } else {
       console.log('Communication error. Ajax status 0.');
-      location.reload();
+      // location.reload();
     }
   } else {
     console.log("Unhandled ajax error.\nRequest status: " + request.status + "\nError: " + error + "\nResponse: " + response);
-    location.reload();
+    // location.reload();
   }
 });

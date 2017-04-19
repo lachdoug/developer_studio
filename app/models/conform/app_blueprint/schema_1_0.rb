@@ -105,6 +105,20 @@ module Conform
         }
       end
 
+      def ports
+        ( r(:software, :ports) || []).map do |p|
+          port_for p
+        end
+      end
+
+      def port_for(p)
+        {
+          port: p.dig(:port).to_i,
+          external: p.dig(:external).to_i,
+          protocol: p.dig(:protocol).to_s
+        }
+      end
+
       def scripts
         {
           start: { language: r(:software, :scripts, :start, :language).to_s,
@@ -122,11 +136,180 @@ module Conform
         }
       end
 
+      def external_repositories
+        ( r(:software, :external_repositories) || []).map do |er|
+          external_repository_for er
+        end
+      end
+
+      def external_repository_for(er)
+        {
+          url: er.dig(:url).to_s,
+          key: er.dig(:key).to_s
+        }
+      end
+
+      def system_packages
+        ( r(:software, :system_packages) || []).map do |sp|
+          system_package_for sp
+        end
+      end
+
+      def system_package_for(sp)
+        {
+          package: sp.dig(:package).to_s,
+          version: sp.dig(:version).to_s
+        }
+      end
+
+      def installed_packages
+        ( r(:software, :installed_packages) || []).map do |ip|
+          installed_package_for ip
+        end
+      end
+
+      def installed_package_for(ip)
+        {
+          name: ip.dig(:name).to_s,
+          source_url: ip.dig(:source_url).to_s,
+          destination: ip.dig(:destination).to_s,
+          extraction_command: ip.dig(:extraction_command).to_s,
+          path_to_extracted: ip.dig(:path_to_extracted).to_s
+        }
+      end
+
+      def required_modules
+        ( r(:software, :required_modules) || []).map do |rm|
+          required_module_for rm
+        end
+      end
+
+      def required_module_for(rm)
+        {
+          name: rm.dig(:name).to_s,
+          type: rm.dig(:type).to_s,
+          os_package: rm.dig(:os_package).to_s
+        }
+      end
+
+      def service_configurations
+        # byebug
+        ( r(:software, :service_configurations) || []).map do |sc|
+          service_configuration_for sc
+        end
+      end
+
+      def service_configuration_for(sc)
+        {
+          publisher_namespace: sc.dig(:publisher_namespace).to_s,
+          type_path: sc.dig(:type_path).to_s,
+          variables: sc.dig(:variables)
+        }
+      end
+
+      def environment_variables
+        ( r(:software, :environment_variables) || []).map do |ev|
+          environment_variable_for ev
+        end
+      end
+
+      def environment_variable_for(ev)
+        {
+          name: ev.dig(:name).to_s,
+          value: ev.dig(:value).to_s,
+          mandatory: cast_boolean_for(ev.dig(:mandatory)),
+          immutable: cast_boolean_for(ev.dig(:immutable)),
+          ask_at_build_time: cast_boolean_for(ev.dig(:ask_at_build_time)),
+          build_time_only: cast_boolean_for(ev.dig(:build_time_only)),
+          input: {
+            type: ev.dig(:input, :type).to_s,
+            label: ev.dig(:input, :label).to_s,
+            title: ev.dig(:input, :title).to_s,
+            comment: ev.dig(:input, :comment).to_s,
+            hint: ev.dig(:input, :hint).to_s,
+            placeholder: ev.dig(:input, :placeholder).to_s,
+            validation: {
+              pattern: ev.dig(:input, :validation, :pattern).to_s,
+              message: ev.dig(:input, :validation, :message).to_s
+            },
+            collection: {
+              include_blank: cast_boolean_for( ev.dig(:input, :collection, :include_blank) ),
+              items: ev.dig(:input, :collection, :items) || {}
+             },
+          }
+        }
+      end
+
+      def template_files
+        ( r(:software, :template_files) || []).map do |tf|
+          template_file_for tf
+        end
+      end
+
+      def template_file_for(tf)
+        {
+          path: tf.dig(:path).to_s,
+          language: tf.dig(:language).to_s,
+          content: tf.dig(:content).to_s
+        }
+      end
+
+      def replacement_strings
+        ( r(:software, :replacement_strings) || []).map do |rs|
+          replacement_string_for rs
+        end
+      end
+
+      def replacement_string_for(rs)
+        {
+          string: rs.dig(:string).to_s,
+          source_file: rs.dig(:source_file).to_s,
+          destination_file: rs.dig(:destination_file).to_s
+        }
+      end
+
       def database_seed
         {
           language: r(:software, :database_seed, :language).to_s,
           content: r(:software, :database_seed, :content).to_s,
           script: cast_boolean_for( r(:software, :database_seed, :script) )
+        }
+      end
+
+      def file_write_permissions
+        ( r(:software, :file_write_permissions) || []).map do |fwp|
+          file_write_permission_for fwp
+        end
+      end
+
+      def file_write_permission_for(fwp)
+        {
+          path: fwp.dig(:path).to_s,
+          recursive: cast_boolean_for( fwp.dig(:recursive) )
+        }
+      end
+
+      def persistent_directories
+        ( r(:software, :persistent_directories) || []).map do |pd|
+          persistent_directory_for pd
+        end
+      end
+
+      def persistent_directory_for(pd)
+        {
+          path: pd.dig(:path).to_s
+        }
+      end
+
+      def persistent_files
+        ( r(:software, :persistent_files) || []).map do |pf|
+          persistent_file_for pf
+        end
+      end
+
+      def persistent_file_for(pf)
+        {
+          path: pf.dig(:path).to_s
         }
       end
 
@@ -151,88 +334,6 @@ module Conform
           install_script: {
             language: c.dig(:install_script, :language).to_s,
             content: c.dig(:install_script, :content).to_s }
-        }
-      end
-
-      def service_configurations
-        # byebug
-        ( r(:software, :service_configurations) || []).map do |sc|
-          service_configuration_for sc
-        end
-      end
-
-      def service_configuration_for(sc)
-        {
-          publisher_namespace: sc.dig(:publisher_namespace).to_s,
-          type_path: sc.dig(:type_path).to_s,
-          variables: sc.dig(:variables)
-        }
-      end
-
-      def persistent_directories
-        ( r(:software, :persistent_directories) || []).map do |pd|
-          persistent_directory_for pd
-        end
-      end
-
-      def persistent_directory_for(pd)
-        {
-          path: pd.dig(:path).to_s
-        }
-      end
-
-      def replacement_strings
-        ( r(:software, :replacement_strings) || []).map do |rs|
-          replacement_string_for rs
-        end
-      end
-
-      def replacement_string_for(rs)
-        {
-          string: rs.dig(:string).to_s,
-          source_file: rs.dig(:source_file).to_s,
-          destination_file: rs.dig(:destination_file).to_s
-        }
-      end
-
-      def persistent_files
-        ( r(:software, :persistent_files) || []).map do |pf|
-          persistent_file_for pf
-        end
-      end
-
-      def persistent_file_for(pf)
-        {
-          path: pf.dig(:path).to_s
-        }
-      end
-
-      def installed_packages
-        ( r(:software, :installed_packages) || []).map do |ip|
-          installed_package_for ip
-        end
-      end
-
-      def installed_package_for(ip)
-        {
-          name: ip.dig(:name).to_s,
-          source_url: ip.dig(:source_url).to_s,
-          destination: ip.dig(:destination).to_s,
-          extraction_command: ip.dig(:extraction_command).to_s,
-          path_to_extracted: ip.dig(:path_to_extracted).to_s
-        }
-      end
-
-      def system_packages
-        ( r(:software, :system_packages) || []).map do |sp|
-          system_package_for sp
-        end
-      end
-
-      def system_package_for(sp)
-        {
-          package: sp.dig(:package).to_s,
-          version: sp.dig(:version).to_s
         }
       end
 
@@ -266,33 +367,6 @@ module Conform
         {
           action: rt.dig(:action).to_s,
           always_run: cast_boolean_for( rt.dig(:always_run) )
-        }
-      end
-
-      def template_files
-        ( r(:software, :template_files) || []).map do |tf|
-          template_file_for tf
-        end
-      end
-
-      def template_file_for(tf)
-        {
-          path: tf.dig(:path).to_s,
-          language: tf.dig(:language).to_s,
-          content: tf.dig(:content).to_s
-        }
-      end
-
-      def file_write_permissions
-        ( r(:software, :file_write_permissions) || []).map do |fwp|
-          file_write_permission_for fwp
-        end
-      end
-
-      def file_write_permission_for(fwp)
-        {
-          path: fwp.dig(:path).to_s,
-          recursive: cast_boolean_for( fwp.dig(:recursive) )
         }
       end
 
@@ -330,34 +404,6 @@ module Conform
       def apache_httpd_configuration_for(ahc)
         {
           content: ahc.dig(:content).to_s
-        }
-      end
-
-      def required_modules
-        ( r(:software, :required_modules) || []).map do |rm|
-          required_module_for rm
-        end
-      end
-
-      def required_module_for(rm)
-        {
-          name: rm.dig(:name).to_s,
-          type: rm.dig(:type).to_s,
-          os_package: rm.dig(:os_package).to_s
-        }
-      end
-
-      def ports
-        ( r(:software, :ports) || []).map do |p|
-          port_for p
-        end
-      end
-
-      def port_for(p)
-        {
-          port: p.dig(:port).to_i,
-          external: p.dig(:external).to_i,
-          protocol: p.dig(:protocol).to_s
         }
       end
 
@@ -407,52 +453,6 @@ module Conform
             collection: {
               include_blank: cast_boolean_for( av.dig(:input, :collection, :include_blank) ),
               items: av.dig(:input, :collection, :items) || {}
-             },
-          }
-        }
-      end
-
-      def external_repositories
-        ( r(:software, :external_repositories) || []).map do |er|
-          external_repository_for er
-        end
-      end
-
-      def external_repository_for(er)
-        {
-          url: er.dig(:url).to_s,
-          key: er.dig(:key).to_s
-        }
-      end
-
-      def environment_variables
-        ( r(:software, :environment_variables) || []).map do |ev|
-          environment_variable_for ev
-        end
-      end
-
-      def environment_variable_for(ev)
-        {
-          name: ev.dig(:name).to_s,
-          value: ev.dig(:value).to_s,
-          mandatory: cast_boolean_for(ev.dig(:mandatory)),
-          immutable: cast_boolean_for(ev.dig(:immutable)),
-          ask_at_build_time: cast_boolean_for(ev.dig(:ask_at_build_time)),
-          build_time_only: cast_boolean_for(ev.dig(:build_time_only)),
-          input: {
-            type: ev.dig(:input, :type).to_s,
-            label: ev.dig(:input, :label).to_s,
-            title: ev.dig(:input, :title).to_s,
-            comment: ev.dig(:input, :comment).to_s,
-            hint: ev.dig(:input, :hint).to_s,
-            placeholder: ev.dig(:input, :placeholder).to_s,
-            validation: {
-              pattern: ev.dig(:input, :validation, :pattern).to_s,
-              message: ev.dig(:input, :validation, :message).to_s
-            },
-            collection: {
-              include_blank: cast_boolean_for( ev.dig(:input, :collection, :include_blank) ),
-              items: ev.dig(:input, :collection, :items) || {}
              },
           }
         }

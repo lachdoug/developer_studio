@@ -8,8 +8,8 @@ html body {margin-bottom: 200px;}
   pointer-events: none;
 }
 
-#apps_list_search input.search.form-control { width: 200px; display: inline-block; }
-#apps_list_search ul { list-style: none; padding: 10px; }
+#engines_list_search input.search.form-control { width: 200px; display: inline-block; }
+#engines_list_search ul { list-style: none; padding: 10px; }
 
 #saving-alert {
   color: #337ab766;
@@ -28,6 +28,10 @@ html body {margin-bottom: 200px;}
   height: 0px;
   padding: 0px;
   border: none;
+}
+
+.form-control.custom-form-editor-input {
+  height: inherit;
 }
 
 .blueprint_item_collapse:hover {
@@ -99,8 +103,8 @@ html body {margin-bottom: 200px;}
 }
 
 .page-main-col { margin-top: 10px; }
-.app_blueprint_section { margin-top: 10px; }
-.app_blueprint_section .main-page-col-json { margin-top: -10px; }
+.engine_blueprint_section { margin-top: 10px; }
+.engine_blueprint_section .main-page-col-json { margin-top: -10px; }
 .nav li.page_section_pill a { padding: 2px 15px; }
 
 .btn.btn-default { border-color: transparent; }

@@ -1,0 +1,6 @@
+<% if @schedule.form_needs_refresh %>
+  <%= render 'services/blueprints/schedules/refresh_item_form', schedule: @schedule %>
+<% end %>
+<%= render 'services/blueprints/schedules/refresh_item_heading', schedule: @schedule %>
+<%= render 'services/blueprints/schedules/enable_moveup', schedule: @schedule %>
+<%= render 'services/blueprints/jsons/refresh' %>

@@ -1,0 +1,4 @@
+<% if port.index > 0 %>
+  $("#<%= "service_blueprint_port_#{port.index}_moveup_button_disabled" %>").hide();
+  $("#<%= "service_blueprint_port_#{port.index}_moveup_button" %>").show();
+<% end %>

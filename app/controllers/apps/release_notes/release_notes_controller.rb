@@ -10,7 +10,7 @@ module Apps
       private
 
       def strong_params
-        params.require(:app_release_notes).permit(:content)
+        params.require(:engine_release_notes).permit(:content)
       end
 
     end

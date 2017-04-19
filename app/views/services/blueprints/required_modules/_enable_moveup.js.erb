@@ -1,0 +1,4 @@
+<% if required_module.index > 0 %>
+  $("#<%= "service_blueprint_required_module_#{required_module.index}_moveup_button_disabled" %>").hide();
+  $("#<%= "service_blueprint_required_module_#{required_module.index}_moveup_button" %>").show();
+<% end %>

@@ -1,0 +1,52 @@
+<% @service.blueprint.actionators.each do |actionator| %>
+
+  <div class="blueprint_item_collapse_area">
+    <legend>
+      <div class="dropdown pull-right">
+        <a class="btn btn-custom" data-toggle="dropdown">
+          <i class="fa fa-bars"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li>
+            <%= link_to icon_text('fa-caret-up', 'Move up'),
+              "#",
+              title: 'Move up',
+              id: "service_blueprint_actionator_#{actionator.index}_moveup_button_disabled", remote: true,
+              class: "disabled_link",
+              style: ( 'display:none;' unless actionator.disable_moveup ) %>
+            <%= link_to icon_text('fa-caret-up', 'Move up'),
+              service_blueprint_actionator_moveup_path(service_id: @service.name, actionator_id: actionator.index),
+              title: 'Move up',
+              id: "service_blueprint_actionator_#{actionator.index}_moveup_button", remote: true,
+              class: "show_saving_spinner_on_click",
+              style: ( 'display:none;' if actionator.disable_moveup ) %>
+          </li>
+          <li>
+            <%= link_to icon_text('fa-trash-o', 'Delete'),
+              service_blueprint_actionator_path(service_id: @service.name, id: actionator.index),
+              method: :delete, remote: true,
+              title: 'Delete',
+              class: 'show_saving_spinner_on_confirmed',
+              data: {confirm: "Are you sure that you want to delete this actionator?"} %>
+          </li>
+        </ul>
+      </div>
+      <a class="blueprint_item_collapse" data-toggle="collapse" href="#service_blueprint_actionator_<%= actionator.index %>_form">
+          Actionator <%= actionator.index + 1 %> -
+          <span id="service_blueprint_actionator_<%= actionator.index %>_section_heading">
+            <%= actionator.to_s %>
+          </span>
+      </a>
+    </legend>
+
+    <div class="collapse <%= 'in' if actionator.new_record %>" id="service_blueprint_actionator_<%= actionator.index %>_form">
+      <%= render 'services/blueprints/actionators/form', actionator: actionator %>
+    </div>
+  </div>
+
+<% end %>
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New actionator'),
+      new_service_blueprint_actionator_path(service_id: @service.name),
+      remote: true, class: 'btn btn-custom pull-right' %>
+</div>

@@ -1,0 +1,60 @@
+
+<% @service.blueprint.ports.each do |port| %>
+
+  <%= custom_form_for port,
+    namespace: "service_blueprint_port_#{port.index}",
+    url: service_blueprint_port_path(service_id: @service.name, id: port.index) do |f| %>
+
+    <table class="table form_table">
+      <tr class="<%= 'hidden_table_header' if port.index > 0 %>">
+        <th>Port</th>
+        <th>External</th>
+        <th>Protocol</th>
+        <th width="1"></th>
+      </tr>
+
+      <tr>
+        <%= f.input :port, as: :integer, required: true, input_html: { min: 0, max: 65535 }, wrapper: :form_table_cell_input %>
+        <%= f.input :external, as: :integer, required: true, input_html: { min: 0, max: 65535 }, wrapper: :form_table_cell_input %>
+        <%= f.input :protocol, as: :select, collection: f.object.protocol_collection, include_blank: false, required: false, wrapper: :form_table_cell_input %>
+        <td>
+          <div class="dropdown">
+            <a class="btn btn-custom" data-toggle="dropdown">
+              <i class="fa fa-bars"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li>
+                <%= link_to icon_text('fa-caret-up', 'Move up'),
+                  "#",
+                  title: 'Move up',
+                  id: "service_blueprint_port_#{port.index}_moveup_button_disabled", remote: true,
+                  class: "disabled_link",
+                  style: ( 'display:none;' unless port.disable_moveup ) %>
+                <%= link_to icon_text('fa-caret-up', 'Move up'),
+                  service_blueprint_port_moveup_path(service_id: @service.name, port_id: port.index),
+                  title: 'Move up',
+                  id: "service_blueprint_port_#{port.index}_moveup_button", remote: true,
+                  class: "show_saving_spinner_on_click",
+                  style: ( 'display:none;' if port.disable_moveup ) %>
+              </li>
+              <li>
+                <%= link_to icon_text('fa-trash-o', 'Delete'),
+                  service_blueprint_port_path(service_id: @service.name, id: port.index),
+                  method: :delete, remote: true,
+                  title: 'Delete',
+                  class: 'show_saving_spinner_on_confirmed',
+                  data: {confirm: "Are you sure that you want to delete this port?"} %>
+                </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+
+<% end %>
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New port'),
+      new_service_blueprint_port_path(service_id: @service.name),
+      remote: true, class: 'btn btn-custom pull-right' %>
+</div>

@@ -99,6 +99,20 @@ module Conform
         }
       end
 
+      def ports
+        ( r(:software, :ports) || []).map do |p|
+          port_for p
+        end
+      end
+
+      def port_for(p)
+        {
+          port: p.dig(:port).to_i,
+          external: p.dig(:external).to_i,
+          protocol: p.dig(:protocol).to_s
+        }
+      end
+
       def scripts
         {
           start: {
@@ -119,6 +133,11 @@ module Conform
           },
         }
       end
+
+
+
+
+
 
       def database_seed
         {
@@ -341,20 +360,6 @@ module Conform
           name: rm.dig(:module_name).to_s,
           type: rm.dig(:module_type).to_s,
           os_package: rm.dig(:os_package).to_s
-        }
-      end
-
-      def ports
-        ( r(:software, :ports) || []).map do |p|
-          port_for p
-        end
-      end
-
-      def port_for(p)
-        {
-          port: p.dig(:port).to_i,
-          external: p.dig(:external).to_i,
-          protocol: p.dig(:protocol).to_s
         }
       end
 

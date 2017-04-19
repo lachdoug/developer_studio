@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
     @app = App.new( name: app_name )
   end
 
+  def set_service(service_name)
+    @service = Service.new( name: service_name )
+  end
+
   def after_sign_out_path_for(resource_or_scope)
     new_user_session_path
   end

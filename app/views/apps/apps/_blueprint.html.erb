@@ -10,129 +10,129 @@
 
         <div class="collapse navbar-collapse">
             <ul class='nav nav-pills nav-stacked'>
-              <li id='app_blueprint_section_json_pill' class='page_section_pill active'>
+              <li id='engine_blueprint_section_json_pill' class='page_section_pill active'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("json")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
                   {}
                 <% end %>
               </li>
-              <li id='app_blueprint_section_metadata_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_metadata_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("metadata")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Metadata <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_metadata_pill_error" %>
+                  Metadata <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_metadata_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_base_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_base_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("base")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Base <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_base_pill_error" %>
+                  Base <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_base_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_ports_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_ports_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("ports")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Ports <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_ports_pill_error" %>
+                  Ports <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_ports_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_scripts_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_scripts_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("scripts")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Scripts <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_scripts_pill_error" %>
+                  Scripts <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_scripts_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_external_repositories_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_external_repositories_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("external_repositories")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  External repositories <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_external_repositories_pill_error" %>
+                  External repositories <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_external_repositories_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_system_packages_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_system_packages_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("system_packages")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  System packages <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_system_packages_pill_error" %>
+                  System packages <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_system_packages_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_installed_packages_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_installed_packages_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("installed_packages")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Installed packages <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_installed_packages_pill_error" %>
+                  Installed packages <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_installed_packages_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_required_modules_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_required_modules_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("required_modules")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Required modules <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_required_modules_pill_error" %>
+                  Required modules <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_required_modules_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_service_configurations_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_service_configurations_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("service_configurations")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Service configurations <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_service_configurations_pill_error" %>
+                  Service configurations <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_service_configurations_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_environment_variables_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_environment_variables_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("environment_variables")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Environment variables <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_environment_variables_pill_error" %>
+                  Environment variables <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_environment_variables_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_template_files_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_template_files_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("template_files")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Template files <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_template_files_pill_error" %>
+                  Template files <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_template_files_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_replacement_strings_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_replacement_strings_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("replacement_strings")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Replacement strings <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_replacement_strings_pill_error" %>
+                  Replacement strings <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_replacement_strings_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_database_seed_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_database_seed_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("database_seed")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Database seed <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_database_seed_pill_error" %>
+                  Database seed <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_database_seed_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_file_write_permissions_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_file_write_permissions_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("file_write_permissions")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  File write permissions <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_file_write_permissions_pill_error" %>
+                  File write permissions <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_file_write_permissions_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_persistent_directories_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_persistent_directories_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("persistent_directories")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Persistent directories <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_persistent_directories_pill_error" %>
+                  Persistent directories <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_persistent_directories_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_persistent_files_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_persistent_files_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("persistent_files")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Persistent files <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_persistent_files_pill_error" %>
+                  Persistent files <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_persistent_files_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_components_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_components_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("components")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Components <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_components_pill_error" %>
+                  Components <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_components_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_workers_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_workers_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("workers")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Workers <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_workers_pill_error" %>
+                  Workers <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_workers_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_rake_tasks_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_rake_tasks_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("rake_tasks")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Rake tasks <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_rake_tasks_pill_error" %>
+                  Rake tasks <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_rake_tasks_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_custom_php_inis_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_custom_php_inis_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("custom_php_inis")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Custom PHP inis <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_custom_php_inis_pill_error" %>
+                  Custom PHP inis <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_custom_php_inis_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_apache_htaccess_files_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_apache_htaccess_files_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("apache_htaccess_files")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Apache htaccess files <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_apache_htaccess_files_pill_error" %>
+                  Apache htaccess files <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_apache_htaccess_files_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_apache_httpd_configurations_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_apache_httpd_configurations_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("apache_httpd_configurations")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Apache httpd configurations <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_apache_httpd_configurations_pill_error" %>
+                  Apache httpd configurations <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_apache_httpd_configurations_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_actionators_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_actionators_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("actionators")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Actionators <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_actionators_pill_error" %>
+                  Actionators <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_actionators_pill_error" %>
                 <% end %>
               </li>
-              <li id='app_blueprint_section_schedules_pill' class='page_section_pill'>
+              <li id='engine_blueprint_section_schedules_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("schedules")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Schedules <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "app_blueprint_section_schedules_pill_error" %>
+                  Schedules <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_schedules_pill_error" %>
                 <% end %>
               </li>
             </ul>
@@ -144,87 +144,80 @@
 
 <div class='col-sm-9 page-main-col'>
 
-  <div id='app_blueprint_section_json' class='app_blueprint_section'>
+  <div id='engine_blueprint_section_json' class='engine_blueprint_section'>
     <%= render 'apps/blueprints/jsons/show' %>
   </div>
-
-  <div id='app_blueprint_section_schedules' class='app_blueprint_section' style='display: none;'>
-    <%= render 'apps/blueprints/schedules/section' %>
-  </div>
-
-  <% if !false %>
-
-  <div id='app_blueprint_section_metadata' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_metadata' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/metadata/section' %>
   </div>
-  <div id='app_blueprint_section_base' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_base' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/bases/section' %>
   </div>
-  <div id='app_blueprint_section_ports' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_ports' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/ports/section' %>
   </div>
-  <div id='app_blueprint_section_scripts' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_scripts' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/scripts/section' %>
   </div>
-  <div id='app_blueprint_section_external_repositories' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_external_repositories' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/external_repositories/section' %>
   </div>
-  <div id='app_blueprint_section_system_packages' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_system_packages' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/system_packages/section' %>
   </div>
-  <div id='app_blueprint_section_installed_packages' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_installed_packages' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/installed_packages/section' %>
   </div>
-  <div id='app_blueprint_section_required_modules' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_required_modules' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/required_modules/section' %>
   </div>
-  <div id='app_blueprint_section_service_configurations' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_service_configurations' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/service_configurations/section' %>
   </div>
-  <div id='app_blueprint_section_environment_variables' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_environment_variables' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/environment_variables/section' %>
   </div>
-  <div id='app_blueprint_section_template_files' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_template_files' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/template_files/section' %>
   </div>
-  <div id='app_blueprint_section_replacement_strings' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_replacement_strings' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/replacement_strings/section' %>
   </div>
-  <div id='app_blueprint_section_database_seed' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_database_seed' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/database_seed/section' %>
   </div>
-  <div id='app_blueprint_section_file_write_permissions' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_file_write_permissions' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/file_write_permissions/section' %>
   </div>
-  <div id='app_blueprint_section_persistent_directories' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_persistent_directories' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/persistent_directories/section' %>
   </div>
-  <div id='app_blueprint_section_persistent_files' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_persistent_files' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/persistent_files/section' %>
   </div>
-  <div id='app_blueprint_section_components' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_components' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/components/section' %>
   </div>
-  <div id='app_blueprint_section_workers' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_workers' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/workers/section' %>
   </div>
-  <div id='app_blueprint_section_rake_tasks' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_rake_tasks' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/rake_tasks/section' %>
   </div>
-  <div id='app_blueprint_section_custom_php_inis' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_custom_php_inis' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/custom_php_inis/section' %>
   </div>
-  <div id='app_blueprint_section_apache_htaccess_files' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_apache_htaccess_files' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/apache_htaccess_files/section' %>
   </div>
-  <div id='app_blueprint_section_apache_httpd_configurations' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_apache_httpd_configurations' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/apache_httpd_configurations/section' %>
   </div>
-
-  <div id='app_blueprint_section_actionators' class='app_blueprint_section' style='display: none;'>
+  <div id='engine_blueprint_section_actionators' class='engine_blueprint_section' style='display: none;'>
     <%= render 'apps/blueprints/actionators/section' %>
   </div>
-
-<% end %>
+  <div id='engine_blueprint_section_schedules' class='engine_blueprint_section' style='display: none;'>
+    <%= render 'apps/blueprints/schedules/section' %>
+  </div>
 
 </div>

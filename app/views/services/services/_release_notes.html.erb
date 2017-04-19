@@ -1,0 +1,6 @@
+<%= simple_form_for @service.release_notes,
+      url: service_release_notes_path(service_id: @service.name), html: { class: 'autosubmit' }, method: :patch, remote: true do |f| %>
+<br>
+<%= button_tag icon_text('fa-edit', :edit), class: 'btn btn-custom pull-right click-through-button-text' %>
+<%= f.input :content, as: :markdown, label: false %>
+<% end %>

@@ -2,9 +2,9 @@ module Apps
   module Repositories
     class CommitsController < BaseController
 
-      def new
-        @app_commit = App::Commit.new(@app)
-      end
+      # def new
+      #   # @app.commit = App::Commit.new(@app)
+      # end
 
       def create
         if params[:commit_type] == 'commit_and_push'
@@ -15,32 +15,31 @@ module Apps
       end
 
       def create_commit
-        @app_commit = App::Commit.new(@app)
-        if @app_commit.commit(strong_params)
+        # @app.commit = App::Commit.new(@app)
+        if @app.commit.do_commit(strong_params)
           redirect_to app_repository_path(id: @app.name), notice: "Successfully committed #{@app.name}."
         else
-          redirect_to app_repository_path(id: @app.name), alert: "Failed to commit #{@app.name}. [#{@app_commit.error_message}]"
+          redirect_to app_repository_path(id: @app.name), alert: "Failed to commit #{@app.name}. [#{@app.commit.error_message}]"
         end
       end
 
       def create_commit_and_push
-        @app_commit = App::Commit.new(@app)
-        if @app_commit.commit(strong_params)
-          @app_push = App::Push.new(@app)
-          if @app_push.push
-            redirect_to app_repository_path(id: @app_push.name), notice: "Successfully pushed #{@app_push.name}."
+        # @app.commit = App::Commit.new(@app)
+        if @app.commit.do_commit(strong_params)
+          if @app.push.do_push
+            redirect_to app_repository_path(id: @app.name), notice: "Successfully pushed #{@app.name}."
           else
-            redirect_to app_repository_path(id: @app.name), alert: "Committed but failed to push #{@app.name}. [#{@app_commit.error_message}]"
+            redirect_to app_repository_path(id: @app.name), alert: "Committed but failed to push #{@app.name}. #{@app.push.error_message}"
           end
         else
-          redirect_to app_repository_path(id: @app.name), alert: "Failed to commit #{@app.name}. [#{@app_commit.error_message}]"
+          redirect_to app_repository_path(id: @app.name), alert: "Failed to commit #{@app.name}. #{@app.commit.error_message}"
         end
       end
 
       private
 
       def strong_params
-        params.require(:app_commit).permit(:message)
+        params.require(:engine_commit).permit(:message)
       end
 
     end

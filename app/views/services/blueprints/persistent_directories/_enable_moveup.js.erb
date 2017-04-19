@@ -1,0 +1,4 @@
+<% if persistent_directory.index > 0 %>
+  $("#<%= "service_blueprint_persistent_directory_#{persistent_directory.index}_moveup_button_disabled" %>").hide();
+  $("#<%= "service_blueprint_persistent_directory_#{persistent_directory.index}_moveup_button" %>").show();
+<% end %>

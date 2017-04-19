@@ -1,0 +1,4 @@
+<% if system_package.index > 0 %>
+  $("#<%= "service_blueprint_system_package_#{system_package.index}_moveup_button_disabled" %>").hide();
+  $("#<%= "service_blueprint_system_package_#{system_package.index}_moveup_button" %>").show();
+<% end %>

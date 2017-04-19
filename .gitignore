@@ -24,5 +24,7 @@
 # Ignore repos
 /repos/apps/*
 !/repos/apps/.gitignore
+/repos/services/*
+!/repos/services/.gitignore
 /repos/service_definitions/*
 !/repos/service_definitions/.gitignore

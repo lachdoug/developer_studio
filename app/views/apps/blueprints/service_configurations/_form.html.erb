@@ -25,7 +25,7 @@
       <%= f.input :type_path, disabled: true %>
       <%= f.input :type_path, as: :hidden %>
       <% if f.object.service_definition_consumer_params_mismatch %>
-        <span class='error app_blueprint_section_custom_error'>
+        <span class='error engine_blueprint_section_custom_error'>
           <div class="clearfix">
             <div class="alert alert-danger">
               The parameters specified in this configuration do not match those in the service definition.<br>
@@ -62,7 +62,7 @@
                       as: :boolean,
                       wrapper: :horizontal_boolean %>
             <% else %>
-              <span class='error app_blueprint_section_custom_error'>
+              <span class='error engine_blueprint_section_custom_error'>
                 <%= ff.input :name, as: :hidden %>
                 <%= ff.input :value, disabled: true %>
                 <div class="clearfix">
@@ -89,7 +89,7 @@
       </div>
       <% end %>
     <% else %>
-      <div class='error app_blueprint_section_custom_error'>
+      <div class='error engine_blueprint_section_custom_error'>
         <%= f.input :publisher_namespace, label: 'Namespace', disabled: true %>
         <%= f.input :publisher_namespace, as: :hidden %>
         <%= f.input :type_path, disabled: true %>

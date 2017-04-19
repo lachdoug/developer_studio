@@ -10,7 +10,7 @@ module Apps
       private
 
       def strong_params
-        params.require(:app_readme).permit(:content)
+        params.require(:engine_readme).permit(:content)
       end
 
     end

@@ -1,0 +1,105 @@
+<% if service_configuration.publisher_namespace.blank? %>
+  <%= custom_form_for service_configuration,
+        namespace: "service_blueprint_service_configuration_#{service_configuration.index}",
+        url: service_blueprint_service_configuration_publisher_namespace_path(service_id: @service.name, service_configuration_id: service_configuration.index), method: :post do |f| %>
+    <%= f.input :publisher_namespace, label: 'Namespace', as: :select, required: true,
+        collection: Settings::ServiceDefinitionNamespace.publisher_namespaces_collection %>
+  <% end %>
+<% elsif service_configuration.type_path.blank? %>
+  <%= custom_form_for service_configuration,
+      namespace: "service_blueprint_service_configuration_#{service_configuration.index}",
+      url: service_blueprint_service_configuration_type_path_path(service_id: @service.name, service_configuration_id: service_configuration.index), method: :post do |f| %>
+    <%= f.input :publisher_namespace, label: 'Namespace', disabled: true %>
+    <%= f.input :publisher_namespace, as: :hidden %>
+    <%= f.input :type_path, as: :select, required: true,
+        collection: Settings::ServiceDefinitionNamespace.
+                      type_paths_collection_for(f.object.publisher_namespace) %>
+  <% end %>
+<% else %>
+  <%= custom_form_for service_configuration,
+      namespace: "service_blueprint_service_configuration_#{service_configuration.index}",
+      url: service_blueprint_service_configuration_path(service_id: @service.name, id: service_configuration.index), method: :patch do |f| %>
+    <% if f.object.service_definition.present? %>
+      <%= f.input :publisher_namespace, label: 'Namespace', disabled: true %>
+      <%= f.input :publisher_namespace, as: :hidden %>
+      <%= f.input :type_path, disabled: true %>
+      <%= f.input :type_path, as: :hidden %>
+      <% if f.object.service_definition_consumer_params_mismatch %>
+        <span class='error engine_blueprint_section_custom_error'>
+          <div class="clearfix">
+            <div class="alert alert-danger">
+              The parameters specified in this configuration do not match those in the service definition.<br>
+              Reload parameters from service definition to bring them into sync.
+            </div>
+          </div>
+        </span>
+      <% end %>
+      <% if f.object.service_definition_has_consumer_params || f.object.variables.any? %>
+        <%= f.simple_fields_for :variables do |ff| %>
+          <div>
+            <div class="form-section-heading">
+              <%= ff.object.send :to_s %>
+            </div>
+            <% if ff.object.variable_definition.present? %>
+              <%= ( content_tag :label, ff.object.send(:name), class: 'col-sm-9 col-sm-offset-3' ) %>
+              <%= ( content_tag :p, ff.object.send(:comment), class: 'col-sm-9 col-sm-offset-3' ) if ff.object.send(:comment).present? %>
+              <%= ff.input :name, as: :hidden %>
+              <%= ff.input :value,
+                      hint: ( ff.object.send(:hint) if ff.object.send(:hint).present? ),
+                      as: ff.object.send(:type),
+                      collection: ff.object.send(:collection),
+                      placeholder: ff.object.send(:placeholder),
+                      title: ff.object.send(:title),
+                      wrapper: ( :horizontal_boolean if ff.object.send(:type).to_sym == :boolean ),
+                      wrapper_html: { class: 'variable_value_input_wrapper' }  %>
+              <%= ff.input :resolve_string,
+                      label: :Resolve,
+                      placeholder: "_Engines_System(), _Engines_Builder() or _Engines_Environment()",
+                      pattern: '^.*(_Engines_System|_Engines_Builder|_Engines_Environment)\(.*\).*',
+                      wrapper_html: { class: 'variable_resolve_string_input_wrapper' } %>
+              <%= ff.input :resolve,
+                      input_html: { class: 'variable_resolve_checkbox_input' },
+                      as: :boolean,
+                      wrapper: :horizontal_boolean %>
+            <% else %>
+              <span class='error engine_blueprint_section_custom_error'>
+                <%= ff.input :name, as: :hidden %>
+                <%= ff.input :value, disabled: true %>
+                <div class="clearfix">
+                  <div class="alert alert-danger">
+                    The service definition does not contain a consumer parameter for <%= ff.object.send(:name) %>.
+                  </div>
+                </div>
+              </span>
+            <% end %>
+          </div>
+        <% end %>
+        <br>
+        <div class='clearfix'>
+          <%= link_to icon_text('fa-refresh', 'Reload parameters from service definition'),
+          new_service_blueprint_service_configuration_variables_path(service_id: @service.name,
+                                              service_configuration_id: service_configuration.index),
+            remote: true, class: 'btn btn-custom pull-right' %>
+        </div>
+      <% else %>
+      <div class="clearfix">
+        <div class="alert alert-info">
+          No consumer parameters to configure.
+        </div>
+      </div>
+      <% end %>
+    <% else %>
+      <div class='error engine_blueprint_section_custom_error'>
+        <%= f.input :publisher_namespace, label: 'Namespace', disabled: true %>
+        <%= f.input :publisher_namespace, as: :hidden %>
+        <%= f.input :type_path, disabled: true %>
+        <%= f.input :type_path, as: :hidden %>
+        <div class="col-sm-12 alert alert-danger">
+          A service definition for <%= "#{f.object.publisher_namespace}/#{f.object.type_path}" %> is not available.<br>
+          Please add the service definition in <%= link_to icon_text('fa-cog', :Settings), settings_path %>, or delete this service configuration.
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+<hr>

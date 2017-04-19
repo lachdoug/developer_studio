@@ -43,7 +43,7 @@
         <%= f.input :actionator_name, label: 'Actionator', disabled: true %>
         <%= f.input :actionator_name, as: :hidden %>
         <% if f.object.blueprint_actionator_variables_mismatch %>
-          <div class='col-sm-12 alert alert-danger error app_blueprint_section_custom_error'>
+          <div class='col-sm-12 alert alert-danger error engine_blueprint_section_custom_error'>
             The parameters specified in this schedule do not match those for the actionator definition.<br>
             Reload parameters from actionator definitions to bring them into sync.
           </div>
@@ -82,7 +82,7 @@
                         as: :boolean,
                         wrapper: :horizontal_boolean %>
               <% else %>
-                <span class='error app_blueprint_section_custom_error'>
+                <span class='error engine_blueprint_section_custom_error'>
                   <%= ff.input :name, as: :hidden %>
                   <%= ff.input :value, disabled: true %>
                   <div class="col-sm-12 alert alert-danger">
@@ -105,7 +105,7 @@
         </div>
         <% end %>
       <% else %>
-        <div class='error app_blueprint_section_custom_error'>
+        <div class='error engine_blueprint_section_custom_error'>
           <%= f.input :actionator_name, label: 'Actionator', disabled: true %>
           <%= f.input :actionator_name, as: :hidden %>
           <div class="col-sm-12 alert alert-danger">

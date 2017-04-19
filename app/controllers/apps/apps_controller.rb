@@ -8,7 +8,8 @@ module Apps
     end
 
     def show
-      Repo::App.new(@app.name).tap &:precheck
+      @app.repo.precheck
+      # Repo::App.new(@app.name).tap &:precheck
     end
 
     def new
@@ -25,10 +26,10 @@ module Apps
     end
 
     def destroy
-      if @app.delete
+      if @app.repo.delete
         redirect_to apps_path, notice: "Deleted #{@app.name}."
       else
-        redirect_to apps_path, alert: "Failed to delete #{@app.name}. (#{@app.error_message})"
+        redirect_to apps_path, alert: "Failed to delete #{@app.name}."
       end
     end
 
