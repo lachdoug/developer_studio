@@ -21,7 +21,7 @@ module Services
       private
 
       def strong_params
-        params.require(:service_blueprint_apache_htaccess_file).
+        params.require(:service_service_blueprint_apache_htaccess_file).
           permit( :directory, :content )
       end
 

@@ -21,7 +21,7 @@ module Services
       private
 
       def strong_params
-        params.require(:service_blueprint_installed_package).
+        params.require(:service_service_blueprint_installed_package).
           permit( :name, :source_url, :destination, :extraction_command, :path_to_extracted )
       end
 

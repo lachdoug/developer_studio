@@ -23,7 +23,7 @@ module Services
         private
 
         def strong_params
-          params.require(:service_blueprint_workers_command).
+          params.require(:service_service_blueprint_workers_command).
             permit( :name, :command )
         end
 

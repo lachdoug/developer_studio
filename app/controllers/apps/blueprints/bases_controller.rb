@@ -10,7 +10,7 @@ module Apps
       private
 
       def strong_params
-        params.require(:app_blueprint_base).
+        params.require(:app_app_blueprint_base).
           permit( :name,
                   :framework,
                   :memory_required,

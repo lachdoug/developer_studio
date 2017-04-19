@@ -13,11 +13,11 @@ module Services
     end
 
     def new
-      @service_builder = Service::Builder.new
+      @service_builder = Service::ServiceBuilder.new
     end
 
     def create
-      @service_builder = Service::Builder.new()
+      @service_builder = Service::ServiceBuilder.new()
       if @service_builder.build(strong_params)
         redirect_to service_path(id: @service_builder.name), notice: "Successfully created #{@service_builder.name}."
       else
@@ -36,7 +36,7 @@ module Services
     private
 
     def strong_params
-      params.require(:service_builder).permit(:url)
+      params.require(:service_service_builder).permit(:url)
     end
 
   end

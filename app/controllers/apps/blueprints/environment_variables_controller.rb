@@ -22,7 +22,7 @@ module Apps
       private
 
       def strong_params
-        params.require(:app_blueprint_environment_variable).
+        params.require(:app_app_blueprint_environment_variable).
           permit( :name,
                   :value,
                   :mandatory,

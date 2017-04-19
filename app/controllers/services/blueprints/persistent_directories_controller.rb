@@ -21,7 +21,7 @@ module Services
       private
 
       def strong_params
-        params.require(:service_blueprint_persistent_directory).
+        params.require(:service_service_blueprint_persistent_directory).
           permit( :path )
       end
 

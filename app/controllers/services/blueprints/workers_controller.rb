@@ -10,7 +10,7 @@ module Services
       private
 
       def strong_params
-        params.require(:service_blueprint_workers).permit( :blocking )
+        params.require(:service_service_blueprint_workers).permit( :blocking )
       end
 
     end

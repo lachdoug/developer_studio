@@ -21,7 +21,7 @@ module Services
       private
 
       def strong_params
-        params.require(:service_blueprint_replacement_string).
+        params.require(:service_service_blueprint_replacement_string).
           permit( :string, :source_file, :destination_file )
       end
 

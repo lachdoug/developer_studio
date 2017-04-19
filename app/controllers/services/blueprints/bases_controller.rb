@@ -10,19 +10,12 @@ module Services
       private
 
       def strong_params
-        params.require(:service_blueprint_base).
+        params.require(:service_service_blueprint_base).
           permit( :name,
-                  :framework,
-                  :memory_required,
-                  :memory_recommended,
-                  :http_protocol,
-                  :framework_port_override,
                   :deployment_type,
-                  :web_root_directory,
-                  :continuous_deployment,
-                  :install_form_comment,
-                  :first_run_url,
-                  :installation_report )
+                  :http_protocol,
+                  :memory_required,
+                  :memory_recommended )
       end
 
     end

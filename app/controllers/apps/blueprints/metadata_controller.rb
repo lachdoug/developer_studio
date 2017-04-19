@@ -10,7 +10,7 @@ module Apps
       private
 
       def strong_params
-        params.require(:app_blueprint_metadata).permit(
+        params.require(:app_app_blueprint_metadata).permit(
           :blueprint_version_major,
           :blueprint_version_minor,
           :blueprint_version_level,

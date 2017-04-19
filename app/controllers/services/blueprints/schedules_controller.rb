@@ -22,7 +22,7 @@ module Services
       private
 
       def strong_params
-        params.require(:service_blueprint_schedule).
+        params.require(:service_service_blueprint_schedule).
           permit( :label,
                   :timespec_minute,
                   :timespec_hour,

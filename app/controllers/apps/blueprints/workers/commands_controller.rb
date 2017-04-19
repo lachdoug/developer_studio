@@ -23,7 +23,7 @@ module Apps
         private
 
         def strong_params
-          params.require(:app_blueprint_workers_command).
+          params.require(:app_app_blueprint_workers_command).
             permit( :name, :command )
         end
 

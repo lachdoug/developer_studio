@@ -21,7 +21,7 @@ module Services
       private
 
       def strong_params
-        params.require(:service_blueprint_port).
+        params.require(:service_service_blueprint_port).
           permit( :port, :external, :protocol )
       end
 

@@ -21,7 +21,7 @@ module Services
       private
 
       def strong_params
-        params.require(:service_blueprint_file_write_permission).
+        params.require(:service_service_blueprint_file_write_permission).
           permit( :path, :recursive )
       end
 

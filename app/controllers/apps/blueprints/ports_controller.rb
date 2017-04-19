@@ -21,7 +21,7 @@ module Apps
       private
 
       def strong_params
-        params.require(:app_blueprint_port).
+        params.require(:app_app_blueprint_port).
           permit( :port, :external, :protocol )
       end
 

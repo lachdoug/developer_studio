@@ -21,7 +21,7 @@ module Apps
       private
 
       def strong_params
-        params.require(:app_blueprint_replacement_string).
+        params.require(:app_app_blueprint_replacement_string).
           permit( :string, :source_file, :destination_file )
       end
 

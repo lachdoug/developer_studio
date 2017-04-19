@@ -21,7 +21,7 @@ module Services
       private
 
       def strong_params
-        params.require(:service_blueprint_system_package).
+        params.require(:service_service_blueprint_system_package).
           permit( :package, :version )
       end
 

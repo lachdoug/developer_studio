@@ -29,8 +29,7 @@ module Conform
               minor: r(:software, :minor).to_i,
               level: r(:software, :release_level).to_s.sub('Release candidate', 'rc').sub('Beta', 'beta').gsub('Alpha', 'alpha'),
               patch: r(:software, :patch).to_i,
-            },
-            timestamp: nil
+            }
           },
           software: {
             display: {
@@ -44,7 +43,8 @@ module Conform
               label: r(:software, :license_label).to_s,
               url: r(:software, :license_sourceurl).to_s,
             }
-          }
+          },
+          timestamp: nil
         }
       end
 
@@ -80,12 +80,12 @@ module Conform
         {
           name: r(:software, :name).to_s,
           framework: r(:software, :framework).to_s,
-          memory: memory,
+          deployment_type: r(:software, :deployment_type).to_s,
           http_protocol: r(:software, :http_protocol).to_s,
           framework_port_override: ( r(:software, :framework_port_override).present? ? r(:software, :framework_port_override).to_i : '' ) ,
-          deployment_type: r(:software, :deployment_type).to_s,
           web_root_directory: r(:software, :web_root_directory).to_s,
           continuous_deployment: cast_boolean_for( r(:software, :continuous_deployment) ),
+          memory: memory,
           install_form_comment: '',
           first_run_url: r(:software, :first_run_url).to_s,
           installation_report: r(:software, :installation_report_template).to_s

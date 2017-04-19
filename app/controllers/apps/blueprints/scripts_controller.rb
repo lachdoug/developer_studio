@@ -10,7 +10,7 @@ module Apps
       private
 
       def strong_params
-        params.require(:app_blueprint_scripts).
+        params.require(:app_app_blueprint_scripts).
           permit( start_attributes: [:language, :content],
                   install_attributes: [:language, :content],
                   post_install_attributes: [:language, :content],

@@ -21,7 +21,7 @@ module Apps
       private
 
       def strong_params
-        params.require(:app_blueprint_rake_task).
+        params.require(:app_app_blueprint_rake_task).
           permit( :action, :always_run )
       end
 

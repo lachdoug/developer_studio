@@ -10,7 +10,7 @@ module Services
       private
 
       def strong_params
-        params.require(:service_blueprint_components).permit( :path, :extract )
+        params.require(:service_service_blueprint_components).permit( :path, :extract )
       end
 
     end

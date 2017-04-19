@@ -12,7 +12,7 @@ module Services
         private
 
         def strong_params
-          params.require(:service_blueprint_service_configuration).
+          params.require(:service_service_blueprint_service_configuration).
             permit( :publisher_namespace,
                     :type_path )
         end

@@ -28,7 +28,7 @@ module Services
         private
 
         def strong_params
-          params.require(:service_blueprint_actionator_variable).
+          params.require(:service_service_blueprint_actionator_variable).
             permit( :name,
                     :value,
                     :mandatory,

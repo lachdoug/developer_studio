@@ -22,7 +22,7 @@ var auto_submit_blueprint_section_form = function(form_element){
   };
 };
 
-var check_validity_of_all_blueprint_sections = function() {
+function check_validity_of_all_blueprint_sections() {
   $('.page_section_pill').each(function(){
     var section_pill = $(this);
     var section_id = section_pill.attr('id');

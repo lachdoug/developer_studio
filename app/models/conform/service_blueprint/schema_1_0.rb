@@ -29,8 +29,7 @@ module Conform
               minor: r(:metadata, :blueprint, :version, :minor).to_i,
               level: r(:metadata, :blueprint, :version, :level).to_s,
               patch: r(:metadata, :blueprint, :version, :patch).to_i,
-            },
-            timestamp: timestamp
+            }
           },
           software: {
             display: {
@@ -44,12 +43,13 @@ module Conform
               label: r(:metadata, :software, :license, :label).to_s,
               url: r(:metadata, :software, :license, :url).to_s,
             }
-          }
+          },
+          timestamp: timestamp
         }
       end
 
       def timestamp
-        DateTime.parse(r :timestamp)
+        DateTime.parse(r :metadata, :timestamp)
       rescue
         nil
       end
@@ -76,16 +76,9 @@ module Conform
       def base
         {
           name: r(:software, :base, :name).to_s,
-          framework: r(:software, :base, :framework).to_s,
-          memory: memory,
-          http_protocol: r(:software, :base, :http_protocol).to_s,
-          framework_port_override: ( r(:software, :base, :framework_port_override).present? ? r(:software, :base, :framework_port_override).to_i : '' ),
           deployment_type: r(:software, :base, :deployment_type).to_s,
-          web_root_directory: r(:software, :base, :web_root_directory).to_s,
-          continuous_deployment: cast_boolean_for( r(:software, :base, :continuous_deployment) ),
-          install_form_comment: r(:software, :base, :install_form_comment).to_s,
-          first_run_url: r(:software, :base, :first_run_url).to_s,
-          installation_report: r(:software, :base, :installation_report).to_s
+          http_protocol: r(:software, :base, :http_protocol).to_s,
+          memory: memory
         }
       end
 

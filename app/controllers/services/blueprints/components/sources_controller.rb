@@ -22,7 +22,7 @@ module Services
         private
 
         def strong_params
-          params.require(:service_blueprint_components_source).
+          params.require(:service_service_blueprint_components_source).
             permit( :label, :url,
                     install_script_attributes: [:language, :content] )
         end

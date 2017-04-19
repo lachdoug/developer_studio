@@ -21,7 +21,7 @@ module Services
       private
 
       def strong_params
-        params.require(:service_blueprint_apache_httpd_configuration).
+        params.require(:service_service_blueprint_apache_httpd_configuration).
           permit( :content )
       end
 

@@ -11,7 +11,7 @@ module Apps
         private
 
         def strong_params
-          params.require(:app_blueprint_service_configuration).
+          params.require(:app_app_blueprint_service_configuration).
             permit( :publisher_namespace )
         end
 

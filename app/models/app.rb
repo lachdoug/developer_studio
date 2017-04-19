@@ -1,9 +1,7 @@
 class App < Engine
 
   def blueprint
-    @blueprint ||= App::Blueprint.new(self)
+    @blueprint ||= ::App::AppBlueprint.new(self)
   end
-
-
 
 end

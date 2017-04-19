@@ -21,7 +21,7 @@ module Services
       private
 
       def strong_params
-        params.require(:service_blueprint_custom_php_ini).
+        params.require(:service_service_blueprint_custom_php_ini).
           permit( :content )
       end
 

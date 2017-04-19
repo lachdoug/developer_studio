@@ -22,7 +22,7 @@ module Apps
       private
 
       def strong_params
-        params.require(:app_blueprint_schedule).
+        params.require(:app_app_blueprint_schedule).
           permit( :label,
                   :timespec_minute,
                   :timespec_hour,

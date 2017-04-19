@@ -10,7 +10,7 @@ module Services
       private
 
       def strong_params
-        params.require(:service_blueprint_metadata).permit(
+        params.require(:service_service_blueprint_metadata).permit(
           :blueprint_version_major,
           :blueprint_version_minor,
           :blueprint_version_level,

@@ -21,7 +21,7 @@ module Services
       private
 
       def strong_params
-        params.require(:service_blueprint_external_repository).
+        params.require(:service_service_blueprint_external_repository).
           permit( :url, :key )
       end
 

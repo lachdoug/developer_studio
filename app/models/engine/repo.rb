@@ -24,19 +24,19 @@ class Engine
     end
 
     def blueprint
-      @blueprint ||= Blueprint.new(self)
+      @blueprint ||= RepoBlueprint.new(self)
     end
 
     def readme
-      @readme ||= Readme.new(self)
+      @readme ||= RepoReadme.new(self)
     end
 
     def release_notes
-      @release_notes ||= ReleaseNotes.new(self)
+      @release_notes ||= RepoReleaseNotes.new(self)
     end
 
     def license
-      @license ||= License.new(self)
+      @license ||= RepoLicense.new(self)
     end
 
     def path
@@ -52,7 +52,7 @@ class Engine
     end
 
     def git_precheck
-      make_initial_commit if git_is_bare
+      do_initial_commit_and_push if git_is_bare
     end
 
     def git_is_bare
@@ -87,18 +87,23 @@ class Engine
       sub("\n\n", "\n")
     end
 
-    def make_initial_commit
+    def do_initial_commit_and_push
+      add_files_to_repo
+      commit 'Initial commit'
+      # `git -C #{path} branch --unset-upstream`
+      push
+    end
+
+    def add_files_to_repo
       `git -C #{path} add -A`
-      `git -C #{path} commit -a -m 'Initial commit'`
-      `git -C #{path} branch --unset-upstream`
     end
 
     def commit(message)
-      stdout, stderr, status = Open3.capture3("git -C #{path} commit -a -m '#{message}'")
+      stdout, stderr, status = Open3.capture3("git -C #{path} commit -m '#{message}'")
       if status.exitstatus == 0
         { success: true }
       else
-        { success: false, message: stderr.split('fatal: ')[1] }
+        { success: false, message: stderr }
       end
     end
 
@@ -107,21 +112,13 @@ class Engine
       if status.exitstatus == 0
         { success: true }
       else
-        { success: false, message: stderr.split('fatal: ')[1].sub(' Email support@github.com for help', '') }
+        { success: false, message: stderr }
       end
     end
 
     def delete
       FileUtils.rm_rf path
     end
-
-    # def update_license(message, author)
-    #   current_commit = "#{author} - #{message}"
-    #   license.tap do |cl|
-    #     cl.license = current_commit + "\n\n" + cl.license
-    #     cl.save
-    #   end
-    # end
 
   end
 end

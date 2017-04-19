@@ -21,7 +21,7 @@ module Apps
       private
 
       def strong_params
-        params.require(:app_blueprint_required_module).
+        params.require(:app_app_blueprint_required_module).
           permit( :type, :os_package, :name )
       end
 

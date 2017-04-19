@@ -28,7 +28,7 @@ module Apps
         private
 
         def strong_params
-          params.require(:app_blueprint_actionator_variable).
+          params.require(:app_app_blueprint_actionator_variable).
             permit( :name,
                     :value,
                     :mandatory,

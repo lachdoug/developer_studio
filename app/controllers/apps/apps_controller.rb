@@ -9,15 +9,14 @@ module Apps
 
     def show
       @app.repo.precheck
-      # Repo::App.new(@app.name).tap &:precheck
     end
 
     def new
-      @app_builder = App::Builder.new
+      @app_builder = App::AppBuilder.new
     end
 
     def create
-      @app_builder = App::Builder.new()
+      @app_builder = App::AppBuilder.new()
       if @app_builder.build(strong_params)
         redirect_to app_path(id: @app_builder.name), notice: "Successfully created #{@app_builder.name}."
       else
@@ -36,7 +35,7 @@ module Apps
     private
 
     def strong_params
-      params.require(:app_builder).permit(:url)
+      params.require(:app_app_builder).permit(:url)
     end
 
   end

@@ -21,7 +21,7 @@ module Services
       private
 
       def strong_params
-        params.require(:service_blueprint_rake_task).
+        params.require(:service_service_blueprint_rake_task).
           permit( :action, :always_run )
       end
 
