@@ -3,8 +3,28 @@ $(document).ajaxComplete(function(){
 });
 
 $(document).on('turbolinks:load', function(){
+  do_blueprint_deployment_type_select();
   do_blueprint_section_forms();
 });
+
+
+var do_blueprint_deployment_type_select = function(){
+  $('#engine_blueprint_section_base').show();
+  blueprint_deployment_type_select_depend_on($('.blueprint_deployment_type_select_wrapper select'));
+  $('#engine_blueprint_section_base').hide();
+};
+
+
+var blueprint_deployment_type_select_depend_on = function(select_object) {
+  if ( $(select_object).val() == "worker" ) {
+    $(select_object).closest('.blueprint_deployment_type_select_wrapper').next().hide();
+  } else {
+    $(select_object).closest('.blueprint_deployment_type_select_wrapper').next().show();
+  };
+};
+
+
+
 
 var do_blueprint_section_forms = function() {
   check_validity_of_all_blueprint_sections();
@@ -22,7 +42,7 @@ var auto_submit_blueprint_section_form = function(form_element){
   };
 };
 
-function check_validity_of_all_blueprint_sections() {
+var check_validity_of_all_blueprint_sections = function() {
   $('.page_section_pill').each(function(){
     var section_pill = $(this);
     var section_id = section_pill.attr('id');
@@ -101,7 +121,6 @@ var remove_collapsed_form_visible_for_valitation = function(section_form){
   section_form.parents('.collapse').removeClass('visible_for_validation');
 };
 
-
 var check_blueprint_section_form_is_valid = function(section_form) {
   section_form.validate();
   if ( section_form.valid() && blueprint_section_form_has_no_custom_errors(section_form) ) {
@@ -134,17 +153,22 @@ var show_pill_error_warning_for = function(section_pill) {
 
 var bind_blueprint_section_forms_input_change_events = function() {
   $('#engine_blueprint input').off('change');
+  $('#engine_blueprint select').off('change');
+  $('#engine_blueprint textarea').off('change');
+
+  $('.blueprint_deployment_type_select_wrapper select').on('change', function(){
+    blueprint_deployment_type_select_depend_on(this);
+    check_validity_of_all_blueprint_sections();
+  });
   $('#engine_blueprint input:not(.do_not_autosubmit_form_on_change)').on('change', function(){
     auto_submit_blueprint_section_form(this);
   });
   $('input.variable_resolve_checkbox_input').on('change', function() {
     show_variable_input_for(this);
   });
-  $('#engine_blueprint select').off('change');
   $('#engine_blueprint select:not(.do_not_autosubmit_form_on_change)').on('change', function(){
     auto_submit_blueprint_section_form(this);
   });
-  $('#engine_blueprint textarea').off('change');
   $('#engine_blueprint textarea:not(.do_not_autosubmit_form_on_change)').on('change', function(){
     auto_submit_blueprint_section_form(this);
   });

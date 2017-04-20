@@ -60,9 +60,9 @@ class Engine
       status.exitstatus == 128
     end
 
-    def remote_web_url
-      @remote_web_url ||= remote_url.sub('ssh://', 'https://')
-    end
+    # def remote_web_url
+    #   @remote_web_url ||= remote_url.sub('ssh://', 'https://')
+    # end
 
     def uncommitted_diffs
       @uncommitted_diffs ||= `git -C #{path} diff HEAD`
@@ -90,12 +90,17 @@ class Engine
     def do_initial_commit_and_push
       add_files_to_repo
       commit 'Initial commit'
-      # `git -C #{path} branch --unset-upstream`
+      set_remote_branch
       push
     end
 
     def add_files_to_repo
       `git -C #{path} add -A`
+    end
+
+    def set_remote_branch
+      `git -C #{path} branch --unset-upstream`
+      `git -C #{path} branch --set-upstream-to origin/master`
     end
 
     def commit(message)

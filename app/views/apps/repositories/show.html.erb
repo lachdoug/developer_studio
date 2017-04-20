@@ -68,6 +68,7 @@
 
 <legend>Remote</legend>
 <div class='col-sm-12'>
-  <%= link_to icon_text('fa-git', 'Open'), @app.repo.remote_web_url, target: @app.repo.remote_web_url, class: 'btn btn-custom pull-right' %>
-  <p><%= @app.repo.remote_web_url %></p>
+  <%= # link_to icon_text('fa-git', 'Open'), @app.repo.remote_url, target: @app.repo.remote_url, class: 'btn btn-custom pull-right'
+  %>
+  <p><%= @app.repo.remote_url %></p>
 </div>
