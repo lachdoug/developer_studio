@@ -68,7 +68,9 @@ module Conform
           template_files: template_files,
           replacement_strings: replacement_strings,
           persistent_directories: persistent_directories,
+          consumer_params: consumer_params,
           actionators: actionators,
+          configurators: configurators,
           schedules: schedules
         }
       end
@@ -224,6 +226,39 @@ module Conform
         }
       end
 
+      def consumer_params
+        ( r(:software, :consumer_params) || []).map do |cp|
+          consumer_param_for cp
+        end
+      end
+
+      def consumer_param_for(cp)
+        {
+          name: cp.dig(:name).to_s,
+          value: cp.dig(:value).to_s,
+          mandatory: cast_boolean_for(cp.dig(:mandatory)),
+          immutable: cast_boolean_for(cp.dig(:immutable)),
+          ask_at_build_time: cast_boolean_for(cp.dig(:ask_at_build_time)),
+          build_time_only: cast_boolean_for(cp.dig(:build_time_only)),
+          input: {
+            type: cp.dig(:input, :type).to_s,
+            label: cp.dig(:input, :label).to_s,
+            title: cp.dig(:input, :title).to_s,
+            comment: cp.dig(:input, :comment).to_s,
+            hint: cp.dig(:input, :hint).to_s,
+            placeholder: cp.dig(:input, :placeholder).to_s,
+            validation: {
+              pattern: cp.dig(:input, :validation, :pattern).to_s,
+              message: cp.dig(:input, :validation, :message).to_s
+            },
+            collection: {
+              include_blank: cast_boolean_for( cp.dig(:input, :collection, :include_blank) ),
+              items: cp.dig(:input, :collection, :items) || {}
+             },
+          }
+        }
+      end
+
       def template_files
         ( r(:software, :template_files) || []).map do |tf|
           template_file_for tf
@@ -310,6 +345,55 @@ module Conform
             collection: {
               include_blank: cast_boolean_for( av.dig(:input, :collection, :include_blank) ),
               items: av.dig(:input, :collection, :items) || {}
+             },
+          }
+        }
+      end
+
+      def configurators
+        ( r(:software, :configurators) || []).map do |c|
+          configurator_for c
+        end
+      end
+
+      def configurator_for(c)
+        {
+          name: c.dig(:name).to_s,
+          label: c.dig(:label).to_s,
+          description: c.dig(:description).to_s,
+          enable_logging: cast_boolean_for( c.dig(:enable_logging) ),
+          variables: configurator_variables_for(c),
+          script: {
+            language: c.dig(:script, :language).to_s,
+            content: c.dig(:script, :content).to_s }
+        }
+      end
+
+      def configurator_variables_for(c)
+        ( c.dig(:variables) || []).map do |av|
+          configurator_variable_for av
+        end
+      end
+
+      def configurator_variable_for(cv)
+        {
+          name: cv.dig(:name).to_s,
+          value: cv.dig(:value).to_s,
+          mandatory: cast_boolean_for(cv.dig(:mandatory)),
+          input: {
+            type: cv.dig(:input, :type).to_s,
+            label: cv.dig(:input, :label).to_s,
+            title: cv.dig(:input, :title).to_s,
+            comment: cv.dig(:input, :comment).to_s,
+            hint: cv.dig(:input, :hint).to_s,
+            placeholder: cv.dig(:input, :placeholder).to_s,
+            validation: {
+              pattern: cv.dig(:input, :validation, :pattern).to_s,
+              message: cv.dig(:input, :validation, :message).to_s
+            },
+            collection: {
+              include_blank: cast_boolean_for( cv.dig(:input, :collection, :include_blank) ),
+              items: cv.dig(:input, :collection, :items) || {}
              },
           }
         }

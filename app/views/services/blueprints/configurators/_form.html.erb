@@ -1,0 +1,77 @@
+<%= custom_form_for configurator,
+  namespace: "service_blueprint_configurator_#{configurator.index}",
+  url: service_blueprint_configurator_path(service_id: @service.name, id: configurator.index) do |f| %>
+  <%= f.input :name, required: true %>
+  <%= f.input :label %>
+  <%= f.input :description, as: :markdown %>
+  <%= f.input :enable_logging, as: :boolean, wrapper: :horizontal_boolean %>
+  <div class="form-section-heading">Script</div>
+  <%= f.simple_fields_for :script do |ff| %>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'},
+    collection: configurator.script_language_collection, include_blank: false, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: configurator.script.send(:language) } }  %>
+  <% end %>
+  <% configurator.variables.each do |variable| %>
+    <div id="service_blueprint_configurator_<%= configurator.index %>_variable_<%= variable.index %>_nested_error"></div>
+  <% end %>
+<% end %>
+
+<div class="form-section-heading">Variables</div>
+<%= 'none' if configurator.variables.empty? %>
+<% configurator.variables.each do |variable| %>
+  <div class="panel panel-default blueprint_item_collapse_area blueprint_section_collapse_area_nested" data-target="service_blueprint_configurator_<%= configurator.index %>_variable_<%= variable.index %>_nested_error">
+    <div class="panel-body">
+      <div class="dropdown pull-right">
+        <a class="btn btn-custom" data-toggle="dropdown">
+          <i class="fa fa-bars"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li>
+            <%= link_to icon_text('fa-caret-up', 'Move up'),
+             "#",
+             title: 'Move up',
+             id: "service_blueprint_configurator_#{configurator.index}_variable_#{variable.index}_moveup_button_disabled", remote: true,
+             class: "disabled_link",
+             style: ( 'display:none;' unless variable.disable_moveup ) %>
+            <%= link_to icon_text('fa-caret-up', 'Move up'),
+             service_blueprint_configurator_variable_moveup_path(service_id: @service.name, configurator_id: configurator.index, variable_id: variable.index),
+             title: 'Move up',
+             id: "service_blueprint_configurator_#{configurator.index}_variable_#{variable.index}_moveup_button", remote: true,
+             class: "show_saving_spinner_on_click",
+             style: ( 'display:none;' if variable.disable_moveup ) %>
+          </li>
+          <li>
+            <%= link_to icon_text('fa-trash-o', 'Delete'),
+             service_blueprint_configurator_variable_path(service_id: @service.name, configurator_id: configurator.index, id: variable.index),
+             method: :delete, remote: true,
+             title: 'Delete',
+             class: 'show_saving_spinner_on_confirmed',
+             data: {confirm: "Are you sure that you want to delete this configurator variable?"} %>
+          </li>
+        </ul>
+      </div>
+      <a class="blueprint_item_collapse" data-toggle="collapse" href="#service_blueprint_configurator_<%= configurator.index %>_variable_<%= variable.index %>_form">
+         Configurator <%= configurator.index + 1 %> variable <%= variable.index + 1 %> -
+         <span id="service_blueprint_configurator_<%= configurator.index %>_variable_<%= variable.index %>_section_heading">
+           <%= variable.to_s %>
+         </span>
+      </a>
+    </div>
+    <div class="collapse <%= 'in' if variable.new_record %>" id="service_blueprint_configurator_<%= configurator.index %>_variable_<%= variable.index %>_form">
+        <%= render 'services/blueprints/configurators/variables/form', configurator: configurator, variable: variable %>
+    </div>
+  </div>
+<% end %>
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New variable'),
+      '#',
+      id: "service_blueprint_configurator_#{configurator.index}_variables_button_disabled",
+      remote: true, class: 'btn btn-custom pull-right disabled_link',
+      style: ('display:none;' unless configurator.new_record) %>
+  <%= link_to icon_text('fa-plus', 'New variable'),
+      new_service_blueprint_configurator_variable_path(service_id: @service.name, configurator_id: configurator.index),
+      id: "service_blueprint_configurator_#{configurator.index}_variables_button",
+      remote: true, class: 'btn btn-custom pull-right',
+      style: ('display:none;' if configurator.new_record) %>
+</div>
+<hr>

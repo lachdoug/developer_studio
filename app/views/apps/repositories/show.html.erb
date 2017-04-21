@@ -2,6 +2,9 @@
 <h4>
   <%= @app.name %> repository
 </h4>
+<div class='col-sm-12'>
+  <p><%= @app.repo.remote_url %></p>
+</div>
 <legend>Status</legend>
 <div class='col-sm-12'>
   <pre><%= @app.repo.status %></pre>
@@ -22,7 +25,6 @@
     <p>Enter a message to commit.</p>
     <%= simple_form_for @app.commit,
           url: app_repository_commit_path(app_id: @app.name),
-          # method: :post,
           html: { class: 'form-horizontal' },
           wrapper: :horizontal_form do |f| %>
       <%= f.input :message, as: :text, required: true %>
@@ -65,10 +67,3 @@
   <br>
 </div>
 <% end %>
-
-<legend>Remote</legend>
-<div class='col-sm-12'>
-  <%= # link_to icon_text('fa-git', 'Open'), @app.repo.remote_url, target: @app.repo.remote_url, class: 'btn btn-custom pull-right'
-  %>
-  <p><%= @app.repo.remote_url %></p>
-</div>

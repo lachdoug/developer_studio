@@ -1,0 +1,52 @@
+<% @service.blueprint.consumer_params.each do |consumer_param| %>
+
+  <div class="blueprint_item_collapse_area">
+    <legend>
+      <div class="dropdown pull-right">
+        <a class="btn btn-custom" data-toggle="dropdown">
+          <i class="fa fa-bars"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li>
+            <%= link_to icon_text('fa-caret-up', 'Move up'),
+              "#",
+              title: 'Move up',
+              id: "service_blueprint_consumer_param_#{consumer_param.index}_moveup_button_disabled", remote: true,
+              class: "disabled_link",
+              style: ( 'display:none;' unless consumer_param.disable_moveup ) %>
+            <%= link_to icon_text('fa-caret-up', 'Move up'),
+              service_blueprint_consumer_param_moveup_path(service_id: @service.name, consumer_param_id: consumer_param.index),
+              title: 'Move up',
+              id: "service_blueprint_consumer_param_#{consumer_param.index}_moveup_button", remote: true,
+              class: "show_saving_spinner_on_click",
+              style: ( 'display:none;' if consumer_param.disable_moveup ) %>
+          </li>
+          <li>
+            <%= link_to icon_text('fa-trash-o', 'Delete'),
+              service_blueprint_consumer_param_path(service_id: @service.name, id: consumer_param.index),
+              method: :delete, remote: true,
+              title: 'Delete',
+              class: 'show_saving_spinner_on_confirmed',
+              data: {confirm: "Are you sure that you want to delete this consumer param?"} %>
+          </li>
+        </ul>
+      </div>
+      <a class="blueprint_item_collapse" data-toggle="collapse" href="#service_blueprint_consumer_param_<%= consumer_param.index %>_form">
+          Consumer param <%= consumer_param.index + 1 %> -
+          <span id="service_blueprint_consumer_param_<%= consumer_param.index %>_section_heading">
+            <%= consumer_param.to_s %>
+          </span>
+      </a>
+    </legend>
+
+    <div class="collapse <%= 'in' if consumer_param.new_record %>" id="service_blueprint_consumer_param_<%= consumer_param.index %>_form">
+      <%= render 'services/blueprints/consumer_params/form', consumer_param: consumer_param %>
+    </div>
+  </div>
+
+<% end %>
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New consumer param'),
+      new_service_blueprint_consumer_param_path(service_id: @service.name),
+      remote: true, class: 'btn btn-custom pull-right' %>
+</div>

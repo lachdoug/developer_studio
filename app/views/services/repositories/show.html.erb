@@ -2,6 +2,9 @@
 <h4>
   <%= @service.name %> repository
 </h4>
+<div class='col-sm-12'>
+  <p><%= @service.repo.remote_url %></p>
+</div>
 <legend>Status</legend>
 <div class='col-sm-12'>
   <pre><%= @service.repo.status %></pre>
@@ -22,7 +25,6 @@
     <p>Enter a message to commit.</p>
     <%= simple_form_for @service.commit,
           url: service_repository_commit_path(service_id: @service.name),
-          # method: :post,
           html: { class: 'form-horizontal' },
           wrapper: :horizontal_form do |f| %>
       <%= f.input :message, as: :text, required: true %>
@@ -65,10 +67,3 @@
   <br>
 </div>
 <% end %>
-
-<legend>Remote</legend>
-<div class='col-sm-12'>
-  <%= # link_to icon_text('fa-git', 'Open'), @service.repo.remote_url, target: @service.repo.remote_url, class: 'btn btn-custom pull-right'
-  %>
-  <p><%= @service.repo.remote_url %></p>
-</div>

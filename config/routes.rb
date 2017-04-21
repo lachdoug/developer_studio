@@ -163,43 +163,35 @@ Rails.application.routes.draw do
       resources :replacement_strings, only: [:new, :update, :destroy] do
         resource :moveup, module: :replacement_strings, only: [:show]
       end
-      resources :database_seed, only: [:new, :update, :destroy] do
-        resource :moveup, module: :database_seed, only: [:show]
-      end
-      resources :file_write_permissions, only: [:new, :update, :destroy] do
-        resource :moveup, module: :file_write_permissions, only: [:show]
-      end
       resources :persistent_directories, only: [:new, :update, :destroy] do
         resource :moveup, module: :persistent_directories, only: [:show]
       end
-      resources :persistent_files, only: [:new, :update, :destroy] do
-        resource :moveup, module: :persistent_files, only: [:show]
-      end
-      resource :components, only: [:update] do
-        resources :sources, module: :components, only: [:new, :update, :destroy] do
-          resource :moveup, module: :sources, only: [:show]
+      resources :consumer_params, only: [:new, :update, :destroy] do
+        resource :moveup, module: :consumer_params, only: [:show]
+        resource :input, only: [], module: :consumer_params do
+          resource :collection, only: [], module: :inputs do
+            resources :items, only: [:new, :destroy], module: :collections do
+              resource :moveup, only: [:show], module: :items
+            end
+          end
         end
-      end
-      resource :workers, only: [:update] do
-        resources :commands, module: :workers, only: [:new, :update, :destroy] do
-          resource :moveup, module: :commands, only: [:show]
-        end
-      end
-      resources :rake_tasks, only: [:new, :update, :destroy] do
-        resource :moveup, module: :rake_tasks, only: [:show]
-      end
-      resources :custom_php_inis, only: [:new, :update, :destroy] do
-        resource :moveup, module: :custom_php_inis, only: [:show]
-      end
-      resources :apache_htaccess_files, only: [:new, :update, :destroy] do
-        resource :moveup, module: :apache_htaccess_files, only: [:show]
-      end
-      resources :apache_httpd_configurations, only: [:new, :update, :destroy] do
-        resource :moveup, module: :apache_httpd_configurations, only: [:show]
       end
       resources :actionators, only: [:new, :update, :destroy] do
         resource :moveup, module: :actionators, only: [:show]
         resources :variables, only: [:new, :update, :destroy], module: :actionators do
+          resource :moveup, module: :variables, only: [:show]
+          resource :input, only: [], module: :variables do
+            resource :collection, only: [], module: :inputs do
+              resources :items, only: [:new, :destroy], module: :collections do
+                resource :moveup, only: [:show], module: :items
+              end
+            end
+          end
+        end
+      end
+      resources :configurators, only: [:new, :update, :destroy] do
+        resource :moveup, module: :configurators, only: [:show]
+        resources :variables, only: [:new, :update, :destroy], module: :configurators do
           resource :moveup, module: :variables, only: [:show]
           resource :input, only: [], module: :variables do
             resource :collection, only: [], module: :inputs do

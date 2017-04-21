@@ -18,7 +18,9 @@ class Service
       :template_files,
       :replacement_strings,
       :persistent_directories,
+      :consumer_params,
       :actionators,
+      :configurators,
       :schedules
     ].each do |method_name|
       define_method method_name do

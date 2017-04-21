@@ -4,9 +4,11 @@
 <div class="form-section-heading">Deployment</div>
 <%= f.input :framework, as: :select, required: true, collection: f.object.frameworks_collection %>
 <%= f.input :deployment_type, as: :select, required: true, collection: f.object.types_collection, wrapper_html: { class: 'blueprint_deployment_type_select_wrapper' } %>
-<%= f.input :http_protocol, as: :select, required: true, collection: f.object.http_protocol_collection, label: 'HTTP protocol' %>
-<%= f.input :framework_port_override, as: :integer, input_html: { min: 0, max: 65535 }  %>
-<%= f.input :web_root_directory %>
+<div class='blueprint_deployment_type_select_dependent_fields'>
+  <%= f.input :http_protocol, as: :select, required: true, collection: f.object.http_protocol_collection, label: 'HTTP protocol' %>
+  <%= f.input :framework_port_override, as: :integer, input_html: { min: 0, max: 65535 }  %>
+  <%= f.input :web_root_directory %>
+</div>
 <%= f.input :continuous_deployment, as: :boolean, wrapper: :horizontal_boolean %>
 <div class="form-section-heading">Memory</div>
 <%= f.input :memory_required, as: :integer, label: 'Required MB' %>

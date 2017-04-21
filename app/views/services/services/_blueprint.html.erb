@@ -80,9 +80,19 @@
                   Persistent directories <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_persistent_directories_pill_error" %>
                 <% end %>
               </li>
+              <li id='engine_blueprint_section_consumer_params_pill' class='page_section_pill'>
+                <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("consumer_params")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
+                  Consumer params <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_consumer_params_pill_error" %>
+                <% end %>
+              </li>
               <li id='engine_blueprint_section_actionators_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("actionators")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
                   Actionators <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_actionators_pill_error" %>
+                <% end %>
+              </li>
+              <li id='engine_blueprint_section_configurators_pill' class='page_section_pill'>
+                <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("configurators")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
+                  Configurators <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_configurators_pill_error" %>
                 <% end %>
               </li>
               <li id='engine_blueprint_section_schedules_pill' class='page_section_pill'>
@@ -143,6 +153,12 @@
   </div>
   <div id='engine_blueprint_section_actionators' class='engine_blueprint_section' style='display: none;'>
     <%= render 'services/blueprints/actionators/section' %>
+  </div>
+  <div id='engine_blueprint_section_consumer_params' class='engine_blueprint_section' style='display: none;'>
+    <%= render 'services/blueprints/consumer_params/section' %>
+  </div>
+  <div id='engine_blueprint_section_configurators' class='engine_blueprint_section' style='display: none;'>
+    <%= render 'services/blueprints/configurators/section' %>
   </div>
   <div id='engine_blueprint_section_schedules' class='engine_blueprint_section' style='display: none;'>
     <%= render 'services/blueprints/schedules/section' %>

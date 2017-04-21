@@ -1,0 +1,4 @@
+<% if consumer_param.index > 0 %>
+  $("#<%= "service_blueprint_consumer_param_#{consumer_param.index}_moveup_button_disabled" %>").hide();
+  $("#<%= "service_blueprint_consumer_param_#{consumer_param.index}_moveup_button" %>").show();
+<% end %>
