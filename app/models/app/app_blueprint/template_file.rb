@@ -12,6 +12,10 @@ class App
         path || 'New'
       end
 
+      def template_file_languages
+        dropdowns_config[:template_file_languages]
+      end
+
     end
   end
 end

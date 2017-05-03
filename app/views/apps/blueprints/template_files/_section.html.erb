@@ -44,7 +44,7 @@
         namespace: "app_blueprint_template_file_#{template_file.index}",
         url: app_blueprint_template_file_path(app_id: @app.name, id: template_file.index) do |f| %>
         <%= f.input :path, required: true, hint: 'Relative to /home/ (except when path prefixed with /usr/local/ or /home/ ).' %>
-        <%= f.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: template_file.script_language_collection, include_blank: false, required: false %>
+        <%= f.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: template_file.template_file_languages, include_blank: false, required: false %>
         <%= f.input :content, as: :code, input_html: { data: { mode: template_file.send(:language) } }  %>
       <% end %>
       <hr>

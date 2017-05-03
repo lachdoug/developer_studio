@@ -55,6 +55,16 @@ module Settings
           "Tomcat 9": "tomcat9",
           "X11": "x11"
         },
+        "template_file_languages": {
+          "Javascript": "javascript",
+          "Lua": "lua",
+          "Shell": "sh",
+          "PHP": "php",
+          "Python": "python",
+          "R": "r",
+          "Text": "text",
+          "YAML": "yaml"
+        },
         "script_languages": {
           "Javascript": "javascript",
           "Lua": "lua",
