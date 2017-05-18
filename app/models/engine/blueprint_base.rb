@@ -12,7 +12,7 @@ class Engine
     end
 
     def save
-      file.update content
+      @content = file.update content
     end
 
     def content

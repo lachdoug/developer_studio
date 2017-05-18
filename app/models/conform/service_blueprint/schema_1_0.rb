@@ -27,7 +27,7 @@ module Conform
             version: {
               major: r(:metadata, :blueprint, :version, :major).to_i,
               minor: r(:metadata, :blueprint, :version, :minor).to_i,
-              level: r(:metadata, :blueprint, :version, :level).to_s,
+              level: (r(:metadata, :blueprint, :version, :level) || :alpha).to_s,
               patch: r(:metadata, :blueprint, :version, :patch).to_i,
             }
           },
@@ -38,14 +38,14 @@ module Conform
               version: r(:metadata, :software, :display, :version).to_s,
               description: r(:metadata, :software, :display, :description).to_s,
               url: r(:metadata, :software, :display, :url).to_s,
-            },
+            }.delete_if { |k,v| v.blank? },
             license: {
               label: r(:metadata, :software, :license, :label).to_s,
               url: r(:metadata, :software, :license, :url).to_s,
-            }
-          },
+            }.delete_if { |k,v| v.blank? }
+          }.delete_if { |k,v| v.blank? },
           timestamp: timestamp
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def timestamp
@@ -72,7 +72,7 @@ module Conform
           actionators: actionators,
           configurators: configurators,
           schedules: schedules
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def base
@@ -81,14 +81,14 @@ module Conform
           deployment_type: r(:software, :base, :deployment_type).to_s,
           http_protocol: r(:software, :base, :http_protocol).to_s,
           memory: memory
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def memory
         {
           required: r(:software, :base, :memory, :required).to_i,
           recommended: r(:software, :base, :memory, :recommended).to_i
-        }
+        }.delete_if { |k,v| v == 0 }
       end
 
       def ports
@@ -102,24 +102,24 @@ module Conform
           port: p.dig(:port).to_i,
           external: p.dig(:external).to_i,
           protocol: p.dig(:protocol).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def scripts
         {
           start: { language: r(:software, :scripts, :start, :language).to_s,
                     content: r(:software, :scripts, :start, :content).to_s
-                  },
+                  }.delete_if { |k,v| v.blank? },
           install: { language: r(:software, :scripts, :install, :language).to_s,
                     content: r(:software, :scripts, :install, :content).to_s
-                  },
+                  }.delete_if { |k,v| v.blank? },
           post_install: { language: r(:software, :scripts, :post_install, :language).to_s,
                     content: r(:software, :scripts, :post_install, :content).to_s
-                  },
+                  }.delete_if { |k,v| v.blank? },
           shutdown: { language: r(:software, :scripts, :shutdown, :language).to_s,
                     content: r(:software, :scripts, :shutdown, :content).to_s
-                  },
-        }
+                  }.delete_if { |k,v| v.blank? },
+        }.delete_if { |k,v| v.blank? }
       end
 
       def external_repositories
@@ -132,7 +132,7 @@ module Conform
         {
           url: er.dig(:url).to_s,
           key: er.dig(:key).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def system_packages
@@ -145,7 +145,7 @@ module Conform
         {
           package: sp.dig(:package).to_s,
           version: sp.dig(:version).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def installed_packages
@@ -157,11 +157,11 @@ module Conform
       def installed_package_for(ip)
         {
           name: ip.dig(:name).to_s,
-          source_url: ip.dig(:source_url).to_s,
+          source: ( ip.dig(:source) || ip.dig(:source_url) ).to_s,
           destination: ip.dig(:destination).to_s,
           extraction_command: ip.dig(:extraction_command).to_s,
           path_to_extracted: ip.dig(:path_to_extracted).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def required_modules
@@ -175,7 +175,7 @@ module Conform
           name: rm.dig(:name).to_s,
           type: rm.dig(:type).to_s,
           os_package: rm.dig(:os_package).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def service_configurations
@@ -190,7 +190,7 @@ module Conform
           publisher_namespace: sc.dig(:publisher_namespace).to_s,
           type_path: sc.dig(:type_path).to_s,
           variables: sc.dig(:variables)
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def environment_variables
@@ -217,13 +217,13 @@ module Conform
             validation: {
               pattern: ev.dig(:input, :validation, :pattern).to_s,
               message: ev.dig(:input, :validation, :message).to_s
-            },
+            }.delete_if { |k,v| v.blank? },
             collection: {
               include_blank: cast_boolean_for( ev.dig(:input, :collection, :include_blank) ),
               items: ev.dig(:input, :collection, :items) || {}
-             },
-          }
-        }
+             }.delete_if { |k,v| v.blank? },
+          }.delete_if { |k,v| v.blank? }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def consumer_params
@@ -250,13 +250,13 @@ module Conform
             validation: {
               pattern: cp.dig(:input, :validation, :pattern).to_s,
               message: cp.dig(:input, :validation, :message).to_s
-            },
+            }.delete_if { |k,v| v.blank? },
             collection: {
               include_blank: cast_boolean_for( cp.dig(:input, :collection, :include_blank) ),
               items: cp.dig(:input, :collection, :items) || {}
-             },
-          }
-        }
+             }.delete_if { |k,v| v.blank? },
+          }.delete_if { |k,v| v.blank? }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def template_files
@@ -270,7 +270,7 @@ module Conform
           path: tf.dig(:path).to_s,
           language: tf.dig(:language).to_s,
           content: tf.dig(:content).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def replacement_strings
@@ -284,7 +284,7 @@ module Conform
           string: rs.dig(:string).to_s,
           source_file: rs.dig(:source_file).to_s,
           destination_file: rs.dig(:destination_file).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def persistent_directories
@@ -296,7 +296,7 @@ module Conform
       def persistent_directory_for(pd)
         {
           path: pd.dig(:path).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def actionators
@@ -316,8 +316,8 @@ module Conform
           variables: actionator_variables_for(a),
           script: {
             language: a.dig(:script, :language).to_s,
-            content: a.dig(:script, :content).to_s }
-        }
+            content: a.dig(:script, :content).to_s }.delete_if { |k,v| v.blank? }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def actionator_variables_for(a)
@@ -341,13 +341,13 @@ module Conform
             validation: {
               pattern: av.dig(:input, :validation, :pattern).to_s,
               message: av.dig(:input, :validation, :message).to_s
-            },
+            }.delete_if { |k,v| v.blank? },
             collection: {
               include_blank: cast_boolean_for( av.dig(:input, :collection, :include_blank) ),
               items: av.dig(:input, :collection, :items) || {}
-             },
-          }
-        }
+             }.delete_if { |k,v| v.blank? },
+          }.delete_if { |k,v| v.blank? }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def configurators
@@ -365,8 +365,8 @@ module Conform
           variables: configurator_variables_for(c),
           script: {
             language: c.dig(:script, :language).to_s,
-            content: c.dig(:script, :content).to_s }
-        }
+            content: c.dig(:script, :content).to_s }.delete_if { |k,v| v.blank? }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def configurator_variables_for(c)
@@ -390,13 +390,13 @@ module Conform
             validation: {
               pattern: cv.dig(:input, :validation, :pattern).to_s,
               message: cv.dig(:input, :validation, :message).to_s
-            },
+            }.delete_if { |k,v| v.blank? },
             collection: {
               include_blank: cast_boolean_for( cv.dig(:input, :collection, :include_blank) ),
               items: cv.dig(:input, :collection, :items) || {}
-             },
-          }
-        }
+             }.delete_if { |k,v| v.blank? },
+          }.delete_if { |k,v| v.blank? }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def schedules
@@ -414,21 +414,21 @@ module Conform
             day_of_month: s.dig(:timespec, :day_of_month),
             month: s.dig(:timespec, :month),
             day_of_week: s.dig(:timespec, :day_of_week)
-          },
+          }.delete_if { |k,v| v.blank? },
           instruction: s.dig(:instruction).to_s,
         }.merge(
           if s.dig(:instruction).to_s == 'action'
             { actionator: schedule_actionator_for(s) }
           else
             {}
-          end )
+          end ).delete_if { |k,v| v.blank? }
       end
 
       def schedule_actionator_for(s)
         {
           name: s.dig(:actionator, :name).to_s,
           params: ( s.dig(:actionator, :params) || {} )
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def cast_boolean_for(boolean)

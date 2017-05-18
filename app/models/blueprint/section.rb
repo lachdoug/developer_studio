@@ -34,7 +34,7 @@ module Blueprint
     def self.define_build_section(attributes)
       send(:define_method, :build_section) do
         attributes.each do |attribute|
-          instance_variable_set( "@#{attribute}", data.dig(attribute) )
+          instance_variable_set( "@#{attribute}", ( data || {} ).dig(attribute) )
         end
       end
     end

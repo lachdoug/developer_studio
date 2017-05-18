@@ -7,13 +7,11 @@ $(document).on('turbolinks:load', function(){
   do_blueprint_section_forms();
 });
 
-
 var do_blueprint_deployment_type_select = function(){
   $('#engine_blueprint_section_base').show();
   blueprint_deployment_type_select_depend_on($('.blueprint_deployment_type_select_wrapper select'));
   $('#engine_blueprint_section_base').hide();
 };
-
 
 var blueprint_deployment_type_select_depend_on = function(select_object) {
   if ( $(select_object).val() == "worker" ) {
@@ -22,9 +20,6 @@ var blueprint_deployment_type_select_depend_on = function(select_object) {
     $(select_object).closest('.blueprint_deployment_type_select_wrapper').next().show();
   };
 };
-
-
-
 
 var do_blueprint_section_forms = function() {
   check_validity_of_all_blueprint_sections();

@@ -4,7 +4,7 @@ class App
 
 
       def collection_data
-        data.map.with_index do |schedule, i|
+        ( data || [] ).map.with_index do |schedule, i|
           { i =>
             { label: schedule[:label],
               timespec_minute: schedule.dig(:timespec, :minute),

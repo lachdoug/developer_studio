@@ -5,10 +5,10 @@ class App
       attr_reader :start, :install, :post_install, :shutdown
 
       def build_section
-        @start = Script.new(data.dig :start )
-        @install = Script.new(data.dig :install )
-        @post_install = Script.new(data.dig :post_install )
-        @shutdown = Script.new(data.dig :shutdown )
+        @start = Script.new( ( data || {} ).dig :start )
+        @install = Script.new( ( data || {} ).dig :install )
+        @post_install = Script.new( ( data || {} ).dig :post_install )
+        @shutdown = Script.new( ( data || {} ).dig :shutdown )
       end
 
       def start_attributes=(params)

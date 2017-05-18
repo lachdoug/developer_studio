@@ -4,9 +4,9 @@ class Service
 
       form_attributes :path, :content, :language
 
-      def language
-        @language ||= :text
-      end
+      # def language
+      #   @language ||= :text
+      # end
 
       def to_s
         path || 'New'

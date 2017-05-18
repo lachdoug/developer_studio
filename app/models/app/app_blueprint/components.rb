@@ -11,13 +11,13 @@ class App
       end
 
       def build_section
-        @path = data.dig :path
-        @extract = data.dig :extract
+        @path = ( data || {} ).dig :path
+        @extract = ( data || {} ).dig :extract
         self.sources_attributes = sources_collection_data
       end
 
       def sources_collection_data
-        data.dig( :sources ).map.with_index do |source, i|
+        ( ( data || {} ).dig( :sources ) || [] ).map.with_index do |source, i|
           { i =>
             source.map do |k,v|
               if k.to_sym == :install_script

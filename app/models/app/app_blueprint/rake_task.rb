@@ -5,8 +5,10 @@ class App
       form_attributes :action, :always_run
 
       def form_data
-        { action: action,
-          always_run: ActiveRecord::Type::Boolean.new.cast(always_run) }
+        {
+          action: action,
+          always_run: ActiveRecord::Type::Boolean.new.cast(always_run)
+        }
       end
 
     end

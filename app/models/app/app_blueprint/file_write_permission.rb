@@ -5,8 +5,10 @@ class App
       form_attributes :path, :recursive
 
       def form_data
-        { path: path,
-          recursive: ActiveRecord::Type::Boolean.new.cast(recursive) }
+        {
+          path: path,
+          recursive: ActiveRecord::Type::Boolean.new.cast(recursive)
+        }
       end
 
     end

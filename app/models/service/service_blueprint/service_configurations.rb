@@ -4,7 +4,7 @@ class Service
 
 
       def collection_data
-        data.map.with_index do |service_configuration, i|
+        ( data || [] ).map.with_index do |service_configuration, i|
           { i =>
             service_configuration.map do |k,v|
               if k.to_sym == :variables

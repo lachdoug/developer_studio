@@ -9,8 +9,10 @@ class App
           attr_accessor :pattern, :message
 
           def form_data
-            { pattern: pattern,
-              message: message }
+            {
+              pattern: pattern,
+              message: message
+            }
           end
 
         end

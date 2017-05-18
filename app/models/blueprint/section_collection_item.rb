@@ -18,7 +18,7 @@ module Blueprint
       send(:define_method, :form_data) do
         attributes.map do |attribute|
           { attribute => send(attribute) }
-        end.inject(:merge)
+        end.inject(:merge).delete_if { |k,v| v.blank? }
       end
     end
 

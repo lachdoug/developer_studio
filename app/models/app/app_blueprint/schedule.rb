@@ -61,7 +61,7 @@ class App
           label: label,
           timespec: timespec,
           instruction: instruction,
-        }.merge form_actionator_data
+        }.merge(form_actionator_data)
       end
 
       def timespec

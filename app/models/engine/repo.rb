@@ -113,7 +113,7 @@ class Engine
     end
 
     def push
-      stdout, stderr, status = Open3.capture3("env GIT_SSH_COMMAND=\"ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i /home/home_dir/.ssh/identity\" git -C #{path} push origin master")
+      stdout, stderr, status = Open3.capture3("git -C #{path} push origin master")
       if status.exitstatus == 0
         { success: true }
       else

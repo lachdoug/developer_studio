@@ -16,18 +16,18 @@ class App
                     :installation_report
 
       def build_section
-        @name = data.dig :name
-        @framework = data.dig :framework
-        @deployment_type = data.dig :deployment_type
-        @http_protocol = data.dig :http_protocol
-        @framework_port_override = data.dig :framework_port_override
-        @web_root_directory = data.dig :web_root_directory
-        @continuous_deployment = data.dig :continuous_deployment
-        @memory_required = data.dig :memory, :required
-        @memory_recommended = data.dig :memory, :recommended
-        @install_form_comment = data.dig :install_form_comment
-        @first_run_url = data.dig :first_run_url
-        @installation_report = data.dig :installation_report
+        @name = ( data || {} ).dig :name
+        @framework = ( data || {} ).dig :framework
+        @deployment_type = ( data || {} ).dig :deployment_type
+        @http_protocol = ( data || {} ).dig :http_protocol
+        @framework_port_override = ( data || {} ).dig :framework_port_override
+        @web_root_directory = ( data || {} ).dig :web_root_directory
+        @continuous_deployment = ( data || {} ).dig :continuous_deployment
+        @memory_required = ( data || {} ).dig :memory, :required
+        @memory_recommended = ( data || {} ).dig :memory, :recommended
+        @install_form_comment = ( data || {} ).dig :install_form_comment
+        @first_run_url = ( data || {} ).dig :first_run_url
+        @installation_report = ( data || {} ).dig :installation_report
       end
 
       def form_data
@@ -35,8 +35,8 @@ class App
           name: name,
           framework: framework,
           memory: {
-            required: memory_required,
-            recommended: memory_recommended
+            required: memory_required.to_i,
+            recommended: memory_recommended.to_i
           },
           http_protocol: ( http_protocol if deployment_type == 'web' ).to_s,
           framework_port_override: framework_port_override,

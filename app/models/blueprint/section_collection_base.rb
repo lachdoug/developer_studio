@@ -20,6 +20,10 @@ module Blueprint
       @collection
     end
 
+    def any?
+      @collection.any?
+    end
+
     def last
       @collection.last
     end

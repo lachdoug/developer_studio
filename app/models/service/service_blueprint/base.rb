@@ -9,11 +9,11 @@ class Service
                     :memory_recommended
 
       def build_section
-        @name = data.dig :name
-        @deployment_type = data.dig :deployment_type
-        @http_protocol = data.dig :http_protocol
-        @memory_required = data.dig :memory, :required
-        @memory_recommended = data.dig :memory, :recommended
+        @name = ( data || {} ).dig :name
+        @deployment_type = ( data || {} ).dig :deployment_type
+        @http_protocol = ( data || {} ).dig :http_protocol
+        @memory_required = ( data || {} ).dig :memory, :required
+        @memory_recommended = ( data || {} ).dig :memory, :recommended
       end
 
       def form_data

@@ -7,7 +7,7 @@ class Service
       end
 
       def collection_data
-        data.map.with_index do |variable_params, i|
+        ( data || [] ).map.with_index do |variable_params, i|
           { i => variable_attributes_for(variable_params) }
         end.inject(:merge) || {}
       end

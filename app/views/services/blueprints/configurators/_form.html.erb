@@ -8,7 +8,7 @@
   <div class="form-section-heading">Script</div>
   <%= f.simple_fields_for :script do |ff| %>
     <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'},
-    collection: configurator.script_language_collection, include_blank: false, required: false %>
+    collection: configurator.script_language_collection, include_blank: true, required: false %>
     <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: configurator.script.send(:language) } }  %>
   <% end %>
   <% configurator.variables.each do |variable| %>

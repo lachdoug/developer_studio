@@ -27,7 +27,7 @@ module Conform
             version: {
               major: r(:metadata, :blueprint, :version, :major).to_i,
               minor: r(:metadata, :blueprint, :version, :minor).to_i,
-              level: r(:metadata, :blueprint, :version, :level).to_s,
+              level: (r(:metadata, :blueprint, :version, :level) || :alpha).to_s,
               patch: r(:metadata, :blueprint, :version, :patch).to_i,
             }
           },
@@ -37,15 +37,15 @@ module Conform
               label: r(:metadata, :software, :display, :label).to_s,
               version: r(:metadata, :software, :display, :version).to_s,
               description: r(:metadata, :software, :display, :description).to_s,
-              url: r(:metadata, :software, :display, :url).to_s,
-            },
+              url: r(:metadata, :software, :display, :url).to_s
+            }.delete_if { |k,v| v.blank? },
             license: {
               label: r(:metadata, :software, :license, :label).to_s,
               url: r(:metadata, :software, :license, :url).to_s,
-            }
-          },
+            }.delete_if { |k,v| v.blank? }
+          }.delete_if { |k,v| v.blank? },
           timestamp: timestamp
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def timestamp
@@ -73,21 +73,27 @@ module Conform
           persistent_files: persistent_files,
           components: components,
           workers: workers,
+          actionators: actionators,
+          schedules: schedules,
+          framework_specific: framework_specific
+        }.delete_if { |k,v| v.blank? }
+      end
+
+      def framework_specific
+        {
           rake_tasks: rake_tasks,
           custom_php_inis: custom_php_inis,
           apache_htaccess_files: apache_htaccess_files,
-          apache_httpd_configurations: apache_httpd_configurations,
-          actionators: actionators,
-          schedules: schedules
-        }
+          apache_httpd_configurations: apache_httpd_configurations
+        }.delete_if { |k,v| v.blank? }
       end
 
       def base
         {
           name: r(:software, :base, :name).to_s,
           framework: r(:software, :base, :framework).to_s,
-          deployment_type: r(:software, :base, :deployment_type).to_s,
-          http_protocol: r(:software, :base, :http_protocol).to_s,
+          deployment_type: (r(:software, :base, :deployment_type) || :web).to_s,
+          http_protocol: (r(:software, :base, :http_protocol) || :https_and_http).to_s,
           framework_port_override: ( r(:software, :base, :framework_port_override).present? ? r(:software, :base, :framework_port_override).to_i : '' ),
           web_root_directory: r(:software, :base, :web_root_directory).to_s,
           continuous_deployment: cast_boolean_for( r(:software, :base, :continuous_deployment) ),
@@ -95,14 +101,14 @@ module Conform
           install_form_comment: r(:software, :base, :install_form_comment).to_s,
           first_run_url: r(:software, :base, :first_run_url).to_s,
           installation_report: r(:software, :base, :installation_report).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def memory
         {
           required: r(:software, :base, :memory, :required).to_i,
           recommended: r(:software, :base, :memory, :recommended).to_i
-        }
+        }.delete_if { |k,v| v == 0 }
       end
 
       def ports
@@ -116,24 +122,24 @@ module Conform
           port: p.dig(:port).to_i,
           external: p.dig(:external).to_i,
           protocol: p.dig(:protocol).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def scripts
         {
           start: { language: r(:software, :scripts, :start, :language).to_s,
                     content: r(:software, :scripts, :start, :content).to_s
-                  },
+                  }.delete_if { |k,v| v.blank? },
           install: { language: r(:software, :scripts, :install, :language).to_s,
                     content: r(:software, :scripts, :install, :content).to_s
-                  },
+                  }.delete_if { |k,v| v.blank? },
           post_install: { language: r(:software, :scripts, :post_install, :language).to_s,
                     content: r(:software, :scripts, :post_install, :content).to_s
-                  },
+                  }.delete_if { |k,v| v.blank? },
           shutdown: { language: r(:software, :scripts, :shutdown, :language).to_s,
                     content: r(:software, :scripts, :shutdown, :content).to_s
-                  },
-        }
+                  }.delete_if { |k,v| v.blank? },
+        }.delete_if { |k,v| v.blank? }
       end
 
       def external_repositories
@@ -146,7 +152,7 @@ module Conform
         {
           url: er.dig(:url).to_s,
           key: er.dig(:key).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def system_packages
@@ -159,7 +165,7 @@ module Conform
         {
           package: sp.dig(:package).to_s,
           version: sp.dig(:version).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def installed_packages
@@ -171,11 +177,11 @@ module Conform
       def installed_package_for(ip)
         {
           name: ip.dig(:name).to_s,
-          source_url: ip.dig(:source_url).to_s,
+          source: ( ip.dig(:source) || ip.dig(:source_url)).to_s,
           destination: ip.dig(:destination).to_s,
           extraction_command: ip.dig(:extraction_command).to_s,
           path_to_extracted: ip.dig(:path_to_extracted).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def required_modules
@@ -189,11 +195,10 @@ module Conform
           name: rm.dig(:name).to_s,
           type: rm.dig(:type).to_s,
           os_package: rm.dig(:os_package).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def service_configurations
-        # byebug
         ( r(:software, :service_configurations) || []).map do |sc|
           service_configuration_for sc
         end
@@ -204,7 +209,7 @@ module Conform
           publisher_namespace: sc.dig(:publisher_namespace).to_s,
           type_path: sc.dig(:type_path).to_s,
           variables: sc.dig(:variables)
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def environment_variables
@@ -231,13 +236,13 @@ module Conform
             validation: {
               pattern: ev.dig(:input, :validation, :pattern).to_s,
               message: ev.dig(:input, :validation, :message).to_s
-            },
+            }.delete_if { |k,v| v.blank? },
             collection: {
               include_blank: cast_boolean_for( ev.dig(:input, :collection, :include_blank) ),
               items: ev.dig(:input, :collection, :items) || {}
-             },
-          }
-        }
+             }.delete_if { |k,v| v.blank? },
+          }.delete_if { |k,v| v.blank? }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def template_files
@@ -251,7 +256,7 @@ module Conform
           path: tf.dig(:path).to_s,
           language: tf.dig(:language).to_s,
           content: tf.dig(:content).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def replacement_strings
@@ -265,7 +270,7 @@ module Conform
           string: rs.dig(:string).to_s,
           source_file: rs.dig(:source_file).to_s,
           destination_file: rs.dig(:destination_file).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def database_seed
@@ -273,7 +278,7 @@ module Conform
           language: r(:software, :database_seed, :language).to_s,
           content: r(:software, :database_seed, :content).to_s,
           script: cast_boolean_for( r(:software, :database_seed, :script) )
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def file_write_permissions
@@ -286,7 +291,7 @@ module Conform
         {
           path: fwp.dig(:path).to_s,
           recursive: cast_boolean_for( fwp.dig(:recursive) )
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def persistent_directories
@@ -298,7 +303,7 @@ module Conform
       def persistent_directory_for(pd)
         {
           path: pd.dig(:path).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def persistent_files
@@ -310,7 +315,7 @@ module Conform
       def persistent_file_for(pf)
         {
           path: pf.dig(:path).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def components
@@ -318,7 +323,7 @@ module Conform
           path: r(:software, :components, :path).to_s,
           extract: cast_boolean_for( r(:software, :components, :extract) ),
           sources: component_sources,
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def component_sources
@@ -333,15 +338,15 @@ module Conform
           url: c.dig(:url).to_s,
           install_script: {
             language: c.dig(:install_script, :language).to_s,
-            content: c.dig(:install_script, :content).to_s }
-        }
+            content: c.dig(:install_script, :content).to_s }.delete_if { |k,v| v.blank? }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def workers
         {
           blocking: r(:software, :workers, :blocking).to_s,
           commands: worker_commands
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def worker_commands
@@ -354,57 +359,7 @@ module Conform
         {
           name: wc.dig(:name).to_s,
           command: wc.dig(:command).to_s
-        }
-      end
-
-      def rake_tasks
-        ( r(:software, :rake_tasks) || []).map do |rt|
-          rake_task_for rt
-        end
-      end
-
-      def rake_task_for(rt)
-        {
-          action: rt.dig(:action).to_s,
-          always_run: cast_boolean_for( rt.dig(:always_run) )
-        }
-      end
-
-      def custom_php_inis
-        ( r(:software, :custom_php_inis) || []).map do |cpi|
-          custom_php_ini_for cpi
-        end
-      end
-
-      def custom_php_ini_for(cpi)
-        {
-          content: cpi.dig(:content).to_s
-        }
-      end
-
-      def apache_htaccess_files
-        ( r(:software, :apache_htaccess_files) || []).map do |ahf|
-          apache_htaccess_file_for ahf
-        end
-      end
-
-      def apache_htaccess_file_for(ahf)
-        {
-          directory: ahf.dig(:directory).to_s,
-          content: ahf.dig(:content).to_s
-        }
-      end
-
-      def apache_httpd_configurations
-        ( r(:software, :apache_httpd_configurations) || []).map do |ahc|
-          apache_httpd_configuration_for ahc
-        end
-      end
-
-      def apache_httpd_configuration_for(ahc)
-        {
-          content: ahc.dig(:content).to_s
-        }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def actionators
@@ -424,8 +379,8 @@ module Conform
           variables: actionator_variables_for(a),
           script: {
             language: a.dig(:script, :language).to_s,
-            content: a.dig(:script, :content).to_s }
-        }
+            content: a.dig(:script, :content).to_s }.delete_if { |k,v| v.blank? }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def actionator_variables_for(a)
@@ -449,13 +404,13 @@ module Conform
             validation: {
               pattern: av.dig(:input, :validation, :pattern).to_s,
               message: av.dig(:input, :validation, :message).to_s
-            },
+            }.delete_if { |k,v| v.blank? },
             collection: {
               include_blank: cast_boolean_for( av.dig(:input, :collection, :include_blank) ),
               items: av.dig(:input, :collection, :items) || {}
-             },
-          }
-        }
+             }.delete_if { |k,v| v.blank? },
+          }.delete_if { |k,v| v.blank? }
+        }.delete_if { |k,v| v.blank? }
       end
 
       def schedules
@@ -473,21 +428,71 @@ module Conform
             day_of_month: s.dig(:timespec, :day_of_month),
             month: s.dig(:timespec, :month),
             day_of_week: s.dig(:timespec, :day_of_week)
-          },
+          }.delete_if { |k,v| v.blank? },
           instruction: s.dig(:instruction).to_s,
         }.merge(
           if s.dig(:instruction).to_s == 'action'
             { actionator: schedule_actionator_for(s) }
           else
             {}
-          end )
+          end ).delete_if { |k,v| v.blank? }
       end
 
       def schedule_actionator_for(s)
         {
           name: s.dig(:actionator, :name).to_s,
           params: ( s.dig(:actionator, :params) || {} )
-        }
+        }.delete_if { |k,v| v.blank? }
+      end
+
+      def rake_tasks
+        ( r(:software, :framework_specific, :rake_tasks) || r(:software, :rake_tasks) || []).map do |rt|
+          rake_task_for rt
+        end
+      end
+
+      def rake_task_for(rt)
+        {
+          action: rt.dig(:action).to_s,
+          always_run: cast_boolean_for( rt.dig(:always_run) )
+        }.delete_if { |k,v| v.blank? }
+      end
+
+      def custom_php_inis
+        ( r(:software, :framework_specific, :custom_php_inis) || r(:software, :custom_php_inis) || []).map do |cpi|
+          custom_php_ini_for cpi
+        end
+      end
+
+      def custom_php_ini_for(cpi)
+        {
+          content: cpi.dig(:content).to_s
+        }.delete_if { |k,v| v.blank? }
+      end
+
+      def apache_htaccess_files
+        ( r(:software, :framework_specific, :apache_htaccess_files) || r(:software, :apache_htaccess_files) || []).map do |ahf|
+          apache_htaccess_file_for ahf
+        end
+      end
+
+      def apache_htaccess_file_for(ahf)
+        {
+          directory: ahf.dig(:directory).to_s,
+          content: ahf.dig(:content).to_s
+        }.delete_if { |k,v| v.blank? }
+      end
+
+      def apache_httpd_configurations
+        ( r(:software, :framework_specific, :apache_httpd_configurations) || r(:software, :apache_httpd_configurations) || []).map do |ahc|
+          apache_httpd_configuration_for ahc
+        end
+      end
+
+      def apache_httpd_configuration_for(ahc)
+        {
+          content: ahc.dig(:content).to_s
+        }.delete_if { |k,v| v.blank? }
       end
 
       def cast_boolean_for(boolean)

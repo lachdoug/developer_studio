@@ -3,7 +3,9 @@
 <%= f.input :name, required: true, pattern: "^[a-z0-9_]*$", maxlength: 16, hint: "Valid characters are lowercase alpha-numeric and underscore. Maximum length 16 characters." %>
 <div class="form-section-heading">Deployment</div>
 <%= f.input :deployment_type, as: :select, required: true, collection: f.object.types_collection, wrapper_html: { class: 'blueprint_deployment_type_select_wrapper' } %>
-<%= f.input :http_protocol, as: :select, required: true, collection: f.object.http_protocol_collection, label: 'HTTP protocol' %>
+<div class='blueprint_deployment_type_select_dependent_fields'>
+  <%= f.input :http_protocol, as: :select, required: true, collection: f.object.http_protocol_collection, label: 'HTTP protocol' %>
+</div>
 <div class="form-section-heading">Memory</div>
 <%= f.input :memory_required, as: :integer, label: 'Required MB' %>
 <%= f.input :memory_recommended, as: :integer, label: 'Recommended MB' %>

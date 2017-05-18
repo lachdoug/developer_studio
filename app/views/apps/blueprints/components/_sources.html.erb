@@ -50,7 +50,7 @@
           <%= ff.input :language, as: :select,
                 input_html: {class: 'ace-editor-language-select'},
                 collection: f.object.script_language_collection,
-                include_blank: false, required: false %>
+                include_blank: true, required: false %>
           <%= ff.input :content, as: :code,
                 input_html: { data: { mode: ff.object.send(:language) } },
                 required: false  %>

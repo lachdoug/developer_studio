@@ -232,7 +232,7 @@ module Conform
       def installed_package_for(ip)
         {
           name: ip.dig(:name).to_s,
-          source_url: ip.dig(:source_url).to_s,
+          source: ip.dig(:source_url).to_s,
           destination: ip.dig(:destination).to_s,
           extraction_command: ip.dig(:extraction_command).to_s,
           path_to_extracted: ip.dig(:path_to_extracted).to_s

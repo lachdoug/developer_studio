@@ -5,9 +5,9 @@ class Service
 
       form_attributes :language, :content, :script
 
-      def language
-        @language || :text
-      end
+      # def language
+      #   @language || :text
+      # end
 
       def form_data
         {

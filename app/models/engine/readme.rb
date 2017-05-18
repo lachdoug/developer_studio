@@ -22,7 +22,7 @@ class Engine
     end
 
     def update(params)
-      byebug
+      # byebug
       @content = params[:content]
       save
     end

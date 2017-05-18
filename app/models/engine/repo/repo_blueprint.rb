@@ -10,10 +10,14 @@ class Engine
       end
 
       def content
-        @content ||= blueprint_json
+        @content ||= repository_blueprint_json
       end
 
-      def timestamped_content
+      def conform_content
+        @content = blueprint_conform_class.new(content).Schema_1_0
+      end
+
+      def timestamp_content
         content.tap do |c|
           c[:metadata][:timestamp] = Time.now.utc
         end
@@ -23,14 +27,11 @@ class Engine
         unless File.exist? "#{repo.path}/blueprint.json"
           File.write "#{repo.path}/blueprint.json", ''
         end
+        save
       end
 
       def blueprint_conform_class
         "Conform::#{repo.engine.class}Blueprint".constantize
-      end
-
-      def blueprint_json
-        blueprint_conform_class.new(repository_blueprint_json).Schema_1_0
       end
 
       def repository_blueprint_json
@@ -44,12 +45,15 @@ class Engine
       end
 
       def save
-        File.write "#{repo.path}/blueprint.json", ( JSON.pretty_generate(timestamped_content) + "\n" )
+        File.write "#{repo.path}/blueprint.json", ( JSON.pretty_generate(content) + "\n" )
       end
 
       def update(new_content)
         @content = new_content
+        conform_content
+        timestamp_content
         save
+        return @content
       end
 
     end

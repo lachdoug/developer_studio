@@ -11,12 +11,12 @@ class App
       end
 
       def build_section
-        @blocking = data.dig :blocking
+        @blocking = ( data || {} ).dig :blocking
         self.commands_attributes = commands_collection_data
       end
 
       def commands_collection_data
-        data[:commands].map.with_index do |command, i|
+        ( ( data || {} )[:commands] || [] ).map.with_index do |command, i|
           { i => command }
         end.inject(:merge) || {}
       end

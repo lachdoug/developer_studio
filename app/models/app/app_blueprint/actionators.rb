@@ -7,7 +7,7 @@ class App
       end
 
       def collection_data
-        data.map.with_index do |actionator, i|
+        ( data || [] ).map.with_index do |actionator, i|
           { i =>
             actionator.map do |k,v|
               if k.to_sym == :script
