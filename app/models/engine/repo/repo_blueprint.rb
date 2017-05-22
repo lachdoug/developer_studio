@@ -27,6 +27,7 @@ class Engine
         unless File.exist? "#{repo.path}/blueprint.json"
           File.write "#{repo.path}/blueprint.json", ''
         end
+        conform_content
         save
       end
 

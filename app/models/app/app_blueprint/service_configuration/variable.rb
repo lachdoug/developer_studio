@@ -73,7 +73,7 @@ class App
 
         def variable_definition
           @variable_definition ||=
-          service_configuration.service_definition_consumer_params[name.to_sym]
+          ( service_configuration.service_definition_consumer_params[name.to_sym] || {} )
         end
 
         # Convert schema v0 service definition field types to v1 fields types
