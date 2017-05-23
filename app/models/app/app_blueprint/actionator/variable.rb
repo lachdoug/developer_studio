@@ -11,7 +11,7 @@ class App
         end
 
         def build_input
-          @input = Input.new(blueprint_section).tap(&:build_validation).tap(&:build_collection)
+          @input = Input.new(blueprint_section) #.tap(&:build_validation).tap(&:build_collection)
         end
 
         def form_data

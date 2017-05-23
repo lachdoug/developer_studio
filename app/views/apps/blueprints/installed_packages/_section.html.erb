@@ -44,7 +44,7 @@
         namespace: "app_blueprint_installed_package_#{installed_package.index}",
         url: app_blueprint_installed_package_path(app_id: @app.name, id: installed_package.index) do |f| %>
         <%= f.input :name, required: true %>
-        <%= f.input :source, as: :string %>
+        <%= f.input :source_url, as: :url, label: 'Source URL' %>
         <%= f.input :destination, hint: 'Relative to /home/app (defaults /home/app).' %>
         <%= f.input :extraction_command %>
         <%= f.input :path_to_extracted %>
