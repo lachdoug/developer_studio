@@ -42,8 +42,12 @@ class Service
           variable_definition.dig(:input, :type)
         end
 
-        def collection
-          variable_definition.dig(:input, :collection)
+        def collection_items
+          variable_definition.dig(:input, :collection, :items)
+        end
+
+        def collection_include_blank
+          variable_definition.dig(:input, :collection, :include_blank)
         end
 
         def label

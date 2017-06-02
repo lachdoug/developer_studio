@@ -10,8 +10,8 @@ class Service
         # byebug
       end
 
-      def build_script
-        @script = Script.new
+      def script
+        @script ||= Script.new
       end
 
       def variables

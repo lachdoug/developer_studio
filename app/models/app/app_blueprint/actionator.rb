@@ -10,8 +10,8 @@ class App
         # byebug
       end
 
-      def build_script
-        @script = Script.new
+      def script
+        @script ||= Script.new
       end
 
       def variables
