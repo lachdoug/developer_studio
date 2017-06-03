@@ -22,7 +22,7 @@ module Apps
 
       def strong_params
         params.require(:app_app_blueprint_external_repository).
-          permit( :url, :key )
+          permit( :source, :key )
       end
 
     end
