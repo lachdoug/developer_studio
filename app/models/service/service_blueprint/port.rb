@@ -5,7 +5,7 @@ class Service
       form_attributes :port, :external, :protocol
 
       def protocol_collection
-        { "TCP": :tcp, "UDP": :udp, "TCP and USP": :tcp_and_udp }
+        { "TCP": :tcp, "UDP": :udp, "TCP and UDP": :tcp_and_udp }
       end
 
     end
