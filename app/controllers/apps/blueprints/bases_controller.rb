@@ -13,6 +13,7 @@ module Apps
         params.require(:app_app_blueprint_base).
           permit( :name,
                   :framework,
+                  :parent_image,
                   :memory_required,
                   :memory_recommended,
                   :http_protocol,

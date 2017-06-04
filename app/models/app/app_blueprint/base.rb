@@ -4,6 +4,7 @@ class App
 
       attr_accessor :name,
                     :framework,
+                    :parent_image,
                     :memory_required,
                     :memory_recommended,
                     :http_protocol,
@@ -18,6 +19,7 @@ class App
       def build_section
         @name = ( data || {} ).dig :name
         @framework = ( data || {} ).dig :framework
+        @parent_image = ( data || {} ).dig :parent_image
         @deployment_type = ( data || {} ).dig :deployment_type
         @http_protocol = ( data || {} ).dig :http_protocol
         @framework_port_override = ( data || {} ).dig :framework_port_override
@@ -34,6 +36,7 @@ class App
         {
           name: name,
           framework: framework,
+          parent_image: parent_image,
           memory: {
             required: memory_required.to_i,
             recommended: memory_recommended.to_i

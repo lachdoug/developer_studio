@@ -86,7 +86,7 @@ module Conform
           web_root_directory: r(:software, :web_root_directory).to_s,
           continuous_deployment: cast_boolean_for( r(:software, :continuous_deployment) ),
           memory: memory,
-          install_form_comment: '',
+          # install_form_comment: '',
           first_run_url: r(:software, :first_run_url).to_s,
           installation_report: r(:software, :installation_report_template).to_s
         }

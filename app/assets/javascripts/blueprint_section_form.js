@@ -4,6 +4,7 @@ $(document).ajaxComplete(function(){
 
 $(document).on('turbolinks:load', function(){
   do_blueprint_deployment_type_select();
+  do_blueprint_framework_select();
   do_blueprint_section_forms();
 });
 
@@ -18,6 +19,21 @@ var blueprint_deployment_type_select_depend_on = function(select_object) {
     $(select_object).closest('.blueprint_deployment_type_select_wrapper').next().hide();
   } else {
     $(select_object).closest('.blueprint_deployment_type_select_wrapper').next().show();
+  };
+};
+
+
+var do_blueprint_framework_select = function(){
+  $('#engine_blueprint_section_base').show();
+  blueprint_framework_select_depend_on($('.blueprint_framework_select_wrapper select'));
+  $('#engine_blueprint_section_base').hide();
+};
+
+var blueprint_framework_select_depend_on = function(select_object) {
+  if ( $(select_object).val() != "docker" ) {
+    $(select_object).closest('.blueprint_framework_select_wrapper').next().hide();
+  } else {
+    $(select_object).closest('.blueprint_framework_select_wrapper').next().show();
   };
 };
 
@@ -151,6 +167,10 @@ var bind_blueprint_section_forms_input_change_events = function() {
   $('#engine_blueprint select').off('change');
   $('#engine_blueprint textarea').off('change');
 
+  $('.blueprint_framework_select_wrapper select').on('change', function(){
+    blueprint_framework_select_depend_on(this);
+    check_validity_of_all_blueprint_sections();
+  });
   $('.blueprint_deployment_type_select_wrapper select').on('change', function(){
     blueprint_deployment_type_select_depend_on(this);
     check_validity_of_all_blueprint_sections();

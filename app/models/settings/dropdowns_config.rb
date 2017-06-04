@@ -36,6 +36,7 @@ module Settings
           "Apache PHP": "apache_php",
           "Apache PHP 5/6": "apache_php56",
           "Base C": "base_c",
+          "Docker": "docker",
           "Jetty": "jetty",
           "Lua": "lua",
           "Meteor": "meteor",
