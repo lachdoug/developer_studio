@@ -93,6 +93,7 @@ module Conform
           name: r(:software, :base, :name).to_s,
           framework: r(:software, :base, :framework).to_s,
           parent_image: r(:software, :base, :parent_image).to_s,
+          run_as_user: r(:software, :base, :run_as_user).to_s,
           deployment_type: (r(:software, :base, :deployment_type) || :web).to_s,
           http_protocol: (r(:software, :base, :http_protocol) || :https_and_http).to_s,
           framework_port_override: ( r(:software, :base, :framework_port_override).present? ? r(:software, :base, :framework_port_override).to_i : '' ),

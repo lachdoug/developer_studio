@@ -5,6 +5,7 @@ class App
       attr_accessor :name,
                     :framework,
                     :parent_image,
+                    :run_as_user,
                     :memory_required,
                     :memory_recommended,
                     :http_protocol,
@@ -20,6 +21,7 @@ class App
         @name = ( data || {} ).dig :name
         @framework = ( data || {} ).dig :framework
         @parent_image = ( data || {} ).dig :parent_image
+        @run_as_user = ( data || {} ).dig :run_as_user
         @deployment_type = ( data || {} ).dig :deployment_type
         @http_protocol = ( data || {} ).dig :http_protocol
         @framework_port_override = ( data || {} ).dig :framework_port_override
@@ -37,6 +39,7 @@ class App
           name: name,
           framework: framework,
           parent_image: parent_image,
+          run_as_user: run_as_user,
           memory: {
             required: memory_required.to_i,
             recommended: memory_recommended.to_i

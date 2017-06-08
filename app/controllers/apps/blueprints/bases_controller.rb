@@ -14,6 +14,7 @@ module Apps
           permit( :name,
                   :framework,
                   :parent_image,
+                  :run_as_user,
                   :memory_required,
                   :memory_recommended,
                   :http_protocol,
