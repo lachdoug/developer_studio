@@ -17,7 +17,7 @@ class Service
                       :comment,
                       :hint,
                       :placeholder
-        attr_reader :blueprint_section, :validation, :collection
+        attr_reader :blueprint_section #, :validation, :collection
 
         def validation_attributes=(params={})
           @validation = Validation.new params
@@ -27,12 +27,12 @@ class Service
           @collection = Collection.new blueprint_section, params
         end
 
-        def build_validation
-          @validation = Validation.new
+        def validation
+          @validation ||= Validation.new
         end
 
-        def build_collection
-          @collection = Collection.new blueprint_section
+        def collection
+          @collection ||= Collection.new blueprint_section
         end
 
         def type_collection
