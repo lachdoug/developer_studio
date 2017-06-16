@@ -1,0 +1,4 @@
+<% if target_environment_variable.index > 0 %>
+  $("#<%= "service_blueprint_target_environment_variable_#{target_environment_variable.index}_moveup_button_disabled" %>").hide();
+  $("#<%= "service_blueprint_target_environment_variable_#{target_environment_variable.index}_moveup_button" %>").show();
+<% end %>

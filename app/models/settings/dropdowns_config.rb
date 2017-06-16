@@ -93,7 +93,39 @@ module Settings
           "PEAR": "pear",
           "PECL": "pecl",
           "PHP": "php"
-        }
+        },
+        "type_paths": [
+          "auth",
+          "avahi",
+          "backup",
+          "cert_auth",
+          "cron",
+          "database/nosql/mongo",
+          "database/sql/mysql",
+          "database/sql/pgsql",
+          "dhcpd",
+          "dns",
+          "dyndns",
+          "email",
+          "filesystem/local/filesystem",
+          "filesystem/remote/nfs",
+          "filesystem/service/ftp",
+          "filesystem/service/nfs",
+          "firstrun",
+          "imap",
+          "ldap",
+          "log_rotate",
+          "logview",
+          "mgmt",
+          "nginx",
+          "nosql_database",
+          "redis",
+          "schedule",
+          "smtp",
+          "syslog",
+          "system",
+          "wwwstats"
+        ]
       }
     end
 

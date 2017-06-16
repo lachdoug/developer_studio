@@ -3,9 +3,9 @@ class App
     class Components
       class Sources < ::Blueprint::SectionNestedCollection
 
-        def build
-          super.tap &:build_install_script
-        end
+        # def build
+        #   super.tap &:build_install_script
+        # end
 
       end
     end

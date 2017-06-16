@@ -1,0 +1,57 @@
+
+<% @service.blueprint.target_environment_variables.each do |target_environment_variable| %>
+
+  <%= custom_form_for target_environment_variable,
+    namespace: "service_blueprint_target_environment_variable_#{target_environment_variable.index}",
+    url: service_blueprint_target_environment_variable_path(service_id: @service.name, id: target_environment_variable.index) do |f| %>
+
+    <table class="table form_table">
+      <tr class="<%= 'hidden_table_header' if target_environment_variable.index > 0 %>">
+        <th>Variable name</th>
+        <th>Environment variable name</th>
+        <th width="1"></th>
+      </tr>
+      <tr>
+        <%= f.input :variable_name, required: true, wrapper: :form_table_cell_input %>
+        <%= f.input :environment_variable_name, wrapper: :form_table_cell_input %>
+        <td>
+          <div class="dropdown">
+            <a class="btn btn-custom" data-toggle="dropdown">
+              <i class="fa fa-bars"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li>
+                <%= link_to icon_text('fa-caret-up', 'Move up'),
+                  "#",
+                  title: 'Move up',
+                  id: "service_blueprint_target_environment_variable_#{target_environment_variable.index}_moveup_button_disabled", remote: true,
+                  class: "disabled_link",
+                  style: ( 'display:none;' unless target_environment_variable.disable_moveup ) %>
+                <%= link_to icon_text('fa-caret-up', 'Move up'),
+                  service_blueprint_target_environment_variable_moveup_path(service_id: @service.name, target_environment_variable_id: target_environment_variable.index),
+                  title: 'Move up',
+                  id: "service_blueprint_target_environment_variable_#{target_environment_variable.index}_moveup_button", remote: true,
+                  class: "show_saving_spinner_on_click",
+                  style: ( 'display:none;' if target_environment_variable.disable_moveup ) %>
+              </li>
+              <li>
+                <%= link_to icon_text('fa-trash-o', 'Delete'),
+                  service_blueprint_target_environment_variable_path(service_id: @service.name, id: target_environment_variable.index),
+                  method: :delete, remote: true,
+                  title: 'Delete',
+                  class: 'show_saving_spinner_on_confirmed',
+                  data: {confirm: "Are you sure that you want to delete this target environment variable?"} %>
+                </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+
+<% end %>
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New target environment variable'),
+      new_service_blueprint_target_environment_variable_path(service_id: @service.name),
+      remote: true, class: 'btn btn-custom pull-right' %>
+</div>

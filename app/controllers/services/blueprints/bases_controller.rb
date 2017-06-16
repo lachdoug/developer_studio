@@ -12,10 +12,21 @@ module Services
       def strong_params
         params.require(:service_service_blueprint_base).
           permit( :name,
+                  :publisher_namespace,
+                  :type_path,
+                  :service_handle_field,
+                  :parent_image,
+                  :run_as_user,
                   :deployment_type,
                   :http_protocol,
                   :memory_required,
-                  :memory_recommended )
+                  :memory_recommended,
+                  :dedicated,
+                  :persistent,
+                  :immutable,
+                  :attach_post_build,
+                  :attach_requires_restart,
+                  :soft_service )
       end
 
     end

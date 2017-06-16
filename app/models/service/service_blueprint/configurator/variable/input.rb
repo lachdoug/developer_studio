@@ -28,12 +28,12 @@ class Service
             @collection = Collection.new blueprint_section, params
           end
 
-          def build_validation
-            @validation = Validation.new
+          def validation
+            @validation ||= Validation.new
           end
 
-          def build_collection
-            @collection = Collection.new blueprint_section
+          def collection
+            @collection ||= Collection.new blueprint_section
           end
 
           def type_collection

@@ -124,7 +124,11 @@ Rails.application.routes.draw do
     end
     namespace :blueprint, module: :blueprints do
       resource :metadata, only: [:update]
-      resource :base, only: [:update]
+      resource :base, only: [:update] do
+        resources :accepts, module: :bases, only: [:new, :update, :destroy] do
+          resource :moveup, module: :accepts, only: [:show]
+        end
+      end
       resource :scripts, only: [:update]
       resources :ports, only: [:new, :update, :destroy] do
         resource :moveup, module: :ports, only: [:show]
@@ -156,6 +160,12 @@ Rails.application.routes.draw do
             end
           end
         end
+      end
+      resources :constants, only: [:new, :update, :destroy] do
+        resource :moveup, module: :constants, only: [:show]
+      end
+      resources :target_environment_variables, only: [:new, :update, :destroy] do
+        resource :moveup, module: :target_environment_variables, only: [:show]
       end
       resources :template_files, only: [:new, :update, :destroy] do
         resource :moveup, module: :template_files, only: [:show]

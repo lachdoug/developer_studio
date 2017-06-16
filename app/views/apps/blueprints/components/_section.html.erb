@@ -4,12 +4,10 @@
   <%= f.input :path %>
   <%= f.input :extract, as: :boolean, wrapper: :horizontal_boolean %>
 <% end %>
-
 <div class="form-section-heading">Sources</div>
 <div id='engine_blueprint_section_components_sources'>
   <%= render 'apps/blueprints/components/sources' %>
 </div>
-
 <div class='clearfix'>
   <%= link_to icon_text('fa-plus', 'New component source'),
     new_app_blueprint_components_source_path(app_id: @app.name),

@@ -10,8 +10,8 @@ class App
           @install_script = InstallScript.new(params)
         end
 
-        def build_install_script
-          @install_script = InstallScript.new
+        def install_script
+          @install_script ||= InstallScript.new
         end
 
         def to_s

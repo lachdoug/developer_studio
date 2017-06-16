@@ -12,6 +12,10 @@ module Apps
       def strong_params
         params.require(:app_app_blueprint_base).
           permit( :name,
+                  accepts: [ :type ],
+                  :publisher_namespace,
+                  :type_path,
+                  :service_handle_field,
                   :framework,
                   :parent_image,
                   :run_as_user,

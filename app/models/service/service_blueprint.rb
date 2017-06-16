@@ -15,6 +15,8 @@ class Service
       :required_modules,
       :service_configurations,
       :environment_variables,
+      :constants,
+      :target_environment_variables,
       :template_files,
       :replacement_strings,
       :persistent_directories,

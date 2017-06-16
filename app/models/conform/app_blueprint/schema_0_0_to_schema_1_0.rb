@@ -8,6 +8,8 @@ module Conform
 
       def r(*keys)
         @raw_blueprint.dig(*keys)
+      rescue
+        nil
       end
 
       def output

@@ -8,6 +8,8 @@ module Conform
 
       def r(*keys)
         @raw_blueprint.dig(*keys)
+      rescue
+        nil
       end
 
       def output
@@ -65,22 +67,36 @@ module Conform
           required_modules: required_modules,
           service_configurations: service_configurations,
           environment_variables: environment_variables,
+          constants: constants,
+          target_environment_variables: target_environment_variables,
           template_files: template_files,
           replacement_strings: replacement_strings,
           persistent_directories: persistent_directories,
           consumer_params: consumer_params,
           actionators: actionators,
           configurators: configurators,
-          schedules: schedules
+          schedules: schedules,
         }.delete_if { |k,v| v.blank? }
       end
 
       def base
         {
           name: r(:software, :base, :name).to_s,
+          accepts: Array(r(:software, :base, :accepts)),
+          publisher_namespace: r(:software, :base, :publisher_namespace).to_s,
+          type_path: r(:software, :base, :type_path).to_s,
+          service_handle_field: r(:software, :base, :service_handle_field).to_s,
+          parent_image: r(:software, :base, :parent_image).to_s,
+          run_as_user: r(:software, :base, :run_as_user).to_s,
           deployment_type: r(:software, :base, :deployment_type).to_s,
           http_protocol: r(:software, :base, :http_protocol).to_s,
-          memory: memory
+          memory: memory,
+          dedicated: cast_boolean_for(r(:software, :base, :dedicated)),
+          persistent: cast_boolean_for(r(:software, :base, :persistent)),
+          immutable: cast_boolean_for(r(:software, :base, :immutable)),
+          attach_post_build: cast_boolean_for(r(:software, :base, :attach_post_build)),
+          attach_requires_restart: cast_boolean_for(r(:software, :base, :attach_requires_restart)),
+          soft_service: cast_boolean_for(r(:software, :base, :soft_service))
         }.delete_if { |k,v| v.blank? }
       end
 
@@ -223,6 +239,32 @@ module Conform
               items: ev.dig(:input, :collection, :items) || {}
              }.delete_if { |k,v| v.blank? },
           }.delete_if { |k,v| v.blank? }
+        }.delete_if { |k,v| v.blank? }
+      end
+
+      def constants
+        ( r(:software, :constants) || []).map do |sc|
+          constant_for sc
+        end
+      end
+
+      def constant_for(sc)
+        {
+          name: sc.dig(:name).to_s,
+          value: sc.dig(:value).to_s
+        }.delete_if { |k,v| v.blank? }
+      end
+
+      def target_environment_variables
+        ( r(:software, :target_environment_variables) || []).map do |tev|
+          target_environment_variable_for tev
+        end
+      end
+
+      def target_environment_variable_for(tev)
+        {
+          variable_name: tev.dig(:variable_name).to_s,
+          environment_variable_name: tev.dig(:environment_variable_name).to_s
         }.delete_if { |k,v| v.blank? }
       end
 

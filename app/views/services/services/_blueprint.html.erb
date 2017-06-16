@@ -65,6 +65,21 @@
                   Environment variables <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_environment_variables_pill_error" %>
                 <% end %>
               </li>
+              <li id='engine_blueprint_section_constants_pill' class='page_section_pill'>
+                <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("constants")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
+                  Constants <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_constants_pill_error" %>
+                <% end %>
+              </li>
+              <li id='engine_blueprint_section_target_environment_variables_pill' class='page_section_pill'>
+                <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("target_environment_variables")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
+                  Target environment variables <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_target_environment_variables_pill_error" %>
+                <% end %>
+              </li>
+              <li id='engine_blueprint_section_environment_variables_pill' class='page_section_pill'>
+                <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("environment_variables")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
+                  Environment variables <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_environment_variables_pill_error" %>
+                <% end %>
+              </li>
               <li id='engine_blueprint_section_template_files_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("template_files")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
                   Template files <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_template_files_pill_error" %>
@@ -141,6 +156,12 @@
   </div>
   <div id='engine_blueprint_section_environment_variables' class='engine_blueprint_section' style='display: none;'>
     <%= render 'services/blueprints/environment_variables/section' %>
+  </div>
+  <div id='engine_blueprint_section_constants' class='engine_blueprint_section' style='display: none;'>
+    <%= render 'services/blueprints/constants/section' %>
+  </div>
+  <div id='engine_blueprint_section_target_environment_variables' class='engine_blueprint_section' style='display: none;'>
+    <%= render 'services/blueprints/target_environment_variables/section' %>
   </div>
   <div id='engine_blueprint_section_template_files' class='engine_blueprint_section' style='display: none;'>
     <%= render 'services/blueprints/template_files/section' %>

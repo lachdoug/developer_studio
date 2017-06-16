@@ -3,14 +3,13 @@ class Service
     class Configurator < ::Blueprint::SectionCollectionItem
 
       attr_accessor :name, :label, :description, :enable_logging
-      attr_reader :script
 
       def script_attributes=(params={})
         @script = Script.new params
       end
 
-      def build_script
-        @script = Script.new
+      def script
+        @script ||= Script.new
       end
 
       def variables
