@@ -19,7 +19,7 @@ class Engine
 
       def timestamp_content
         content.tap do |c|
-          c[:metadata][:timestamp] = Time.now.utc
+          c[:metadata][:timestamp] = DateTime.now
         end
       end
 

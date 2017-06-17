@@ -9,7 +9,7 @@ class Engine
       if result[:success] == true
         true
       else
-        @error_message = result[:message]
+        @error_message = result[:message].gsub('hint: ', '')
         false
       end
     end

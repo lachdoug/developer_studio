@@ -20,8 +20,8 @@ class Service
         # byebug
       end
 
-      def build_input
-        @input = Input.new(blueprint_section).tap(&:build_validation).tap(&:build_collection)
+      def input
+        @input ||= Input.new(blueprint_section) #.tap(&:build_validation).tap(&:build_collection)
       end
 
       def form_data

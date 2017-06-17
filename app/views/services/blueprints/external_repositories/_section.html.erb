@@ -6,13 +6,13 @@
 
     <table class="table form_table">
       <tr class="<%= 'hidden_table_header' if external_repository.index > 0 %>">
-        <th>URL</th>
+        <th>Source</th>
         <th>Key</th>
         <th width="1"></th>
       </tr>
 
       <tr>
-        <%= f.input :url, as: :string, required: true, wrapper: :form_table_cell_input %>
+        <%= f.input :source, as: :string, required: true, wrapper: :form_table_cell_input %>
         <%= f.input :key, wrapper: :form_table_cell_input %>
         <td>
           <div class="dropdown">

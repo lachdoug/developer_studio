@@ -2,9 +2,9 @@ class Service
   class ServiceBlueprint
     class EnvironmentVariables < ::Blueprint::SectionCollection
 
-      def build
-        super.tap &:build_input
-      end
+      # def build
+      #   super.tap &:build_input
+      # end
 
       def collection_data
         ( data || [] ).map.with_index do |variable_params, i|

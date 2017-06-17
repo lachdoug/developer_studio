@@ -2,9 +2,9 @@ class Service
   class ServiceBlueprint
     class ConsumerParams < ::Blueprint::SectionCollection
 
-      def build
-        super.tap &:build_input
-      end
+      # def build
+      #   super.tap &:build_input
+      # end
 
       def collection_data
         ( data || [] ).map.with_index do |consumer_param_params, i|

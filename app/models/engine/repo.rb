@@ -113,7 +113,7 @@ class Engine
     end
 
     def push
-      stdout, stderr, status = Open3.capture3("git -C #{path} push origin master")
+      stdout, stderr, status = Open3.capture3("git -C #{path} push -f origin master")
       if status.exitstatus == 0
         { success: true }
       else

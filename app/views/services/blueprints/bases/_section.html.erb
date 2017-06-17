@@ -2,8 +2,8 @@
       url: service_blueprint_base_path(service_id: @service.name) do |f| %>
 <%= f.input :name, required: true, pattern: "^[a-z0-9_]*$", maxlength: 16, hint: "Valid characters are lowercase alpha-numeric and underscore. Maximum length 16 characters." %>
 <%= f.input :publisher_namespace, as: :string, label: 'Namespace' %>
-<%= f.input :type_path, as: :string %>
-<%= f.input :service_handle_field, as: :string, label: 'Handle field' %>
+<%= f.input :type_path %>
+<%= f.input :service_handle_field %>
 <div class="form-section-heading">Deployment</div>
 <%= f.input :parent_image %>
 <%= f.input :run_as_user %>

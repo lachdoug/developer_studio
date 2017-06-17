@@ -67,3 +67,17 @@
   <br>
 </div>
 <% end %>
+
+<legend>Service Definition</legend>
+<div class='col-sm-6'>
+  <h4>Generated from blueprint</h4>
+  <%= pretty_print @service.service_definition %>
+</div>
+<div class='col-sm-6'>
+  <h4>From the repo</h4>
+  <% if @service.repository_service_definition_content.present? %>
+    <%= pretty_print @service.repository_service_definition_content %>
+  <% else %>
+    <p>Not found.</p>
+  <% end %>
+</div>
