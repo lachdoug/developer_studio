@@ -1,7 +1,7 @@
 class Engine
   class Push
 
-    include ActiveModel::Model
+    # include ActiveModel::Model
 
     def initialize(engine)
       @engine = engine

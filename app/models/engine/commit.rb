@@ -15,7 +15,7 @@ class Engine
       if commit_result[:success]
         true
       else
-        @error_message = commit_result[:message].gsub('hint: ', '')
+        @error_message = commit_result[:message]
         false
       end
     end

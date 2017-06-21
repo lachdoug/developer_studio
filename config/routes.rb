@@ -121,6 +121,9 @@ Rails.application.routes.draw do
     resource :repository, only: [:show] do
       resource :commit, module: :repositories, only: [:create]
       resource :push, module: :repositories, only: [:show]
+      # resource :service_definition_update, module: :repositories, only: [:show]
+      resource :service_definition_commit, module: :repositories, only: [:create]
+      resource :service_definition_push, module: :repositories, only: [:show]
     end
     namespace :blueprint, module: :blueprints do
       resource :metadata, only: [:update]

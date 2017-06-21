@@ -80,6 +80,10 @@ class Engine
       `git -C #{path} log`
     end
 
+    def last_commit_message
+      `git -C #{path} log -1`.split("\n")[4..-1].map{|line| line[1..-1]}.join("\n")
+    end
+
     def status
       `git -C #{path} add . ; git -C #{path} status`.
       sub( "  (use \"git push\" to publish your local commits)\n", '' ).
