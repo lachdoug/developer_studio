@@ -13,9 +13,13 @@ module Settings
         @content ||= repository_service_definition
       end
 
+      def path
+        "#{Rails.application.config.persistent_data_directory}/repos/service_definitions"
+      end
+
       def repository_service_definition
         # byebug
-        File.read "repos/service_definitions/#{service_definition_publisher_namespace.name}/#{file_path}"
+        File.read "#{path}/#{service_definition_publisher_namespace.name}/#{file_path}"
       rescue Errno::ENOENT # no file error
         ''
       end
@@ -31,7 +35,7 @@ module Settings
     end
   end
 end
- 
+
 # module Settings
 #   class ServiceDefinitionNamespace
 #     class ServiceDefinition

@@ -27,7 +27,7 @@ module Services
         # @service.commit = Service::Commit.new(@service)
         if @service.commit.do_commit(strong_params)
           if @service.push.do_push
-            redirect_to service_repository_path(id: @service.name), notice: "Successfully pushed #{@service.name}."
+            redirect_to service_repository_path(id: @service.name), notice: "Successfully committed and pushed #{@service.name}."
           else
             redirect_to service_repository_path(id: @service.name), alert: "Committed but failed to push #{@service.name}. #{@service.push.error_message}"
           end

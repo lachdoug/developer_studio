@@ -1,4 +1,3 @@
-
 <% @app.blueprint.persistent_files.each do |persistent_file| %>
 
   <%= custom_form_for persistent_file,
@@ -8,15 +7,12 @@
     <table class="table form_table">
       <tr class="<%= 'hidden_table_header' if persistent_file.index > 0 %>">
         <th>Path</th>
+        <th>Volume name</th>
         <th width="1"></th>
-      </tr>
-      <tr class="<%= 'hidden_table_header' if persistent_file.index > 0 %>">
-        <td colspan=2 class="help-block">
-          Relative to /home/ (except when path prefixed with /usr/local/ or /home/ ).
-        </td>
       </tr>
       <tr>
         <%= f.input :path, required: true, wrapper: :form_table_cell_input %>
+        <%= f.input :volume_name, wrapper: :form_table_cell_input %>
         <td>
           <div class="dropdown">
             <a class="btn btn-custom" data-toggle="dropdown">
@@ -53,6 +49,12 @@
   <% end %>
 
 <% end %>
+
+<p class="<%= 'hidden' if @app.blueprint.persistent_files.empty? %>">
+  Path relative to /home/ (except when path prefixed with /usr/local/ or /home/ ).
+</p>
+
+
 <div class='clearfix'>
   <%= link_to icon_text('fa-plus', 'New persistent file'),
       new_app_blueprint_persistent_file_path(app_id: @app.name),

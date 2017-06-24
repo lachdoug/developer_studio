@@ -1,0 +1,126 @@
+<%= link_to icon('fa-arrow-up'), service_repository_path(id: @service.name), class: 'btn pull-right' %>
+
+<% if @service.service_definition.publisher_namespace.blank? || @service.service_definition.type_path.blank? %>
+
+  <h4><%= @service.name %> service definition</h4>
+  <p>Service blueprint requires Namespace and Type path.</p>
+
+<% elsif @service.service_definition.repo.exists? %>
+
+  <h4>
+    <%= @service.name %> service definition<br><%= @service.service_definition.publisher_namespace %> repository
+  </h4>
+  <div class='col-sm-12'>
+    <p><%= @service.service_definition.repo.remote_url %></p>
+  </div>
+  <legend>Update</legend>
+  <div class='col-sm-12'>
+    <% if @service.service_definition.needs_update? %>
+      <p class="clearfix">
+        Service definition has been changed. Click update to save new service definition to file.
+        <%= link_to icon_text('fa-check', :Update), service_service_definition_update_path(id: @service.name), class: 'btn btn-warning pull-right', data: { disable_with: 'Updating...' }  %>
+        <%= button_tag icon_text('fa-file-o', :Versions),
+              class: "btn btn-custom pull-right",
+              data: { toggle: "collapse",
+                      target: "#serviceDefinitionVersions" } %>
+      </p>
+    <% else %>
+      Service definition file is up-to-date.
+      <%= button_tag icon_text('fa-file-o', :Versions),
+            class: "btn btn-custom pull-right",
+            data: { toggle: "collapse",
+                    target: "#serviceDefinitionVersions" } %>
+    <% end %>
+    <div class="collapse" id="serviceDefinitionVersions">
+      <br>
+      <div class='col-sm-6'>
+        <h5>Generated from blueprint</h5>
+        <%= pretty_print @service.service_definition.yaml_from_blueprint %>
+      </div>
+      <div class='col-sm-6'>
+        <h5>Repository</h5>
+        <% if @service.service_definition.repo.file_content.present? %>
+          <%= pretty_print @service.service_definition.repo.file_content %>
+        <% else %>
+          <p>Not found.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <legend>Status</legend>
+  <div class='col-sm-12'>
+    <pre><%= @service.service_definition.repo.status %></pre>
+    <p class="clearfix">
+      <%= button_tag icon_text('fa-file-o', :Log),
+            class: "btn btn-custom pull-right",
+            data: { toggle: "collapse",
+                    target: "#repositoryGitLog" } %>
+    </p>
+    <div class="collapse" id="repositoryGitLog">
+      <pre><%= @service.service_definition.repo.log %></pre>
+    </div>
+    <br>
+  </div>
+  <legend>Commit</legend>
+  <% if @service.service_definition.repo.uncommitted_diffs.present? %>
+    <div class='col-sm-12 clearfix'>
+      <p>Enter a message to commit.</p>
+      <%= simple_form_for @service.service_definition.commit,
+            url: service_service_definition_commit_path(service_id: @service.name),
+            html: { class: 'form-horizontal' },
+            wrapper: :horizontal_form do |f| %>
+        <%= f.input :message, as: :text, required: true %>
+        <div class='btn-group pull-right'>
+          <%= f.button :button, class: "btn btn-primary", name: :commit_type, value: :commit, data: { disable_with: 'Committing...' } do %>
+            <%= icon_text 'fa-check', :Commit  %>
+          <% end %>
+          <%= f.button :button, class: "btn btn-info", name: :commit_type, value: :commit_and_push, data: { disable_with: '...' } do %>
+            <%= icon_text 'fa-hand-paper-o', 'Commit and push'  %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class='col-sm-12'>
+      <label>Uncommitted changes</label>
+      <pre><%= @service.service_definition.repo.uncommitted_diffs %></pre>
+      <br>
+    </div>
+  <% else %>
+    <div class='col-sm-12'>
+      <p>No changes to commit.</p>
+      <br>
+    </div>
+  <% end %>
+
+  <legend>Push</legend>
+  <% if @service.service_definition.repo.committed_diffs.present? %>
+    <div class='col-sm-12'>
+      <%= link_to icon_text('fa-hand-paper-o', 'Push'), service_service_definition_push_path(service_id: @service.name), class: 'btn btn-primary pull-right', data: { disable_with: 'Pushing...' } %>
+      <p>Click to push.</p>
+    </div>
+    <div class='col-sm-12'>
+      <label>Committed changes</label>
+      <pre><%= @service.service_definition.repo.committed_diffs %></pre>
+      <br>
+    </div>
+  <% else %>
+  <div class='col-sm-12'>
+    <p>No committed changes to push.</p>
+    <br>
+  </div>
+  <% end %>
+
+<% else %>
+
+  <h4>Service definition</h4>
+  <p>The working repository does not exist.</p>
+  <% if @service.service_definition.settings_remote_url.blank? %>
+    <p>Could not find a url for a remote repository for <%= @service.service_definition.publisher_namespace %>. Please add the namespace to the Service definitions section of Settings.</p>
+  <% else %>
+    <p class="clearfix">
+      Create working repository from <%= @service.service_definition.settings_remote_url %>.
+      <%= link_to icon_text('fa-check', :Create), service_service_definition_clone_path(id: @service.name), class: 'btn btn-warning pull-right' %>
+    </p>
+  <% end %>
+
+<% end %>

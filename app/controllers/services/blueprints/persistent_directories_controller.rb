@@ -22,7 +22,7 @@ module Services
 
       def strong_params
         params.require(:service_service_blueprint_persistent_directory).
-          permit( :path )
+          permit( :path, :volume_name )
       end
 
     end

@@ -190,7 +190,8 @@ module Conform
 
       def persistent_directory_for(pd)
         {
-          path: pd.dig(:path).to_s
+          path: pd.dig(:path).to_s,
+          volume_name: pd.dig(:volume_name).to_s
         }
       end
 
@@ -216,7 +217,8 @@ module Conform
 
       def persistent_file_for(pf)
         {
-          path: pf.dig(:path).to_s
+          path: pf.dig(:path).to_s,
+          volume_name: pf.dig(:volume_name).to_s
         }
       end
 

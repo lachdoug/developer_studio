@@ -4,8 +4,8 @@ class Service < Engine
     @blueprint ||= ::Service::ServiceBlueprint.new(self)
   end
 
-  def service_definition_repo
-    @service_definition_repo ||= ::Service::ServiceDefinitionRepo.new(self)
+  def service_definition
+    @service_definition ||= ::Service::ServiceDefinition.new(self)
   end
 
   # service def

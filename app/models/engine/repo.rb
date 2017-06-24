@@ -4,12 +4,12 @@ class Engine
     require 'open3'
 
     def self.list(type_plural)
-      Dir.glob("repos/#{type_plural}/*").map{ |file_path| file_path.split("/").last }.sort
+      Dir.glob("#{Rails.application.config.persistent_data_directory}/repos/#{type_plural}/*").map{ |file_path| file_path.split("/").last }.sort
     end
 
     def self.clone(url, type_plural)
       ssh_url = url.sub('https://', 'ssh://')
-      stdout, stderr, status = Open3.capture3("env GIT_SSH_COMMAND=\"ssh -i /home/home_dir/.ssh/identity\" git -C repos/#{type_plural} clone '#{ssh_url}'")
+      stdout, stderr, status = Open3.capture3("env GIT_SSH_COMMAND=\"ssh -i /home/home_dir/.ssh/identity\" git -C #{Rails.application.config.persistent_data_directory}/repos/#{type_plural} clone '#{ssh_url}'")
       if status.exitstatus == 0
         { success: true }
       else
@@ -40,7 +40,7 @@ class Engine
     end
 
     def path
-      "repos/#{engine.class.to_s.underscore.pluralize}/#{engine.name}"
+      "#{Rails.application.config.persistent_data_directory}/repos/#{engine.class.to_s.underscore.pluralize}/#{engine.name}"
     end
 
     def precheck
@@ -88,7 +88,8 @@ class Engine
       `git -C #{path} add . ; git -C #{path} status`.
       sub( "  (use \"git push\" to publish your local commits)\n", '' ).
       sub( "  (use \"git reset HEAD <file>...\" to unstage)\n", '' ).
-      sub("\n\n", "\n")
+      sub("\n\n", "\n").sub("\n\n", "\n") + ( committed_diffs.present? ?
+                "There are unpushed commits": "No unpushed commits")
     end
 
     def do_initial_commit_and_push

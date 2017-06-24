@@ -8,15 +8,12 @@
     <table class="table form_table">
       <tr class="<%= 'hidden_table_header' if persistent_directory.index > 0 %>">
         <th>Path</th>
+        <th>Volume name</th>
         <th width="1"></th>
-      </tr>
-      <tr class="<%= 'hidden_table_header' if persistent_directory.index > 0 %>">
-        <td colspan=2 class="help-block">
-          Relative to /home/ (except when path prefixed with /usr/local/ or /home/ ).
-        </td>
       </tr>
       <tr>
         <%= f.input :path, required: true, wrapper: :form_table_cell_input %>
+        <%= f.input :volume_name, wrapper: :form_table_cell_input %>
         <td>
           <div class="dropdown">
             <a class="btn btn-custom" data-toggle="dropdown">
@@ -53,6 +50,11 @@
   <% end %>
 
 <% end %>
+
+<p class="<%= 'hidden' if @app.blueprint.persistent_directories.empty? %>">
+  Path relative to /home/ (except when path prefixed with /usr/local/ or /home/ ).
+</p>
+
 <div class='clearfix'>
   <%= link_to icon_text('fa-plus', 'New persistent directory'),
       new_app_blueprint_persistent_directory_path(app_id: @app.name),

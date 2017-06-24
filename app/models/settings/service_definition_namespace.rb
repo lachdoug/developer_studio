@@ -4,8 +4,12 @@ module Settings
     require 'fileutils'
     include ActiveModel::Model
 
+    def self.path
+      "#{Rails.application.config.persistent_data_directory}/repos/service_definitions"
+    end
+
     def self.list
-      Dir.glob('repos/service_definitions/*').map{ |file_path| file_path.split("/").last }.sort
+      Dir.glob("#{path}/*").map{ |file_path| file_path.split("/").last }.sort
     end
 
     def self.all
@@ -28,12 +32,16 @@ module Settings
     attr_accessor :name
     attr_reader :error_message
 
+    def path
+      self.class.path
+    end
+
     def service_definition_for(type_path)
       ServiceDefinition.new(self, type_path)
     end
 
     def list_service_definition_type_paths
-      Dir.glob("repos/service_definitions/#{name}/**/*.yaml").map{ |file_path| file_path.sub("repos/service_definitions/#{name}/", '').split('/')[0..-2].join('/') }.sort
+      Dir.glob("#{path}/#{name}/**/*.yaml").map{ |file_path| file_path.sub("#{path}/#{name}/", '').split('/')[0..-2].join('/') }.sort
     end
 
     def service_definitions
@@ -41,7 +49,7 @@ module Settings
     end
 
     def pull
-      stdout, stderr, status = Open3.capture3("git -C repos/service_definitions/#{name} pull")
+      stdout, stderr, status = Open3.capture3("git -C #{path}/#{name} pull")
       if status.exitstatus == 0
         true
       else
@@ -51,7 +59,11 @@ module Settings
     end
 
     def delete
-      FileUtils.rm_rf "repos/service_definitions/#{name}"
+      FileUtils.rm_rf "#{path}/#{name}"
+    end
+
+    def remote_url
+      `git -C #{path}/#{name} remote get-url origin`
     end
 
   end

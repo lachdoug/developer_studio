@@ -22,7 +22,7 @@ module Apps
 
       def strong_params
         params.require(:app_app_blueprint_persistent_file).
-          permit( :path )
+          permit( :path, :volume_name )
       end
 
     end

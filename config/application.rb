@@ -23,6 +23,14 @@ module DeveloperStudio
     # -- all .rb files in that directory are automatically loaded.
 
     config.public_key = File.read("#{Dir.home}/.ssh/identity.pub")
+    config.persistent_data_directory = ENV['EDS_PERSISTENT_DATA_DIRECTORY'] || "../developer_studio_persistent_data"
+
+    # Create any missing data directories
+    Dir.mkdir "#{config.persistent_data_directory}/repos" unless File.directory? "#{config.persistent_data_directory}/repos"
+    Dir.mkdir "#{config.persistent_data_directory}/repos/apps" unless File.directory? "#{config.persistent_data_directory}/repos/apps"
+    Dir.mkdir "#{config.persistent_data_directory}/repos/services" unless File.directory? "#{config.persistent_data_directory}/repos/services"
+    Dir.mkdir "#{config.persistent_data_directory}/repos/service_definitions" unless File.directory? "#{config.persistent_data_directory}/repos/service_definitions"
+    Dir.mkdir "#{config.persistent_data_directory}/repos/service_definitions_working_dir" unless File.directory? "#{config.persistent_data_directory}/repos/service_definitions_working_dir"
 
   end
 end

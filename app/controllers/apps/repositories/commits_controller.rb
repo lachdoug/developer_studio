@@ -27,7 +27,7 @@ module Apps
         # @app.commit = App::Commit.new(@app)
         if @app.commit.do_commit(strong_params)
           if @app.push.do_push
-            redirect_to app_repository_path(id: @app.name), notice: "Successfully pushed #{@app.name}."
+            redirect_to app_repository_path(id: @app.name), notice: "Successfully committed and pushed #{@app.name}."
           else
             redirect_to app_repository_path(id: @app.name), alert: "Committed but failed to push #{@app.name}. #{@app.push.error_message}"
           end

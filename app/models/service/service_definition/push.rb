@@ -1,17 +1,17 @@
 class Service
-  class ServiceDefinitionRepo
+  class ServiceDefinition
     class Push
 
       include ActiveModel::Model
 
-      def initialize(service_definition_repo)
-        @service_definition_repo = service_definition_repo
+      def initialize(service_definition)
+        @service_definition = service_definition
       end
 
-      attr_reader :service_definition_repo, :error_message
+      attr_reader :service_definition, :error_message
 
       def do_push
-        push_result = service_definition_repo.do_push
+        push_result = service_definition.repo.do_push
         if push_result[:success]
           true
         else

@@ -337,7 +337,8 @@ module Conform
 
       def persistent_directory_for(pd)
         {
-          path: pd.dig(:path).to_s
+          path: pd.dig(:path).to_s,
+          volume_name: pd.dig(:volume_name).to_s
         }.delete_if { |k,v| v.blank? }
       end
 

@@ -9,7 +9,7 @@ Deploy
 - Rails 5 app
 - MySQL2 database
 - Persistent directories:
-  - repos
+  - A data directory - pass path to ENV['EDS_PERSISTENT_DATA_DIRECTORY']
 - Persistent files:
   - config/custom_dropdowns.yml
 - Requires an SSH key in the .ssh directory. The public key must have filename 'identity.pub'.

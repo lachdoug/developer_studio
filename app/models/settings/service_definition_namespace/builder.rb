@@ -13,8 +13,12 @@ module Settings
       attr_accessor :url
       attr_reader :error_message
 
+      def path
+        "#{Rails.application.config.persistent_data_directory}/repos/service_definitions"
+      end
+
       def clone_remote
-        stdout, stderr, status = Open3.capture3("git -C repos/service_definitions clone '#{url}'")
+        stdout, stderr, status = Open3.capture3("git -C #{path} clone '#{url}'")
         if status.exitstatus == 0
           true
         else

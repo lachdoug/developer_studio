@@ -1,7 +1,9 @@
 <%= link_to icon('fa-arrow-up'), settings_path(), class: 'btn pull-right' %>
 <%= render 'show_menu' %>
 <h4>Service definitions for <%= @service_definition_namespace.name %></h4>
-
+<div class="col-sm-12">
+  <p><%= @service_definition_namespace.remote_url %></p>
+</div>
 <div id="service_definitions">
   <div class="col-sm-3 page-main-col">
       <nav id="sidebar_nav" class="navbar navbar-default" role="navigation">
