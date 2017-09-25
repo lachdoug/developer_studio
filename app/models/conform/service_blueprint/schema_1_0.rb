@@ -406,9 +406,12 @@ module Conform
           description: c.dig(:description).to_s,
           enable_logging: cast_boolean_for( c.dig(:enable_logging) ),
           variables: configurator_variables_for(c),
-          script: {
-            language: c.dig(:script, :language).to_s,
-            content: c.dig(:script, :content).to_s }.delete_if { |k,v| v.blank? }
+          set_script: {
+            language: c.dig(:set_script, :language).to_s,
+            content: c.dig(:set_script, :content).to_s }.delete_if { |k,v| v.blank? },
+          read_script: {
+            language: c.dig(:read_script, :language).to_s,
+            content: c.dig(:read_script, :content).to_s }.delete_if { |k,v| v.blank? }
         }.delete_if { |k,v| v.blank? }
       end
 

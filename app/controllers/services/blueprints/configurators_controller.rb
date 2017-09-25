@@ -30,7 +30,8 @@ module Services
                   :label,
                   :description,
                   :enable_logging,
-                  script_attributes: [:language, :content]
+                  set_script_attributes: [:language, :content],
+                  read_script_attributes: [:language, :content]
                 )
       end
 

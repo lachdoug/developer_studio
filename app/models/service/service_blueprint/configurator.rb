@@ -4,12 +4,20 @@ class Service
 
       attr_accessor :name, :label, :description, :enable_logging
 
-      def script_attributes=(params={})
-        @script = Script.new params
+      def set_script_attributes=(params={})
+        @set_script = Script.new params
       end
 
-      def script
-        @script ||= Script.new
+      def set_script
+        @set_script ||= Script.new
+      end
+
+      def read_script_attributes=(params={})
+        @read_script = Script.new params
+      end
+
+      def read_script
+        @read_script ||= Script.new
       end
 
       def variables
@@ -26,7 +34,8 @@ class Service
           label: label,
           description: description,
           enable_logging: ActiveRecord::Type::Boolean.new.cast(enable_logging),
-          script: script.form_data,
+          set_script: set_script.form_data,
+          read_script: read_script.form_data,
           variables: variables.map(&:form_data),
         }
       end

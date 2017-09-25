@@ -33,7 +33,7 @@ class Service
     end
 
     def service_definition
-      {
+      compact_service_definition({
         publisher_namespace: base.publisher_namespace,
         type_path: base.type_path,
         accepts: base.accepts.form_data,
@@ -54,10 +54,29 @@ class Service
         target_environment_variables: target_environment_variables.form_data.map{ |v| { v[:variable_name].to_sym => v } }.inject(:merge),
         consumer_params: consumer_params.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge),
         type_consumer_params: "type_consumer_params.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge)",
-        configurators: configurators.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge),
-        service_actionators: actionators.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge),
+        configurators: configurators.form_data.map{ |v| { v[:name].to_sym => v.without(:set_script, :read_script) } }.inject(:merge),
+        service_actionators: actionators.form_data.map{ |v| { v[:name].to_sym => v.without(:script) } }.inject(:merge),
         constants: constants.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge)
-      }
+      })
+    end
+
+    def compact_service_definition(element)
+      # byebug
+      if element.blank?
+        nil
+      elsif element.is_a? Array
+        element.map do |v|
+          compact_service_definition v
+        end.compact
+      elsif element.is_a? Hash
+        element.map do |k,v|
+          { k => compact_service_definition(v) }
+        end.inject(:merge).delete_if do |k,v|
+          v.blank?
+        end
+      else
+        element
+      end
     end
 
   end

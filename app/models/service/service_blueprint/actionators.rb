@@ -2,9 +2,9 @@ class Service
   class ServiceBlueprint
     class Actionators < ::Blueprint::SectionCollection
 
-      def build
-        super.tap &:build_script
-      end
+      # def build
+      #   super.tap &:build_script
+      # end
 
       def collection_data
         ( data || [] ).map.with_index do |actionator, i|
