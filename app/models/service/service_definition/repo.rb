@@ -71,7 +71,7 @@ class Service
       end
 
       def update
-        byebug
+        # byebug
         FileUtils.mkdir_p("#{path}/#{service_definition.type_path}") unless File.directory? "#{path}/#{service_definition.type_path}"
         File.write "#{path}/#{file_path}", service_definition.yaml_from_blueprint
         `git -C #{path} add -A`
