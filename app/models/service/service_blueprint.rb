@@ -53,7 +53,7 @@ class Service
         soft_service: base.soft_service,
         target_environment_variables: target_environment_variables.form_data.map{ |v| { v[:variable_name].to_sym => v } }.inject(:merge),
         consumer_params: consumer_params.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge),
-        type_consumer_params: "type_consumer_params.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge)",
+        # type_consumer_params: type_consumer_params.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge),
         configurators: configurators.form_data.map{ |v| { v[:name].to_sym => v.without(:set_script, :read_script) } }.inject(:merge),
         service_actionators: actionators.form_data.map{ |v| { v[:name].to_sym => v.without(:script) } }.inject(:merge),
         constants: constants.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge)

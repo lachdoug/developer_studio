@@ -55,7 +55,7 @@ module Conform
           constants: constants,
           target_environment_variables: target_environment_variables,
           consumer_params: consumer_params,
-          type_consumer_params: type_consumer_params
+          # type_consumer_params: type_consumer_params
         }
       end
 
