@@ -405,6 +405,7 @@ module Conform
           label: c.dig(:label).to_s,
           description: c.dig(:description).to_s,
           enable_logging: cast_boolean_for( c.dig(:enable_logging) ),
+          no_save: cast_boolean_for( c.dig(:no_save) ),
           variables: configurator_variables_for(c),
           set_script: {
             language: c.dig(:set_script, :language).to_s,

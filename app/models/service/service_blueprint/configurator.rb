@@ -2,7 +2,7 @@ class Service
   class ServiceBlueprint
     class Configurator < ::Blueprint::SectionCollectionItem
 
-      attr_accessor :name, :label, :description, :enable_logging
+      attr_accessor :name, :label, :description, :enable_logging, :no_save
 
       def set_script_attributes=(params={})
         @set_script = Script.new params
@@ -34,6 +34,7 @@ class Service
           label: label,
           description: description,
           enable_logging: ActiveRecord::Type::Boolean.new.cast(enable_logging),
+          no_save: ActiveRecord::Type::Boolean.new.cast(no_save),
           set_script: set_script.form_data,
           read_script: read_script.form_data,
           variables: variables.map(&:form_data),

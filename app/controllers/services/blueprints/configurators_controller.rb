@@ -30,6 +30,7 @@ module Services
                   :label,
                   :description,
                   :enable_logging,
+                  :no_save,
                   set_script_attributes: [:language, :content],
                   read_script_attributes: [:language, :content]
                 )

@@ -5,6 +5,7 @@
   <%= f.input :label %>
   <%= f.input :description, as: :markdown %>
   <%= f.input :enable_logging, as: :boolean, wrapper: :horizontal_boolean %>
+  <%= f.input :no_save, as: :boolean, wrapper: :horizontal_boolean %>
   <div class="form-section-heading">Set script</div>
   <%= f.simple_fields_for :set_script do |ff| %>
     <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'},
