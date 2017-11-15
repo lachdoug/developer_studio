@@ -18,7 +18,7 @@ class Service
         end
 
         def type_collection
-          [ 'ManagedEngine', 'ManagesService' ] + dropdowns_config[:type_paths]
+          [ 'ManagedEngine', 'ManagedService' ] + dropdowns_config[:type_paths]
         end
 
       end
