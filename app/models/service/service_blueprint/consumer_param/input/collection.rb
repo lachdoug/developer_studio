@@ -23,7 +23,7 @@ class Service
           end
 
           def build_item
-            # @items = [] unless @items
+            @items = [] unless @items
             @items << Item.new({new_record: true, index: items.count})
           end
 

@@ -26,7 +26,7 @@ module DeveloperStudio
       "#{Dir.home}/.ssh/#{
         ENV['ENGINES_DEVELOPER_STUDIO_SHH_ID_PUB_FILENAME'] ||
         'identity.pub'}" )
-    config.persistent_data_directory = ENV['EDS_PERSISTENT_DATA_DIRECTORY'] || "../developer_studio_persistent_data"
+    config.persistent_data_directory = ENV['EDS_PERSISTENT_DATA_DIRECTORY'] || "data"
 
     # Create any missing data directories
     Dir.mkdir "#{config.persistent_data_directory}/repos" unless File.directory? "#{config.persistent_data_directory}/repos"
