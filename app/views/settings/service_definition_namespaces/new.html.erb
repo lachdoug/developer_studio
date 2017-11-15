@@ -5,6 +5,7 @@
       html: { class: 'form-horizontal' },
       wrapper: :horizontal_form do |f| %>
       <p>Remote repo URL for service definition namespace.</p>
+      <p>For EnginesSystem use https://github.com/EnginesServices/EnginesSystem</p>
       <%= f.input :url, as: :string, label: "URL", required: true %>
 
 <%= link_to icon_text('fa-times', :Cancel), settings_path, class: 'btn btn-warning' %>
