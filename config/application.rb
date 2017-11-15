@@ -22,7 +22,10 @@ module DeveloperStudio
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    config.public_key = File.read("#{Dir.home}/.ssh/identity.pub")
+    config.public_key = File.read(
+      "#{Dir.home}/.ssh/#{
+        ENV['ENGINES_DEVELOPER_STUDIO_SHH_ID_PUB_FILENAME'] ||
+        'identity.pub'}" )
     config.persistent_data_directory = ENV['EDS_PERSISTENT_DATA_DIRECTORY'] || "../developer_studio_persistent_data"
 
     # Create any missing data directories
