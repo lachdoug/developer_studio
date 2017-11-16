@@ -109,8 +109,8 @@ module Conform
 
       def port_for(p)
         {
-          port: p.dig(:port).to_i,
-          external: p.dig(:external).to_i,
+          port: p.dig(:port).to_s,
+          external: p.dig(:external).to_s,
           protocol: p.dig(:protocol).to_s
         }
       end

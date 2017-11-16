@@ -14,8 +14,8 @@
       </tr>
 
       <tr>
-        <%= f.input :port, as: :integer, required: true, input_html: { min: 0, max: 65535 }, wrapper: :form_table_cell_input %>
-        <%= f.input :external, as: :integer, required: true, input_html: { min: 0, max: 65535 }, wrapper: :form_table_cell_input %>
+        <%= f.input :port, required: true, wrapper: :form_table_cell_input, input_html: { pattern: "^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])(?:-([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5]))?$" } %>
+        <%= f.input :external, required: true, wrapper: :form_table_cell_input, input_html: { pattern: "^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])(?:-([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5]))?$" } %>
         <%= f.input :protocol, as: :select, collection: f.object.protocol_collection, include_blank: false, required: false, wrapper: :form_table_cell_input %>
         <td>
           <div class="dropdown">
@@ -53,6 +53,11 @@
   <% end %>
 
 <% end %>
+
+<p class="<%= 'hidden' if @service.blueprint.ports.empty? %>">
+  0 to 65535 (specify a range with a '-' such as 5000-5100)
+</p>
+
 <div class='clearfix'>
   <%= link_to icon_text('fa-plus', 'New port'),
       new_service_blueprint_port_path(service_id: @service.name),
