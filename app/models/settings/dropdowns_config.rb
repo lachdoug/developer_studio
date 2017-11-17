@@ -6,6 +6,7 @@ module Settings
     attr_accessor :config_yaml
 
     def self.config
+p "do merge"
       custom_dropdown_config.deep_merge default_dropdown_config
     end
 
@@ -125,7 +126,34 @@ module Settings
           "syslog",
           "system",
           "wwwstats"
-        ]
+        ],
+        "input_types": {
+          "boolean (Single check box. Input label shown beside checkbox.)": "boolean",
+          "check_boxes (Multiple check boxes. Uses collection for check box labels.)": "check_boxes",
+          "country (Returns two-letter country code.)": "country",
+          "date": "date",
+          "datetime": "datetime",
+          "decimal": "decimal",
+          "email": "email",
+          "file": "file",
+          "float": "float",
+          "hidden": "hidden",
+          "integer": "integer",
+          "language (Returns two-letter language code.)": "language",
+          "password": "password",
+          "password_with_confirmation": "password_with_confirmation",
+          "radio_buttons (Uses collection for radio button labels.)": "radio_buttons",
+          # "range": "range",
+          "select (Uses collection for dropdown list.)": "select",
+          "select_with_input (Select with user input. Uses collection for dropdown list.)": "select_with_input",
+          "string (Single line of text.)": "string",
+          "time": "time",
+          "time_zone": "time_zone",
+          "tel": "tel",
+          "text (Multiple lines of text.)": "text",
+          "url": "url",
+          "uuid": "uuid"
+        }
       }
     end
 

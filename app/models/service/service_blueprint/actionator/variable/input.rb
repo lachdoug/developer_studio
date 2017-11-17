@@ -36,30 +36,12 @@ class Service
             @collection ||= Collection.new blueprint_section
           end
 
+          def dropdowns_config
+            @dropdowns_config ||= Settings::DropdownsConfig.config
+          end
+
           def type_collection
-            [ :string,
-              :boolean,
-              :email,
-              :url,
-              :tel,
-              :password,
-              :password_with_confirmation,
-              :uuid,
-              :text,
-              :file,
-              :hidden,
-              :integer,
-              :float,
-              :decimal,
-              :range,
-              :datetime,
-              :date,
-              :time,
-              :select,
-              :radio_buttons,
-              :check_boxes,
-              :country,
-              :time_zone ]
+            @type_collection ||= dropdowns_config[:input_types]
           end
 
           def form_data

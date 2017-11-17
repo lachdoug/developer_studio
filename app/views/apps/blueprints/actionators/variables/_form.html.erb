@@ -8,11 +8,11 @@
     <div class="form-section-heading">Input</div>
     <%= f.simple_fields_for :input do |ff| %>
       <%= ff.input :type, as: :select, collection: ff.object.type_collection, include_blank: false %>
-      <%= ff.input :label %>
-      <%= ff.input :title %>
-      <%= ff.input :comment %>
-      <%= ff.input :hint %>
-      <%= ff.input :placeholder %>
+      <%= ff.input :label, hint: "Shown in bold (normally above input). Uses name as default." %>
+      <%= ff.input :title, hint: "Shown as a tooltip when user hovers over input. Uses label or name as default." %>
+      <%= ff.input :comment, hint: "Shown below label to explain the purpose and usage of the input." %>
+      <%= ff.input :hint, hint: "Shown below input to help user enter a valid value." %>
+      <%= ff.input :placeholder, hint: "Shown inside empty input. Does not apply to check boxes or radio buttons" %>
       <div class="form-section-heading">Collection</div>
       <%= ff.simple_fields_for :collection do |fff| %>
         <%= fff.input :include_blank, required: false, as: :boolean, wrapper: :horizontal_boolean %>
@@ -21,7 +21,7 @@
           <%= fff.simple_fields_for :items do |ffff| %>
           <tr>
             <%= ffff.input :value, required: true, wrapper: :form_table_cell_input %>
-            <%= ffff.input :label, required: true, wrapper: :form_table_cell_input %>
+            <%= ffff.input :label, wrapper: :form_table_cell_input %>
             <td>
               <div class="dropdown">
                 <a class="btn btn-custom" data-toggle="dropdown">
@@ -71,9 +71,16 @@
       <% end %>
       <div class="form-section-heading">Validation</div>
       <%= ff.simple_fields_for :validation do |fff| %>
-        <%= fff.input :pattern, required: false %>
+        <%= fff.input :pattern, hint: "Use regex. Invalid match triggers message.", required: false %>
         <%= fff.input :message, required: false %>
       <% end %>
+<% if false %>
+      <div class="form-section-heading">Depend on</div>
+      <%= ff.simple_fields_for :depend_on do |fff| %>
+        <%= fff.input :target, required: false %>
+        <%= fff.input :pattern, hint: "Use regex. Invalid match triggers message.", required: false %>
+      <% end %>
+<% end %>
     <% end %>
   <% end %>
 </div>
