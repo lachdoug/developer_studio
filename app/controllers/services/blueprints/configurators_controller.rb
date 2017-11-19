@@ -4,8 +4,6 @@ module Services
 
       def update
         @configurator = @service.blueprint.configurators.find params[:id]
-        # get associated schedules to refresh
-        @configurator_schedules = associated_schedules
         @configurator.update strong_params
         render
       end
@@ -17,7 +15,6 @@ module Services
 
       def destroy
         @configurator = @service.blueprint.configurators.find params[:id]
-        @configurator_schedules = associated_schedules
         @service.blueprint.configurators.delete params[:id]
         render
       end
@@ -34,10 +31,6 @@ module Services
                   set_script_attributes: [:language, :content],
                   read_script_attributes: [:language, :content]
                 )
-      end
-
-      def associated_schedules
-        @service.blueprint.schedules.select{ |schedule| schedule.configurator_name == @configurator.name }
       end
 
     end

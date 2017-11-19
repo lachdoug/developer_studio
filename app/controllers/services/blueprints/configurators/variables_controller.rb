@@ -5,8 +5,6 @@ module Services
 
         def update
           @configurator = @service.blueprint.configurators.find params[:configurator_id]
-          # get associated schedules to refresh
-          @configurator_schedules = associated_schedules
           @variable = @configurator.variables.find params[:id]
           @variable.update strong_params
           render
@@ -20,7 +18,6 @@ module Services
 
         def destroy
           @configurator = @service.blueprint.configurators.find params[:configurator_id]
-          @configurator_schedules = associated_schedules
           @configurator.variables.delete params[:id]
           render
         end
@@ -51,10 +48,6 @@ module Services
                         :message
                       ] ]
                   )
-        end
-
-        def associated_schedules
-          @service.blueprint.schedules.select{ |schedule| schedule.configurator_name == @configurator.name }
         end
 
       end
