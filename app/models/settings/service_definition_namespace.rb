@@ -60,6 +60,7 @@ module Settings
 
     def delete
       FileUtils.rm_rf "#{path}/#{name}"
+      FileUtils.rm_rf "#{path}_working_dir/#{name}"
     end
 
     def remote_url
