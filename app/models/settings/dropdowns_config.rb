@@ -59,6 +59,7 @@ p "do merge"
         },
         "template_file_languages": {
           "Javascript": "javascript",
+          "JSON": "json",
           "Lua": "lua",
           "Shell": "sh",
           "PHP": "php",
