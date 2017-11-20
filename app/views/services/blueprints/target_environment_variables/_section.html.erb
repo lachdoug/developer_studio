@@ -12,7 +12,7 @@
         <th width="1"></th>
       </tr>
       <tr>
-        <%= f.input :variable_name, required: true, wrapper: :form_table_cell_input %>
+        <%= f.input :variable_name, as: :select, collection: @service.blueprint.consumer_params.map{ |param| param.name }, include_blank: true , required: true, wrapper: :form_table_cell_input %>
         <%= f.input :environment_variable_name, wrapper: :form_table_cell_input %>
         <td>
           <div class="dropdown">

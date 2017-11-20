@@ -3,6 +3,7 @@ frameworks:
   # e.g. 'New One': new_one
 
 script_languages:
+  'JSON': json
 
 database_seed_languages:
 
