@@ -29,7 +29,7 @@ class App
           description: description,
           return_type: return_type,
           return_file_name: return_file_name,
-          enable_logging: ActiveRecord::Type::Boolean.new.cast(enable_logging),
+          enable_logging: cast_as_boolean(enable_logging),
           script: script.form_data,
           variables: variables.map(&:form_data),
         }

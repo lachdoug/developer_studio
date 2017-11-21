@@ -13,7 +13,7 @@ class App
         {
           language: language,
           content: content,
-          script: ActiveRecord::Type::Boolean.new.cast(script)
+          script: cast_as_boolean(script)
         }
       end
 

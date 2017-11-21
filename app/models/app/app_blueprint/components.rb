@@ -36,7 +36,7 @@ class App
       def form_data
         {
           path: path,
-          extract: ActiveRecord::Type::Boolean.new.cast(extract),
+          extract: cast_as_boolean(extract),
           sources: sources.form_data
         }
       end

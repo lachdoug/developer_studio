@@ -29,7 +29,7 @@ class Service
 
           def form_data
             { items: items.map(&:form_data).inject(:merge) || {},
-              include_blank: ActiveRecord::Type::Boolean.new.cast(include_blank) }
+              include_blank: cast_as_boolean(include_blank) }
           end
 
           def moveup(i)

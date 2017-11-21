@@ -33,7 +33,7 @@ class Service
     end
 
     def service_definition
-      byebug
+      # byebug
       compact_service_definition({
         publisher_namespace: base.publisher_namespace,
         type_path: base.type_path,
@@ -47,11 +47,11 @@ class Service
         service_container: base.name,
         service_handle_field: base.service_handle_field,
         dedicated: cast_as_boolean(base.dedicated),
-        persistent: ActiveRecord::Type::Boolean.new.cast(base.persistent),
-        immutable: ActiveRecord::Type::Boolean.new.cast(base.immutable),
-        attach_post_build: ActiveRecord::Type::Boolean.new.cast(base.attach_post_build),
-        attach_requires_restart: ActiveRecord::Type::Boolean.new.cast(base.attach_requires_restart),
-        soft_service: ActiveRecord::Type::Boolean.new.cast(base.soft_service),
+        persistent: cast_as_boolean(base.persistent),
+        immutable: cast_as_boolean(base.immutable),
+        attach_post_build: cast_as_boolean(base.attach_post_build),
+        attach_requires_restart: cast_as_boolean(base.attach_requires_restart),
+        soft_service: cast_as_boolean(base.soft_service),
         target_environment_variables: target_environment_variables.form_data.map{ |v| { v[:variable_name].to_sym => v } }.inject(:merge),
         consumer_params: consumer_params.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge),
         # type_consumer_params: type_consumer_params.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge),

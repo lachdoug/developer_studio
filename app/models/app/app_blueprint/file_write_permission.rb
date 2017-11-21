@@ -7,7 +7,7 @@ class App
       def form_data
         {
           path: path,
-          recursive: ActiveRecord::Type::Boolean.new.cast(recursive)
+          recursive: cast_as_boolean(recursive)
         }
       end
 

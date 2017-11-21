@@ -29,7 +29,7 @@ class Service
 
           def form_data
             { items: items.map(&:form_data).inject(:merge) || {},
-              include_blank: ActiveRecord::Type::Boolean.new.cast(include_blank) }
+              include_blank: cast_as_boolean(include_blank) }
           end
 
           def moveup(i)
@@ -44,6 +44,10 @@ class Service
             i = i.to_i
             @items.delete_at i.to_i
             blueprint_section.save
+          end
+
+          def cast_as_boolean(value)
+            ActiveRecord::Type::Boolean.new.cast(value) == true
           end
 
         end

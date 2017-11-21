@@ -18,7 +18,7 @@ class Service
           {
             name: name,
             value: value,
-            mandatory: ActiveRecord::Type::Boolean.new.cast(mandatory),
+            mandatory: cast_as_boolean(mandatory),
             input: input.form_data
           }
         end

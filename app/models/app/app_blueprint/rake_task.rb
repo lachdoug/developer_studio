@@ -7,7 +7,7 @@ class App
       def form_data
         {
           action: action,
-          always_run: ActiveRecord::Type::Boolean.new.cast(always_run)
+          always_run: cast_as_boolean(always_run)
         }
       end
 

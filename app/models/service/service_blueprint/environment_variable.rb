@@ -28,10 +28,10 @@ class Service
         {
           name: name,
           value: value,
-          mandatory: ActiveRecord::Type::Boolean.new.cast(mandatory),
-          ask_at_build_time: ActiveRecord::Type::Boolean.new.cast(ask_at_build_time),
-          build_time_only: ActiveRecord::Type::Boolean.new.cast(build_time_only),
-          immutable: ActiveRecord::Type::Boolean.new.cast(immutable),
+          mandatory: cast_as_boolean(mandatory),
+          ask_at_build_time: cast_as_boolean(ask_at_build_time),
+          build_time_only: cast_as_boolean(build_time_only),
+          immutable: cast_as_boolean(immutable),
           input: input.form_data
         }
       end

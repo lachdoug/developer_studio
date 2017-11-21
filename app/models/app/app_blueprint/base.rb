@@ -48,7 +48,7 @@ class App
           framework_port_override: framework_port_override,
           deployment_type: deployment_type,
           web_root_directory: web_root_directory,
-          continuous_deployment: ActiveRecord::Type::Boolean.new.cast(continuous_deployment),
+          continuous_deployment: cast_as_boolean(continuous_deployment),
           install_form_comment: install_form_comment,
           first_run_url: first_run_url,
           installation_report: installation_report

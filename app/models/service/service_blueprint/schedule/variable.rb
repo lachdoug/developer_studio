@@ -34,7 +34,7 @@ class Service
 
         def form_data_value
           return resolve_string if resolve == '1'
-          return ActiveRecord::Type::Boolean.new.cast(value) if variable_definition.present? && type.to_sym == :boolean
+          return cast_as_boolean(value) if variable_definition.present? && type.to_sym == :boolean
           value
         end
 
