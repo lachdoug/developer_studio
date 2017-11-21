@@ -37,7 +37,8 @@ module Services
       end
 
       def associated_schedules
-        @service.blueprint.schedules.select{ |schedule| schedule.actionator_name == @actionator.name }
+        # get schedules using current name and new name, so that all schedules impacted by name change can be refreshed
+        @service.blueprint.schedules.select{ |schedule| ( schedule.actionator_name == @actionator.name ) || ( schedule.actionator_name == strong_params[:name] ) }
       end
 
     end

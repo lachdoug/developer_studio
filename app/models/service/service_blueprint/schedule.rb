@@ -133,7 +133,6 @@ class Service
       end
 
       def blueprint_actionator_variable_defaults
-        # byebug
         @blueprint_actionator_variable_defaults ||=
           blueprint_actionator_variables.map{|v| { v[:name].to_sym => { name: v[:name], value: v[:value] } } }.inject(:merge) || {}
       end
@@ -144,6 +143,7 @@ class Service
       end
 
       def blueprint_actionator
+        # byebug
         @blueprint_actionator ||=
         ( blueprint_section.blueprint.content[:software][:actionators] || [] ).find{|actionator| actionator[:name] == actionator_name } || {}
       end

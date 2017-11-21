@@ -33,6 +33,7 @@ class Service
     end
 
     def service_definition
+      byebug
       compact_service_definition({
         publisher_namespace: base.publisher_namespace,
         type_path: base.type_path,
@@ -45,12 +46,12 @@ class Service
         patch: metadata.blueprint_version_patch,
         service_container: base.name,
         service_handle_field: base.service_handle_field,
-        dedicated: base.dedicated,
-        persistent: base.persistent,
-        immutable: base.immutable,
-        attach_post_build: base.attach_post_build,
-        attach_requires_restart: base.attach_requires_restart,
-        soft_service: base.soft_service,
+        dedicated: cast_as_boolean(base.dedicated),
+        persistent: ActiveRecord::Type::Boolean.new.cast(base.persistent),
+        immutable: ActiveRecord::Type::Boolean.new.cast(base.immutable),
+        attach_post_build: ActiveRecord::Type::Boolean.new.cast(base.attach_post_build),
+        attach_requires_restart: ActiveRecord::Type::Boolean.new.cast(base.attach_requires_restart),
+        soft_service: ActiveRecord::Type::Boolean.new.cast(base.soft_service),
         target_environment_variables: target_environment_variables.form_data.map{ |v| { v[:variable_name].to_sym => v } }.inject(:merge),
         consumer_params: consumer_params.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge),
         # type_consumer_params: type_consumer_params.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge),
@@ -61,22 +62,23 @@ class Service
     end
 
     def compact_service_definition(element)
+      return element
       # byebug
-      if element.blank?
-        nil
-      elsif element.is_a? Array
-        element.map do |v|
-          compact_service_definition v
-        end.compact
-      elsif element.is_a? Hash
-        element.map do |k,v|
-          { k => compact_service_definition(v) }
-        end.inject(:merge).delete_if do |k,v|
-          v.blank?
-        end
-      else
-        element
-      end
+      # if element.blank?
+      #   nil
+      # elsif element.is_a? Array
+      #   element.map do |v|
+      #     compact_service_definition v
+      #   end.compact
+      # elsif element.is_a? Hash
+      #   element.map do |k,v|
+      #     { k => compact_service_definition(v) }
+      #   end.inject(:merge).delete_if do |k,v|
+      #     v.blank?
+      #   end
+      # else
+      #   element
+      # end
     end
 
   end
