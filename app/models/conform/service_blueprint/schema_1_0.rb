@@ -96,7 +96,9 @@ module Conform
           immutable: cast_boolean_for(r(:software, :base, :immutable)),
           attach_post_build: cast_boolean_for(r(:software, :base, :attach_post_build)),
           attach_requires_restart: cast_boolean_for(r(:software, :base, :attach_requires_restart)),
-          soft_service: cast_boolean_for(r(:software, :base, :soft_service))
+          soft_service: cast_boolean_for(r(:software, :base, :soft_service)),
+          shareable: cast_boolean_for(r(:software, :base, :shareable)),
+          consumer_exportable: cast_boolean_for(r(:software, :base, :consumer_exportable)),
         }.delete_if { |k,v| v.blank? }
       end
 

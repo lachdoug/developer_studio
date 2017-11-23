@@ -17,7 +17,9 @@ class Service
                     :immutable,
                     :attach_post_build,
                     :attach_requires_restart,
-                    :soft_service
+                    :soft_service,
+                    :shareable,
+                    :consumer_exportable
       attr_reader :accepts
 
       def build_section
@@ -37,6 +39,8 @@ class Service
         @attach_post_build = ( data || {} ).dig :attach_post_build
         @attach_requires_restart = ( data || {} ).dig :attach_requires_restart
         @soft_service = ( data || {} ).dig :soft_service
+        @shareable = ( data || {} ).dig :shareable
+        @consumer_exportable = ( data || {} ).dig :consumer_exportable
         self.accepts_attributes = accepts_collection_data
       end
 
@@ -70,7 +74,9 @@ class Service
           immutable: immutable,
           attach_post_build: attach_post_build,
           attach_requires_restart: attach_requires_restart,
-          soft_service: soft_service
+          soft_service: soft_service,
+          shareable: shareable,
+          consumer_exportable: consumer_exportable
         }
       end
 

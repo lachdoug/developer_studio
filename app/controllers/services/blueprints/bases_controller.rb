@@ -26,7 +26,9 @@ module Services
                   :immutable,
                   :attach_post_build,
                   :attach_requires_restart,
-                  :soft_service )
+                  :soft_service,
+                  :shareable,
+                  :consumer_exportable )
       end
 
     end

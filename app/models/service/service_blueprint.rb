@@ -52,6 +52,8 @@ class Service
         attach_post_build: cast_as_boolean(base.attach_post_build),
         attach_requires_restart: cast_as_boolean(base.attach_requires_restart),
         soft_service: cast_as_boolean(base.soft_service),
+        shareable: cast_as_boolean(base.shareable),
+        consumer_exportable: cast_as_boolean(base.consumer_exportable),
         target_environment_variables: target_environment_variables.form_data.map{ |v| { v[:variable_name].to_sym => v } }.inject(:merge),
         consumer_params: consumer_params.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge),
         # type_consumer_params: type_consumer_params.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge),
