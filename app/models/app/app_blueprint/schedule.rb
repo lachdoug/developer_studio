@@ -44,7 +44,7 @@ class App
       end
 
       def actionator_names_collection
-        blueprint_section.blueprint.content[:software][:actionators].map { |actionator| actionator[:name] }
+        ( blueprint_section.blueprint.content[:software][:actionators] || [] ).map { |actionator| actionator[:name] }
       end
 
       def variables_attributes=(params={})

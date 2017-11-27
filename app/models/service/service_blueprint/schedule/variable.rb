@@ -34,53 +34,53 @@ class Service
 
         def form_data_value
           return resolve_string if resolve == '1'
-          return cast_as_boolean(value) if variable_definition.present? && type.to_sym == :boolean
+          # return cast_as_boolean(value) if variable_definition.present? && type.to_sym == :boolean
           value
         end
 
-        def type
-          variable_definition.dig(:input, :type)
-        end
-
-        def collection_items
-          variable_definition.dig(:input, :collection, :items)
-        end
-
-        def collection_include_blank
-          variable_definition.dig(:input, :collection, :include_blank)
-        end
-
-        def label
-          variable_definition.dig(:input, :label)
-        end
-
-        def title
-          variable_definition.dig(:input, :title)
-        end
-
-        def hint
-          variable_definition.dig(:input, :hint)
-        end
-
-        def comment
-          variable_definition.dig(:input, :comment)
-        end
-
-        def placeholder
-          variable_definition.dig(:input, :placeholder)
-        end
-
-        def pattern
-          variable_definition.dig(:input, :validation, :pattern)
-        end
-
-        def validation_message
-          variable_definition.dig(:input, :validation, :message)
-        end
-
-        def required
-          variable_definition.dig(:input, :mandatory)
-        end
+        # def type
+        #   variable_definition.dig(:input, :type)
+        # end
+        #
+        # def collection_items
+        #   variable_definition.dig(:input, :collection, :items)
+        # end
+        #
+        # def collection_include_blank
+        #   variable_definition.dig(:input, :collection, :include_blank)
+        # end
+        #
+        # def label
+        #   variable_definition.dig(:input, :label)
+        # end
+        #
+        # def title
+        #   variable_definition.dig(:input, :title)
+        # end
+        #
+        # def hint
+        #   variable_definition.dig(:input, :hint)
+        # end
+        #
+        # def comment
+        #   variable_definition.dig(:input, :comment)
+        # end
+        #
+        # def placeholder
+        #   variable_definition.dig(:input, :placeholder)
+        # end
+        #
+        # def pattern
+        #   variable_definition.dig(:input, :validation, :pattern)
+        # end
+        #
+        # def validation_message
+        #   variable_definition.dig(:input, :validation, :message)
+        # end
+        #
+        # def required
+        #   variable_definition.dig(:input, :mandatory)
+        # end
 
         def variable_definition
           @variable_definition ||=
@@ -92,12 +92,17 @@ class Service
 
         end
 
-        def collection_for(select_collection)
-          return [] unless variable_definition[:select_collection].present?
-          JSON.parse(variable_definition[:select_collection])
-        rescue
-          [variable_definition[:select_collection]]
-        end
+        # def collection_for(select_collection)
+        #   return [] unless variable_definition[:select_collection].present?
+        #   JSON.parse(variable_definition[:select_collection])
+        # rescue
+        #   [variable_definition[:select_collection]]
+        # end
+
+
+        # def cast_as_boolean(value)
+        #   ActiveRecord::Type::Boolean.new.cast(value) == true
+        # end
 
       end
     end

@@ -41,17 +41,10 @@
               <%= ff.object.send :to_s %>
             </div>
             <% if ff.object.variable_definition.present? %>
-              <%= ( content_tag :label, ff.object.send(:name), class: 'col-sm-9 col-sm-offset-3' ) %>
-              <%= ( content_tag :p, ff.object.send(:comment), class: 'col-sm-9 col-sm-offset-3' ) if ff.object.send(:comment).present? %>
               <%= ff.input :name, as: :hidden %>
               <%= ff.input :value,
-                      hint: ( ff.object.send(:hint) if ff.object.send(:hint).present? ),
-                      as: ff.object.send(:type),
-                      collection: ff.object.send(:collection),
-                      placeholder: ff.object.send(:placeholder),
-                      title: ff.object.send(:title),
-                      wrapper: ( :horizontal_boolean if ff.object.send(:type).to_sym == :boolean ),
-                      wrapper_html: { class: 'variable_value_input_wrapper' }  %>
+                      as: :string,
+                      wrapper_html: { class: 'variable_value_input_wrapper' } %>
               <%= ff.input :resolve_string,
                       label: :Resolve,
                       placeholder: "_Engines_System(), _Engines_Builder() or _Engines_Environment()",
@@ -61,6 +54,12 @@
                       input_html: { class: 'variable_resolve_checkbox_input' },
                       as: :boolean,
                       wrapper: :horizontal_boolean %>
+              <div class="clearfix">
+                <div class="btn btn-custom pull-right" data-toggle="collapse" data-target="#service_service_configuration_<%= service_configuration.index %>_input_definition_collapse_<%= ff.object.send(:name) %>"><%= icon_text('fa-info') %></div>
+              </div>
+              <div id="service_service_configuration_<%= service_configuration.index %>_input_definition_collapse_<%= ff.object.send(:name) %>" class="collapse">
+                <%= pretty_print ff.object.variable_definition %>
+              </div>
             <% else %>
               <span class='error engine_blueprint_section_custom_error'>
                 <%= ff.input :name, as: :hidden %>

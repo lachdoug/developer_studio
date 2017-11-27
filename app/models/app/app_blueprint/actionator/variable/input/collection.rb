@@ -54,6 +54,10 @@ class App
                 include_blank: cast_as_boolean(include_blank) }
             end
 
+            def cast_as_boolean(value)
+              ActiveRecord::Type::Boolean.new.cast(value) == true
+            end
+
           end
         end
       end

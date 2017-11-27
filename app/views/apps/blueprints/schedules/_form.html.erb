@@ -55,21 +55,9 @@
                 <%= ff.object.send :name %>
               </div>
               <% if ff.object.variable_definition.present? %>
-                <%= ( content_tag :label, ff.object.send(:label), class: 'col-sm-9 col-sm-offset-3' ) %>
-                <%= ( content_tag :p, ff.object.send(:comment), class: 'col-sm-9 col-sm-offset-3' ) if ff.object.send(:comment).present? %>
                 <%= ff.input :name, as: :hidden %>
                 <%= ff.input :value,
-                        hint: ( ff.object.send(:hint) if ff.object.send(:hint).present? ),
-                        as: ff.object.send(:type),
-                        collection: ff.object.send(:collection_items),
-                        include_blank: ff.object.send(:collection_include_blank),
-                        placeholder: ff.object.send(:placeholder),
-                        pattern: ff.object.send(:pattern),
-                        input_html: { pattern_validation_error_message: ff.object.send(:validation_message) },
-                        # input_html: { 'data-validation': "custom", 'data-validation-regexp': '^([a-z]+)$' , 'data-validation-error-msg': "Invalid Regex" },
-                        required: ff.object.send(:required),
-                        title: ff.object.send(:title),
-                        wrapper: ( :horizontal_boolean if ff.object.send(:type).to_sym == :boolean ),
+                        as: :string,
                         wrapper_html: { class: 'variable_value_input_wrapper' } %>
                 <%= ff.input :resolve_string,
                         label: :Resolve,
@@ -81,6 +69,12 @@
                         input_html: { class: 'variable_resolve_checkbox_input' },
                         as: :boolean,
                         wrapper: :horizontal_boolean %>
+                <div class="clearfix">
+                  <div class="btn btn-custom pull-right" data-toggle="collapse" data-target="#app_schedule_<%= schedule.index %>_input_definition_collapse_<%= ff.object.send(:name) %>"><%= icon_text('fa-info') %></div>
+                </div>
+                <div id="app_schedule_<%= schedule.index %>_input_definition_collapse_<%= ff.object.send(:name) %>" class="collapse">
+                  <%= pretty_print ff.object.variable_definition %>
+                </div>
               <% else %>
                 <span class='error engine_blueprint_section_custom_error'>
                   <%= ff.input :name, as: :hidden %>

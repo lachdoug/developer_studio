@@ -129,9 +129,9 @@ p "do merge"
           "wwwstats"
         ],
         "input_types": {
-          "boolean [ Deprecated in favour of checkbox_boolean ]": "boolean",
-          "checkbox (Single check box. Returns value when checked, otherwise empty. Default value is '1'. Input label shown beside checkbox.)": "checkbox",
-          "checkbox_boolean (Single check box. Returns 'true' when cheched, otherwise 'false'. Input label shown beside checkbox.)": "checkbox_boolean",
+          "boolean [ Deprecated in favour of checkbox ]": "boolean",
+          "checkbox (Single check box. Uses first item in collection for checked and second item for unchecked.)": "checkbox",
+          "checkbox_boolean (Single check box. Returns 'true' when checked, otherwise 'false'. Input label shown beside checkbox.)": "checkbox_boolean",
           "check_boxes [ Deprecated in favour of checkboxes ]": "check_boxes",
           "checkboxes (Multiple checkboxes. Return an array of checked values. Value can be a comma-separated list. Uses collection for checkbox values and labels.)": "checkboxes",
           "country (Returns two-letter country code.)": "country",

@@ -9,7 +9,8 @@ class App
         attr_reader :name, :value
 
         def to_s
-          label.present? ? label : name
+          # label.present? ? label : name
+          name
         end
 
         def name=(name)
@@ -38,75 +39,78 @@ class App
 
         def form_data_value
           return resolve_string if resolve == '1'
-          return cast_as_boolean(value) if type.to_sym == :boolean
+          # return cast_as_boolean(value) if type.to_sym == :boolean
           value
         end
 
-        def type
-          return '' unless variable_definition
-          variable_definition.dig(:input, :type) || field_type_for( variable_definition[:field_type] )
-        end
-
-        def collection
-          variable_definition.dig(:input, :collection) || collection_for( variable_definition[:select_collection] )
-        end
-
-        def label
-          variable_definition.dig(:input, :label) || variable_definition[:label]
-        end
-
-        def title
-          variable_definition.dig(:input, :title) || variable_definition[:title]
-        end
-
-        def hint
-          variable_definition.dig(:input, :hint) || variable_definition[:hint]
-        end
-
-        def comment
-          variable_definition.dig(:input, :comment) || variable_definition[:comment]
-        end
-
-        def placeholder
-          variable_definition.dig(:input, :placeholder) || variable_definition[:placeholder]
-        end
-
+        # def type
+        #   return '' unless variable_definition
+        #   variable_definition.dig(:input, :type) || field_type_for( variable_definition[:field_type] )
+        # end
+        #
+        # def collection
+        #   variable_definition.dig(:input, :collection) || collection_for( variable_definition[:select_collection] )
+        # end
+        #
+        # def label
+        #   variable_definition.dig(:input, :label) || variable_definition[:label]
+        # end
+        #
+        # def title
+        #   variable_definition.dig(:input, :title) || variable_definition[:title]
+        # end
+        #
+        # def hint
+        #   variable_definition.dig(:input, :hint) || variable_definition[:hint]
+        # end
+        #
+        # def comment
+        #   variable_definition.dig(:input, :comment) || variable_definition[:comment]
+        # end
+        #
+        # def placeholder
+        #   variable_definition.dig(:input, :placeholder) || variable_definition[:placeholder]
+        # end
+        #
         def variable_definition
           @variable_definition ||=
           ( service_configuration.service_definition_consumer_params[name.to_sym] || {} )
         end
 
-        # Convert schema v0 service definition field types to v1 fields types
-        def field_type_for(field_type)
-          case field_type.to_sym
-          when :boolean
-            :boolean
-          when :collection, :select, :select_single
-            :select
-          when :int
-            :integer
-          when :hidden
-            :string
-          when :password
-            :string
-          when :password_with_confirmation
-            :string
-          when :text, :text_area
-            :text
-          when :text_field
-            :string
-          else
-            :string
-          end
-        end
+        # # Convert schema v0 service definition field types to v1 fields types
+        # def field_type_for(field_type)
+        #   case field_type.to_sym
+        #   when :boolean
+        #     :boolean
+        #   when :collection, :select, :select_single
+        #     :select
+        #   when :int
+        #     :integer
+        #   when :hidden
+        #     :string
+        #   when :password
+        #     :string
+        #   when :password_with_confirmation
+        #     :string
+        #   when :text, :text_area
+        #     :text
+        #   when :text_field
+        #     :string
+        #   else
+        #     :string
+        #   end
+        # end
+        #
+        # def collection_for(select_collection)
+        #   return [] unless variable_definition[:select_collection].present?
+        #   JSON.parse(variable_definition[:select_collection])
+        # rescue
+        #   [variable_definition[:select_collection]]
+        # end
 
-        def collection_for(select_collection)
-          return [] unless variable_definition[:select_collection].present?
-          JSON.parse(variable_definition[:select_collection])
-        rescue
-          [variable_definition[:select_collection]]
-        end
-
+        # def cast_as_boolean(value)
+        #   ActiveRecord::Type::Boolean.new.cast(value) == true
+        # end
 
       end
     end
