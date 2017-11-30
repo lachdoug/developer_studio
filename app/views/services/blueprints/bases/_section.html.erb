@@ -6,27 +6,20 @@
 <%= f.input :service_handle_field %>
 <div class="form-section-heading">Deployment</div>
 <%= f.input :parent_image %>
-<%= f.input :run_as_user %>
 <%= f.input :deployment_type, as: :select, required: true, collection: f.object.types_collection, wrapper_html: { class: 'blueprint_deployment_type_select_wrapper' } %>
 <div class='blueprint_deployment_type_select_dependent_fields'>
   <%= f.input :http_protocol, as: :select, required: true, collection: f.object.http_protocol_collection, label: 'HTTP protocol' %>
 </div>
+<%= f.input :hostname %>
+<%= f.input :domain_name %>
+<%= f.input :set_state, as: :select, collection: [ "running", "stopped", "nocontainer" ] %>
+<%= f.input :default_stop_timeout, as: :integer %>
 <div class="form-section-heading">Memory</div>
 <%= f.input :memory_required, as: :integer, label: 'Required MB' %>
 <%= f.input :memory_recommended, as: :integer, label: 'Recommended MB' %>
-<div class="form-section-heading">Behavior</div>
-<div class="col-md-9 col-md-offset-3">
-  <%= f.input :dedicated, as: :boolean %>
-  <%= f.input :persistent, as: :boolean %>
-  <%= f.input :immutable, as: :boolean %>
-  <%= f.input :attach_post_build, as: :boolean %>
-  <%= f.input :attach_requires_restart, as: :boolean %>
-  <%= f.input :soft_service, as: :boolean %>
-  <%= f.input :shareable, as: :boolean %>
-  <%= f.input :consumer_exportable, as: :boolean %>
-</div>
+<div class="form-section-heading">User</div>
+<%= f.input :run_as_user, label: "Run as" %>
+<%= f.input :user_id, label: "User ID" %>
+<%= f.input :user_primary_group, label: "Primary group" %>
+<%= f.input :create_user, as: :boolean, wrapper: :horizontal_boolean %>
 <% end %>
-<div class="form-section-heading">Accepts</div>
-<div id='engine_blueprint_section_base_accepts'>
-  <%= render 'services/blueprints/bases/accepts' %>
-</div>

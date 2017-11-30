@@ -1,0 +1,19 @@
+<%= custom_form_for @service.blueprint.consumer_scripts,
+      namespace: "service_blueprint_consumer_scripts",
+      url: service_blueprint_consumer_scripts_path(service_id: @service.name) do |f| %>
+  <%= f.simple_fields_for :add_script do |ff| %>
+    <div class="form-section-heading">Add</div>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
+  <% end %>
+  <%= f.simple_fields_for :remove_script do |ff| %>
+    <div class="form-section-heading">Remove</div>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
+  <% end %>
+  <%= f.simple_fields_for :update_script do |ff| %>
+    <div class="form-section-heading">Update</div>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
+  <% end %>
+<% end %>

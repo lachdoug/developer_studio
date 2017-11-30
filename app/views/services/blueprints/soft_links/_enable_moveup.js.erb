@@ -1,0 +1,4 @@
+<% if soft_link.index > 0 %>
+  $("#<%= "service_blueprint_soft_link_#{soft_link.index}_moveup_button_disabled" %>").hide();
+  $("#<%= "service_blueprint_soft_link_#{soft_link.index}_moveup_button" %>").show();
+<% end %>

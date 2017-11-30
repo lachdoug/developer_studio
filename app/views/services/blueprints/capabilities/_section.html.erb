@@ -1,0 +1,9 @@
+<%= custom_form_for @service.blueprint.capabilities,
+      url: service_blueprint_capabilities_path(service_id: @service.name) do |f| %>
+<!-- <div class="form-section-heading">Behavior</div> -->
+<div class="col-md-9 col-md-offset-3">
+  <%= f.input :allow, as: :radio_buttons, collection: [ [:Default, :default], [:None, :none], [:All, :all], [:Selected, :selected] ] %>
+  <%= f.input :selected, as: :check_boxes, collection: f.object.allow_selected_collection, include_hidden: false,
+    wrapper_html: { class: 'blueprint_capabilities_selected_checkboxes_wrapper' } %>
+</div>
+<% end %>

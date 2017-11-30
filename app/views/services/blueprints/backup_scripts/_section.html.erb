@@ -1,0 +1,14 @@
+<%= custom_form_for @service.blueprint.backup_scripts,
+      namespace: "service_blueprint_backup_scripts",
+      url: service_blueprint_backup_scripts_path(service_id: @service.name) do |f| %>
+  <%= f.simple_fields_for :backup_script do |ff| %>
+    <div class="form-section-heading">Backup</div>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
+  <% end %>
+  <%= f.simple_fields_for :restore_script do |ff| %>
+    <div class="form-section-heading">Restore</div>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
+  <% end %>
+<% end %>

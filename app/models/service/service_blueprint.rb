@@ -7,6 +7,7 @@ class Service
     # end
     [ :metadata,
       :base,
+      :disposition,
       :scripts,
       :external_repositories,
       :ports,
@@ -20,10 +21,20 @@ class Service
       :template_files,
       :replacement_strings,
       :persistent_directories,
+      :consumers,
+      :consumer_scripts,
       :consumer_params,
       :actionators,
       :configurators,
-      :schedules
+      :schedules,
+      :service_dependencies,
+      :guises,
+      :capabilities,
+      :log_directories,
+      :build_dependencies,
+      :file_permissions,
+      :soft_links,
+      :backup_scripts
     ].each do |method_name|
       define_method method_name do
         instance_variable_set "@#{method_name}",
@@ -33,11 +44,9 @@ class Service
     end
 
     def service_definition
-      # byebug
-      compact_service_definition({
+      {
         publisher_namespace: base.publisher_namespace,
         type_path: base.type_path,
-        accepts: base.accepts.form_data,
         title: metadata.software_display_title,
         description: metadata.software_display_description,
         major: metadata.blueprint_version_major,
@@ -46,41 +55,26 @@ class Service
         patch: metadata.blueprint_version_patch,
         service_container: base.name,
         service_handle_field: base.service_handle_field,
-        dedicated: cast_as_boolean(base.dedicated),
-        persistent: cast_as_boolean(base.persistent),
-        immutable: cast_as_boolean(base.immutable),
-        attach_post_build: cast_as_boolean(base.attach_post_build),
-        attach_requires_restart: cast_as_boolean(base.attach_requires_restart),
-        soft_service: cast_as_boolean(base.soft_service),
-        shareable: cast_as_boolean(base.shareable),
-        consumer_exportable: cast_as_boolean(base.consumer_exportable),
-        target_environment_variables: target_environment_variables.form_data.map{ |v| { v[:variable_name].to_sym => v } }.inject(:merge),
-        consumer_params: consumer_params.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge),
-        # type_consumer_params: type_consumer_params.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge),
-        configurators: configurators.form_data.map{ |v| { v[:name].to_sym => v.without(:set_script, :read_script) } }.inject(:merge),
-        service_actionators: actionators.form_data.map{ |v| { v[:name].to_sym => v.without(:script) } }.inject(:merge),
-        constants: constants.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge)
-      })
-    end
-
-    def compact_service_definition(element)
-      return element
-      # byebug
-      # if element.blank?
-      #   nil
-      # elsif element.is_a? Array
-      #   element.map do |v|
-      #     compact_service_definition v
-      #   end.compact
-      # elsif element.is_a? Hash
-      #   element.map do |k,v|
-      #     { k => compact_service_definition(v) }
-      #   end.inject(:merge).delete_if do |k,v|
-      #     v.blank?
-      #   end
-      # else
-      #   element
-      # end
+        dedicated: cast_as_boolean(disposition.dedicated),
+        persistent: cast_as_boolean(disposition.persistent),
+        immutable: cast_as_boolean(disposition.immutable),
+        attach_post_build: cast_as_boolean(disposition.attach_post_build),
+        attach_requires_restart: cast_as_boolean(disposition.attach_requires_restart),
+        soft_service: cast_as_boolean(disposition.soft_service),
+        shareable: cast_as_boolean(disposition.shareable),
+        consumer_exportable: cast_as_boolean(disposition.consumer_exportable),
+        consumerless: cast_as_boolean(disposition.consumerless),
+        target_environment_variables: target_environment_variables.form_data.map{ |v| { v[:variable_name].to_sym => v } }.inject(:merge) || {},
+        accepts: consumers.accepts.form_data,
+        consumer_params: consumer_params.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge) || {},
+        # type_consumer_params: type_consumer_params.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge) || {},
+        configurators: configurators.form_data.map{ |v| { v[:name].to_sym => v.without(:set_script, :read_script) } }.inject(:merge) || {},
+        service_actionators: actionators.form_data.map{ |v| { v[:name].to_sym => v.without(:script) } }.inject(:merge) || {},
+        constants: constants.form_data.map{ |v| { v[:name].to_sym => v } }.inject(:merge) || {},
+        service_dependencies: service_dependencies.form_data,
+        guises: guises.form_data,
+        build_dependencies: build_dependencies.form_data
+      }
     end
 
   end

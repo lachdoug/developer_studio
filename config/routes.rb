@@ -130,11 +130,8 @@ Rails.application.routes.draw do
     end
     namespace :blueprint, module: :blueprints do
       resource :metadata, only: [:update]
-      resource :base, only: [:update] do
-        resources :accepts, module: :bases, only: [:new, :update, :destroy] do
-          resource :moveup, module: :accepts, only: [:show]
-        end
-      end
+      resource :base, only: [:update]
+      resource :disposition, only: [:update]
       resource :scripts, only: [:update]
       resources :ports, only: [:new, :update, :destroy] do
         resource :moveup, module: :ports, only: [:show]
@@ -182,6 +179,12 @@ Rails.application.routes.draw do
       resources :persistent_directories, only: [:new, :update, :destroy] do
         resource :moveup, module: :persistent_directories, only: [:show]
       end
+      resource :consumers, only: [] do
+        resources :accepts, module: :consumers, only: [:new, :update, :destroy] do
+          resource :moveup, module: :accepts, only: [:show]
+        end
+      end
+      resource :consumer_scripts, only: [:update]
       resources :consumer_params, only: [:new, :update, :destroy] do
         resource :moveup, module: :consumer_params, only: [:show]
         resource :input, only: [], module: :consumer_params do
@@ -222,6 +225,26 @@ Rails.application.routes.draw do
         resource :moveup, module: :schedules, only: [:show]
         resource :variables, module: :schedules, only: [:new]
       end
+      resources :service_dependencies, only: [:new, :update, :destroy] do
+        resource :moveup, module: :service_dependencies, only: [:show]
+      end
+      resources :guises, only: [:new, :update, :destroy] do
+        resource :moveup, module: :guises, only: [:show]
+      end
+      resource :capabilities, only: [:update]
+      resources :log_directories, only: [:new, :update, :destroy] do
+        resource :moveup, module: :log_directories, only: [:show]
+      end
+      resources :build_dependencies, only: [:new, :update, :destroy] do
+        resource :moveup, module: :build_dependencies, only: [:show]
+      end
+      resources :file_permissions, only: [:new, :update, :destroy] do
+        resource :moveup, module: :file_permissions, only: [:show]
+      end
+      resources :soft_links, only: [:new, :update, :destroy] do
+        resource :moveup, module: :soft_links, only: [:show]
+      end
+      resource :backup_scripts, only: [:update]
     end
     resource :readme, only: [:update], module: :readmes
     resource :release_notes, only: [:update], module: :release_notes

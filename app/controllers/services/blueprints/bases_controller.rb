@@ -16,19 +16,18 @@ module Services
                   :type_path,
                   :service_handle_field,
                   :parent_image,
-                  :run_as_user,
                   :deployment_type,
                   :http_protocol,
+                  :hostname,
+                  :domain_name,
+                  :set_state,
+                  :default_stop_timeout,
                   :memory_required,
                   :memory_recommended,
-                  :dedicated,
-                  :persistent,
-                  :immutable,
-                  :attach_post_build,
-                  :attach_requires_restart,
-                  :soft_service,
-                  :shareable,
-                  :consumer_exportable )
+                  :run_as_user,
+                  :user_id,
+                  :user_primary_group,
+                  :create_user )
       end
 
     end

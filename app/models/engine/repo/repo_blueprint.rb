@@ -14,7 +14,7 @@ class Engine
       end
 
       def conform_content
-        @content = blueprint_conform_class.new(content).Schema_1_0
+        @content = blueprint_conform_class.new(content).Schema_0_1
       end
 
       def timestamp_content
@@ -50,6 +50,7 @@ class Engine
       end
 
       def update(new_content)
+        # byebug
         @content = new_content
         conform_content
         timestamp_content

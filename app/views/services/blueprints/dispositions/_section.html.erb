@@ -1,0 +1,21 @@
+<%= custom_form_for @service.blueprint.disposition,
+      url: service_blueprint_disposition_path(service_id: @service.name) do |f| %>
+<!-- <div class="form-section-heading">Behavior</div> -->
+<div class="col-md-9 col-md-offset-3">
+  <%= f.input :dedicated, as: :boolean %>
+  <%= f.input :persistent, as: :boolean %>
+  <%= f.input :immutable, as: :boolean %>
+  <%= f.input :attach_post_build, as: :boolean %>
+  <%= f.input :attach_requires_restart, as: :boolean %>
+  <%= f.input :soft_service, as: :boolean %>
+  <%= f.input :shareable, as: :boolean %>
+  <%= f.input :consumer_exportable, as: :boolean %>
+  <%= f.input :stopped_ok, as: :boolean, label: "Stopped OK" %>
+  <%= f.input :kerberos_support, as: :boolean %>
+  <%= f.input :host_network, as: :boolean %>
+  <%= f.input :privileged, as: :boolean %>
+  <%= f.input :no_ca_map, as: :boolean, label: "No CA map" %>
+  <%= f.input :consumerless, as: :boolean %>
+  <%= f.input :start_syslog, as: :boolean %>
+</div>
+<% end %>

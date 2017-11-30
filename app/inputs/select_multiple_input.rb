@@ -1,5 +1,0 @@
-class SelectMultipleInput < MultipleInput
-
-
-
-end

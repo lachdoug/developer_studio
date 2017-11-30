@@ -1,0 +1,60 @@
+
+<% @service.blueprint.soft_links.each do |soft_link| %>
+
+  <%= custom_form_for soft_link,
+    namespace: "service_blueprint_soft_link_#{soft_link.index}",
+    url: service_blueprint_soft_link_path(service_id: @service.name, id: soft_link.index) do |f| %>
+
+    <table class="table form_table">
+      <tr class="<%= 'hidden_table_header' if soft_link.index > 0 %>">
+        <th>Source</th>
+        <th>Target</th>
+        <th>Owner</th>
+        <th width="1"></th>
+      </tr>
+      <tr>
+        <%= f.input :source, required: true, wrapper: :form_table_cell_input %>
+        <%= f.input :target, wrapper: :form_table_cell_input %>
+        <%= f.input :owner, wrapper: :form_table_cell_input %>
+        <td>
+          <div class="dropdown">
+            <a class="btn btn-custom" data-toggle="dropdown">
+              <i class="fa fa-bars"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li>
+                <%= link_to icon_text('fa-caret-up', 'Move up'),
+                  "#",
+                  title: 'Move up',
+                  id: "service_blueprint_soft_link_#{soft_link.index}_moveup_button_disabled", remote: true,
+                  class: "disabled_link",
+                  style: ( 'display:none;' unless soft_link.disable_moveup ) %>
+                <%= link_to icon_text('fa-caret-up', 'Move up'),
+                  service_blueprint_soft_link_moveup_path(service_id: @service.name, soft_link_id: soft_link.index),
+                  title: 'Move up',
+                  id: "service_blueprint_soft_link_#{soft_link.index}_moveup_button", remote: true,
+                  class: "show_saving_spinner_on_click",
+                  style: ( 'display:none;' if soft_link.disable_moveup ) %>
+              </li>
+              <li>
+                <%= link_to icon_text('fa-trash-o', 'Delete'),
+                  service_blueprint_soft_link_path(service_id: @service.name, id: soft_link.index),
+                  method: :delete, remote: true,
+                  title: 'Delete',
+                  class: 'show_saving_spinner_on_confirmed',
+                  data: {confirm: "Are you sure that you want to delete this soft link?"} %>
+                </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+
+<% end %>
+
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New soft link'),
+      new_service_blueprint_soft_link_path(service_id: @service.name),
+      remote: true, class: 'btn btn-custom pull-right' %>
+</div>

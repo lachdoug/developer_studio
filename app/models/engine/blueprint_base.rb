@@ -16,6 +16,7 @@ class Engine
     end
 
     def content
+      # byebug
       @content ||= file.content
     end
 

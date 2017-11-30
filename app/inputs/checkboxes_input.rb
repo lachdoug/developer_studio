@@ -1,5 +1,0 @@
-class CheckboxesInput < MultipleInput
-
-
-
-end

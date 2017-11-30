@@ -129,7 +129,7 @@ p "do merge"
           "wwwstats"
         ],
         "input_types": {
-          "boolean [ Deprecated in favour of checkbox ]": "boolean",
+          "boolean [ Deprecated in favour of checkbox_boolean ]": "boolean",
           "checkbox (Single check box. Uses first item in collection for checked and second item for unchecked.)": "checkbox",
           "checkbox_boolean (Single check box. Returns 'true' when checked, otherwise 'false'. Input label shown beside checkbox.)": "checkbox_boolean",
           "check_boxes [ Deprecated in favour of checkboxes ]": "check_boxes",

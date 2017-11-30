@@ -1,0 +1,56 @@
+
+<% @service.blueprint.build_dependencies.each do |build_dependency| %>
+
+  <%= custom_form_for build_dependency,
+    namespace: "service_blueprint_build_dependency_#{build_dependency.index}",
+    url: service_blueprint_build_dependency_path(service_id: @service.name, id: build_dependency.index) do |f| %>
+
+    <table class="table form_table">
+      <tr class="<%= 'hidden_table_header' if build_dependency.index > 0 %>">
+        <th>Path</th>
+        <th width="1"></th>
+      </tr>
+      <tr>
+        <%= f.input :path, required: true, wrapper: :form_table_cell_input %>
+        <td>
+          <div class="dropdown">
+            <a class="btn btn-custom" data-toggle="dropdown">
+              <i class="fa fa-bars"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li>
+                <%= link_to icon_text('fa-caret-up', 'Move up'),
+                  "#",
+                  title: 'Move up',
+                  id: "service_blueprint_build_dependency_#{build_dependency.index}_moveup_button_disabled", remote: true,
+                  class: "disabled_link",
+                  style: ( 'display:none;' unless build_dependency.disable_moveup ) %>
+                <%= link_to icon_text('fa-caret-up', 'Move up'),
+                  service_blueprint_build_dependency_moveup_path(service_id: @service.name, build_dependency_id: build_dependency.index),
+                  title: 'Move up',
+                  id: "service_blueprint_build_dependency_#{build_dependency.index}_moveup_button", remote: true,
+                  class: "show_saving_spinner_on_click",
+                  style: ( 'display:none;' if build_dependency.disable_moveup ) %>
+              </li>
+              <li>
+                <%= link_to icon_text('fa-trash-o', 'Delete'),
+                  service_blueprint_build_dependency_path(service_id: @service.name, id: build_dependency.index),
+                  method: :delete, remote: true,
+                  title: 'Delete',
+                  class: 'show_saving_spinner_on_confirmed',
+                  data: {confirm: "Are you sure that you want to delete this build dependency?"} %>
+                </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+
+<% end %>
+
+<div class='clearfix'>
+  <%= link_to icon_text('fa-plus', 'New build dependency'),
+      new_service_blueprint_build_dependency_path(service_id: @service.name),
+      remote: true, class: 'btn btn-custom pull-right' %>
+</div>

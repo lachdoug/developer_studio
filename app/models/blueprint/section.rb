@@ -44,6 +44,7 @@ module Blueprint
     attr_reader :blueprint
 
     def initialize(blueprint)
+      # byebug
       @blueprint = blueprint
       build_section
       self
@@ -62,6 +63,7 @@ module Blueprint
     end
 
     def update(params)
+      # byebug
       assign_attributes(params)
       save
     end

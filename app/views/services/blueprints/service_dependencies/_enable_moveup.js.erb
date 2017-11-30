@@ -1,0 +1,4 @@
+<% if service_dependency.index > 0 %>
+  $("#<%= "service_blueprint_service_dependency_#{service_dependency.index}_moveup_button_disabled" %>").hide();
+  $("#<%= "service_blueprint_service_dependency_#{service_dependency.index}_moveup_button" %>").show();
+<% end %>
