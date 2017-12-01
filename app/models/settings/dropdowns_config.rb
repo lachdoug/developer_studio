@@ -130,7 +130,7 @@ p "do merge"
         ],
         "input_types": {
           "boolean [ Deprecated in favour of checkbox_boolean ]": "boolean",
-          "checkbox (Single check box. Uses first item in collection for checked and second item for unchecked.)": "checkbox",
+          "checkbox (Single check box. Uses first item in collection for unchecked and second item for checked.)": "checkbox",
           "checkbox_boolean (Single check box. Returns 'true' when checked, otherwise 'false'. Input label shown beside checkbox.)": "checkbox_boolean",
           "check_boxes [ Deprecated in favour of checkboxes ]": "check_boxes",
           "checkboxes (Multiple checkboxes. Return an array of checked values. Value can be a comma-separated list. Uses collection for checkbox values and labels.)": "checkboxes",

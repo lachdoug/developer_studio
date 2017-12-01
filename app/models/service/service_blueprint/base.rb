@@ -3,6 +3,7 @@ class Service
     class Base < ::Blueprint::Section
 
       attr_accessor :name,
+                    :cardinal,
                     :publisher_namespace,
                     :type_path,
                     :service_handle_field,
@@ -32,6 +33,7 @@ class Service
       def build_section
         # byebug
         @name = ( data || {} ).dig :name
+        @cardinal = ( data || {} ).dig :cardinal
         @publisher_namespace= ( data || {} ).dig :publisher_namespace
         @type_path= ( data || {} ).dig :type_path
         @service_handle_field= ( data || {} ).dig :service_handle_field
@@ -72,6 +74,7 @@ class Service
       def form_data
         {
           name: name,
+          cardinal: cardinal,
           publisher_namespace: publisher_namespace,
           type_path: type_path,
           service_handle_field: service_handle_field,

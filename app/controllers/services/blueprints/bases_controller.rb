@@ -12,6 +12,7 @@ module Services
       def strong_params
         params.require(:service_service_blueprint_base).
           permit( :name,
+                  :cardinal,
                   :publisher_namespace,
                   :type_path,
                   :service_handle_field,

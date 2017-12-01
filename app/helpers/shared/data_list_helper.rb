@@ -17,7 +17,7 @@ module Shared
             "#{value}"
           end
         else
-          "#{value}"
+          value.present? ? "#{value}" : "&nbsp;".html_safe
         end
       end
     end
