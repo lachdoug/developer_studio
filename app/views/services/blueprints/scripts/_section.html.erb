@@ -6,8 +6,18 @@
     <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
     <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
   <% end %>
+  <%= f.simple_fields_for :start_sudo do |ff| %>
+    <div class="form-section-heading">Start sudo</div>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
+  <% end %>
   <%= f.simple_fields_for :install do |ff| %>
     <div class="form-section-heading">Install</div>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
+  <% end %>
+  <%= f.simple_fields_for :install_sudo do |ff| %>
+    <div class="form-section-heading">Install sudo</div>
     <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
     <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
   <% end %>
@@ -16,8 +26,18 @@
     <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
     <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
   <% end %>
+  <%= f.simple_fields_for :post_install_sudo do |ff| %>
+    <div class="form-section-heading">Post install sudo</div>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
+  <% end %>
   <%= f.simple_fields_for :shutdown do |ff| %>
     <div class="form-section-heading">Shutdown</div>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
+  <% end %>
+  <%= f.simple_fields_for :shutdown_sudo do |ff| %>
+    <div class="form-section-heading">Shutdown sudo</div>
     <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
     <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
   <% end %>

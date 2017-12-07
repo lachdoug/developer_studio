@@ -12,8 +12,12 @@ class Service
             configurator.map do |k,v|
               if k.to_sym == :read_script
                 { read_script_attributes: v }
+              elsif k.to_sym == :read_script_sudo
+                { read_script_sudo_attributes: v }
               elsif k.to_sym == :set_script
                 { set_script_attributes: v }
+              elsif k.to_sym == :set_script_sudo
+                { set_script_sudo_attributes: v }
               elsif k.to_sym == :variables
                 { variables_attributes: variables_attributes_for(v) }
               else

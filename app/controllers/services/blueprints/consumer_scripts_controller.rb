@@ -13,8 +13,11 @@ module Services
       def strong_params
         params.require(:service_service_blueprint_consumer_scripts).
           permit( add_script_attributes: [:language, :content],
+                  add_script_sudo_attributes: [:language, :content],
                   remove_script_attributes: [:language, :content],
-                  update_script_attributes: [:language, :content] )
+                  remove_script_sudo_attributes: [:language, :content],
+                  update_script_attributes: [:language, :content],
+                  update_script_sudo_attributes: [:language, :content] )
       end
 
     end

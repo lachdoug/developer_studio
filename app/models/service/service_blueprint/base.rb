@@ -14,6 +14,8 @@ class Service
                     :domain_name,
                     :set_state,
                     :default_stop_timeout,
+                    :restart_policy,
+                    :restart_attempts,
                     :memory_required,
                     :memory_recommended,
                     :run_as_user,
@@ -44,6 +46,8 @@ class Service
         @domain_name = ( data || {} ).dig :domain_name
         @set_state = ( data || {} ).dig :set_state
         @default_stop_timeout = ( data || {} ).dig :default_stop_timeout
+        @restart_policy = ( data || {} ).dig :restart_policy
+        @restart_attempts = ( data || {} ).dig :restart_attempts
         @memory_required = ( data || {} ).dig :memory, :required
         @memory_recommended = ( data || {} ).dig :memory, :recommended
         @run_as_user = ( data || {} ).dig :run_as_user
@@ -86,6 +90,8 @@ class Service
           domain_name: domain_name,
           set_state: set_state,
           default_stop_timeout: default_stop_timeout,
+          restart_policy: restart_policy,
+          restart_attempts: restart_attempts,
           memory: {
             required: memory_required,
             recommended: memory_recommended

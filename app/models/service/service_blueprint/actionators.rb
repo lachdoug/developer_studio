@@ -12,6 +12,8 @@ class Service
             actionator.map do |k,v|
               if k.to_sym == :script
                 { script_attributes: v }
+              elsif k.to_sym == :script_sudo
+                { script_sudo_attributes: v }
               elsif k.to_sym == :variables
                 { variables_attributes: variables_attributes_for(v) }
               else

@@ -15,6 +15,10 @@
 <%= f.input :domain_name %>
 <%= f.input :set_state, as: :select, collection: [ "running", "stopped", "nocontainer" ] %>
 <%= f.input :default_stop_timeout, as: :integer %>
+<%= f.input :restart_policy, as: :select, collection: [ "on-failure", "unless-stopped", "always", "no" ], include_blank: true, wrapper_html: { class: 'blueprint_restart_policy_select_wrapper' } %>
+<div class='blueprint_restart_policy_select_dependent_fields'>
+  <%= f.input :restart_attempts, as: :integer %>
+</div>
 <div class="form-section-heading">Memory</div>
 <%= f.input :memory_required, as: :integer, label: 'Required MB' %>
 <%= f.input :memory_recommended, as: :integer, label: 'Recommended MB' %>

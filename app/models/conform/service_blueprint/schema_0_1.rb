@@ -87,7 +87,8 @@ module Conform
           build_dependencies: build_dependencies,
           file_permissions: file_permissions,
           soft_links: soft_links,
-          backup_scripts: backup_scripts
+          backup_scripts: backup_scripts,
+          library_scripts: library_scripts,
         }.delete_if { |k,v| v.blank? }
       end
 
@@ -106,6 +107,8 @@ module Conform
           domain_name: r(:software, :base, :domain_name),
           set_state: r(:software, :base, :set_state),
           default_stop_timeout: r(:software, :base, :default_stop_timeout),
+          restart_policy: r(:software, :base, :restart_policy),
+          restart_attempts: r(:software, :base, :restart_attempts),
           memory: memory,
           run_as_user: r(:software, :base, :run_as_user).to_s,
           user_id: r(:software, :base, :user_id).to_s,
@@ -161,14 +164,26 @@ module Conform
           start: { language: r(:software, :scripts, :start, :language).to_s,
                     content: r(:software, :scripts, :start, :content).to_s
                   }.delete_if { |k,v| v.blank? },
+          start_sudo: { language: r(:software, :scripts, :start_sudo, :language).to_s,
+                    content: r(:software, :scripts, :start_sudo, :content).to_s
+                  }.delete_if { |k,v| v.blank? },
           install: { language: r(:software, :scripts, :install, :language).to_s,
                     content: r(:software, :scripts, :install, :content).to_s
+                  }.delete_if { |k,v| v.blank? },
+          install_sudo: { language: r(:software, :scripts, :install_sudo, :language).to_s,
+                    content: r(:software, :scripts, :install_sudo, :content).to_s
                   }.delete_if { |k,v| v.blank? },
           post_install: { language: r(:software, :scripts, :post_install, :language).to_s,
                     content: r(:software, :scripts, :post_install, :content).to_s
                   }.delete_if { |k,v| v.blank? },
+          post_install_sudo: { language: r(:software, :scripts, :post_install_sudo, :language).to_s,
+                    content: r(:software, :scripts, :post_install_sudo, :content).to_s
+                  }.delete_if { |k,v| v.blank? },
           shutdown: { language: r(:software, :scripts, :shutdown, :language).to_s,
                     content: r(:software, :scripts, :shutdown, :content).to_s
+                  }.delete_if { |k,v| v.blank? },
+          shutdown_sudo: { language: r(:software, :scripts, :shutdown_sudo, :language).to_s,
+                    content: r(:software, :scripts, :shutdown_sudo, :content).to_s
                   }.delete_if { |k,v| v.blank? },
         }.delete_if { |k,v| v.blank? }
       end
@@ -315,13 +330,25 @@ module Conform
             language: r(:software, :consumer_scripts, :add, :language).to_s,
             content: r(:software, :consumer_scripts, :add, :content).to_s
           }.delete_if { |k,v| v.blank? },
+          add_sudo: {
+            language: r(:software, :consumer_scripts, :add_sudo, :language).to_s,
+            content: r(:software, :consumer_scripts, :add_sudo, :content).to_s
+          }.delete_if { |k,v| v.blank? },
           update: {
             language: r(:software, :consumer_scripts, :update, :language).to_s,
             content: r(:software, :consumer_scripts, :update, :content).to_s
           }.delete_if { |k,v| v.blank? },
+          update_sudo: {
+            language: r(:software, :consumer_scripts, :update_sudo, :language).to_s,
+            content: r(:software, :consumer_scripts, :update_sudo, :content).to_s
+          }.delete_if { |k,v| v.blank? },
           remove: {
             language: r(:software, :consumer_scripts, :remove, :language).to_s,
             content: r(:software, :consumer_scripts, :remove, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          remove_sudo: {
+            language: r(:software, :consumer_scripts, :remove_sudo, :language).to_s,
+            content: r(:software, :consumer_scripts, :remove_sudo, :content).to_s
           }.delete_if { |k,v| v.blank? },
         }.delete_if { |k,v| v.blank? }
       end
@@ -369,7 +396,11 @@ module Conform
         {
           path: tf.dig(:path).to_s,
           language: tf.dig(:language).to_s,
-          content: tf.dig(:content).to_s
+          content: tf.dig(:content).to_s,
+          user: tf.dig(:user).to_s,
+          group: tf.dig(:group).to_s,
+          permissions: tf.dig(:permissions).to_s,
+          preprocess: cast_boolean_for( tf.dig(:preprocess) )
         }.delete_if { |k,v| v.blank? }
       end
 
@@ -417,7 +448,12 @@ module Conform
           variables: actionator_variables_for(a),
           script: {
             language: a.dig(:script, :language).to_s,
-            content: a.dig(:script, :content).to_s }.delete_if { |k,v| v.blank? }
+            content: a.dig(:script, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          script_sudo: {
+            language: a.dig(:script_sudo, :language).to_s,
+            content: a.dig(:script_sudo, :content).to_s
+          }.delete_if { |k,v| v.blank? }
         }.delete_if { |k,v| v.blank? }
       end
 
@@ -467,10 +503,20 @@ module Conform
           variables: configurator_variables_for(c),
           set_script: {
             language: c.dig(:set_script, :language).to_s,
-            content: c.dig(:set_script, :content).to_s }.delete_if { |k,v| v.blank? },
+            content: c.dig(:set_script, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          set_script_sudo: {
+            language: c.dig(:set_script_sudo, :language).to_s,
+            content: c.dig(:set_script_sudo, :content).to_s
+          }.delete_if { |k,v| v.blank? },
           read_script: {
             language: c.dig(:read_script, :language).to_s,
-            content: c.dig(:read_script, :content).to_s }.delete_if { |k,v| v.blank? }
+            content: c.dig(:read_script, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          read_script_sudo: {
+            language: c.dig(:read_script_sudo, :language).to_s,
+            content: c.dig(:read_script_sudo, :content).to_s
+          }.delete_if { |k,v| v.blank? }
         }.delete_if { |k,v| v.blank? }
       end
 
@@ -595,11 +641,30 @@ module Conform
             language: r(:software, :backup_scripts, :backup, :language).to_s,
             content: r(:software, :backup_scripts, :backup, :content).to_s
           }.delete_if { |k,v| v.blank? },
+          backup_sudo: {
+            language: r(:software, :backup_scripts, :backup_sudo, :language).to_s,
+            content: r(:software, :backup_scripts, :backup_sudo, :content).to_s
+          }.delete_if { |k,v| v.blank? },
           restore: {
             language: r(:software, :backup_scripts, :restore, :language).to_s,
             content: r(:software, :backup_scripts, :restore, :content).to_s
           }.delete_if { |k,v| v.blank? },
+          restore_sudo: {
+            language: r(:software, :backup_scripts, :restore_sudo, :language).to_s,
+            content: r(:software, :backup_scripts, :restore_sudo, :content).to_s
+          }.delete_if { |k,v| v.blank? },
         }.delete_if { |k,v| v.blank? }
+      end
+
+      def library_scripts
+        ( r(:software, :library_scripts) || []).map do |ls|
+          {
+            name: ls.dig(:name).to_s,
+            language: ls.dig(:language).to_s,
+            content: ls.dig(:content).to_s,
+            sudo: cast_boolean_for( ls.dig(:sudo) )
+          }
+        end
       end
 
       def cast_boolean_for(boolean)

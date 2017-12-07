@@ -245,6 +245,9 @@ Rails.application.routes.draw do
         resource :moveup, module: :soft_links, only: [:show]
       end
       resource :backup_scripts, only: [:update]
+      resources :library_scripts, only: [:new, :update, :destroy] do
+        resource :moveup, module: :library_scripts, only: [:show]
+      end
     end
     resource :readme, only: [:update], module: :readmes
     resource :release_notes, only: [:update], module: :release_notes

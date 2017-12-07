@@ -32,7 +32,8 @@ module Services
                   :return_type,
                   :return_file_name,
                   :enable_logging,
-                  script_attributes: [:language, :content]
+                  script_attributes: [:language, :content],
+                  script_sudo_attributes: [:language, :content]
                 )
       end
 

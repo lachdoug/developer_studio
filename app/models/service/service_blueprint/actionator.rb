@@ -3,15 +3,22 @@ class Service
     class Actionator < ::Blueprint::SectionCollectionItem
 
       attr_accessor :name, :label, :description, :return_type, :return_file_name, :enable_logging
-      attr_reader :script
+      # attr_reader :script, :script_sudo
 
       def script_attributes=(params={})
         @script = Script.new params
-        # byebug
       end
 
       def script
         @script ||= Script.new
+      end
+
+      def script_sudo_attributes=(params={})
+        @script_sudo = Script.new params
+      end
+
+      def script_sudo
+        @script_sudo ||= Script.new
       end
 
       def variables
@@ -31,6 +38,7 @@ class Service
           return_file_name: return_file_name,
           enable_logging: cast_as_boolean(enable_logging),
           script: script.form_data,
+          script_sudo: script_sudo.form_data,
           variables: variables.map(&:form_data),
         }
       end

@@ -6,8 +6,18 @@
     <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
     <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
   <% end %>
+  <%= f.simple_fields_for :backup_script_sudo do |ff| %>
+    <div class="form-section-heading">Backup sudo</div>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
+  <% end %>
   <%= f.simple_fields_for :restore_script do |ff| %>
     <div class="form-section-heading">Restore</div>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
+  <% end %>
+  <%= f.simple_fields_for :restore_script_sudo do |ff| %>
+    <div class="form-section-heading">Restore sudo</div>
     <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
     <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
   <% end %>

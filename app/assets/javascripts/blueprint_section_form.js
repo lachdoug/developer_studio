@@ -5,6 +5,7 @@ $(document).ajaxComplete(function(){
 $(document).on('turbolinks:load', function(){
   do_blueprint_deployment_type_select();
   do_blueprint_framework_select();
+  do_blueprint_restart_policy_select();
   do_blueprint_capabilities_select();
   do_blueprint_section_forms();
 });
@@ -23,6 +24,19 @@ var blueprint_deployment_type_select_depend_on = function(select_object) {
   };
 };
 
+var do_blueprint_restart_policy_select = function(){
+  $('#engine_blueprint_section_base').show();
+  blueprint_restart_policy_select_depend_on($('.blueprint_restart_policy_select_wrapper select'));
+  $('#engine_blueprint_section_base').hide();
+};
+
+var blueprint_restart_policy_select_depend_on = function(select_object) {
+  if ( $(select_object).val() == "on-failure" ) {
+    $(select_object).closest('.blueprint_restart_policy_select_wrapper').next().show();
+  } else {
+    $(select_object).closest('.blueprint_restart_policy_select_wrapper').next().hide();
+  };
+};
 
 var do_blueprint_framework_select = function(){
   $('#engine_blueprint_section_base').show();
@@ -195,6 +209,10 @@ var bind_blueprint_section_forms_input_change_events = function() {
   });
   $('.blueprint_deployment_type_select_wrapper select').on('change', function(){
     blueprint_deployment_type_select_depend_on(this);
+    check_validity_of_all_blueprint_sections();
+  });
+  $('.blueprint_restart_policy_select_wrapper select').on('change', function(){
+    blueprint_restart_policy_select_depend_on(this);
     check_validity_of_all_blueprint_sections();
   });
   $('#engine_blueprint input:not(.do_not_autosubmit_form_on_change)').on('change', function(){

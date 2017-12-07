@@ -29,7 +29,9 @@ module Services
                   :enable_logging,
                   :no_save,
                   set_script_attributes: [:language, :content],
-                  read_script_attributes: [:language, :content]
+                  set_script_sudo_attributes: [:language, :content],
+                  read_script_attributes: [:language, :content],
+                  read_script_sudo_attributes: [:language, :content],
                 )
       end
 

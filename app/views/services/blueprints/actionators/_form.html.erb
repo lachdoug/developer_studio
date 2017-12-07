@@ -13,6 +13,12 @@
     collection: actionator.script_language_collection, include_blank: true, required: false %>
     <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: actionator.script.send(:language) } }  %>
   <% end %>
+  <div class="form-section-heading">Script sudo</div>
+  <%= f.simple_fields_for :script_sudo do |ff| %>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'},
+    collection: actionator.script_language_collection, include_blank: true, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: actionator.script.send(:language) } }  %>
+  <% end %>
   <% actionator.variables.each do |variable| %>
     <div id="service_blueprint_actionator_<%= actionator.index %>_variable_<%= variable.index %>_nested_error"></div>
   <% end %>

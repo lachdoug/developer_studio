@@ -13,7 +13,9 @@ module Services
       def strong_params
         params.require(:service_service_blueprint_backup_scripts).
           permit( backup_script_attributes: [:language, :content],
-                  restore_script_attributes: [:language, :content] )
+                  restore_script_attributes: [:language, :content],
+                  backup_script_sudo_attributes: [:language, :content],
+                  restore_script_sudo_attributes: [:language, :content] )
       end
 
     end

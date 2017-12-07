@@ -12,8 +12,20 @@
     collection: configurator.script_language_collection, include_blank: true, required: false %>
     <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: configurator.set_script.send(:language) } }  %>
   <% end %>
+  <div class="form-section-heading">Set script sudo</div>
+  <%= f.simple_fields_for :set_script_sudo do |ff| %>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'},
+    collection: configurator.script_language_collection, include_blank: true, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: configurator.set_script.send(:language) } }  %>
+  <% end %>
   <div class="form-section-heading">Read script</div>
   <%= f.simple_fields_for :read_script do |ff| %>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'},
+    collection: configurator.script_language_collection, include_blank: true, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: configurator.read_script.send(:language) } }  %>
+  <% end %>
+  <div class="form-section-heading">Read script sudo</div>
+  <%= f.simple_fields_for :read_script_sudo do |ff| %>
     <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'},
     collection: configurator.script_language_collection, include_blank: true, required: false %>
     <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: configurator.read_script.send(:language) } }  %>

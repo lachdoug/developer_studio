@@ -23,6 +23,8 @@ module Services
                   :domain_name,
                   :set_state,
                   :default_stop_timeout,
+                  :restart_policy,
+                  :restart_attempts,
                   :memory_required,
                   :memory_recommended,
                   :run_as_user,

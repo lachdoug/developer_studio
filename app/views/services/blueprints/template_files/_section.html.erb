@@ -46,6 +46,10 @@
         <%= f.input :path, required: true, hint: 'Relative to /home/ (except when path prefixed with /usr/local/ or /home/ ).' %>
         <%= f.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: template_file.script_language_collection, include_blank: true, required: false %>
         <%= f.input :content, as: :code, input_html: { data: { mode: template_file.send(:language) } }  %>
+        <%= f.input :user %>
+        <%= f.input :group %>
+        <%= f.input :permissions %>
+        <%= f.input :preprocess, as: :boolean, wrapper: :horizontal_boolean %>
       <% end %>
       <hr>
     </div>

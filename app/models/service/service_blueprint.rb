@@ -34,7 +34,8 @@ class Service
       :build_dependencies,
       :file_permissions,
       :soft_links,
-      :backup_scripts
+      :backup_scripts,
+      :library_scripts
     ].each do |method_name|
       define_method method_name do
         instance_variable_set "@#{method_name}",
