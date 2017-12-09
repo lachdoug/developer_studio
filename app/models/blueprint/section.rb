@@ -89,6 +89,10 @@ module Blueprint
       dropdowns_config[:script_languages]
     end
 
+    def cast_as_boolean(value)
+      ActiveRecord::Type::Boolean.new.cast(value) == true
+    end
+
 
 
     # def new_record?
