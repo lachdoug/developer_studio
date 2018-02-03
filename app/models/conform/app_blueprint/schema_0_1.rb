@@ -93,6 +93,7 @@ module Conform
       def base
         {
           name: r(:software, :base, :name).to_s,
+          inherit: r(:software, :base, :inherit).to_s,
           framework: r(:software, :base, :framework).to_s,
           parent_image: r(:software, :base, :parent_image).to_s,
           run_as_user: r(:software, :base, :run_as_user).to_s,

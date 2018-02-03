@@ -3,6 +3,7 @@ class Service
     class Base < ::Blueprint::Section
 
       attr_accessor :name,
+                    :inherit,
                     :cardinal,
                     :publisher_namespace,
                     :type_path,
@@ -35,6 +36,7 @@ class Service
       def build_section
         # byebug
         @name = ( data || {} ).dig :name
+        @inherit = ( data || {} ).dig :inherit
         @cardinal = ( data || {} ).dig :cardinal
         @publisher_namespace= ( data || {} ).dig :publisher_namespace
         @type_path= ( data || {} ).dig :type_path
@@ -78,6 +80,7 @@ class Service
       def form_data
         {
           name: name,
+          inherit: inherit,
           cardinal: cardinal,
           publisher_namespace: publisher_namespace,
           type_path: type_path,

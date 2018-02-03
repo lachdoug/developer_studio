@@ -5,6 +5,8 @@
 <%= f.input :publisher_namespace, as: :string, label: 'Namespace' %>
 <%= f.input :type_path %>
 <%= f.input :service_handle_field %>
+<div class="form-section-heading">Inherit</div>
+<%= f.input :inherit, as: :url, label: 'Blueprint URL' %>
 <div class="form-section-heading">Deployment</div>
 <%= f.input :parent_image %>
 <%= f.input :deployment_type, as: :select, required: true, collection: f.object.types_collection, wrapper_html: { class: 'blueprint_deployment_type_select_wrapper' } %>

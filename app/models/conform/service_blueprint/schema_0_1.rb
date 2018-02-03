@@ -95,8 +95,8 @@ module Conform
       def base
         {
           name: r(:software, :base, :name).to_s,
+          inherit: r(:software, :base, :inherit).to_s,
           cardinal: r(:software, :base, :cardinal).to_s,
-          # accepts: Array(r(:software, :base, :accepts)),
           publisher_namespace: r(:software, :base, :publisher_namespace).to_s,
           type_path: r(:software, :base, :type_path).to_s,
           service_handle_field: r(:software, :base, :service_handle_field).to_s,

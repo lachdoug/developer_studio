@@ -3,6 +3,7 @@ class App
     class Base < ::Blueprint::Section
 
       attr_accessor :name,
+                    :inherit,
                     :framework,
                     :parent_image,
                     :run_as_user,
@@ -19,6 +20,7 @@ class App
 
       def build_section
         @name = ( data || {} ).dig :name
+        @inherit = ( data || {} ).dig :inherit
         @framework = ( data || {} ).dig :framework
         @parent_image = ( data || {} ).dig :parent_image
         @run_as_user = ( data || {} ).dig :run_as_user
@@ -37,6 +39,7 @@ class App
       def form_data
         {
           name: name,
+          inherit: inherit,
           framework: framework,
           parent_image: parent_image,
           run_as_user: run_as_user,

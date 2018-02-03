@@ -1,6 +1,8 @@
 <%= custom_form_for @app.blueprint.base,
       url: app_blueprint_base_path(app_id: @app.name) do |f| %>
 <%= f.input :name, required: true, pattern: "^[a-z0-9_]*$", maxlength: 16, hint: "Valid characters are lowercase alpha-numeric and underscore. Maximum length 16 characters." %>
+<div class="form-section-heading">Inherit</div>
+<%= f.input :inherit, as: :url, label: 'Blueprint URL' %>
 <div class="form-section-heading">Deployment</div>
 <%= f.input :framework, as: :select, required: true, collection: f.object.frameworks_collection, wrapper_html: { class: 'blueprint_framework_select_wrapper' } %>
 <div class='blueprint_framework_select_dependent_fields'>
