@@ -59,16 +59,17 @@
                 <%= ff.input :value,
                         as: :string,
                         wrapper_html: { class: 'variable_value_input_wrapper' } %>
-                <%= ff.input :resolve_string,
-                        label: :Resolve,
-                        placeholder: "_Engines_System(), _Engines_Builder() or _Engines_Environment()",
-                        pattern: '^.*(_Engines_System|_Engines_Builder|_Engines_Environment)\(.*\).*',
-                        input_html: { pattern_validation_error_message: "Must have format _Engines_System(), _Engines_Builder() or _Engines_Environment()" },
-                        wrapper_html: { class: 'variable_resolve_string_input_wrapper' } %>
-                <%= ff.input :resolve,
-                        input_html: { class: 'variable_resolve_checkbox_input' },
-                        as: :boolean,
-                        wrapper: :horizontal_boolean %>
+                <div class="dropdown pull-right">
+                  <button class="btn btn-custom" type="button" data-toggle="dropdown">
+                    Insert
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <% ff.object.resolve_strings_collection.each do |resolve_string| %>
+                      <li><div class="btn btn-custom" onclick="copyResolveString(this)"><%= resolve_string %></div></li>
+                    <% end %>
+                  </ul>
+                </div>
                 <div class="clearfix">
                   <div class="btn btn-custom pull-right" data-toggle="collapse" data-target="#service_schedule_<%= schedule.index %>_input_definition_collapse_<%= ff.object.send(:name) %>"><%= icon_text('fa-info') %></div>
                 </div>
