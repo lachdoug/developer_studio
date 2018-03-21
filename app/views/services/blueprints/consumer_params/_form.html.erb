@@ -3,6 +3,17 @@
   url: service_blueprint_consumer_param_path(service_id: @service.name, id: consumer_param.index) do |f| %>
   <%= f.input :name, required: true %>
   <%= f.input :value %>
+  <div class="dropdown pull-right">
+    <button class="btn btn-custom" type="button" data-toggle="dropdown">
+      Insert
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <% Settings::DropdownsConfig.config[:resolve_strings].each do |resolve_string| %>
+      <li onclick="copyResolveStringToPreviousInput(this)"><button><%= resolve_string %></button></li>
+      <% end %>
+    </ul>
+  </div>
   <%= f.input :mandatory, as: :boolean, wrapper: :horizontal_boolean %>
   <%= f.input :immutable, as: :boolean, wrapper: :horizontal_boolean %>
   <%= f.input :ask_at_build_time, as: :boolean, wrapper: :horizontal_boolean %>

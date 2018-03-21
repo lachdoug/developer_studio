@@ -65,8 +65,8 @@
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu">
-                    <% ff.object.resolve_strings_collection.each do |resolve_string| %>
-                      <li><div class="btn btn-custom" onclick="copyResolveString(this)"><%= resolve_string %></div></li>
+                    <% Settings::DropdownsConfig.config[:resolve_strings].each do |resolve_string| %>
+                      <li onclick="copyResolveStringToPreviousInput(this)"><button><%= resolve_string %></button></li>
                     <% end %>
                   </ul>
                 </div>

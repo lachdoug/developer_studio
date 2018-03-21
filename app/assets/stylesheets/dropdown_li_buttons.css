@@ -1,0 +1,23 @@
+.dropdown li button {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.42857143;
+  color: #333333;
+  white-space: nowrap;
+  background-color: transparent;
+  border: none;
+}
+
+.dropdown li button:hover {
+  color: #262626;
+}
+.dropdown li:hover {
+  background-color: #f5f5f5;
+}
+
+.dropdown-menu {
+  overflow-y: scroll;
+  max-height: 80vh;
+}

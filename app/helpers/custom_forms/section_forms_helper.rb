@@ -28,6 +28,20 @@ module CustomForms
                   icon_text 'fa-check', 'OK'
                 end
               end +
+              content_tag(:div, title: 'Insert resolve string', class: "dropdown pull-left") do
+                content_tag(:button, class: "btn btn-custom", data: { toggle: "dropdown" } ) do
+                  content_tag(:span, "Insert ") + content_tag(:span, nil, class: "caret")
+                end +
+                content_tag(:ul, class: "dropdown-menu") do
+                  Settings::DropdownsConfig.config[:resolve_strings].map do |resolve_string|
+                    content_tag(:li, onclick: "copyResolveStringToAceEditor(this)") do
+                      content_tag(:button) do
+                        resolve_string
+                      end
+                    end
+                  end.join.html_safe
+                end
+              end +
               content_tag(:div, title: 'Cancel edit', class: "btn pull-right ace-editor-cancel") do
                 content_tag :span, class: 'click-through-button-text' do
                   icon 'fa-times'
