@@ -1,0 +1,4 @@
+<% if custom_file.index > 0 %>
+  $("#<%= "service_blueprint_custom_file_#{custom_file.index}_moveup_button_disabled" %>").hide();
+  $("#<%= "service_blueprint_custom_file_#{custom_file.index}_moveup_button" %>").show();
+<% end %>

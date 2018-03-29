@@ -60,6 +60,11 @@
                   Required modules <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_required_modules_pill_error" %>
                 <% end %>
               </li>
+              <li id='engine_blueprint_section_included_files_pill' class='page_section_pill'>
+                <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("included_files")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
+                  Included files <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_included_files_pill_error" %>
+                <% end %>
+              </li>
               <li id='engine_blueprint_section_service_configurations_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("service_configurations")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
                   Service configurations <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_service_configurations_pill_error" %>
@@ -108,6 +113,11 @@
               <li id='engine_blueprint_section_consumer_params_pill' class='page_section_pill'>
                 <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("consumer_params")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
                   Consumer params <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_consumer_params_pill_error" %>
+                <% end %>
+              </li>
+              <li id='engine_blueprint_section_custom_files_pill' class='page_section_pill'>
+                <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("custom_files")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
+                  Custom files <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_custom_files_pill_error" %>
                 <% end %>
               </li>
               <li id='engine_blueprint_section_actionators_pill' class='page_section_pill'>
@@ -165,11 +175,6 @@
                   Backup scripts <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_backup_scripts_pill_error" %>
                 <% end %>
               </li>
-              <li id='engine_blueprint_section_library_scripts_pill' class='page_section_pill'>
-                <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("library_scripts")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Library scripts <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_library_scripts_pill_error" %>
-                <% end %>
-              </li>
             </ul>
 
         </div>
@@ -209,6 +214,9 @@
   <div id='engine_blueprint_section_required_modules' class='engine_blueprint_section' style='display: none;'>
     <%= render 'services/blueprints/required_modules/section' %>
   </div>
+  <div id='engine_blueprint_section_included_files' class='engine_blueprint_section' style='display: none;'>
+    <%= render 'services/blueprints/included_files/section' %>
+  </div>
   <div id='engine_blueprint_section_service_configurations' class='engine_blueprint_section' style='display: none;'>
     <%= render 'services/blueprints/service_configurations/section' %>
   </div>
@@ -242,6 +250,9 @@
   <div id='engine_blueprint_section_consumer_params' class='engine_blueprint_section' style='display: none;'>
     <%= render 'services/blueprints/consumer_params/section' %>
   </div>
+  <div id='engine_blueprint_section_custom_files' class='engine_blueprint_section' style='display: none;'>
+    <%= render 'services/blueprints/custom_files/section' %>
+  </div>
   <div id='engine_blueprint_section_configurators' class='engine_blueprint_section' style='display: none;'>
     <%= render 'services/blueprints/configurators/section' %>
   </div>
@@ -271,9 +282,6 @@
   </div>
   <div id='engine_blueprint_section_backup_scripts' class='engine_blueprint_section' style='display: none;'>
     <%= render 'services/blueprints/backup_scripts/section' %>
-  </div>
-  <div id='engine_blueprint_section_library_scripts' class='engine_blueprint_section' style='display: none;'>
-    <%= render 'services/blueprints/library_scripts/section' %>
   </div>
 
 </div>

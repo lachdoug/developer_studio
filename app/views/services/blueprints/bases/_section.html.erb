@@ -1,3 +1,5 @@
+<%= @service.blueprint.base %>
+
 <%= custom_form_for @service.blueprint.base,
       url: service_blueprint_base_path(service_id: @service.name) do |f| %>
 <%= f.input :name, required: true, pattern: "^[a-z0-9_]*$", maxlength: 16, hint: "Valid characters are lowercase alpha-numeric and underscore. Maximum length 16 characters." %>
@@ -29,4 +31,6 @@
 <%= f.input :user_id, label: "User ID" %>
 <%= f.input :user_primary_group, label: "Primary group" %>
 <%= f.input :create_user, as: :boolean, wrapper: :horizontal_boolean %>
+<div class="form-section-heading">Source files</div>
+<%= f.input :source_files, as: :url, label: 'Repo URL' %>
 <% end %>

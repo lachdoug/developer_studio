@@ -14,6 +14,7 @@ class Service
       :system_packages,
       :installed_packages,
       :required_modules,
+      :included_files,
       :service_configurations,
       :environment_variables,
       :constants,
@@ -23,6 +24,7 @@ class Service
       :persistent_directories,
       :consumers,
       :consumer_scripts,
+      :custom_files,
       :consumer_params,
       :actionators,
       :configurators,
@@ -35,7 +37,7 @@ class Service
       :file_permissions,
       :soft_links,
       :backup_scripts,
-      :library_scripts
+      # :library_scripts
     ].each do |method_name|
       define_method method_name do
         instance_variable_set "@#{method_name}",

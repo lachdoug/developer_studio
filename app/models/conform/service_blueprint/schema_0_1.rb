@@ -67,6 +67,7 @@ module Conform
           system_packages: system_packages,
           installed_packages: installed_packages,
           required_modules: required_modules,
+          included_files: included_files,
           service_configurations: service_configurations,
           environment_variables: environment_variables,
           constants: constants,
@@ -77,6 +78,7 @@ module Conform
           consumers: consumers,
           consumer_scripts: consumer_scripts,
           consumer_params: consumer_params,
+          custom_files: custom_files,
           actionators: actionators,
           configurators: configurators,
           schedules: schedules,
@@ -88,7 +90,6 @@ module Conform
           file_permissions: file_permissions,
           soft_links: soft_links,
           backup_scripts: backup_scripts,
-          library_scripts: library_scripts,
         }.delete_if { |k,v| v.blank? }
       end
 
@@ -114,11 +115,11 @@ module Conform
           user_id: r(:software, :base, :user_id).to_s,
           user_primary_group: r(:software, :base, :user_primary_group).to_s,
           create_user: r(:software, :base, :create_user).to_s,
+          source_files: r(:software, :base, :source_files).to_s,
         }.delete_if { |k,v| v.blank? }
       end
 
       def disposition
-        # byebug
         {
           dedicated: cast_boolean_for(r(:software, :base, :dedicated).nil? ? r(:software, :disposition, :dedicated) : r(:software, :base, :dedicated)),
           persistent: cast_boolean_for(r(:software, :base, :persistent).nil? ? r(:software, :disposition, :persistent) : r(:software, :base, :persistent)),
@@ -244,8 +245,24 @@ module Conform
         }.delete_if { |k,v| v.blank? }
       end
 
+      def included_files
+        ( r(:software, :included_files) || []).map do |inf|
+          included_file_for inf
+        end
+      end
+
+      def included_file_for(inf)
+        {
+          source: inf.dig(:source).to_s,
+          destination: inf.dig(:destination).to_s,
+          owner: inf.dig(:owner).to_s,
+          group: inf.dig(:group).to_s,
+          permissions: inf.dig(:permissions).to_s,
+          template: cast_boolean_for(inf.dig(:template)),
+        }.delete_if { |k,v| v.blank? }
+      end
+
       def service_configurations
-        # byebug
         ( r(:software, :service_configurations) || []).map do |sc|
           service_configuration_for sc
         end
@@ -318,6 +335,23 @@ module Conform
         }.delete_if { |k,v| v.blank? }
       end
 
+      def template_files
+        ( r(:software, :template_files) || []).map do |tf|
+          template_file_for tf
+        end
+      end
+
+      def template_file_for(tf)
+        {
+          path: tf.dig(:path).to_s,
+          language: tf.dig(:language).to_s,
+          content: tf.dig(:content).to_s,
+          user: tf.dig(:user).to_s,
+          group: tf.dig(:group).to_s,
+          permissions: tf.dig(:permissions).to_s
+        }.delete_if { |k,v| v.blank? }
+      end
+
       def consumers
         {
           accepts: Array(r(:software, :consumers, :accepts) || r(:software, :base, :accepts)),
@@ -386,21 +420,20 @@ module Conform
         }.delete_if { |k,v| v.blank? }
       end
 
-      def template_files
-        ( r(:software, :template_files) || []).map do |tf|
-          template_file_for tf
+      def custom_files
+        ( r(:software, :custom_files) || []).map do |cf|
+          custom_file_for cf
         end
       end
 
-      def template_file_for(tf)
+      def custom_file_for(cf)
         {
-          path: tf.dig(:path).to_s,
-          language: tf.dig(:language).to_s,
-          content: tf.dig(:content).to_s,
-          user: tf.dig(:user).to_s,
-          group: tf.dig(:group).to_s,
-          permissions: tf.dig(:permissions).to_s,
-          preprocess: cast_boolean_for( tf.dig(:preprocess) )
+          type: cf.dig(:type).to_s,
+          path: cf.dig(:path).to_s,
+          language: cf.dig(:language).to_s,
+          content: cf.dig(:content).to_s,
+          execute: cast_boolean_for( cf.dig(:execute) ),
+          sudo: cast_boolean_for( cf.dig(:sudo) )
         }.delete_if { |k,v| v.blank? }
       end
 
@@ -654,17 +687,6 @@ module Conform
             content: r(:software, :backup_scripts, :restore_sudo, :content).to_s
           }.delete_if { |k,v| v.blank? },
         }.delete_if { |k,v| v.blank? }
-      end
-
-      def library_scripts
-        ( r(:software, :library_scripts) || []).map do |ls|
-          {
-            name: ls.dig(:name).to_s,
-            language: ls.dig(:language).to_s,
-            content: ls.dig(:content).to_s,
-            sudo: cast_boolean_for( ls.dig(:sudo) )
-          }
-        end
       end
 
       def cast_boolean_for(boolean)

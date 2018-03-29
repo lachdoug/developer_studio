@@ -43,13 +43,12 @@
       <%= custom_form_for template_file,
         namespace: "service_blueprint_template_file_#{template_file.index}",
         url: service_blueprint_template_file_path(service_id: @service.name, id: template_file.index) do |f| %>
-        <%= f.input :path, required: true, hint: 'Relative to /home/ (except when path prefixed with /usr/local/ or /home/ ).' %>
+        <%= f.input :path, required: true, hint: 'Relative to /home/engines/templates.' %>
         <%= f.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: template_file.script_language_collection, include_blank: true, required: false %>
         <%= f.input :content, as: :code, input_html: { data: { mode: template_file.send(:language) } }  %>
         <%= f.input :user %>
         <%= f.input :group %>
         <%= f.input :permissions %>
-        <%= f.input :preprocess, as: :boolean, wrapper: :horizontal_boolean %>
       <% end %>
       <hr>
     </div>

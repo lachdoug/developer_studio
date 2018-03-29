@@ -31,7 +31,9 @@ module Services
                   :run_as_user,
                   :user_id,
                   :user_primary_group,
-                  :create_user )
+                  :create_user,
+                  :source_files,
+                )
       end
 
     end

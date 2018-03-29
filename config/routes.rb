@@ -148,6 +148,9 @@ Rails.application.routes.draw do
       resources :required_modules, only: [:new, :update, :destroy] do
         resource :moveup, module: :required_modules, only: [:show]
       end
+      resources :included_files, only: [:new, :update, :destroy] do
+        resource :moveup, module: :included_files, only: [:show]
+      end
       resources :service_configurations, only: [:new, :create, :update, :destroy] do
         resource :moveup, module: :service_configurations, only: [:show]
         resource :variables, module: :service_configurations, only: [:new]
@@ -172,6 +175,9 @@ Rails.application.routes.draw do
       end
       resources :template_files, only: [:new, :update, :destroy] do
         resource :moveup, module: :template_files, only: [:show]
+      end
+      resources :custom_files, only: [:new, :update, :destroy] do
+        resource :moveup, module: :custom_files, only: [:show]
       end
       resources :replacement_strings, only: [:new, :update, :destroy] do
         resource :moveup, module: :replacement_strings, only: [:show]

@@ -22,7 +22,8 @@ class Service
                     :run_as_user,
                     :user_id,
                     :user_primary_group,
-                    :create_user
+                    :create_user,
+                    :source_files
                     # :dedicated,
                     # :persistent,
                     # :immutable,
@@ -34,7 +35,6 @@ class Service
       # attr_reader :accepts
 
       def build_section
-        # byebug
         @name = ( data || {} ).dig :name
         @inherit = ( data || {} ).dig :inherit
         @cardinal = ( data || {} ).dig :cardinal
@@ -56,6 +56,7 @@ class Service
         @user_id = ( data || {} ).dig :user_id
         @user_primary_group = ( data || {} ).dig :user_primary_group
         @create_user = ( data || {} ).dig :create_user
+        @source_files = ( data || {} ).dig :source_files
         # @dedicated = ( data || {} ).dig :dedicated
         # @persistent = ( data || {} ).dig :persistent
         # @immutable = ( data || {} ).dig :immutable
@@ -86,7 +87,6 @@ class Service
           type_path: type_path,
           service_handle_field: service_handle_field,
           parent_image: parent_image,
-          run_as_user: run_as_user,
           deployment_type: deployment_type,
           http_protocol: ( http_protocol if deployment_type == 'web' ).to_s,
           hostname: hostname,
@@ -99,6 +99,12 @@ class Service
             required: memory_required,
             recommended: memory_recommended
           },
+          run_as_user: run_as_user,
+          user_id: user_id,
+          user_primary_group: user_primary_group,
+          create_user: create_user,
+          source_files: source_files,
+          
           # dedicated: dedicated,
           # persistent: persistent,
           # immutable: immutable,

@@ -1,10 +1,10 @@
 module Services
   module Blueprints
-    module LibraryScripts
+    module IncludedFiles
       class MoveupsController < BaseController
 
         def show
-          @service.blueprint.library_scripts.moveup params[:library_script_id]
+          @service.blueprint.included_files.moveup params[:included_file_id]
           render
         end
 

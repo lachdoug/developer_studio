@@ -1,6 +1,6 @@
 class Service
   class ServiceBlueprint
-    class LibraryScripts < ::Blueprint::SectionCollection
+    class CustomFiles < ::Blueprint::SectionCollection
 
     end
   end

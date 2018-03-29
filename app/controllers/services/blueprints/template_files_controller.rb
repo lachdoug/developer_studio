@@ -22,7 +22,7 @@ module Services
 
       def strong_params
         params.require(:service_service_blueprint_template_file).
-          permit( :path, :content, :language, :preprocess, :user, :group, :permissions )
+          permit( :path, :content, :language, :user, :group, :permissions )
       end
 
     end
