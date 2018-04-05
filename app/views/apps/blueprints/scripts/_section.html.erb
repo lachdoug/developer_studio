@@ -11,6 +11,11 @@
     <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
     <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
   <% end %>
+  <%= f.simple_fields_for :first_run do |ff| %>
+    <div class="form-section-heading">First run</div>
+    <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>
+    <%= ff.input :content, as: :code, required: false, input_html: { data: { mode: ff.object.send(:language) } } %>
+  <% end %>
   <%= f.simple_fields_for :post_install do |ff| %>
     <div class="form-section-heading">Post install</div>
     <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'}, collection: f.object.script_language_collection, include_blank: true, required: false %>

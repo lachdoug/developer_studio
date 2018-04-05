@@ -104,12 +104,12 @@ module Conform
           parent_image: r(:software, :base, :parent_image).to_s,
           deployment_type: r(:software, :base, :deployment_type).to_s,
           http_protocol: r(:software, :base, :http_protocol).to_s,
-          hostname: r(:software, :base, :hostname),
-          domain_name: r(:software, :base, :domain_name),
-          set_state: r(:software, :base, :set_state),
-          default_stop_timeout: r(:software, :base, :default_stop_timeout),
-          restart_policy: r(:software, :base, :restart_policy),
-          restart_attempts: r(:software, :base, :restart_attempts),
+          hostname: r(:software, :base, :hostname).to_s,
+          domain_name: r(:software, :base, :domain_name).to_s,
+          set_state: r(:software, :base, :set_state).to_s,
+          default_stop_timeout: r(:software, :base, :default_stop_timeout).to_i,
+          restart_policy: r(:software, :base, :restart_policy).to_s,
+          restart_attempts: r(:software, :base, :restart_attempts).to_i,
           memory: memory,
           run_as_user: r(:software, :base, :run_as_user).to_s,
           user_id: r(:software, :base, :user_id).to_s,
@@ -117,6 +117,13 @@ module Conform
           create_user: r(:software, :base, :create_user).to_s,
           source_files: r(:software, :base, :source_files).to_s,
         }.delete_if { |k,v| v.blank? }
+      end
+
+      def memory
+        {
+          required: r(:software, :base, :memory, :required).to_i,
+          recommended: r(:software, :base, :memory, :recommended).to_i
+        }.delete_if { |k,v| v == 0 }
       end
 
       def disposition
@@ -137,13 +144,6 @@ module Conform
           consumerless: cast_boolean_for(r(:software, :base, :consumerless).nil? ? r(:software, :disposition, :consumerless) : r(:software, :base, :consumerless)),
           start_syslog: cast_boolean_for(r(:software, :base, :start_syslog).nil? ? r(:software, :disposition, :start_syslog) : r(:software, :base, :start_syslog)),
         }.delete_if { |k,v| v.blank? }
-      end
-
-      def memory
-        {
-          required: r(:software, :base, :memory, :required).to_i,
-          recommended: r(:software, :base, :memory, :recommended).to_i
-        }.delete_if { |k,v| v == 0 }
       end
 
       def ports
@@ -593,11 +593,11 @@ module Conform
         {
           label: s.dig(:label).to_s,
           timespec: {
-            minute: s.dig(:timespec, :minute),
-            hour: s.dig(:timespec, :hour),
-            day_of_month: s.dig(:timespec, :day_of_month),
-            month: s.dig(:timespec, :month),
-            day_of_week: s.dig(:timespec, :day_of_week)
+            minute: s.dig(:timespec, :minute).to_i,
+            hour: s.dig(:timespec, :hour).to_i,
+            day_of_month: s.dig(:timespec, :day_of_month).to_i,
+            month: s.dig(:timespec, :month).to_i,
+            day_of_week: s.dig(:timespec, :day_of_week).to_i
           }.delete_if { |k,v| v.blank? },
           instruction: s.dig(:instruction).to_s,
         }.merge(

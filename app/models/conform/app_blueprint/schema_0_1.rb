@@ -138,6 +138,9 @@ module Conform
           install: { language: r(:software, :scripts, :install, :language).to_s,
                     content: r(:software, :scripts, :install, :content).to_s
                   }.delete_if { |k,v| v.blank? },
+          first_run: { language: r(:software, :scripts, :first_run, :language).to_s,
+                    content: r(:software, :scripts, :first_run, :content).to_s
+                  }.delete_if { |k,v| v.blank? },
           post_install: { language: r(:software, :scripts, :post_install, :language).to_s,
                     content: r(:software, :scripts, :post_install, :content).to_s
                   }.delete_if { |k,v| v.blank? },
