@@ -224,9 +224,11 @@ module Conform
       def installed_package_for(ip)
         {
           name: ip.dig(:name).to_s,
+          download_type: ip.dig(:download_type).to_s,
           source_url: ip.dig(:source_url).to_s,
           destination: ip.dig(:destination).to_s,
           extraction_command: ip.dig(:extraction_command).to_s,
+          command_options: ip.dig(:command_options).to_s,
           path_to_extracted: ip.dig(:path_to_extracted).to_s
         }.delete_if { |k,v| v.blank? }
       end

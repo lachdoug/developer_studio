@@ -22,7 +22,7 @@ module Services
 
       def strong_params
         params.require(:service_service_blueprint_installed_package).
-          permit( :name, :source, :destination, :extraction_command, :path_to_extracted )
+          permit( :name, :download_type, :source_url, :destination, :extraction_command, :command_options, :path_to_extracted )
       end
 
     end
