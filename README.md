@@ -18,6 +18,11 @@ Deploy
 
 
 Sign in
----
+-------
 Username: admin
 Default password: password
+
+
+Development
+-----------
+ENGINES_DEVELOPER_STUDIO_SHH_ID_PUB_FILENAME=id_rsa.pub rails s -p 3010

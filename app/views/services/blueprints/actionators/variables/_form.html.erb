@@ -3,11 +3,11 @@
     namespace: "service_blueprint_actionator_#{actionator.index}_variable_#{variable.index}",
     url: service_blueprint_actionator_variable_path(service_id: @service.name, actionator_id: actionator.index, id: variable.index) do |f| %>
     <%= f.input :name, required: true %>
-    <%= f.input :value %>
+    <%= f.input :value, as: 'text' %>
     <%= f.input :mandatory, as: :boolean, wrapper: :horizontal_boolean %>
     <div class="form-section-heading">Input</div>
     <%= f.simple_fields_for :input do |ff| %>
-      <%= ff.input :type, as: :select, collection: ff.object.type_collection, include_blank: false %>
+      <%= ff.input :type, as: :select, collection: ff.object.type_collection, include_blank: false, selected: ff.object.type || "string" %>
       <%= ff.input :label, hint: "Shown in bold (normally above input). Uses name as default." %>
       <%= ff.input :title, hint: "Shown as a tooltip when user hovers over input. Uses label or name as default." %>
       <%= ff.input :comment, hint: "Shown below label to explain the purpose and usage of the input." %>
