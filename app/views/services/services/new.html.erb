@@ -4,7 +4,7 @@
       # method: :post,
       html: { class: 'form-horizontal' },
       wrapper: :horizontal_form do |f| %>
-      <p>URL to remote Git repository. The repository must be accessible via SSH. Ensure the SSH pubic key for this servicelication
+      <p>URL to remote Git repository. The repository must be accessible via SSH. Ensure the SSH pubic key for this service
          (see <%= link_to icon_text('fa-cog', :Settings), settings_path %>) has been loaded into the repository.</p>
       <%= f.input :url, as: :string, label: "Remote URL", required: true %>
 
