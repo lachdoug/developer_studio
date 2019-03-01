@@ -9,6 +9,7 @@ var enableAceEditor = function(targetInput) {
   };
   $('#ace-editor-language-mode-display').text(mode);
   var editor = ace.edit("ace-editor");
+  editor.setKeyboardHandler("ace/keyboard/vim");
   editor.getSession().setMode("ace/mode/" + mode);
   var edit_text = targetInput.val();
   if ( edit_text == undefined ) { edit_text = '' };
