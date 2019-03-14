@@ -1,7 +1,7 @@
 <%= custom_form_for actionator,
   namespace: "app_blueprint_actionator_#{actionator.index}",
   url: app_blueprint_actionator_path(app_id: @app.name, id: actionator.index) do |f| %>
-  <%= f.input :name, required: true %>
+  <%= f.input :name, required: true, pattern: "^[a-zA-Z0-9_]*$" %>
   <%= f.input :label %>
   <%= f.input :description, as: :markdown %>
   <%= f.input :return_type, as: :select, collection: actionator.return_type_collection, include_blank: false %>

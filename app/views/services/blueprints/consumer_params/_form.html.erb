@@ -1,7 +1,7 @@
 <%= custom_form_for consumer_param,
   namespace: "service_blueprint_consumer_param_#{consumer_param.index}",
   url: service_blueprint_consumer_param_path(service_id: @service.name, id: consumer_param.index) do |f| %>
-  <%= f.input :name, required: true %>
+  <%= f.input :name, required: true, pattern: "^[a-zA-Z0-9_]*$" %>
   <%= f.input :value %>
   <div class="dropdown pull-right">
     <button class="btn btn-custom" type="button" data-toggle="dropdown">

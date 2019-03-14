@@ -28,7 +28,8 @@ gem 'ace-rails-ap'
 gem 'simplemde-rails'
 # jQuery form validation plugin
 gem 'jquery-validation-rails'
-# gem 'jquery-form-validator-rails'
+# Parse git ssh uris like git@github.com:Engines/Engines.git
+gem 'uri-ssh_git'
 
 
 # In Rails Gems below:

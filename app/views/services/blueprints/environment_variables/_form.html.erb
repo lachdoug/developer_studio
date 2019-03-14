@@ -1,7 +1,7 @@
 <%= custom_form_for environment_variable,
   namespace: "service_blueprint_environment_variable_#{environment_variable.index}",
   url: service_blueprint_environment_variable_path(service_id: @service.name, id: environment_variable.index) do |f| %>
-  <%= f.input :name, required: true %>
+  <%= f.input :name, required: true, pattern: "^[a-zA-Z0-9_]*$" %>
   <%= f.input :value %>
   <%= f.input :mandatory, as: :boolean, wrapper: :horizontal_boolean %>
   <%= f.input :immutable, as: :boolean, wrapper: :horizontal_boolean %>

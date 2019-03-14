@@ -14,11 +14,13 @@ class Engine
       end
     end
 
-    attr_reader :url, :error_message
+    attr_reader :error_message
 
-    def url=(url)
-      @url = url
-    end
+    attr_accessor :url
+
+    # def url=(url)
+    #   @url = url
+    # end
 
     def name
       @name ||= url.split('/').last.split('.').first

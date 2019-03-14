@@ -43,7 +43,7 @@
       <%= custom_form_for installed_package,
         namespace: "service_blueprint_installed_package_#{installed_package.index}",
         url: service_blueprint_installed_package_path(service_id: @service.name, id: installed_package.index) do |f| %>
-        <%= f.input :name, required: true %>
+        <%= f.input :name, required: true, pattern: "^[a-zA-Z0-9_]*$" %>
         <%= f.input :download_type, as: :select, collection: [ "http(s)", "git", "ftp" ], include_blank: false %>
         <%= f.input :command_options %>
         <%= f.input :source_url, label: "Source URL", as: :url %>

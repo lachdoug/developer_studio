@@ -76,7 +76,7 @@ p "do merge"
           "_Engines_System(docker_ip)",
           "_Engines_System(system_hostname)",
           "_Engines_Environment(< env name >)",
-          "_Engines_Field(< field name >)",  
+          "_Engines_Field(< field name >)",
         ],
         "frameworks": {
           "Apache PHP": "apache_php",
@@ -93,6 +93,7 @@ p "do merge"
           "OpenJDK 9": "openjdk9",
           "OpenJDK 7": "openjdk7",
           "Python": "python",
+          "Python 3.7": "python3.7",
           "Rails 4": "rails4",
           "Rails 5": "rails5",
           "RStudio": "rstudio",

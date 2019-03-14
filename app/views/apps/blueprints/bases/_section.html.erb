@@ -1,6 +1,6 @@
 <%= custom_form_for @app.blueprint.base,
       url: app_blueprint_base_path(app_id: @app.name) do |f| %>
-<%= f.input :name, required: true, pattern: "^[a-z0-9_]*$", maxlength: 16, hint: "Valid characters are lowercase alpha-numeric and underscore. Maximum length 16 characters." %>
+<%= f.input :name, required: true, pattern: "^[a-zA-Z0-9_]*$", maxlength: 16, hint: "Valid characters are lowercase alpha-numeric and underscore. Maximum length 16 characters." %>
 <div class="form-section-heading">Inherit</div>
 <%= f.input :inherit, as: :url, label: 'Blueprint URL' %>
 <div class="form-section-heading">Deployment</div>
@@ -15,6 +15,7 @@
   <%= f.input :framework_port_override, as: :integer, input_html: { min: 0, max: 65535 }  %>
   <%= f.input :web_root_directory %>
 </div>
+<%= f.input :sudo_list, as: :code, required: false %>
 <%= f.input :continuous_deployment, as: :boolean, wrapper: :horizontal_boolean %>
 <div class="form-section-heading">Memory</div>
 <%= f.input :memory_required, as: :integer, label: 'Required MB' %>

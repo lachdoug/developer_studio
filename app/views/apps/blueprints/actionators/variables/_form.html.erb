@@ -2,7 +2,7 @@
   <%= custom_form_for variable,
     namespace: "app_blueprint_actionator_#{actionator.index}_variable_#{variable.index}",
     url: app_blueprint_actionator_variable_path(app_id: @app.name, actionator_id: actionator.index, id: variable.index) do |f| %>
-    <%= f.input :name, required: true %>
+    <%= f.input :name, required: true, pattern: "^[a-zA-Z0-9_]*$" %>
     <%= f.input :value, as: 'text' %>
     <%= f.input :mandatory, as: :boolean, wrapper: :horizontal_boolean %>
     <div class="form-section-heading">Input</div>
