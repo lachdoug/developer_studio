@@ -2,27 +2,22 @@ class Engine
   class Repo
 
     require 'open3'
-    require 'uri/ssh_git'
 
     def self.list(type_plural)
       Dir.glob("#{Rails.application.config.persistent_data_directory}/repos/#{type_plural}/*").map{ |file_path| file_path.split("/").last }.sort
     end
 
     def self.clone(url, type_plural)
-      parsed_url = URI::SshGit.parse(url)
-      port = parsed_url.port || 22
-
-      stdout, stderr, status = Open3.capture3(
-      "GIT_SSH_COMMAND=\"ssh -oPort=#{port} -i #{ Rails.application.config.ssh_public_key_filename }\" git -C #{Rails.application.config.persistent_data_directory}/repos/#{type_plural} clone '#{url}'"
-      )
-      #
-      #
-      # stdout, stderr, status = Open3.capture3("env GIT_SSH_COMMAND=\"ssh -i /home/home_dir/.ssh/identity\" git -C #{Rails.application.config.persistent_data_directory}/repos/#{type_plural} clone '#{ssh_url}'")
-# debugger
+      # parsed_url = URI::SshGit.parse(url)
+      # port = parsed_url.port || 22
+      # stdout, stderr, status = Open3.capture3(
+      # "GIT_SSH_COMMAND=\"ssh -oPort=#{port} -i #{ Rails.application.config.ssh_public_key_filename }\" git -C #{Rails.application.config.persistent_data_directory}/repos/#{type_plural} clone '#{url}'"
+      # )
+      stdout, stderr, status = Open3.capture3("git -C #{Rails.application.config.persistent_data_directory}/repos/#{type_plural} clone '#{url}'")
       if status.exitstatus == 0
         { success: true }
       else
-        { success: false, message: stderr.split('fatal: ')[1] || stderr }
+        { success: false, message: stderr.split('fatal: ')[1] } || stderr
       end
     end
 
