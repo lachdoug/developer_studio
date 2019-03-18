@@ -1,7 +1,7 @@
 <%= custom_form_for configurator,
   namespace: "service_blueprint_configurator_#{configurator.index}",
   url: service_blueprint_configurator_path(service_id: @service.name, id: configurator.index) do |f| %>
-  <%= f.input :name, required: true, pattern: "^[a-zA-Z0-9_]*$" %>
+  <%= f.input :name, required: true, pattern: "^[^\s]*$" %>
   <%= f.input :label %>
   <%= f.input :description, as: :markdown %>
   <%= f.input :enable_logging, as: :boolean, wrapper: :horizontal_boolean %>

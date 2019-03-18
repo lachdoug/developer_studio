@@ -11,7 +11,7 @@
       </tr>
 
       <tr>
-        <%= f.input :name, required: true, pattern: "^[a-zA-Z0-9_]*$", wrapper: :form_table_cell_input %>
+        <%= f.input :name, required: true, pattern: "^[^\s]*$", wrapper: :form_table_cell_input %>
         <%= f.input :command, required: true, wrapper: :form_table_cell_input %>
         <td>
           <div class="dropdown">

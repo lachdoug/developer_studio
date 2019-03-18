@@ -2,23 +2,57 @@ class Engine
   class Repo
 
     require 'open3'
+    # require 'uri/ssh_git'
 
     def self.list(type_plural)
       Dir.glob("#{Rails.application.config.persistent_data_directory}/repos/#{type_plural}/*").map{ |file_path| file_path.split("/").last }.sort
     end
 
     def self.clone(url, type_plural)
-      # parsed_url = URI::SshGit.parse(url)
-      # port = parsed_url.port || 22
-      # stdout, stderr, status = Open3.capture3(
-      # "GIT_SSH_COMMAND=\"ssh -oPort=#{port} -i #{ Rails.application.config.ssh_public_key_filename }\" git -C #{Rails.application.config.persistent_data_directory}/repos/#{type_plural} clone '#{url}'"
-      # )
-      stdout, stderr, status = Open3.capture3("git -C #{Rails.application.config.persistent_data_directory}/repos/#{type_plural} clone '#{url}'")
+      regex = /^(ssh:\/\/|)([^@]*)@([^:]*):(\d*|)(.*)$/
+      scheme, user, host, port, path = url.match( regex ).captures
+
+      git_cmd = "GIT_SSH_COMMAND='ssh -oPort=#{
+          port.present? ? port : 22
+        } -i #{
+          Rails.application.config.ssh_private_key_filename
+        } -o StrictHostKeyChecking=no'"
+
+      remote = "#{ user }@#{ host }:#{ path }"
+
+      destination = "#{
+        Rails.application.config.persistent_data_directory
+      }/repos/#{
+        type_plural
+      }"
+
+      stdout, stderr, status = Open3.capture3(
+        "#{ git_cmd } git -C #{
+          destination
+        } clone '#{ remote }'")
+
       if status.exitstatus == 0
+
+        repo_name = path.split('/')[-1].split('.')[0]
+
+        config = {
+          port: port,
+        }
+        config_filepath = "#{destination}/#{repo_name}/config.yaml"
+        File.write( config_filepath, config.to_yaml )
+
+        gitignore_filepath = "#{destination}/#{repo_name}/.gitignore"
+        gitignore = "config.yaml\n.gitignore"
+        File.write( gitignore_filepath, gitignore )
+
         { success: true }
+
       else
+
         { success: false, message: stderr.split('fatal: ')[1] } || stderr
+
       end
+
     end
 
     attr_reader :engine
@@ -67,6 +101,11 @@ class Engine
     # def remote_web_url
     #   @remote_web_url ||= remote_url.sub('ssh://', 'https://')
     # end
+
+    def port
+      port_config = YAML.load_file( "#{ path }/config.yaml" )[:port]
+      port_config.present? ? port_config : 22
+    end
 
     def uncommitted_diffs
       @uncommitted_diffs ||= `git -C #{path} diff HEAD`
@@ -121,8 +160,16 @@ class Engine
       end
     end
 
+    def git_ssh_command
+      "GIT_SSH_COMMAND='ssh -oPort=#{
+          port
+        } -i #{
+          Rails.application.config.ssh_private_key_filename
+        } -o StrictHostKeyChecking=no'"
+    end
+
     def push
-      stdout, stderr, status = Open3.capture3("git -C #{path} push -f origin master")
+      stdout, stderr, status = Open3.capture3("#{ git_ssh_command } git -C #{path} push -f origin master")
       if status.exitstatus == 0
         { success: true }
       else

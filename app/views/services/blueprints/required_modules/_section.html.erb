@@ -15,7 +15,7 @@
       <tr>
         <%= f.input :type, as: :select, collection: f.object.type_collection, include_blank: false, required: false, wrapper: :form_table_cell_input %>
         <%= f.input :os_package, wrapper: :form_table_cell_input %>
-        <%= f.input :name, required: true, pattern: "^[a-zA-Z0-9_]*$", wrapper: :form_table_cell_input %>
+        <%= f.input :name, required: true, pattern: "^[^\s]*$", wrapper: :form_table_cell_input %>
         <td>
           <div class="dropdown">
             <a class="btn btn-custom" data-toggle="dropdown">
