@@ -98,13 +98,11 @@ class Engine
       status.exitstatus == 128
     end
 
-    # def remote_web_url
-    #   @remote_web_url ||= remote_url.sub('ssh://', 'https://')
-    # end
-
     def port
       port_config = YAML.load_file( "#{ path }/config.yaml" )[:port]
       port_config.present? ? port_config : 22
+    rescue Errno::ENOENT # no config.yaml in some old repos
+      22
     end
 
     def uncommitted_diffs
