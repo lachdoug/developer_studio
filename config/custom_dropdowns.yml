@@ -1,9 +1,10 @@
 ---
 frameworks:
-  # e.g. 'New One': new_one
+  # e.g.
+  #  'New One': new_one
+  # Be sure to insert two leading spaces.
 
 script_languages:
-  'JSON': json
 
 database_seed_languages:
 

@@ -13,7 +13,7 @@
       </tr>
 
       <tr>
-        <%= f.input :type, as: :select, collection: f.object.type_collection, include_blank: false, required: false, wrapper: :form_table_cell_input %>
+        <%= f.input :type, as: :select, collection: f.object.type_collection, include_blank: true, required: false, wrapper: :form_table_cell_input %>
         <%= f.input :os_package, wrapper: :form_table_cell_input %>
         <%= f.input :name, required: true, pattern: "^[^\s]*$", wrapper: :form_table_cell_input %>
         <td>
