@@ -45,7 +45,9 @@ module Settings
     end
 
     def service_definitions
-      list_service_definition_type_paths.map { |type_path| ServiceDefinition.new(self, type_path) }
+      list_service_definition_type_paths.map do |type_path|
+        ServiceDefinition.new( self, type_path )
+      end
     end
 
     def pull
