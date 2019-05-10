@@ -8,7 +8,8 @@ class App
                       :destination,
                       :extraction_command,
                       :command_options,
-                      :path_to_extracted
+                      :path_to_extracted,
+                      :authentication
 
     end
   end

@@ -22,7 +22,16 @@ module Apps
 
       def strong_params
         params.require(:app_app_blueprint_installed_package).
-          permit( :name, :download_type, :source_url, :destination, :extraction_command, :command_options, :path_to_extracted )
+          permit(
+            :name,
+            :download_type,
+            :source_url,
+            :destination,
+            :extraction_command,
+            :command_options,
+            :path_to_extracted,
+            :authentication
+          )
       end
 
     end
