@@ -220,6 +220,10 @@ module Conform
         {
           publisher_namespace: sc.dig(:publisher_namespace).to_s,
           type_path: sc.dig(:type_path).to_s,
+          runtime_enviroment_variables: {
+            permit: sc.dig(:runtime_enviroment_variables, :permit).to_s,
+            select: sc.dig(:runtime_enviroment_variables, :select).to_a,
+          }.delete_if { |k,v| v.blank? },
           variables: sc.dig(:variables)
         }.delete_if { |k,v| v.blank? }
       end

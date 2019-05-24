@@ -29,6 +29,8 @@ module Apps
         params.require(:app_app_blueprint_service_configuration).
           permit( :publisher_namespace,
                   :type_path,
+                  :runtime_enviroment_variables_permit,
+                  { runtime_enviroment_variables_select: [] },
                   { variables_attributes:
                       [ :name, :value, :resolve_string, :resolve] } )
       end

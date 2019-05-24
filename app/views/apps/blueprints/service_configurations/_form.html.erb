@@ -34,6 +34,36 @@
           </div>
         </span>
       <% end %>
+
+      <div class="form-section-heading">
+        Service Environment Variables
+      </div>
+
+      <div class="runtime_enviroment_variables col-md-9 col-md-offset-3">
+        <%= f.input :runtime_enviroment_variables_permit,
+          as: :radio_buttons,
+          label: false,
+          collection: [ [ "None", "" ], [ "All", "all" ], [ "Select", "select" ] ]
+        %>
+        <% if f.object.available_service_environment_variables.empty? %>
+          <p class="check_boxes">
+            Service does not have any target environment variables.
+          </p>
+        <% else %>
+          <%= f.input :runtime_enviroment_variables_select,
+            as: :check_boxes,
+            label: false,
+            collection: f.object.available_service_environment_variables,
+            include_hidden: false,
+            checked: f.object.runtime_enviroment_variables_select,
+            wrapper_html: {
+              # class: 'runtime_enviroment_variables_selected_checkboxes_wrapper'
+            } %>
+        <% end %>
+      </div>
+
+      <% # if f.object.service_definition_has_environment_mappings || f.object.variables.any? %>
+      <% # end %>
       <% if f.object.service_definition_has_consumer_params || f.object.variables.any? %>
         <%= f.simple_fields_for :variables do |ff| %>
           <div>

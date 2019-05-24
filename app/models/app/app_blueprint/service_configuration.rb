@@ -2,7 +2,20 @@ class App
   class AppBlueprint
     class ServiceConfiguration < ::Blueprint::SectionCollectionItem
 
-      form_attributes :publisher_namespace, :type_path
+      form_attributes :publisher_namespace,
+                      :type_path
+
+      attr_accessor     :runtime_enviroment_variables_permit
+
+      # ,
+      attr_writer                 :runtime_enviroment_variables_select
+
+      def runtime_enviroment_variables_select
+        puts "! #{ @runtime_enviroment_variables_select }"
+        @runtime_enviroment_variables_select
+      end
+
+      # attr_accessor   :runtime_enviroment_variables
 
       def variables
         @variables ||= []
@@ -18,9 +31,14 @@ class App
       end
 
       def form_data
+          # debugger
         {
           publisher_namespace: publisher_namespace,
           type_path: type_path,
+          runtime_enviroment_variables: {
+            permit: runtime_enviroment_variables_permit,
+            select: runtime_enviroment_variables_selected,
+          },
           variables: variables.map(&:form_data).inject(:merge) || {}
         }
       end
@@ -108,6 +126,40 @@ class App
             @variables.find { |variable| variable.name.to_s == defined_variable_name.to_s }
           end
       end
+
+      def available_service_environment_variables
+        @available_service_environment_variables =
+        ( service_definition[:target_environment_variables] || [] ).map do |k,v|
+          [ "#{k} (#{v[:environment_variable_name]})", k ]
+        end
+      end
+
+      # def form_runtime_enviroment_variables
+      #   # debugger
+      #   if ( @runtime_enviroment_variables_permit === "select" )
+      #     @runtime_enviroment_variables_select
+      #   else
+      #     @runtime_enviroment_variables_permit
+      #   end
+      # end
+
+      def runtime_enviroment_variables=(r)
+        # debugger
+        @runtime_enviroment_variables_permit = r[:permit] || ""
+        @runtime_enviroment_variables_select = r[:select] || []
+      end
+
+
+
+      # def runtime_enviroment_variables_permit
+      #   @runtime_enviroment_variables_permit
+      # end
+      #
+      def runtime_enviroment_variables_selected
+        @runtime_enviroment_variables_permit.to_s === "select" ?
+          @runtime_enviroment_variables_select : []
+      end
+
 
     end
   end

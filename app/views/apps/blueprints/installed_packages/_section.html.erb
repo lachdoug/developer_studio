@@ -50,15 +50,15 @@
         <%= f.input :destination, hint: 'Relative to /home/app (defaults /home/app).' %>
         <%= f.input :extraction_command %>
         <%= f.input :path_to_extracted %>
-        <div class="col-md-7 col-md-offset-5">
+        <div class="col-md-9 col-md-offset-3">
           <%= f.input :authentication,
-                      as: :radio_buttons,
-                      collection: {
-                        "None": '',
-                        "Credentials - username and password": :credentials,
-                        "Key": :key
-                        }
-            %>
+              as: :radio_buttons,
+              collection: {
+                "None": '',
+                "Credentials - username and password": :credentials,
+                "Key": :key
+                }
+          %>
         </div>
       <% end %>
       <hr>

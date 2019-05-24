@@ -8,6 +8,7 @@ $(document).on('turbolinks:load', function(){
   do_blueprint_restart_policy_select();
   do_blueprint_capabilities_select();
   do_blueprint_section_forms();
+  do_runtime_enviroment_variables_select();
 });
 
 var do_blueprint_deployment_type_select = function(){
@@ -68,6 +69,35 @@ var blueprint_capabilities_select_depend_on = function(select_object) {
     $('.blueprint_capabilities_selected_checkboxes_wrapper').hide();
   };
 };
+
+var do_runtime_enviroment_variables_select = function(){
+  $('#engine_blueprint_section_service_configurations .runtime_enviroment_variables').each(
+    function(i) {
+      console.log( `SCENV ${i}` )
+      runtime_enviroment_variables_select_depend_on( this );
+    }
+  );
+};
+
+var runtime_enviroment_variables_select_depend_on = function(runtime_enviroment_variables) {
+  $( runtime_enviroment_variables ).children(".radio_buttons").change(
+    function() {
+      // debugger;
+      if ( $(this).children(".radio")[2].getElementsByTagName("input")[0].checked ) {
+        $( $(this).parent() ).children('.check_boxes').show();
+      } else {
+        $( $(this).parent() ).children('.check_boxes').hide();
+      }
+    }
+  )
+  if ( $( runtime_enviroment_variables ).children(".radio_buttons").children(".radio")[0].getElementsByTagName("input")[0].checked ) {
+    // debugger
+    $( runtime_enviroment_variables ).children('.check_boxes').hide();
+  } else {
+    $( runtime_enviroment_variables ).children('.check_boxes').show();
+  }
+};
+
 
 
 var do_blueprint_section_forms = function() {
