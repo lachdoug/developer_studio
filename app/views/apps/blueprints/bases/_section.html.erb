@@ -15,6 +15,9 @@
   <%= f.input :framework_port_override, as: :integer, input_html: { min: 0, max: 65535 }  %>
   <%= f.input :web_root_directory %>
 </div>
+
+<%= f.input :username %>
+<%= f.input :user_primary_group, label: "Primary group" %>
 <%= f.input :sudo_list, as: :code, required: false %>
 <%= f.input :continuous_deployment, as: :boolean, wrapper: :horizontal_boolean %>
 <div class="form-section-heading">Memory</div>

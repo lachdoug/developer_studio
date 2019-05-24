@@ -22,6 +22,8 @@ module Apps
                   :framework_port_override,
                   :deployment_type,
                   :web_root_directory,
+                  :username,
+                  :user_primary_group,
                   :sudo_list,
                   :continuous_deployment,
                   :install_form_comment,

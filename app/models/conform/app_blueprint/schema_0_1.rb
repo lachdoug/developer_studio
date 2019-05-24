@@ -101,6 +101,8 @@ module Conform
           http_protocol: (r(:software, :base, :http_protocol) || :https_and_http).to_s,
           framework_port_override: ( r(:software, :base, :framework_port_override).present? ? r(:software, :base, :framework_port_override).to_i : '' ),
           web_root_directory: r(:software, :base, :web_root_directory).to_s,
+          username: r(:software, :base, :username).to_s,
+          user_primary_group: r(:software, :base, :user_primary_group).to_s,
           sudo_list: r(:software, :base, :sudo_list).to_s,
           continuous_deployment: cast_boolean_for( r(:software, :base, :continuous_deployment) ),
           memory: memory,

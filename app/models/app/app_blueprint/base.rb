@@ -12,6 +12,8 @@ class App
                     :http_protocol,
                     :framework_port_override,
                     :deployment_type,
+                    :username,
+                    :user_primary_group,
                     :sudo_list,
                     :web_root_directory,
                     :continuous_deployment,
@@ -29,6 +31,8 @@ class App
         @http_protocol = ( data || {} ).dig :http_protocol
         @framework_port_override = ( data || {} ).dig :framework_port_override
         @web_root_directory = ( data || {} ).dig :web_root_directory
+        @username = ( data || {} ).dig :username
+        @user_primary_group = ( data || {} ).dig :user_primary_group
         @sudo_list = ( data || {} ).dig :sudo_list
         @continuous_deployment = ( data || {} ).dig :continuous_deployment
         @memory_required = ( data || {} ).dig :memory, :required
@@ -49,6 +53,8 @@ class App
           http_protocol: ( http_protocol if deployment_type == 'web' ).to_s,
           framework_port_override: framework_port_override,
           web_root_directory: web_root_directory,
+          username: username,
+          user_primary_group: user_primary_group,
           sudo_list: sudo_list,
           continuous_deployment: cast_as_boolean(continuous_deployment),
           memory: {
