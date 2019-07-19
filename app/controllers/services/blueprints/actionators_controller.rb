@@ -31,7 +31,9 @@ module Services
                   :description,
                   :return_type,
                   :return_file_name,
+                  :timeout,
                   :enable_logging,
+                  :background,
                   script_attributes: [:language, :content],
                   script_sudo_attributes: [:language, :content]
                 )

@@ -6,7 +6,9 @@
   <%= f.input :description, as: :markdown %>
   <%= f.input :return_type, as: :select, collection: actionator.return_type_collection, include_blank: false %>
   <%= f.input :return_file_name %>
+  <%= f.input :timeout, as: :integer, label: "Timeout (seconds)" %>
   <%= f.input :enable_logging, as: :boolean, wrapper: :horizontal_boolean %>
+  <%= f.input :background, as: :boolean, wrapper: :horizontal_boolean %>
   <div class="form-section-heading">Script</div>
   <%= f.simple_fields_for :script do |ff| %>
     <%= ff.input :language, as: :select, input_html: {class: 'ace-editor-language-select'},

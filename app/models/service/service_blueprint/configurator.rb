@@ -59,9 +59,9 @@ class Service
         }
       end
 
-      def return_type_collection
-        [:none, :plain_text, :markdown, :json, :url, :file]
-      end
+      # def return_type_collection
+      #   [:none, :plain_text, :markdown, :json, :url, :file]
+      # end
 
     end
   end

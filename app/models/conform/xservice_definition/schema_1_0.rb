@@ -371,7 +371,9 @@ module Conform
           description: a.dig(:description).to_s,
           return_type: a.dig(:return_type).to_s,
           return_file_name: a.dig(:return_file_name).to_s,
+          timeout: a.dig(:timeout).present? ? a.dig(:timeout).to_i : '',
           enable_logging: cast_boolean_for( a.dig(:enable_logging) ),
+          background: cast_boolean_for( a.dig(:background) ),
           variables: actionator_variables_for(a),
           script: {
             language: a.dig(:script, :language).to_s,

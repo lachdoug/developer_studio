@@ -89,7 +89,7 @@ module Conform
           build_dependencies: build_dependencies,
           file_permissions: file_permissions,
           soft_links: soft_links,
-          backup_scripts: backup_scripts,
+          # backup_scripts: backup_scripts,
         }.delete_if { |k,v| v.blank? }
       end
 
@@ -162,30 +162,54 @@ module Conform
 
       def scripts
         {
-          start: { language: r(:software, :scripts, :start, :language).to_s,
-                    content: r(:software, :scripts, :start, :content).to_s
-                  }.delete_if { |k,v| v.blank? },
-          start_sudo: { language: r(:software, :scripts, :start_sudo, :language).to_s,
-                    content: r(:software, :scripts, :start_sudo, :content).to_s
-                  }.delete_if { |k,v| v.blank? },
-          install: { language: r(:software, :scripts, :install, :language).to_s,
-                    content: r(:software, :scripts, :install, :content).to_s
-                  }.delete_if { |k,v| v.blank? },
-          install_sudo: { language: r(:software, :scripts, :install_sudo, :language).to_s,
-                    content: r(:software, :scripts, :install_sudo, :content).to_s
-                  }.delete_if { |k,v| v.blank? },
-          post_install: { language: r(:software, :scripts, :post_install, :language).to_s,
-                    content: r(:software, :scripts, :post_install, :content).to_s
-                  }.delete_if { |k,v| v.blank? },
-          post_install_sudo: { language: r(:software, :scripts, :post_install_sudo, :language).to_s,
-                    content: r(:software, :scripts, :post_install_sudo, :content).to_s
-                  }.delete_if { |k,v| v.blank? },
-          shutdown: { language: r(:software, :scripts, :shutdown, :language).to_s,
-                    content: r(:software, :scripts, :shutdown, :content).to_s
-                  }.delete_if { |k,v| v.blank? },
-          shutdown_sudo: { language: r(:software, :scripts, :shutdown_sudo, :language).to_s,
-                    content: r(:software, :scripts, :shutdown_sudo, :content).to_s
-                  }.delete_if { |k,v| v.blank? },
+          start: {
+            language: r(:software, :scripts, :start, :language).to_s,
+            content: r(:software, :scripts, :start, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          start_sudo: {
+            language: r(:software, :scripts, :start_sudo, :language).to_s,
+            content: r(:software, :scripts, :start_sudo, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          install: {
+            language: r(:software, :scripts, :install, :language).to_s,
+            content: r(:software, :scripts, :install, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          install_sudo: {
+            language: r(:software, :scripts, :install_sudo, :language).to_s,
+            content: r(:software, :scripts, :install_sudo, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          post_install: {
+            language: r(:software, :scripts, :post_install, :language).to_s,
+            content: r(:software, :scripts, :post_install, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          post_install_sudo: {
+            language: r(:software, :scripts, :post_install_sudo, :language).to_s,
+            content: r(:software, :scripts, :post_install_sudo, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          backup: {
+            language: r(:software, :scripts, :backup, :language).to_s,
+            content: r(:software, :scripts, :backup, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          backup_sudo: {
+            language: r(:software, :scripts, :backup_sudo, :language).to_s,
+            content: r(:software, :scripts, :backup_sudo, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          restore: {
+            language: r(:software, :scripts, :restore, :language).to_s,
+            content: r(:software, :scripts, :restore, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          restore_sudo: {
+            language: r(:software, :scripts, :restore_sudo, :language).to_s,
+            content: r(:software, :scripts, :restore_sudo, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          shutdown: {
+            language: r(:software, :scripts, :shutdown, :language).to_s,
+            content: r(:software, :scripts, :shutdown, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          shutdown_sudo: {
+            language: r(:software, :scripts, :shutdown_sudo, :language).to_s,
+            content: r(:software, :scripts, :shutdown_sudo, :content).to_s
+          }.delete_if { |k,v| v.blank? },
         }.delete_if { |k,v| v.blank? }
       end
 
@@ -479,7 +503,9 @@ module Conform
           description: a.dig(:description).to_s,
           return_type: a.dig(:return_type).to_s,
           return_file_name: a.dig(:return_file_name).to_s,
+          timeout: a.dig(:timeout).present? ? a.dig(:timeout).to_i : '',
           enable_logging: cast_boolean_for( a.dig(:enable_logging) ),
+          background: cast_boolean_for( a.dig(:background) ),
           variables: actionator_variables_for(a),
           script: {
             language: a.dig(:script, :language).to_s,
@@ -670,26 +696,26 @@ module Conform
         end
       end
 
-      def backup_scripts
-        {
-          backup: {
-            language: r(:software, :backup_scripts, :backup, :language).to_s,
-            content: r(:software, :backup_scripts, :backup, :content).to_s
-          }.delete_if { |k,v| v.blank? },
-          backup_sudo: {
-            language: r(:software, :backup_scripts, :backup_sudo, :language).to_s,
-            content: r(:software, :backup_scripts, :backup_sudo, :content).to_s
-          }.delete_if { |k,v| v.blank? },
-          restore: {
-            language: r(:software, :backup_scripts, :restore, :language).to_s,
-            content: r(:software, :backup_scripts, :restore, :content).to_s
-          }.delete_if { |k,v| v.blank? },
-          restore_sudo: {
-            language: r(:software, :backup_scripts, :restore_sudo, :language).to_s,
-            content: r(:software, :backup_scripts, :restore_sudo, :content).to_s
-          }.delete_if { |k,v| v.blank? },
-        }.delete_if { |k,v| v.blank? }
-      end
+      # def backup_scripts
+      #   {
+      #     backup: {
+      #       language: r(:software, :backup_scripts, :backup, :language).to_s,
+      #       content: r(:software, :backup_scripts, :backup, :content).to_s
+      #     }.delete_if { |k,v| v.blank? },
+      #     backup_sudo: {
+      #       language: r(:software, :backup_scripts, :backup_sudo, :language).to_s,
+      #       content: r(:software, :backup_scripts, :backup_sudo, :content).to_s
+      #     }.delete_if { |k,v| v.blank? },
+      #     restore: {
+      #       language: r(:software, :backup_scripts, :restore, :language).to_s,
+      #       content: r(:software, :backup_scripts, :restore, :content).to_s
+      #     }.delete_if { |k,v| v.blank? },
+      #     restore_sudo: {
+      #       language: r(:software, :backup_scripts, :restore_sudo, :language).to_s,
+      #       content: r(:software, :backup_scripts, :restore_sudo, :content).to_s
+      #     }.delete_if { |k,v| v.blank? },
+      #   }.delete_if { |k,v| v.blank? }
+      # end
 
       def cast_boolean_for(boolean)
         return false if boolean.nil?

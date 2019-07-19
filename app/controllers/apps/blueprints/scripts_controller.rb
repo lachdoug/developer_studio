@@ -15,6 +15,8 @@ module Apps
                   install_attributes: [:language, :content],
                   first_run_attributes: [:language, :content],
                   post_install_attributes: [:language, :content],
+                  backup_attributes: [:language, :content],
+                  restore_attributes: [:language, :content],
                   shutdown_attributes: [:language, :content] )
       end
 

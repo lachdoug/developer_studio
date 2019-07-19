@@ -18,6 +18,10 @@ module Services
             install_sudo_attributes: [:language, :content],
             post_install_attributes: [:language, :content],
             post_install_sudo_attributes: [:language, :content],
+            backup_attributes: [:language, :content],
+            backup_sudo_attributes: [:language, :content],
+            restore_attributes: [:language, :content],
+            restore_sudo_attributes: [:language, :content],
             shutdown_attributes: [:language, :content],
             shutdown_sudo_attributes: [:language, :content],
           )

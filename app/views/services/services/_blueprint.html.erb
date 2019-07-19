@@ -170,11 +170,11 @@
                   Soft links <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_soft_links_pill_error" %>
                 <% end %>
               </li>
-              <li id='engine_blueprint_section_backup_scripts_pill' class='page_section_pill'>
-                <%= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("backup_scripts")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
-                  Backup scripts <%= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_backup_scripts_pill_error" %>
-                <% end %>
-              </li>
+              <!-- <li id='engine_blueprint_section_backup_scripts_pill' class='page_section_pill'>
+                < %= content_tag :a, class: 'clearfix', onclick: 'display_blueprint_section("backup_scripts")', data:{ toggle: "collapse", target: "#sidebar_nav .navbar-collapse.in" } do %>
+                  Backup scripts < %= content_tag :div, icon('fa-warning'), class: 'pull-right error pill_error', style: 'display: none;', id: "engine_blueprint_section_backup_scripts_pill_error" %>
+                < % end %>
+              </li> -->
             </ul>
 
         </div>
@@ -280,8 +280,8 @@
   <div id='engine_blueprint_section_soft_links' class='engine_blueprint_section' style='display: none;'>
     <%= render 'services/blueprints/soft_links/section' %>
   </div>
-  <div id='engine_blueprint_section_backup_scripts' class='engine_blueprint_section' style='display: none;'>
-    <%= render 'services/blueprints/backup_scripts/section' %>
-  </div>
+  <!-- <div id='engine_blueprint_section_backup_scripts' class='engine_blueprint_section' style='display: none;'>
+    < %= render 'services/blueprints/backup_scripts/section' %>
+  </div> -->
 
 </div>

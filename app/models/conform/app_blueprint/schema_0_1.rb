@@ -135,21 +135,34 @@ module Conform
 
       def scripts
         {
-          start: { language: r(:software, :scripts, :start, :language).to_s,
-                    content: r(:software, :scripts, :start, :content).to_s
-                  }.delete_if { |k,v| v.blank? },
-          install: { language: r(:software, :scripts, :install, :language).to_s,
-                    content: r(:software, :scripts, :install, :content).to_s
-                  }.delete_if { |k,v| v.blank? },
-          first_run: { language: r(:software, :scripts, :first_run, :language).to_s,
-                    content: r(:software, :scripts, :first_run, :content).to_s
-                  }.delete_if { |k,v| v.blank? },
-          post_install: { language: r(:software, :scripts, :post_install, :language).to_s,
-                    content: r(:software, :scripts, :post_install, :content).to_s
-                  }.delete_if { |k,v| v.blank? },
-          shutdown: { language: r(:software, :scripts, :shutdown, :language).to_s,
-                    content: r(:software, :scripts, :shutdown, :content).to_s
-                  }.delete_if { |k,v| v.blank? },
+          start: {
+            language: r(:software, :scripts, :start, :language).to_s,
+            content: r(:software, :scripts, :start, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          install: {
+            language: r(:software, :scripts, :install, :language).to_s,
+            content: r(:software, :scripts, :install, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          first_run: {
+            language: r(:software, :scripts, :first_run, :language).to_s,
+            content: r(:software, :scripts, :first_run, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          post_install: {
+            language: r(:software, :scripts, :post_install, :language).to_s,
+            content: r(:software, :scripts, :post_install, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          backup: {
+            language: r(:software, :scripts, :backup, :language).to_s,
+            content: r(:software, :scripts, :backup, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          restore: {
+            language: r(:software, :scripts, :restore, :language).to_s,
+            content: r(:software, :scripts, :restore, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          shutdown: { 
+            language: r(:software, :scripts, :shutdown, :language).to_s,
+            content: r(:software, :scripts, :shutdown, :content).to_s
+          }.delete_if { |k,v| v.blank? },
         }.delete_if { |k,v| v.blank? }
       end
 
@@ -395,7 +408,9 @@ module Conform
           description: a.dig(:description).to_s,
           return_type: a.dig(:return_type).to_s,
           return_file_name: a.dig(:return_file_name).to_s,
+          timeout: a.dig(:timeout).present? ? a.dig(:timeout).to_i : '',
           enable_logging: cast_boolean_for( a.dig(:enable_logging) ),
+          background: cast_boolean_for( a.dig(:background) ),
           variables: actionator_variables_for(a),
           script: {
             language: a.dig(:script, :language).to_s,

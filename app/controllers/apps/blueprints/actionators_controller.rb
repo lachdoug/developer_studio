@@ -31,7 +31,9 @@ module Apps
                   :description,
                   :return_type,
                   :return_file_name,
+                  :timeout,
                   :enable_logging,
+                  :background,
                   script_attributes: [:language, :content],
                 )
       end

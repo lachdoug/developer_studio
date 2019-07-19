@@ -2,7 +2,18 @@ class Service
   class ServiceBlueprint
     class Scripts < ::Blueprint::Section
 
-      attr_reader :start, :start_sudo, :install, :install_sudo, :post_install, :post_install_sudo, :shutdown, :shutdown_sudo
+      attr_reader :start,
+                  :start_sudo,
+                  :install,
+                  :install_sudo,
+                  :post_install,
+                  :post_install_sudo,
+                  :backup,
+                  :backup_sudo,
+                  :restore,
+                  :restore_sudo,
+                  :shutdown,
+                  :shutdown_sudo
 
       def build_section
         @start = Script.new(( data || {} ).dig :start )
@@ -11,6 +22,10 @@ class Service
         @install_sudo = Script.new(( data || {} ).dig :install_sudo )
         @post_install = Script.new(( data || {} ).dig :post_install )
         @post_install_sudo = Script.new(( data || {} ).dig :post_install_sudo )
+        @backup = Script.new(( data || {} ).dig :backup )
+        @backup_sudo = Script.new(( data || {} ).dig :backup_sudo )
+        @restore = Script.new(( data || {} ).dig :restore )
+        @restore_sudo = Script.new(( data || {} ).dig :restore_sudo )
         @shutdown = Script.new(( data || {} ).dig :shutdown )
         @shutdown_sudo = Script.new(( data || {} ).dig :shutdown_sudo )
       end
@@ -39,6 +54,22 @@ class Service
         @post_install_sudo = Script.new params
       end
 
+      def backup_attributes=(params)
+        @backup = Script.new params
+      end
+
+      def backup_sudo_attributes=(params)
+        @backup_sudo = Script.new params
+      end
+
+      def restore_attributes=(params)
+        @restore = Script.new params
+      end
+
+      def restore_sudo_attributes=(params)
+        @restore_sudo = Script.new params
+      end
+
       def shutdown_attributes=(params)
         @shutdown = Script.new params
       end
@@ -55,6 +86,10 @@ class Service
           install_sudo: install_sudo.form_data,
           post_install: post_install.form_data,
           post_install_sudo: post_install_sudo.form_data,
+          backup: backup.form_data,
+          backup_sudo: backup_sudo.form_data,
+          restore: restore.form_data,
+          restore_sudo: restore_sudo.form_data,
           shutdown: shutdown.form_data,
           shutdown_sudo: shutdown_sudo.form_data
         }
