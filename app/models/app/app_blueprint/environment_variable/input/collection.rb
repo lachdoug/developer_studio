@@ -47,7 +47,7 @@ class App
             @items.delete_at i.to_i
             blueprint_section.save
           end
-          
+
           def cast_as_boolean(value)
             ActiveRecord::Type::Boolean.new.cast(value) == true
           end

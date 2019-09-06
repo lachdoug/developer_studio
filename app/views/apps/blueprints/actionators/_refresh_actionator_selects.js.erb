@@ -1,0 +1,28 @@
+// var newOptions = <%= raw @actionator.blueprint_section.list_actionators.to_json %>
+//
+// console.log( newOptions )
+//
+// $(".actionator_select").each( function (i,el) {
+//
+//   var exists
+//   var value
+//
+//   if ( el.selectedIndex ) {
+//     value = el.options[el.selectedIndex].value
+//   }
+//
+//   $(el).empty()
+//
+//   newOptions.forEach( function( opt ) {
+//     $(el).append( $("<option></option>" ).
+//     attr( "value", opt ).text( opt ) )
+//     exists = exists || opt == value
+//   } )
+//
+//   if ( value && exists ) {
+//     $(el).val( value )
+//   } else {
+//     $(el).val( null )
+//   }
+//
+// } )

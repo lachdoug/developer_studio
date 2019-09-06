@@ -6,7 +6,6 @@ module Settings
     attr_accessor :config_yaml
 
     def self.config
-p "do merge"
       custom_dropdown_config.deep_merge default_dropdown_config
     end
 
@@ -87,20 +86,24 @@ p "do merge"
           "Lua": "lua",
           "Meteor": "meteor",
           "NGINX": "nginx",
-          "Node 4.7": "node4.7",
-          "Node 6.9": "node6.9",
+          "Node": "node",
+          "Node 11": "node11",
+          "Node 10": "node10",
+          "Node 8": "node8",
+          "Node 7": "node7",
+          "Node 6": "node6",
+          "Node 4": "node4",
+          "OpenJDK 11": "openjdk11",
           "OpenJDK 8": "openjdk8",
-          "OpenJDK 9": "openjdk9",
-          "OpenJDK 7": "openjdk7",
           "Python": "python",
           "Python 3.7": "python3.7",
-          "Rails 4": "rails4",
           "Rails 5": "rails5",
-          "RStudio": "rstudio",
+          "Rails 4": "rails4",
+          "R Base 3.5": "rbase3.5",
+          "R Base 3.4": "rbase3.4",
           "Sinatra": "sinatra",
-          "Tomcat 7": "tomcat7",
-          "Tomcat 8": "tomcat8",
           "Tomcat 9": "tomcat9",
+          "Tomcat 8": "tomcat8",
           "X11": "x11"
         },
         "template_file_languages": {

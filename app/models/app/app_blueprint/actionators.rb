@@ -57,6 +57,10 @@ class App
         end.inject(:merge) }
       end
 
+      # def list_actionators
+      #   @list_actionators ||= data.map do |a| a[:name] end
+      # end
+
     end
   end
 end

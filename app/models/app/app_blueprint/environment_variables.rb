@@ -40,6 +40,10 @@ class App
         end.inject(:merge) }
       end
 
+      # def list_actionators
+      #   blueprint.actionators.list_actionators
+      # end
+
     end
   end
 end

@@ -38,7 +38,7 @@ class App
       end
 
       def return_type_collection
-        [:none, :plain_text, :markdown, :code, :json, :url, :file]
+        [:none, :plain_text, :markdown, :code, :json, :yaml, :url, :file]
       end
 
     end

@@ -34,6 +34,7 @@ module Apps
                   :timeout,
                   :enable_logging,
                   :background,
+                  chain_attributes: [:parameters, :target, :submit],
                   script_attributes: [:language, :content],
                 )
       end
