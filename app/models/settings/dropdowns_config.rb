@@ -22,6 +22,9 @@ module Settings
     end
 
     def config_yaml_file
+      if !File.exists? 'config/custom_dropdowns.yml'
+        FileUtils.copy( 'config/custom_dropdowns.yml.default', 'config/custom_dropdowns.yml' )
+      end
       File.read 'config/custom_dropdowns.yml'
     end
 
