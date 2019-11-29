@@ -16,6 +16,8 @@ module Services
             start_sudo_attributes: [:language, :content],
             install_attributes: [:language, :content],
             install_sudo_attributes: [:language, :content],
+            first_run_attributes: [:language, :content],
+            first_run_sudo_attributes: [:language, :content],
             post_install_attributes: [:language, :content],
             post_install_sudo_attributes: [:language, :content],
             backup_attributes: [:language, :content],

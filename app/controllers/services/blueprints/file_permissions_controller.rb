@@ -22,7 +22,7 @@ module Services
 
       def strong_params
         params.require(:service_service_blueprint_file_permission).
-          permit( :path, :recursive, :user, :group, :permissions )
+          permit( :path, :recursive, :user, :group, :permissions, :create )
       end
 
     end

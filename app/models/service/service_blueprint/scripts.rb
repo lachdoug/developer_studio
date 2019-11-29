@@ -8,6 +8,8 @@ class Service
                   :install_sudo,
                   :post_install,
                   :post_install_sudo,
+                  :first_run,
+                  :first_run_sudo,
                   :backup,
                   :backup_sudo,
                   :restore,
@@ -20,6 +22,8 @@ class Service
         @start_sudo = Script.new(( data || {} ).dig :start_sudo )
         @install = Script.new(( data || {} ).dig :install )
         @install_sudo = Script.new(( data || {} ).dig :install_sudo )
+        @first_run = Script.new(( data || {} ).dig :first_run )
+        @first_run_sudo = Script.new(( data || {} ).dig :first_run_sudo )
         @post_install = Script.new(( data || {} ).dig :post_install )
         @post_install_sudo = Script.new(( data || {} ).dig :post_install_sudo )
         @backup = Script.new(( data || {} ).dig :backup )
@@ -54,6 +58,14 @@ class Service
         @post_install_sudo = Script.new params
       end
 
+      def first_run_attributes=(params)
+        @first_run = Script.new params
+      end
+
+      def first_run_sudo_attributes=(params)
+        @first_run_sudo = Script.new params
+      end
+
       def backup_attributes=(params)
         @backup = Script.new params
       end
@@ -86,6 +98,8 @@ class Service
           install_sudo: install_sudo.form_data,
           post_install: post_install.form_data,
           post_install_sudo: post_install_sudo.form_data,
+          first_run: first_run.form_data,
+          first_run_sudo: first_run_sudo.form_data,
           backup: backup.form_data,
           backup_sudo: backup_sudo.form_data,
           restore: restore.form_data,

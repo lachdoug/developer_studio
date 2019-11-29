@@ -6,7 +6,8 @@ class Service
                       :recursive,
                       :user,
                       :group,
-                      :permissions
+                      :permissions,
+                      :create
 
       def to_s
         path || 'New'
@@ -19,6 +20,7 @@ class Service
           user: user,
           group: group,
           permissions: permissions,
+          create: create,
         }
       end
 

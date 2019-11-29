@@ -43,11 +43,12 @@
       <%= custom_form_for file_permission,
         namespace: "service_blueprint_file_permission_#{file_permission.index}",
         url: service_blueprint_file_permission_path(service_id: @service.name, id: file_permission.index) do |f| %>
-        <%= f.input :path, required: true, hint: 'Hint??????? Relative to /home/ (except when path prefixed with /usr/local/ or /home/ ).' %>
+        <%= f.input :path, required: true, hint: 'Relative to /home/ (except when path prefixed with /usr/local/ or /home/ ).' %>
         <%= f.input :recursive, as: :boolean, wrapper: :horizontal_boolean %>
         <%= f.input :user %>
         <%= f.input :group %>
         <%= f.input :permissions %>
+        <%= f.input :create, as: :select, collection: { 'File': 'file', 'Dir': 'dir' } %>
       <% end %>
       <hr>
     </div>

@@ -186,6 +186,14 @@ module Conform
             language: r(:software, :scripts, :post_install_sudo, :language).to_s,
             content: r(:software, :scripts, :post_install_sudo, :content).to_s
           }.delete_if { |k,v| v.blank? },
+          first_run: {
+            language: r(:software, :scripts, :first_run, :language).to_s,
+            content: r(:software, :scripts, :first_run, :content).to_s
+          }.delete_if { |k,v| v.blank? },
+          first_run_sudo: {
+            language: r(:software, :scripts, :first_run_sudo, :language).to_s,
+            content: r(:software, :scripts, :first_run_sudo, :content).to_s
+          }.delete_if { |k,v| v.blank? },
           backup: {
             language: r(:software, :scripts, :backup, :language).to_s,
             content: r(:software, :scripts, :backup, :content).to_s
@@ -682,6 +690,7 @@ module Conform
             user: fp.dig(:user).to_s,
             group: fp.dig(:group).to_s,
             permissions: fp.dig(:permissions).to_s,
+            create: fp.dig(:create).to_s
           }
         end
       end
